@@ -65,7 +65,7 @@ export default function ModernHeader() {
   return (
     <div ref={headerRef} className="fixed top-0 left-0 right-0 z-50">
       {/* Top Bar */}
-      <div className="bg-slate text-white py-2 text-sm">
+      <div className="hidden sm:block bg-slate text-white py-2 text-sm">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6">
@@ -92,12 +92,18 @@ export default function ModernHeader() {
 
       {/* Main Header */}
       <header className="bg-white shadow-xl sticky top-0 z-50">
-        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1600px] mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-24">
             {/* Logo Section */}
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center space-x-4 group">
-                <Image src="/branding/logo.png" alt="Spanish Horizons Logo" width={200} height={64} className="object-contain h-20" />
+            <div className="flex items-center -ml-5 sm:ml-0">
+              <Link href="/" className="flex items-center group">
+                <Image 
+                  src="/branding/logo.png" 
+                  alt="Spanish Horizons Logo" 
+                  width={200} 
+                  height={64} 
+                  className="object-contain h-16 sm:h-20 max-w-[150px] sm:max-w-[200px]" 
+                />
               </Link>
             </div>
 
@@ -176,7 +182,7 @@ export default function ModernHeader() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-xl bg-slate-light text-slate hover:bg-slate-medium hover:text-white transition-colors duration-200"
+              className="lg:hidden p-2 rounded-xl bg-slate-light text-white hover:bg-slate-medium hover:text-white transition-colors duration-200"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -195,8 +201,8 @@ export default function ModernHeader() {
                       <button
                         className={`w-full flex items-center justify-between px-6 py-4 rounded-xl text-lg font-questa font-medium transition-colors duration-200 ${
                           isActivePage(item.href, item.submenu)
-                            ? "bg-slate-light text-slate"
-                            : "text-slate hover:bg-slate-light hover:text-slate"
+                            ? "bg-slate-light text-white"
+                            : "text-slate hover:bg-slate-light hover:text-white"
                         }`}
                         onClick={(e) => handleDropdownToggle(item.name, e)}
                       >
@@ -215,8 +221,8 @@ export default function ModernHeader() {
                               href={subItem.href}
                               className={`block px-4 py-2 rounded-lg text-sm font-questa transition-colors duration-200 ${
                                 pathname === subItem.href || pathname.startsWith(subItem.href.split("#")[0])
-                                  ? "bg-slate-light text-slate font-medium"
-                                  : "text-slate hover:bg-slate-light hover:text-slate"
+                                  ? "bg-slate-light text-white font-medium"
+                                  : "text-white hover:bg-slate-light hover:text-white"
                               }`}
                               onClick={() => {
                                 setIsMenuOpen(false)
@@ -234,7 +240,7 @@ export default function ModernHeader() {
                       href={item.href}
                       className={`block px-6 py-4 rounded-xl text-lg font-questa font-medium transition-colors duration-200 ${
                         pathname === item.href
-                          ? "bg-slate-light text-slate"
+                          ? "bg-slate-light text-white"
                           : "text-slate hover:bg-slate-light hover:text-slate"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
