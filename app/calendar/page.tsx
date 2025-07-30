@@ -153,7 +153,7 @@ export default function CalendarPage() {
           {/* Additional Information */}
           <Card className="mt-12 bg-slate-light">
             <CardHeader>
-              <CardTitle className="text-slate font-ivry">Important Notes</CardTitle>
+              <CardTitle className="text-white font-ivry">Important Notes</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4 text-slate-medium font-questa">
