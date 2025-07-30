@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col justify-between md:items-end text-center md:text-right">
-            <div className="space-y ">
+            <div className="space-y">
               <div className="flex text-right gap-2 text-slate-200 text-sm">
                 <MapPin className="h-4 w-4" />
                 770 NE Rogahn Street, Hillsboro, OR 97124

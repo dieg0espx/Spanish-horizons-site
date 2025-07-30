@@ -6,6 +6,7 @@ import HeroWithImages from "@/components/hero-with-images"
 import ImageGallery from "@/components/image-gallery"
 
 export default function HomePage() {
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section with Images */}
