@@ -108,7 +108,7 @@ export default function CalendarPage() {
       </section>
 
       {/* Priority Notice */}
-      <section className="py-6 bg-golden-light border-b border-golden">
+      <section className="py-6 bg-amber">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
             <AlertCircle className="h-5 w-5 text-golden mr-2" />
