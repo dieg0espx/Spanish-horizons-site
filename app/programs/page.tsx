@@ -61,7 +61,7 @@ export default function ProgramsPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-slate-medium px-8 py-4 rounded-xl font-questa font-semibold bg-transparent"
+                className="border-2 border-white text-white hover:bg-white px-8 py-4 rounded-xl font-questa font-semibold bg-transparent"
               >
                 <a href="/tuition">View Tuition Information</a>
               </Button>
@@ -363,7 +363,7 @@ export default function ProgramsPage() {
             <Button size="lg" className="bg-amber hover:bg-golden hover:text-slate text-white font-questa">
               <a href="/admissions">Schedule a Tour</a>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-slate-medium bg-transparent font-questa">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white bg-transparent font-questa">
               <a href="/contact">Contact Us</a>
             </Button>
           </div>

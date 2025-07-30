@@ -108,7 +108,7 @@ export default function ModernHeader() {
                   {item.submenu ? (
                     <div className="relative">
                       <button
-                        className={`flex items-center px-4 py-2 rounded-xl text-sm font-questa font-semibold transition-all duration-200 ${
+                        className={`flex items-center px-6 py-3 rounded-xl text-base font-questa font-semibold transition-all duration-200 ${
                           isActivePage(item.href, item.submenu)
                             ? "bg-slate-light text-white shadow-md"
                             : "text-slate hover:bg-slate-light hover:text-white"
@@ -145,7 +145,7 @@ export default function ModernHeader() {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`px-4 py-2 rounded-xl text-sm font-questa font-semibold transition-all duration-200 ${
+                      className={`px-6 py-3 rounded-xl text-base font-questa font-semibold transition-all duration-200 ${
                         pathname === item.href
                           ? "bg-slate-light text-white shadow-md"
                           : "text-slate hover:bg-slate-light hover:text-white"
@@ -159,16 +159,16 @@ export default function ModernHeader() {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden md:flex items-center space-x-4">
               <Button
-                size="sm"
-                className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 font-questa"
+                size="lg"
+                className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 font-questa px-6 py-3 text-base"
               >
                 <Link href="/admissions">Schedule Tour</Link>
               </Button>
               <Button
-                size="sm"
-                className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 font-questa"
+                size="lg"
+                className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 font-questa px-6 py-3 text-base"
               >
                 <Link href="/contact">Apply Now</Link>
               </Button>
@@ -193,7 +193,7 @@ export default function ModernHeader() {
                   {item.submenu ? (
                     <div>
                       <button
-                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-questa font-medium transition-colors duration-200 ${
+                        className={`w-full flex items-center justify-between px-6 py-4 rounded-xl text-lg font-questa font-medium transition-colors duration-200 ${
                           isActivePage(item.href, item.submenu)
                             ? "bg-slate-light text-slate"
                             : "text-slate hover:bg-slate-light hover:text-slate"
@@ -232,7 +232,7 @@ export default function ModernHeader() {
                   ) : (
                     <Link
                       href={item.href}
-                      className={`block px-4 py-3 rounded-xl text-base font-questa font-medium transition-colors duration-200 ${
+                      className={`block px-6 py-4 rounded-xl text-lg font-questa font-medium transition-colors duration-200 ${
                         pathname === item.href
                           ? "bg-slate-light text-slate"
                           : "text-slate hover:bg-slate-light hover:text-slate"
@@ -246,14 +246,16 @@ export default function ModernHeader() {
               ))}
               <div className="pt-4 space-y-3">
                 <Button
-                  className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa"
+                  size="lg"
+                  className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa py-4 text-base"
                 >
                   <Link href="/admissions" onClick={() => setIsMenuOpen(false)}>
                     Schedule Tour
                   </Link>
                 </Button>
                 <Button
-                  className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa"
+                  size="lg"
+                  className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa py-4 text-base"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Link href="/contact">Apply Now</Link>

@@ -66,14 +66,14 @@ export default function AboutPage() {
   const [storyImage1, setStoryImage1] = useState(shuffledImages[0]);
   const [storyImage2, setStoryImage2] = useState(shuffledImages[1]);
   const [storyImage3, setStoryImage3] = useState(shuffledImages[2]);
-  const [founderImage, setFounderImage] = useState(shuffledImages[3]);
+  const [founderImage] = useState("/pictures/founder.png");
   const [valueImage1, setValueImage1] = useState(shuffledImages[4]);
   const [valueImage2, setValueImage2] = useState(shuffledImages[5]);
   const [valueImage3, setValueImage3] = useState(shuffledImages[6]);
   const [valueImage4, setValueImage4] = useState(shuffledImages[7]);
   const [valueImage5, setValueImage5] = useState(shuffledImages[8]);
   const [valueImage6, setValueImage6] = useState(shuffledImages[9]);
-  const [changingImage, setChangingImage] = useState<'story1' | 'story2' | 'story3' | 'founder' | 'value1' | 'value2' | 'value3' | 'value4' | 'value5' | 'value6' | null>(null);
+  const [changingImage, setChangingImage] = useState<'story1' | 'story2' | 'story3' | 'value1' | 'value2' | 'value3' | 'value4' | 'value5' | 'value6' | null>(null);
 
   // Function to get random image
   const getRandomImage = () => {
@@ -82,7 +82,7 @@ export default function AboutPage() {
 
   // Function to change one image at a time
   const changeOneImage = () => {
-    const imageTypes = ['story1', 'story2', 'story3', 'founder', 'value1', 'value2', 'value3', 'value4', 'value5', 'value6'] as const;
+    const imageTypes = ['story1', 'story2', 'story3', 'value1', 'value2', 'value3', 'value4', 'value5', 'value6'] as const;
     const randomType = imageTypes[Math.floor(Math.random() * imageTypes.length)];
     
     setChangingImage(randomType);
@@ -97,9 +97,6 @@ export default function AboutPage() {
           break;
         case 'story3':
           setStoryImage3(getRandomImage());
-          break;
-        case 'founder':
-          setFounderImage(getRandomImage());
           break;
         case 'value1':
           setValueImage1(getRandomImage());
@@ -160,13 +157,9 @@ export default function AboutPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 bg-slate text-white text-sm font-questa font-medium mb-6">
-              <BookOpen className="h-4 w-4 mr-2" />
-              Our Journey
-            </div>
+          <div className="mb-20">
             <h2 className="text-5xl md:text-6xl font-ivry font-bold text-slate mb-4">Our Story</h2>
-            <p className="text-xl text-slate-medium max-w-3xl mx-auto font-questa">
+            <p className="text-xl text-slate-medium max-w-3xlfont-questa">
               A journey of passion, innovation, and commitment to bilingual excellence
             </p>
           </div>
@@ -221,7 +214,7 @@ export default function AboutPage() {
               </div>
 
               {/* Key Features */}
-              <div className="grid grid-cols-2 gap-6">
+              {/* <div className="grid grid-cols-2 gap-6">
                 <div className="bg-slate-50 rounded-xl p-6 text-center border border-slate-200">
                   <div className="w-12 h-12 bg-golden rounded-lg flex items-center justify-center mx-auto mb-4">
                     <Users className="h-6 w-6 text-white" />
@@ -236,7 +229,7 @@ export default function AboutPage() {
                   <h4 className="font-questa font-semibold text-slate text-sm mb-2">Creative Learning</h4>
                   <p className="text-xs text-slate-medium">Art, movement, and hands-on experiences</p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Images Side */}
@@ -284,14 +277,12 @@ export default function AboutPage() {
 
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             {/* Founder Photo */}
-            <div className="text-center">
-              <div className="w-80 h-80 bg-white rounded-3xl mx-auto mb-6 overflow-hidden shadow-2xl">
+            <div className="text-center h-full">
+              <div className="w-80 h-[calc(100%-80px)] bg-white rounded-lg mx-auto mb-6 overflow-hidden shadow-2xl">
                 <img 
                   src={founderImage} 
                   alt="Laura Paz-Whitmore - Founder & Educational Director" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${
-                    changingImage === 'founder' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                  }`}
+                  className="w-full h-full object-cover grayscale opacity-90"
                 />
               </div>
               <h3 className="text-2xl font-ivry font-bold text-white">Laura Paz-Whitmore</h3>
@@ -319,23 +310,19 @@ export default function AboutPage() {
 
                     {/* Additional Images */}
                     <div className="grid grid-cols-2 gap-4 mt-8">
-                      <div className="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-10 h-10 bg-golden-light rounded-full flex items-center justify-center mx-auto mb-2">
-                            <ChefHat className="h-5 w-5 text-golden" />
-                          </div>
-                          <p className="text-slate font-questa font-medium text-xs">Laura Teaching</p>
-                          <p className="text-xs text-slate-medium font-questa">From Dropbox</p>
-                        </div>
+                      <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
+                        <img 
+                          src="/pictures/3-DSC02563.jpg" 
+                          alt="Laura Teaching" 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <div className="aspect-video bg-gray-100 rounded-xl flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-10 h-10 bg-amber-light rounded-full flex items-center justify-center mx-auto mb-2">
-                            <Palette className="h-5 w-5 text-amber" />
-                          </div>
-                          <p className="text-slate font-questa font-medium text-xs">With Students</p>
-                          <p className="text-xs text-slate-medium font-questa">From Dropbox</p>
-                        </div>
+                      <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
+                        <img 
+                          src="/pictures/5-DSC02576.jpg" 
+                          alt="With Students" 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
                   </div>
@@ -346,24 +333,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Team Coming Soon */}
-      {/* <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-4xl font-ivry font-bold text-slate mb-6">Leadership Team</h2>
-            <Card className="max-w-2xl mx-auto shadow-2xl border-0 bg-white">
-              <CardContent className="p-12 text-center">
-                <Star className="h-20 w-20 text-golden mx-auto mb-6" />
-                <h3 className="text-2xl font-ivry font-bold text-slate mb-4">Coming Soon</h3>
-                <p className="text-slate-medium text-lg leading-relaxed font-questa">
-                  We're building an exceptional team of educators and leaders who share our passion for bilingual,
-                  experiential education. Meet our full leadership team soon!
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section> */}
+
 
       {/* Our Values in Action with Images */}
       <section id="values" className="py-16 ">
@@ -509,7 +479,7 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/contact"
-              className="border-2 border-white hover:bg-slate-medium text-white px-8 py-4 rounded-xl font-questa font-semibold transition-colors"
+              className="border-2 border-white hover:bg-white hover:text-slate text-white px-8 py-4 rounded-xl font-questa font-semibold transition-colors"
             >
               Contact Us
             </Link>

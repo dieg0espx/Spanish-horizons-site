@@ -91,7 +91,7 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-light">
+    <div className="min-h-screen ">
       {/* Header */}
       <section className="bg-slate py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10"></div>
@@ -156,7 +156,7 @@ export default function CalendarPage() {
               <CardTitle className="text-white font-ivry">Important Notes</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4 text-slate-medium font-questa">
+              <div className="space-y-4 text-white font-questa">
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-slate rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <p>

@@ -130,7 +130,7 @@ export default function ContactPage() {
                   <CardContent className="p-8">
                     <div className="flex items-start">
                       <div className="w-16 h-16 bg-slate-light rounded-2xl flex items-center justify-center mr-6 group-hover:bg-slate transition-colors duration-300">
-                        <MapPin className="h-8 w-8 text-slate group-hover:text-white transition-colors duration-300" />
+                        <MapPin className="h-8 w-8 text-white transition-colors duration-300" />
                       </div>
                       <div>
                         <h3 className="font-ivry font-bold text-xl text-slate mb-3">School Address</h3>
@@ -302,8 +302,8 @@ export default function ContactPage() {
       <section className="py-16 bg-slate-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Visit Our Campus</h2>
-            <p className="text-lg text-slate-medium font-questa">Located in the heart of Hillsboro, Oregon</p>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Visit Our Campus</h2>
+            <p className="text-lg text-white/50 font-questa">Located in the heart of Hillsboro, Oregon</p>
           </div>
 
           <Card className="max-w-4xl mx-auto">
@@ -316,7 +316,7 @@ export default function ContactPage() {
                     changingImage === 'campus' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                   }`}
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
                   <div className="text-center text-white">
                     <MapPin className="h-16 w-16 mx-auto mb-4" />
                     <p className="font-questa font-medium">Visit Our Campus</p>
@@ -402,7 +402,7 @@ export default function ContactPage() {
             <Button size="lg" className="bg-amber hover:bg-golden hover:text-slate text-white font-questa">
               <a href="/admissions">Schedule a Tour</a>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-slate-medium bg-transparent font-questa">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white bg-transparent font-questa">
               <a href="tel:5039169758">Call Us Today</a>
             </Button>
           </div>
