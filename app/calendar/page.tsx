@@ -134,11 +134,11 @@ export default function CalendarPage() {
                     <div className="flex-1">
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 bg-slate-light rounded-2xl flex items-center justify-center mr-4 group-hover:bg-slate transition-colors duration-300">
-                          <Clock className="h-6 w-6 text-slate group-hover:text-white transition-colors duration-300" />
+                          <Clock className="h-6 w-6 text-white transition-colors duration-300" />
                         </div>
                         <div>
                           <span className="text-lg font-questa font-bold text-slate block">{item.date}</span>
-                          <Badge className={`mt-1 font-questa ${getTypeColor(item.type)}`}>{getTypeLabel(item.type)}</Badge>
+                          <Badge className={`mt-1 font-questa !text-white ${getTypeColor(item.type)}`}>{getTypeLabel(item.type)}</Badge>
                         </div>
                       </div>
                       <h3 className="text-2xl font-ivry font-bold text-slate mb-3">{item.event}</h3>
