@@ -6,15 +6,15 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-50 py-20">
+      <section className="bg-slate py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
               <HelpCircle className="h-4 w-4 mr-2" />
               Get Your Questions Answered
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-ivry font-bold text-white mb-6">Frequently Asked Questions</h1>
+            <p className="text-xl text-white max-w-3xl mx-auto font-questa">
               Find answers to common questions about our K-5 Spanish immersion program, admissions process, and school
               community.
             </p>
@@ -30,35 +30,35 @@ export default function FAQPage() {
       </section>
 
       {/* Still Have Questions */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-slate-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Still Have Questions?</h2>
-            <p className="text-xl text-gray-600 mb-12">
+            <h2 className="text-4xl font-ivry font-bold text-slate mb-6">Still Have Questions?</h2>
+            <p className="text-xl text-slate-medium mb-12 font-questa">
               Our admissions team is here to help you understand our program and find the best fit for your family. All
               conversations are confidential and welcoming.
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white rounded-2xl p-8 shadow-xl">
-                <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Phone className="h-8 w-8 text-blue-600" />
+                <div className="w-16 h-16 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Phone className="h-8 w-8 text-slate" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Call Us</h3>
-                <p className="text-gray-600 mb-6">Speak directly with our admissions team during office hours</p>
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold">
+                <h3 className="text-2xl font-ivry font-bold text-slate mb-4">Call Us</h3>
+                <p className="text-slate-medium mb-6 font-questa">Speak directly with our admissions team during office hours</p>
+                <Button className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-3 rounded-xl font-questa font-semibold">
                   <a href="tel:5039169758">(503) 916-9758</a>
                 </Button>
               </div>
 
               <div className="bg-white rounded-2xl p-8 shadow-xl">
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <MessageCircle className="h-8 w-8 text-green-600" />
+                <div className="w-16 h-16 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <MessageCircle className="h-8 w-8 text-golden" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Schedule a Tour</h3>
-                <p className="text-gray-600 mb-6">Experience our learning environment and meet our team in person</p>
-                <Button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-semibold">
-                  <a href="/contact">Schedule Visit</a>
+                <h3 className="text-2xl font-ivry font-bold text-slate mb-4">Schedule a Tour</h3>
+                <p className="text-slate-medium mb-6 font-questa">Experience our learning environment and meet our team in person</p>
+                <Button className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-3 rounded-xl font-questa font-semibold">
+                  <a href="/contact">Contact Us</a>
                 </Button>
               </div>
             </div>

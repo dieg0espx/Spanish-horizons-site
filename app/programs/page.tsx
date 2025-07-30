@@ -35,24 +35,24 @@ export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-50 py-24 relative overflow-hidden">
+      <section className="bg-slate py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-800 text-sm font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
               <Target className="h-4 w-4 mr-2" />
               K-5 Academic Excellence
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">K-5 Spanish Immersion Program</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <h1 className="text-5xl md:text-6xl font-ivry font-bold text-white mb-6">K-5 Spanish Immersion Program</h1>
+            <p className="text-xl text-white max-w-3xl mx-auto mb-8 font-questa">
               Built on two powerful pillars: Expeditionary Learning and Spanish Immersion (80/20 model). Where academic
               excellence meets cultural richness and hands-on discovery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-              >
+                          <Button
+              size="lg"
+              className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-4 rounded-xl font-questa font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+            >
                 <a href="/admissions" className="flex items-center">
                   Schedule a Tour
                   <ChevronRight className="ml-2 h-5 w-5" />
@@ -61,7 +61,7 @@ export default function ProgramsPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-xl font-semibold bg-transparent"
+                className="border-2 border-white text-white hover:bg-slate-medium px-8 py-4 rounded-xl font-questa font-semibold bg-transparent"
               >
                 <a href="/tuition">View Tuition Information</a>
               </Button>
@@ -74,19 +74,19 @@ export default function ProgramsPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Built on Two Pillars</h2>
+            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Built on Two Pillars</h2>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
               <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Globe className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+                  <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-2xl font-bold">Spanish Immersion (80/20 Model)</CardTitle>
+                <CardTitle className="text-2xl font-ivry font-bold text-slate">Spanish Immersion (80/20 Model)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4 text-gray-700">
+                <div className="space-y-4 text-slate-medium font-questa">
                   <p>
                     <strong>80% Spanish:</strong> Core subjects including math, science, social studies, and arts are
                     taught in Spanish, providing authentic language acquisition through meaningful content.
@@ -105,13 +105,13 @@ export default function ProgramsPage() {
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
               <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Target className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
+                  <Target className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-2xl font-bold">Expeditionary Learning (EL)</CardTitle>
+                <CardTitle className="text-2xl font-ivry font-bold text-slate">Expeditionary Learning (EL)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4 text-gray-700">
+                <div className="space-y-4 text-slate-medium font-questa">
                   <p>
                     <strong>Project-Based Units:</strong> Students explore real-world topics through multi-week
                     expeditions that integrate multiple subjects and culminate in authentic products.
@@ -132,11 +132,11 @@ export default function ProgramsPage() {
       </section>
 
       {/* Core Academic Areas */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-slate-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Core Academic Areas</h2>
-            <p className="text-lg text-gray-600">
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Core Academic Areas</h2>
+            <p className="text-lg text-white/50 font-questa">
               Comprehensive curriculum delivered through immersive, hands-on experiences
             </p>
           </div>
@@ -144,41 +144,41 @@ export default function ProgramsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 text-center">
               <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <BookOpen className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+                  <BookOpen className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Daily Academics</h3>
-                <p className="text-gray-600 text-sm">Math, Literacy, Phonics & Writing</p>
+                <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Daily Academics</h3>
+                <p className="text-slate-medium text-sm font-questa">Math, Literacy, Phonics & Writing</p>
               </CardContent>
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 text-center">
               <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Target className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
+                  <Target className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Project-Based Units</h3>
-                <p className="text-gray-600 text-sm">Expeditions & Investigations</p>
+                <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Project-Based Units</h3>
+                <p className="text-slate-medium text-sm font-questa">Expeditions & Investigations</p>
               </CardContent>
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 text-center">
               <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Heart className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-amber transition-colors duration-300">
+                  <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Social-Emotional</h3>
-                <p className="text-gray-600 text-sm">Emotional Regulation & Executive Function</p>
+                <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Social-Emotional</h3>
+                <p className="text-slate-medium text-sm font-questa">Emotional Regulation & Executive Function</p>
               </CardContent>
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 text-center">
               <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Palette className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-slate-medium rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+                  <Palette className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Specials</h3>
-                <p className="text-gray-600 text-sm">Art, Music, Cooking, Gardening, Movement</p>
+                <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Specials</h3>
+                <p className="text-slate-medium text-sm font-questa">Art, Music, Cooking, Gardening, Movement</p>
               </CardContent>
             </Card>
           </div>
@@ -189,73 +189,73 @@ export default function ProgramsPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">
               Sample Curriculum: Adventures Across Latin America
             </h2>
-            <p className="text-lg text-gray-600">See how our expeditionary approach brings learning to life</p>
+            <p className="text-lg text-slate-medium font-questa">See how our expeditionary approach brings learning to life</p>
           </div>
 
           <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 max-w-4xl mx-auto">
             <CardHeader>
-              <CardTitle className="text-center text-2xl">Multi-Week Expedition Example</CardTitle>
+              <CardTitle className="text-center text-2xl font-ivry text-slate">Multi-Week Expedition Example</CardTitle>
             </CardHeader>
             <CardContent className="p-8">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-blue-800">Countries Explored</h3>
+                  <h3 className="text-xl font-ivry font-semibold mb-4 text-slate">Countries Explored</h3>
                   <div className="space-y-2">
-                    <Badge variant="outline" className="mr-2">
+                    <Badge variant="outline" className="mr-2 font-questa">
                       Mexico
                     </Badge>
-                    <Badge variant="outline" className="mr-2">
+                    <Badge variant="outline" className="mr-2 font-questa">
                       Colombia
                     </Badge>
-                    <Badge variant="outline" className="mr-2">
+                    <Badge variant="outline" className="mr-2 font-questa">
                       Peru
                     </Badge>
-                    <Badge variant="outline" className="mr-2">
+                    <Badge variant="outline" className="mr-2 font-questa">
                       Argentina
                     </Badge>
-                    <Badge variant="outline" className="mr-2">
+                    <Badge variant="outline" className="mr-2 font-questa">
                       And more...
                     </Badge>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-green-800">Learning Activities</h3>
+                  <h3 className="text-xl font-ivry font-semibold mb-4 text-slate">Learning Activities</h3>
                   <div className="space-y-3">
                     <div className="flex items-center">
-                      <ChefHat className="h-5 w-5 text-orange-600 mr-2" />
-                      <span className="text-gray-700">Cooking traditional foods</span>
+                      <ChefHat className="h-5 w-5 text-amber mr-2" />
+                      <span className="text-slate-medium font-questa">Cooking traditional foods</span>
                     </div>
                     <div className="flex items-center">
-                      <BookOpen className="h-5 w-5 text-blue-600 mr-2" />
-                      <span className="text-gray-700">Storytelling and bilingual literature</span>
+                      <BookOpen className="h-5 w-5 text-slate mr-2" />
+                      <span className="text-slate-medium font-questa">Storytelling and bilingual literature</span>
                     </div>
                     <div className="flex items-center">
-                      <Music className="h-5 w-5 text-purple-600 mr-2" />
-                      <span className="text-gray-700">Music and cultural dances (Cumbia)</span>
+                      <Music className="h-5 w-5 text-golden mr-2" />
+                      <span className="text-slate-medium font-questa">Music and cultural dances (Cumbia)</span>
                     </div>
                     <div className="flex items-center">
-                      <Sprout className="h-5 w-5 text-green-600 mr-2" />
-                      <span className="text-gray-700">Science (rainforest ecosystems)</span>
+                      <Sprout className="h-5 w-5 text-golden mr-2" />
+                      <span className="text-slate-medium font-questa">Science (rainforest ecosystems)</span>
                     </div>
                     <div className="flex items-center">
-                      <Target className="h-5 w-5 text-red-600 mr-2" />
-                      <span className="text-gray-700">Math with cultural contexts</span>
+                      <Target className="h-5 w-5 text-amber mr-2" />
+                      <span className="text-slate-medium font-questa">Math with cultural contexts</span>
                     </div>
                     <div className="flex items-center">
-                      <Palette className="h-5 w-5 text-yellow-600 mr-2" />
-                      <span className="text-gray-700">Art (Andean-inspired projects)</span>
+                      <Palette className="h-5 w-5 text-golden mr-2" />
+                      <span className="text-slate-medium font-questa">Art (Andean-inspired projects)</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-blue-50 rounded-lg">
-                <h4 className="text-lg font-semibold text-blue-800 mb-2">Culmination Event</h4>
-                <p className="text-blue-700">
+              <div className="mt-8 p-6 bg-slate-light rounded-lg">
+                <h4 className="text-lg font-ivry font-semibold text-white mb-2">Culmination Event</h4>
+                <p className="text-white/50 font-questa">
                   <strong>Student-led Latin America Fair:</strong> Students showcase their learning through
                   presentations, cultural performances, food tastings, and interactive displays for families and the
                   community.
@@ -267,25 +267,25 @@ export default function ProgramsPage() {
       </section>
 
       {/* Daily Schedule */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-slate-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Kindergarten Daily Schedule</h2>
-            <p className="text-lg text-gray-600">A balanced day of learning, play, and discovery</p>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Kindergarten Daily Schedule</h2>
+            <p className="text-lg text-white/50 font-questa">A balanced day of learning, play, and discovery</p>
           </div>
 
           <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 max-w-4xl mx-auto">
             <CardContent className="p-0">
               <div className="divide-y divide-gray-200">
                 {dailySchedule.map((item, index) => (
-                  <div key={index} className="p-4 hover:bg-gray-50 transition-colors">
+                  <div key={index} className="p-4 hover:bg-slate-light text-slate  hover:text-white transition-colors">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                       <div className="flex items-center mb-2 md:mb-0">
-                        <Clock className="h-5 w-5 text-blue-600 mr-3" />
-                        <span className="font-semibold text-gray-900 min-w-[120px]">{item.time}</span>
-                        <span className="font-medium text-gray-800 ml-4">{item.activity}</span>
+                        <Clock className="h-5 w-5 mr-3" />
+                        <span className="font-questa font-semibold min-w-[120px]">{item.time}</span>
+                        <span className="font-questa font-medium ml-4">{item.activity}</span>
                       </div>
-                      <span className="text-gray-600 text-sm md:ml-4">{item.description}</span>
+                      <span className="medium text-sm md:ml-4 font-questa">{item.description}</span>
                     </div>
                   </div>
                 ))}
@@ -294,10 +294,10 @@ export default function ProgramsPage() {
           </Card>
 
           <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
+            <p className="text-white mb-4 font-questa">
               <em>Schedule may vary slightly for grades 1-5 to accommodate developmental needs</em>
             </p>
-            <Button variant="outline">
+            <Button variant="outline" className="font-questa">
               <a href="/admissions">Schedule a Visit to See Our Program in Action</a>
             </Button>
           </div>
@@ -308,17 +308,17 @@ export default function ProgramsPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Program Highlights</h2>
+            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Program Highlights</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
               <CardContent className="pt-6 text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Users className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+                  <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Small Class Sizes</h3>
-                <p className="text-gray-600">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Small Class Sizes</h3>
+                <p className="text-slate-medium font-questa">
                   12–16 students per grade with one classroom per grade level for personalized attention
                 </p>
               </CardContent>
@@ -326,11 +326,11 @@ export default function ProgramsPage() {
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
               <CardContent className="pt-6 text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Heart className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-amber transition-colors duration-300">
+                  <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Emotional Development</h3>
-                <p className="text-gray-600">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Emotional Development</h3>
+                <p className="text-slate-medium font-questa">
                   Strong focus on emotional regulation, mental health, and prefrontal cortex development
                 </p>
               </CardContent>
@@ -338,11 +338,11 @@ export default function ProgramsPage() {
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
               <CardContent className="pt-6 text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <Globe className="h-10 w-10 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
+                  <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Cultural Immersion</h3>
-                <p className="text-gray-600">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Cultural Immersion</h3>
+                <p className="text-slate-medium font-questa">
                   Authentic cultural experiences woven throughout the curriculum and daily life
                 </p>
               </CardContent>
@@ -352,18 +352,18 @@ export default function ProgramsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-slate text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Explore Our Program?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-ivry font-bold mb-4">Ready to Explore Our Program?</h2>
+          <p className="text-xl text-white mb-8 max-w-2xl mx-auto font-questa">
             Experience our vibrant learning community firsthand. Schedule a tour to see our students engaged in
             authentic Spanish immersion and hands-on expeditionary learning.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Button size="lg" className="bg-amber hover:bg-golden hover:text-slate text-white font-questa">
               <a href="/admissions">Schedule a Tour</a>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-blue-700 bg-transparent">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-slate-medium bg-transparent font-questa">
               <a href="/contact">Contact Us</a>
             </Button>
           </div>

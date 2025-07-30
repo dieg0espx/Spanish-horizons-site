@@ -1,11 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import ModernHeader from "@/components/modern-header"
 import Footer from "@/components/footer"
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Spanish Horizons Academy - K-5 Spanish Immersion School",
@@ -21,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ marginTop: "100px" }}>
+      <body className="font-questa" style={{ marginTop: "100px" }}>
         <ModernHeader />
         {children}
         <Footer />

@@ -69,20 +69,20 @@ export default function FAQSection() {
           <Card key={faq.id} className="shadow-lg border-0 overflow-hidden">
             <CardContent className="p-0">
               <button
-                className="w-full p-6 text-left hover:bg-gray-50 transition-colors duration-200 flex items-center justify-between"
+                className="w-full p-6 text-left hover:bg-slate-light transition-colors duration-200 flex items-center justify-between"
                 onClick={() => toggleItem(faq.id)}
               >
-                <h3 className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
+                <h3 className="text-lg font-ivry font-semibold text-slate pr-4">{faq.question}</h3>
                 {openItems.includes(faq.id) ? (
-                  <ChevronUp className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <ChevronUp className="h-5 w-5 text-slate flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="h-5 w-5 text-gray-400 flex-shrink-0" />
+                  <ChevronDown className="h-5 w-5 text-slate-medium flex-shrink-0" />
                 )}
               </button>
               {openItems.includes(faq.id) && (
                 <div className="px-6 pb-6">
                   <div className="border-t border-gray-100 pt-4">
-                    <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                    <p className="text-slate-medium leading-relaxed font-questa">{faq.answer}</p>
                   </div>
                 </div>
               )}

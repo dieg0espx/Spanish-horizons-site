@@ -89,24 +89,24 @@ export default function TestimonialsCarousel() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 ">
+    <div className="mx-auto px-4 sm:px-6 ">
       <Slider {...settings}>
         {testimonials.map((testimonial) => (
-          <div key={testimonial.id} className="p-2 sm:p-3">
+          <div key={testimonial.id} className="p-2 sm:p-5">
             <Card className="shadow-lg border-0 bg-white h-full">
               <CardContent className="p-4 sm:p-6 h-full flex flex-col">
                 <div className="flex flex-col h-full text-center">
                   <div className="flex justify-center mb-3 sm:mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+                      <Star key={i} className="h-4 w-4 sm:h-4 sm:w-4 text-golden fill-current" />
                     ))}
                   </div>
-                  <blockquote className="text-sm sm:text-sm text-gray-700 italic leading-relaxed flex-grow min-h-[80px] sm:min-h-[100px]">
+                  <blockquote className="text-sm sm:text-[20px] text-slate-medium italic leading-relaxed flex-grow h-[150px] font-questa">
                     "{testimonial.content}"
                   </blockquote>
                   <div className="mt-auto pt-3">
-                    <p className="font-bold text-gray-900 text-sm sm:text-sm mb-1">{testimonial.name}</p>
-                    <p className="text-blue-600 text-sm font-medium">{testimonial.role}</p>
+                    <p className="font-ivry font-bold text-slate text-sm sm:text-sm mb-1">{testimonial.name}</p>
+                    <p className="text-slate-medium text-sm font-questa font-medium">{testimonial.role}</p>
                   </div>
                 </div>
               </CardContent>

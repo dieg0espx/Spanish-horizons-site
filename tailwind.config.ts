@@ -12,7 +12,29 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			'questa': ['Questa Grande', 'serif'],
+  			'ivry': ['IvryOra Display', 'serif'],
+  			'sans': ['Questa Grande', 'sans-serif'],
+  			'serif': ['IvryOra Display', 'serif']
+  		},
   		colors: {
+  			// Custom color palette
+  			golden: {
+  				DEFAULT: '#FFD700', // Golden yellow - C: 0%, M: 26%, Y: 89%, K: 0%
+  				light: '#FFE44D',
+  				dark: '#FFB300'
+  			},
+  			amber: {
+  				DEFAULT: '#FF8C00', // Deep orange - C: 0%, M: 45%, Y: 100%, K: 0%
+  				light: '#FFA726',
+  				dark: '#E65100'
+  			},
+  			slate: {
+  				DEFAULT: '#2C4A5B', // Dark slate blue - C: 100%, M: 32%, Y: 20%, K: 58%
+  				medium: '#3A5A6B', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
+  				light: '#4A6A7B' // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

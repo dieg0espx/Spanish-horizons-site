@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Users, Heart, Globe, Star, BookOpen, Palette, Music, ChefHat } from "lucide-react"
+import Image from "next/image"
 
 interface ImageGalleryProps {
   title?: string
@@ -7,8 +7,8 @@ interface ImageGalleryProps {
   images?: Array<{
     title: string
     description: string
-    icon: any
     category: string
+    imageSrc: string
   }>
 }
 
@@ -19,48 +19,82 @@ export default function ImageGallery({
     {
       title: "Classroom Learning",
       description: "Students engaged in Spanish immersion",
-      icon: Users,
       category: "academics",
+      imageSrc: "/pictures/5-DSC02576.jpg",
     },
-    { title: "Cooking Activities", description: "Cultural cooking experiences", icon: ChefHat, category: "culture" },
-    { title: "Art Projects", description: "Creative expression in Spanish", icon: Palette, category: "arts" },
-    { title: "Music & Dance", description: "Latin American cultural activities", icon: Music, category: "culture" },
-    { title: "Outdoor Learning", description: "Garden and nature exploration", icon: Globe, category: "outdoor" },
-    { title: "Reading Circle", description: "Bilingual literature time", icon: BookOpen, category: "academics" },
-    { title: "Science Projects", description: "Hands-on STEM learning", icon: Star, category: "academics" },
-    { title: "Community Time", description: "Building friendships", icon: Heart, category: "community" },
+    { 
+      title: "Cooking Activities", 
+      description: "Cultural cooking experiences", 
+      category: "culture",
+      imageSrc: "/pictures/18-DSC02649.jpg",
+    },
+    { 
+      title: "Art Projects", 
+      description: "Creative expression in Spanish", 
+      category: "arts",
+      imageSrc: "/pictures/33-DSC02875.jpg",
+    },
+    { 
+      title: "Music & Dance", 
+      description: "Latin American cultural activities", 
+      category: "culture",
+      imageSrc: "/pictures/11-DSC02612.jpg",
+    },
+    { 
+      title: "Outdoor Learning", 
+      description: "Garden and nature exploration", 
+      category: "outdoor",
+      imageSrc: "/pictures/26-DSC02753.jpg",
+    },
+    { 
+      title: "Reading Circle", 
+      description: "Bilingual literature time", 
+      category: "academics",
+      imageSrc: "/pictures/14-DSC02635.jpg",
+    },
+    { 
+      title: "Science Projects", 
+      description: "Hands-on STEM learning", 
+      category: "academics",
+      imageSrc: "/pictures/30-DSC02799.jpg",
+    },
+    { 
+      title: "Community Time", 
+      description: "Building friendships", 
+      category: "community",
+      imageSrc: "/pictures/8-DSC02584.jpg",
+    },
   ],
 }: ImageGalleryProps) {
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">{title}</h2>
-          <p className="text-xl text-gray-600">{subtitle}</p>
+          <h2 className="text-4xl font-ivry font-bold text-slate mb-4">{title}</h2>
+          <p className="text-xl text-slate-medium font-questa">{subtitle}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {images.map((image, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white overflow-hidden"
+              className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white overflow-hidden cursor-pointer"
             >
               <CardContent className="p-0">
-                <div className="aspect-square bg-white relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-colors duration-300">
-                    <div className="text-center p-6">
-                      <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 transition-colors duration-300">
-                        <image.icon className="h-8 w-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
-                      </div>
-                      <h3 className="font-bold text-gray-900 mb-2">{image.title}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{image.description}</p>
-                      <div className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
-                        {image.category}
-                      </div>
-                    </div>
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <div className="absolute inset-0">
+                    <Image
+                      src={image.imageSrc}
+                      alt={image.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-xs text-gray-500 text-center">Photo from Dropbox Gallery</p>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
+                    <div className="flex justify-between items-start mb-0">
+                      <h3 className="font-ivry font-bold text-white text-lg drop-shadow-lg">{image.title}</h3>
+                    </div>
+                    <p className="text-sm text-white/90 font-questa drop-shadow-md mb-3 leading-relaxed">{image.description}</p>
                   </div>
                 </div>
               </CardContent>
