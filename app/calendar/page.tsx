@@ -111,8 +111,8 @@ export default function CalendarPage() {
       <section className="py-6 bg-amber">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
-            <AlertCircle className="h-5 w-5 text-golden mr-2" />
-            <p className="text-slate font-questa font-medium">
+            <AlertCircle className="h-5 w-5 text-white mr-2" />
+            <p className="text-white font-questa font-medium">
               This calendar has been updated for the 2025-2026 school year. Please save these dates for planning
               purposes.
             </p>
