@@ -30,45 +30,12 @@ export default function HeroWithImages({
     description: "Classroom and outdoor activities",
   },
 }: HeroWithImagesProps) {
-  // Array of all available images for background
+  // Array of favorite images for background
   const allImages = [
-    "/pictures/1-DSC02558.jpg",
-    "/pictures/2-DSC02562.jpg",
-    "/pictures/3-DSC02563.jpg",
-    "/pictures/4-DSC02569.jpg",
-    "/pictures/5-DSC02576.jpg",
-    "/pictures/6-DSC02581.jpg",
-    "/pictures/7-DSC02580.jpg",
-    "/pictures/8-DSC02584.jpg",
-    "/pictures/9-DSC02596.jpg",
-    "/pictures/10-DSC02610.jpg",
-    "/pictures/11-DSC02612.jpg",
-    "/pictures/12-DSC02622.jpg",
-    "/pictures/13-DSC02624.jpg",
-    "/pictures/14-DSC02635.jpg",
-    "/pictures/15-DSC02634.jpg",
-    "/pictures/16-DSC02642.jpg",
-    "/pictures/17-DSC02646.jpg",
-    "/pictures/18-DSC02649.jpg",
-    "/pictures/19-DSC02675.jpg",
-    "/pictures/20-DSC02677.jpg",
-    "/pictures/21-DSC02692.jpg",
-    "/pictures/22-DSC02691.jpg",
-    "/pictures/23-DSC02698.jpg",
-    "/pictures/24-DSC02700.jpg",
-    "/pictures/25-DSC02739.jpg",
-    "/pictures/26-DSC02753.jpg",
-    "/pictures/27-DSC02764.jpg",
-    "/pictures/28-DSC02777.jpg",
-    "/pictures/29-DSC02795.jpg",
-    "/pictures/30-DSC02799.jpg",
-    "/pictures/31-DSC02844.jpg",
-    "/pictures/32-DSC02871.jpg",
-    "/pictures/33-DSC02875.jpg",
-    "/pictures/34-DSC02882.jpg",
-    "/pictures/35-DSC02888.jpg",
-    "/pictures/36-DSC02905.jpg",
-    "/pictures/37-DSC02941.jpg"
+    "/pictures/whats1.JPG",
+    "/pictures/whats2.JPG", 
+    "/pictures/whats3.JPG",
+    "/pictures/whats4.JPG"
   ];
 
   // Function to shuffle array
