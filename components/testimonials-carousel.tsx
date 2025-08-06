@@ -101,7 +101,7 @@ export default function TestimonialsCarousel() {
                       <Star key={i} className="h-4 w-4 sm:h-4 sm:w-4 text-golden fill-current" />
                     ))}
                   </div>
-                  <blockquote className="text-sm sm:text-[20px] text-slate-medium italic leading-relaxed flex-grow h-[150px] font-questa">
+                  <blockquote className="text-md text-slate-medium italic leading-relaxed flex-grow h-[150px] font-questa">
                     "{testimonial.content}"
                   </blockquote>
                   <div className="mt-auto pt-3">

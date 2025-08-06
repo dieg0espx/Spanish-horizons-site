@@ -3,6 +3,19 @@ import type { Metadata } from "next"
 import "./globals.css"
 import ModernHeader from "@/components/modern-header"
 import Footer from "@/components/footer"
+import { Inter, Playfair_Display } from 'next/font/google'
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const playfair = Playfair_Display({ 
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: "Spanish Horizons Academy - K-5 Spanish Immersion School",
@@ -83,7 +96,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
         {/* Favicon Links */}
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
@@ -147,7 +160,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-questa" style={{ marginTop: "100px" }}>
+      <body className="font-sans" style={{ marginTop: "100px" }}>
         <ModernHeader />
         {children}
         <Footer />

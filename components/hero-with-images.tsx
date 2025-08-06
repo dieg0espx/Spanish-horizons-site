@@ -30,7 +30,7 @@ export default function HeroWithImages({
     description: "Classroom and outdoor activities",
   },
 }: HeroWithImagesProps) {
-  // Array of all available images
+  // Array of all available images for background
   const allImages = [
     "/pictures/1-DSC02558.jpg",
     "/pictures/2-DSC02562.jpg",
@@ -84,46 +84,30 @@ export default function HeroWithImages({
   // Shuffle the images array
   const shuffledImages = shuffleArray(allImages);
 
-  // State for current images
-  const [mainImage, setMainImage] = useState(shuffledImages[0]);
-  const [smallImage1, setSmallImage1] = useState(shuffledImages[1]);
-  const [smallImage2, setSmallImage2] = useState(shuffledImages[2]);
-  const [changingImage, setChangingImage] = useState<'main' | 'small1' | 'small2' | null>(null);
+  // State for current background image
+  const [currentImage, setCurrentImage] = useState(shuffledImages[0]);
+  const [isChanging, setIsChanging] = useState(false);
 
   // Function to get random image
   const getRandomImage = () => {
     return shuffledImages[Math.floor(Math.random() * shuffledImages.length)];
   };
 
-  // Function to change one image at a time
-  const changeOneImage = () => {
-    const imageTypes = ['main', 'small1', 'small2'] as const;
-    const randomType = imageTypes[Math.floor(Math.random() * imageTypes.length)];
-    
-    setChangingImage(randomType);
-    
+  // Function to change background image
+  const changeBackgroundImage = () => {
+    setIsChanging(true);
     setTimeout(() => {
-      switch (randomType) {
-        case 'main':
-          setMainImage(getRandomImage());
-          break;
-        case 'small1':
-          setSmallImage1(getRandomImage());
-          break;
-        case 'small2':
-          setSmallImage2(getRandomImage());
-          break;
-      }
-      setChangingImage(null);
+      setCurrentImage(getRandomImage());
+      setIsChanging(false);
     }, 500);
   };
 
-  // Effect to change one image at random intervals (2-6 seconds)
+  // Effect to change background image at random intervals (8-15 seconds)
   useEffect(() => {
     const scheduleNextChange = () => {
-      const randomDelay = Math.random() * 4000 + 2000; // Random delay between 2-6 seconds
+      const randomDelay = Math.random() * 7000 + 8000; // Random delay between 8-15 seconds
       setTimeout(() => {
-        changeOneImage();
+        changeBackgroundImage();
         scheduleNextChange(); // Schedule the next change
       }, randomDelay);
     };
@@ -136,87 +120,60 @@ export default function HeroWithImages({
   }, []);
 
   return (
-    <section className="bg-slate py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-white/10"></div>
-
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
+        style={{
+          backgroundImage: `url(${currentImage})`,
+          filter: isChanging ? 'blur(2px)' : 'blur(0px)',
+        }}
+      />
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/50"></div>
+      
+     
       {/* Decorative Elements */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-golden-light rounded-full opacity-20 animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 bg-amber-light rounded-full opacity-20 animate-pulse delay-1000"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
-              <Globe className="h-4 w-4 mr-2" />
-              {badge}
-            </div>
-            <h1 className="text-5xl md:text-6xl font-ivry font-bold text-white mb-6">
-              {title}
-              {subtitle && <span className="text-golden block">{subtitle}</span>}
-            </h1>
-            <p className="text-2xl text-white mb-8 leading-relaxed font-questa">{description}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-4 rounded-xl font-questa font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                <Link href={primaryButton.href} className="flex items-center">
-                  {primaryButton.text}
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              {secondaryButton && (
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-slate px-8 py-4 rounded-xl font-questa font-semibold bg-transparent"
-                >
-                  <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
-                </Button>
-              )}
-            </div>
-          </div>
-
-          {/* Hero Image Section */}
-          <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Main large image */}
-              <div className="col-span-2 aspect-video bg-white rounded-3xl shadow-2xl overflow-hidden">
-                <img 
-                  src={mainImage} 
-                  alt="Students in Spanish Immersion" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${
-                    changingImage === 'main' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                  }`}
-                />
-              </div>
-
-              {/* Two smaller images */}
-              <div className="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden">
-                <img 
-                  src={smallImage1} 
-                  alt="Cultural Activities" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${
-                    changingImage === 'small1' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                  }`}
-                />
-              </div>
-
-              <div className="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden">
-                <img 
-                  src={smallImage2} 
-                  alt="Outdoor Learning" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${
-                    changingImage === 'small2' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                  }`}
-                />
-              </div>
-            </div>
-
-            {/* Floating elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-golden rounded-full opacity-20"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber rounded-full opacity-20"></div>
-          </div>
+      {/* Content */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6 border border-white/30">
+          <Globe className="h-4 w-4 mr-2" />
+          {badge}
+        </div>
+        
+        <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+          {title}
+          {subtitle && <span className="text-golden block">{subtitle}</span>}
+        </h1>
+        
+        <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto font-sans">
+          {description}
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button
+            size="lg"
+            className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+          >
+            <Link href={primaryButton.href} className="flex items-center">
+              {primaryButton.text}
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+          
+          {secondaryButton && (
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white hover:text-slate px-8 py-4 rounded-xl font-semibold bg-transparent backdrop-blur-sm"
+            >
+              <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
+            </Button>
+          )}
         </div>
       </div>
     </section>

@@ -13,10 +13,9 @@ const config: Config = {
   theme: {
   	extend: {
   		fontFamily: {
-  			'questa': ['Questa Grande', 'serif'],
-  			'ivry': ['IvryOra Display', 'serif'],
-  			'sans': ['Questa Grande', 'sans-serif'],
-  			'serif': ['IvryOra Display', 'serif']
+  			'sans': ['var(--font-inter)', 'system-ui', 'sans-serif'],
+  			'serif': ['var(--font-playfair)', 'Georgia', 'serif'],
+  			'mono': ['JetBrains Mono', 'Fira Code', 'monospace']
   		},
   		colors: {
   			// Custom color palette
@@ -31,9 +30,9 @@ const config: Config = {
   				dark: '#E65100'
   			},
   			slate: {
-  				DEFAULT: '#2C4A5B', // Dark slate blue - C: 100%, M: 32%, Y: 20%, K: 58%
-  				medium: '#3A5A6B', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
-  				light: '#4A6A7B' // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
+  				DEFAULT: '#000638', // Dark slate blue - C: 100%, M: 32%, Y: 20%, K: 58%
+  				medium: '#000638', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
+  				light: '#000638' // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
