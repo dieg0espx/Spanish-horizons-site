@@ -190,7 +190,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans" style={{ marginTop: "100px" }}>
+      <body className="font-sans" style={{ marginTop: "70px" }}>
         <ModernHeader />
         {children}
         <Footer />
