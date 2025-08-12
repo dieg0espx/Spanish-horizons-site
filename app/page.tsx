@@ -23,9 +23,9 @@ export default function HomePage() {
       />
 
       {/* Quick Highlights */}
-      <section className="py-20 bg-white">
+      <section className="py-20 md:py-20 py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Why Choose Spanish Horizons?</h2>
             <p className="text-xl text-slate-medium max-w-3xl mx-auto font-questa">
               Three pillars that make our educational approach unique and effective
@@ -72,8 +72,8 @@ export default function HomePage() {
       {/* Image Gallery Section */}
       <ImageGallery />
 
-      {/* Testimonials Carousel */}
-      <section className="py-20 bg-white">
+             {/* Testimonials Carousel */}
+       <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-4">What Parents Are Saying</h2>
@@ -121,11 +121,11 @@ export default function HomePage() {
       {/* Core Values */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+                     <div className="text-center mb-12 md:mb-16">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Our Core Values</h2>
             <p className="text-xl text-slate-medium font-questa">The principles that guide everything we do</p>
           </div>
-          <div className="grid md:grid-cols-5 gap-8">
+                     <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             <div className="text-center group">
               <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
                 <FiZap className="h-10 w-10 text-white" />
@@ -154,13 +154,13 @@ export default function HomePage() {
               <h3 className="font-ivry font-bold text-xl text-slate mb-2">Language</h3>
               <p className="text-slate-medium text-sm font-questa">Authentic bilingual development</p>
             </div>
-            <div className="text-center group">
-              <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
-                <FiSearch className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="font-ivry font-bold text-xl text-slate mb-2">Discovery</h3>
-              <p className="text-slate-medium text-sm font-questa">Learning through exploration</p>
-            </div>
+                         <div className="text-center group col-span-2 md:col-span-1">
+               <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
+                 <FiSearch className="h-10 w-10 text-white" />
+               </div>
+               <h3 className="font-ivry font-bold text-xl text-slate mb-2">Discovery</h3>
+               <p className="text-slate-medium text-sm font-questa max-w-[120px] mx-auto">Learning through exploration</p>
+             </div>
           </div>
         </div>
       </section>

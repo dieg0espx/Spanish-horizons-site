@@ -112,19 +112,19 @@ export default function HeroWithImages({
           {badge}
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+        <h1 className="text-5xl md:text-7xl font-sf-pro font-light text-white mb-6 leading-tight tracking-wide">
           {title}
-          {subtitle && <span className="text-golden block">{subtitle}</span>}
+          {subtitle && <span className="text-golden block font-normal">{subtitle}</span>}
         </h1>
         
         <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto font-sans">
           {description}
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
           <Button
             size="lg"
-            className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+            className="bg-amber hover:bg-golden hover:text-slate text-white px-6 sm:px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 text-sm sm:text-base"
           >
             <Link href={primaryButton.href} className="flex items-center">
               {primaryButton.text}
@@ -136,7 +136,7 @@ export default function HeroWithImages({
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-slate px-8 py-4 rounded-xl font-semibold bg-transparent backdrop-blur-sm"
+              className="border-2 border-white text-white hover:bg-white hover:text-slate px-6 sm:px-8 py-4 rounded-xl font-semibold bg-transparent backdrop-blur-sm text-sm sm:text-base"
             >
               <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
             </Button>
