@@ -107,9 +107,9 @@ export default function ModernHeader() {
       {/* Main Header */}
       <header className="bg-white shadow-xl sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-24">
+          <div className="flex items-center h-24">
             {/* Logo Section */}
-            <div className="flex items-center -ml-5 sm:ml-0">
+            <div className="flex items-center -ml-5 sm:ml-0 flex-shrink-0">
               <Link href="/" className="flex items-center group">
                 <Image 
                   src="/branding/logo.png" 
@@ -121,8 +121,8 @@ export default function ModernHeader() {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            {/* Desktop Navigation - Centered */}
+            <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
               {navigation.map((item) => (
                 <div key={item.name} className="relative">
                   {item.submenu ? (
@@ -179,7 +179,7 @@ export default function ModernHeader() {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
               <Button
                 size="lg"
                 className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 font-questa px-6 py-3 text-base"
