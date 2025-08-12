@@ -14,7 +14,12 @@ const config: Config = {
   	extend: {
   		fontFamily: {
   			'sans': ['var(--font-inter)', 'system-ui', 'sans-serif'],
+  			'sf-pro': ['SF Pro Display', 'system-ui', 'sans-serif'],
   			'serif': ['var(--font-playfair)', 'Georgia', 'serif'],
+  			'lora': ['var(--font-lora)', 'Georgia', 'serif'],
+  			'cormorant': ['var(--font-cormorant)', 'Georgia', 'serif'],
+  			'libre-baskerville': ['var(--font-libre-baskerville)', 'Georgia', 'serif'],
+  			'poppins': ['var(--font-poppins)', 'system-ui', 'sans-serif'],
   			'mono': ['JetBrains Mono', 'Fira Code', 'monospace']
   		},
   		colors: {
@@ -106,11 +111,33 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'fade-in-up': {
+  				from: {
+  					opacity: '0',
+  					transform: 'translateY(20px)'
+  				},
+  				to: {
+  					opacity: '1',
+  					transform: 'translateY(0)'
+  				}
+  			},
+  			'slide-down': {
+  				from: {
+  					opacity: '0',
+  					transform: 'translateY(-10px)'
+  				},
+  				to: {
+  					opacity: '1',
+  					transform: 'translateY(0)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+  			'slide-down': 'slide-down 0.3s ease-out forwards'
   		}
   	}
   },

@@ -1,9 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import "./fonts.css"
 import ModernHeader from "@/components/modern-header"
 import Footer from "@/components/footer"
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, Poppins } from 'next/font/google'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -16,6 +17,35 @@ const playfair = Playfair_Display({
   variable: '--font-playfair',
   display: 'swap',
 })
+
+const lora = Lora({ 
+  subsets: ['latin'],
+  variable: '--font-lora',
+  display: 'swap',
+})
+
+const cormorant = Cormorant_Garamond({ 
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  weight: ['300', '400', '500'],
+  display: 'swap',
+})
+
+const libreBaskerville = Libre_Baskerville({ 
+  subsets: ['latin'],
+  variable: '--font-libre-baskerville',
+  weight: ['400', '700'],
+  display: 'swap',
+})
+
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+})
+
+
 
 export const metadata: Metadata = {
   title: "Spanish Horizons Academy - K-5 Spanish Immersion School",
@@ -96,7 +126,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${lora.variable} ${cormorant.variable} ${libreBaskerville.variable} ${poppins.variable}`}>
       <head>
         {/* Favicon Links */}
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
