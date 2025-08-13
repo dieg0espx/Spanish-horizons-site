@@ -179,7 +179,7 @@ export default function ModernHeader() {
             </nav>
 
             {/* CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
+            <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
               <div className="relative">
                 <Button
                   size="lg"
@@ -242,11 +242,11 @@ export default function ModernHeader() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="lg:hidden mobile-menu fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
-            <div className={`absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out overflow-y-auto ${
+            <div className={`absolute top-0 right-0 h-screen w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${
               isMenuAnimating ? 'translate-x-0' : 'translate-x-full'
             }`}>
               {/* Mobile Menu Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-gradient-to-r from-amber/5 to-golden/5">
+              <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-gradient-to-r from-amber/5 to-golden/5 flex-shrink-0">
                 <div className="flex items-center flex-1">
                   <Image 
                     src="/branding/logo.png" 
@@ -268,14 +268,14 @@ export default function ModernHeader() {
               </div>
 
               {/* Mobile Menu Content */}
-              <div className="flex flex-col h-full">
-                <nav className="flex-1 px-4 py-6 space-y-3">
+              <div className="flex flex-col flex-1 min-h-0">
+                <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
                   {navigation.map((item) => (
                     <div key={item.name}>
                       {item.submenu ? (
                         <div>
                           <button
-                            className={`w-full flex items-center justify-between px-4 py-4 rounded-xl text-base font-medium transition-all duration-200 ${
+                            className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                               isActivePage(item.href, item.submenu)
                                 ? "bg-amber text-white shadow-lg"
                                 : "text-gray-700 hover:bg-amber/10 hover:text-amber"
@@ -292,12 +292,12 @@ export default function ModernHeader() {
                             />
                           </button>
                           {activeDropdown === item.name && (
-                            <div className="ml-4 mt-3 space-y-2 bg-gray-50 rounded-lg p-3">
+                            <div className="ml-3 mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
                               {item.submenu.map((subItem) => (
                                 <Link
                                   key={subItem.name}
                                   href={subItem.href}
-                                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                  className={`block px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                                     pathname === subItem.href || pathname.startsWith(subItem.href.split("#")[0])
                                       ? "bg-amber text-white shadow-md"
                                       : "text-gray-600 hover:bg-amber hover:text-white"
@@ -319,7 +319,7 @@ export default function ModernHeader() {
                       ) : (
                         <Link
                           href={item.href}
-                          className={`flex items-center px-4 py-4 rounded-xl text-base font-medium transition-all duration-200 ${
+                          className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                             pathname === item.href
                               ? "bg-amber text-white shadow-lg"
                               : "text-gray-700 hover:bg-amber/10 hover:text-amber"
@@ -337,12 +337,12 @@ export default function ModernHeader() {
                 </nav>
 
                 {/* Action Buttons */}
-                <div className="px-4 py-6 border-t border-gray-100">
-                  <div className="space-y-4">
+                <div className="px-4 py-4 border-t border-gray-100 flex-shrink-0">
+                  <div className="space-y-3">
                     <div className="relative">
                       <Button
                         size="lg"
-                        className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-medium py-4 text-base shadow-lg transition-all duration-200 flex items-center justify-between"
+                        className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-medium py-3 text-sm shadow-lg transition-all duration-200 flex items-center justify-between"
                         onClick={(e) => handleDropdownToggle("Discover More Mobile", e)}
                       >
                         <span>Discover More</span>
@@ -353,10 +353,10 @@ export default function ModernHeader() {
                         />
                       </Button>
                       {activeDropdown === "Discover More Mobile" && (
-                        <div className="mt-3 space-y-2 bg-gray-50 rounded-lg p-3">
+                        <div className="mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
                           <Link
                             href="/casita-azul"
-                            className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                            className="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                             onClick={() => {
                               setIsMenuAnimating(false)
                               setTimeout(() => {
@@ -369,7 +369,7 @@ export default function ModernHeader() {
                           </Link>
                           <Link
                             href="/camp-alegria"
-                            className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                            className="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                             onClick={() => {
                               setIsMenuAnimating(false)
                               setTimeout(() => {
@@ -385,7 +385,7 @@ export default function ModernHeader() {
                     </div>
                     <Button
                       size="lg"
-                      className="w-full bg-slate hover:bg-slate-medium text-white rounded-xl font-medium py-4 text-base shadow-lg transition-all duration-200"
+                      className="w-full bg-slate hover:bg-slate-medium text-white rounded-xl font-medium py-3 text-sm shadow-lg transition-all duration-200"
                       onClick={() => {
                         setIsMenuAnimating(false)
                         setTimeout(() => setIsMenuOpen(false), 300)
