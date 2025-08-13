@@ -46,7 +46,7 @@ export default function TuitionPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-24 relative overflow-hidden">
+      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
@@ -222,50 +222,50 @@ export default function TuitionPage() {
         </div>
       </section>
 
-      {/* Financial Assistance */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Financial Assistance</h2>
-            <p className="text-lg text-slate-medium font-questa">
-              We believe in making quality bilingual education accessible to all families
-            </p>
-          </div>
+             {/* Financial Assistance */}
+       <section className="py-12 md:py-16 bg-white">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="text-center mb-8 md:mb-12">
+             <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Financial Assistance</h2>
+             <p className="text-lg text-slate-medium font-questa">
+               We believe in making quality bilingual education accessible to all families
+             </p>
+           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-6">
-              <CardContent className="pt-6">
-                <Heart className="h-12 w-12 text-amber mx-auto mb-4" />
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Need-Based Scholarships</h3>
-                <p className="text-slate-medium font-questa">
-                  Financial assistance available based on family income and demonstrated need. Apply during the
-                  admissions process.
-                </p>
-              </CardContent>
-            </Card>
+                     <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+             <Card className="text-center p-4 md:p-6">
+               <CardContent className="pt-4 md:pt-6">
+                 <Heart className="h-12 w-12 text-amber mx-auto mb-3 md:mb-4" />
+                 <h3 className="text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Need-Based Scholarships</h3>
+                 <p className="text-slate-medium font-questa">
+                   Financial assistance available based on family income and demonstrated need. Apply during the
+                   admissions process.
+                 </p>
+               </CardContent>
+             </Card>
 
-            <Card className="text-center p-6">
-              <CardContent className="pt-6">
-                <Users className="h-12 w-12 text-slate mx-auto mb-4" />
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Equity-Based Assistance</h3>
-                <p className="text-slate-medium font-questa">
-                  Scholarships designed to support diverse families and ensure our community reflects the broader
-                  population we serve.
-                </p>
-              </CardContent>
-            </Card>
+             <Card className="text-center p-4 md:p-6">
+               <CardContent className="pt-4 md:pt-6">
+                 <Users className="h-12 w-12 text-slate mx-auto mb-3 md:mb-4" />
+                 <h3 className="text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Equity-Based Assistance</h3>
+                 <p className="text-slate-medium font-questa">
+                   Scholarships designed to support diverse families and ensure our community reflects the broader
+                   population we serve.
+                 </p>
+               </CardContent>
+             </Card>
 
-            <Card className="text-center p-6">
-              <CardContent className="pt-6">
-                <Calculator className="h-12 w-12 text-golden mx-auto mb-4" />
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Sibling Discount</h3>
-                <p className="text-slate-medium font-questa">
-                  <strong>10% off tuition</strong> for second child (applies to tuition only, not additional fees).
-                  Available for aftercare as well.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+             <Card className="text-center p-4 md:p-6">
+               <CardContent className="pt-4 md:pt-6">
+                 <Calculator className="h-12 w-12 text-golden mx-auto mb-3 md:mb-4" />
+                 <h3 className="text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Sibling Discount</h3>
+                 <p className="text-slate-medium font-questa">
+                   <strong>10% off tuition</strong> for second child (applies to tuition only, not additional fees).
+                   Available for aftercare as well.
+                 </p>
+               </CardContent>
+             </Card>
+           </div>
 
           <Card className="max-w-4xl mx-auto mt-12 bg-slate-light">
             <CardContent className="p-8 text-center">
@@ -283,13 +283,13 @@ export default function TuitionPage() {
         </div>
       </section>
 
-      {/* Important Notes */}
-      <section className="py-16 bg-slate-light">
+             {/* Important Notes */}
+       <section className="py-16 bg-slate-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="max-w-4xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-center text-2xl font-ivry text-slate">Important Tuition Information</CardTitle>
-            </CardHeader>
+                     <Card className="max-w-4xl mx-auto">
+             <CardHeader className="pb-0">
+               <CardTitle className="text-center text-2xl font-ivry text-slate">Important Tuition Information</CardTitle>
+             </CardHeader>
             <CardContent className="p-8">
               <div className="space-y-4 text-slate-medium font-questa">
                 <div className="flex items-start">
