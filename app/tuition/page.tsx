@@ -232,40 +232,40 @@ export default function TuitionPage() {
              </p>
            </div>
 
-                     <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-             <Card className="text-center p-4 md:p-6">
-               <CardContent className="pt-4 md:pt-6">
-                 <Heart className="h-12 w-12 text-amber mx-auto mb-3 md:mb-4" />
-                 <h3 className="text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Need-Based Scholarships</h3>
-                 <p className="text-slate-medium font-questa">
-                   Financial assistance available based on family income and demonstrated need. Apply during the
-                   admissions process.
-                 </p>
-               </CardContent>
-             </Card>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center p-6 bg-amber">
+              <CardContent className="pt-6">
+                <Heart className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Need-Based Scholarships</h3>
+                <p className="text-white/90 font-questa">
+                  Financial assistance available based on family income and demonstrated need. Apply during the
+                  admissions process.
+                </p>
+              </CardContent>
+            </Card>
 
-             <Card className="text-center p-4 md:p-6">
-               <CardContent className="pt-4 md:pt-6">
-                 <Users className="h-12 w-12 text-slate mx-auto mb-3 md:mb-4" />
-                 <h3 className="text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Equity-Based Assistance</h3>
-                 <p className="text-slate-medium font-questa">
-                   Scholarships designed to support diverse families and ensure our community reflects the broader
-                   population we serve.
-                 </p>
-               </CardContent>
-             </Card>
+            <Card className="text-center p-6 bg-golden">
+              <CardContent className="pt-6">
+                <Users className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Equity-Based Assistance</h3>
+                <p className="text-white/90 font-questa">
+                  Scholarships designed to support diverse families and ensure our community reflects the broader
+                  population we serve.
+                </p>
+              </CardContent>
+            </Card>
 
-             <Card className="text-center p-4 md:p-6">
-               <CardContent className="pt-4 md:pt-6">
-                 <Calculator className="h-12 w-12 text-golden mx-auto mb-3 md:mb-4" />
-                 <h3 className="text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Sibling Discount</h3>
-                 <p className="text-slate-medium font-questa">
-                   <strong>10% off tuition</strong> for second child (applies to tuition only, not additional fees).
-                   Available for aftercare as well.
-                 </p>
-               </CardContent>
-             </Card>
-           </div>
+            <Card className="text-center p-6 bg-amber-light">
+              <CardContent className="pt-6">
+                <Calculator className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Sibling Discount</h3>
+                <p className="text-white/90 font-questa">
+                  <strong>10% off tuition</strong> for second child (applies to tuition only, not additional fees).
+                  Available for aftercare as well.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
 
           <Card className="max-w-4xl mx-auto mt-12 bg-slate-light">
             <CardContent className="p-8 text-center">

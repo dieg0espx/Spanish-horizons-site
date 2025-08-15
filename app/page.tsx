@@ -32,35 +32,35 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 text-slate">Spanish Immersion</h3>
-                <p className="text-slate-medium leading-relaxed font-questa">
+                <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Spanish Immersion</h3>
+                <p className="text-white/90 leading-relaxed font-questa">
                   80/20 model for authentic bilingual development through meaningful content learning
                 </p>
               </CardContent>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-medium">
               <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 text-slate">Experiential Learning</h3>
-                <p className="text-slate-medium leading-relaxed font-questa">
+                <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Experiential Learning</h3>
+                <p className="text-white/90 leading-relaxed font-questa">
                   Through Cooking, Art, Gardening & Movement that makes learning memorable
                 </p>
               </CardContent>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-amber transition-colors duration-300">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 text-slate">Community Focus</h3>
-                <p className="text-slate-medium leading-relaxed font-questa">
+                <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Community Focus</h3>
+                <p className="text-white/90 leading-relaxed font-questa">
                   Culture, Connection, and Collaboration in a supportive learning environment
                 </p>
               </CardContent>

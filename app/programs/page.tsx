@@ -78,15 +78,15 @@ export default function ProgramsPage() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lighter p-8">
               <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-2xl font-ivry font-bold text-slate">Spanish Immersion (80/20 Model)</CardTitle>
+                <CardTitle className="text-2xl font-ivry font-bold text-white">Spanish Immersion (80/20 Model)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4 text-slate-medium font-questa">
+                <div className="space-y-4 text-white/90 font-questa">
                   <p>
                     <strong>80% Spanish:</strong> Core subjects including math, science, social studies, and arts are
                     taught in Spanish, providing authentic language acquisition through meaningful content.
@@ -103,15 +103,15 @@ export default function ProgramsPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lighter p-8">
               <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
+                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Target className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-2xl font-ivry font-bold text-slate">Expeditionary Learning (EL)</CardTitle>
+                <CardTitle className="text-2xl font-ivry font-bold text-white">Expeditionary Learning (EL)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4 text-slate-medium font-questa">
+                <div className="space-y-4 text-white/90 font-questa">
                   <p>
                     <strong>Project-Based Units:</strong> Students explore real-world topics through multi-week
                     expeditions that integrate multiple subjects and culminate in authentic products.
