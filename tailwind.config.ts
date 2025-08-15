@@ -36,8 +36,10 @@ const config: Config = {
   			},
   			slate: {
   				DEFAULT: '#000638', // Dark slate blue - C: 100%, M: 32%, Y: 20%, K: 58%
-  				medium: '#000638', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
-  				light: '#000638' // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
+  				medium: '#1a1f5c', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
+  				light: '#2a2f6c', // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
+  				lighter: '#3a3f7c', // Lighter slate blue
+  				lightest: '#4a4f8c' // Lightest slate blue
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

@@ -346,7 +346,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -357,15 +357,15 @@ export default function AboutPage() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Curiosity</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Curiosity</h3>
+                <p className="text-white/90 font-questa">
                   We foster natural wonder through hands-on exploration, encouraging students to ask questions and seek
                   answers through investigation.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -376,15 +376,15 @@ export default function AboutPage() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Culture</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Culture</h3>
+                <p className="text-white/90 font-questa">
                   Rich cultural experiences through cooking, music, art, and storytelling connect students to the
                   broader Spanish-speaking world.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lighter">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -395,15 +395,15 @@ export default function AboutPage() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Community</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Community</h3>
+                <p className="text-white/90 font-questa">
                   Strong partnerships between families, teachers, and students create a supportive learning environment
                   for everyone.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lighter">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -414,15 +414,15 @@ export default function AboutPage() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Language</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Language</h3>
+                <p className="text-white/90 font-questa">
                   Authentic Spanish immersion develops true bilingual competency while maintaining strong English
                   language arts skills.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -433,15 +433,15 @@ export default function AboutPage() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Discovery</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Discovery</h3>
+                <p className="text-white/90 font-questa">
                   Project-based expeditions allow students to uncover connections between subjects and real-world
                   applications.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -452,8 +452,8 @@ export default function AboutPage() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Heart-Centered Learning</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Heart-Centered Learning</h3>
+                <p className="text-white/90 font-questa">
                   Emotional regulation and social-emotional learning are woven throughout our curriculum and daily
                   practices.
                 </p>

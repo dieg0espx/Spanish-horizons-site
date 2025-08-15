@@ -146,14 +146,16 @@ export default function AdmissionsPage() {
                       </div>
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <div className="flex items-center justify-center md:justify-start mb-2">
-                        <Badge className="bg-slate text-white mr-3 font-questa">Step {step.step}</Badge>
-                        <h3 className="text-xl font-ivry font-semibold text-slate">{step.title}</h3>
+                      <div className="flex flex-col sm:flex-row items-center sm:justify-center md:justify-start mb-2 gap-2 sm:gap-0">
+                        <Badge className="bg-slate text-white sm:mr-3 font-questa">Step {step.step}</Badge>
+                        <h3 className="text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
                       </div>
-                      <p className="text-slate-medium mb-4 font-questa">{step.description}</p>
-                      <Button variant="outline" size="sm" className="font-questa">
-                        {step.action}
-                      </Button>
+                      <p className="text-slate-medium mb-4 font-questa text-center sm:text-left">{step.description}</p>
+                      <div className="flex justify-center md:justify-start">
+                        <Button variant="outline" size="sm" className="font-questa">
+                          {step.action}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -171,41 +173,41 @@ export default function AdmissionsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 text-center">
+            <Card className="p-6 text-center bg-slate-lightest">
               <CardContent className="pt-6">
-                <Heart className="h-12 w-12 text-amber mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-slate">No Spanish Required</h3>
-                <p className="text-slate-medium text-sm font-questa">
+                <Heart className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">No Spanish Required</h3>
+                <p className="text-white/90 text-sm font-questa">
                   No Spanish language experience required for families. Our immersion model supports all learners.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center">
+            <Card className="p-6 text-center bg-slate-lighter">
               <CardContent className="pt-6">
-                <Users className="h-12 w-12 text-slate mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-slate">Small Class Sizes</h3>
-                <p className="text-slate-medium text-sm font-questa">
+                <Users className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Small Class Sizes</h3>
+                <p className="text-white/90 text-sm font-questa">
                   12–16 students per grade with one classroom per grade level for personalized attention.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
-                <DollarSign className="h-12 w-12 text-golden mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-slate">Financial Assistance</h3>
-                <p className="text-slate-medium text-sm font-questa">
+                <DollarSign className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Financial Assistance</h3>
+                <p className="text-white/90 text-sm font-questa">
                   Need-based and equity-based scholarships available to support diverse families.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center">
+            <Card className="p-6 text-center bg-slate-medium">
               <CardContent className="pt-6">
-                <CheckCircle className="h-12 w-12 text-golden mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-slate">Rolling Admissions</h3>
-                <p className="text-slate-medium text-sm font-questa">
+                <CheckCircle className="h-12 w-12 text-white mx-auto mb-4" />
+                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Rolling Admissions</h3>
+                <p className="text-white/90 text-sm font-questa">
                   Applications accepted throughout the year based on space availability.
                 </p>
               </CardContent>
