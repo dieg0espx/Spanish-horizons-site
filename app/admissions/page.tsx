@@ -147,7 +147,7 @@ export default function AdmissionsPage() {
                     </div>
                     <div className="flex-1 text-center md:text-left">
                       <div className="flex flex-col sm:flex-row items-center sm:justify-center md:justify-start mb-2 gap-2 sm:gap-0">
-                        <Badge className="bg-slate text-white sm:mr-3 font-questa">Step {step.step}</Badge>
+                        <Badge className="bg-slate-light text-white sm:mr-3 font-questa">Step {step.step}</Badge>
                         <h3 className="text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
                       </div>
                       <p className="text-slate-medium mb-4 font-questa text-center sm:text-left">{step.description}</p>
@@ -173,7 +173,7 @@ export default function AdmissionsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 text-center bg-slate-lightest">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
                 <Heart className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">No Spanish Required</h3>
@@ -183,7 +183,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-lighter">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
                 <Users className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Small Class Sizes</h3>
@@ -203,7 +203,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-medium">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
                 <CheckCircle className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Rolling Admissions</h3>

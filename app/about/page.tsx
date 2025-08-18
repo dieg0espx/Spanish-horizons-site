@@ -346,7 +346,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -365,7 +365,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -384,7 +384,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lighter">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -403,7 +403,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lighter">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -422,7 +422,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -441,7 +441,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-lightest">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
