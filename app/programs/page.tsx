@@ -35,11 +35,10 @@ export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-slate py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
               <Target className="h-4 w-4 mr-2" />
               K-5 Academic Excellence
             </div>
@@ -60,8 +59,7 @@ export default function ProgramsPage() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white px-8 py-4 rounded-xl font-questa font-semibold bg-transparent"
+                className="bg-white text-slate hover:bg-amber hover:text-white px-8 py-4 rounded-xl font-questa font-semibold transition-all duration-200"
               >
                 <a href="/tuition">View Tuition Information</a>
               </Button>
@@ -78,7 +76,7 @@ export default function ProgramsPage() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light p-8">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate p-8">
               <CardHeader className="text-center pb-6">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -103,7 +101,7 @@ export default function ProgramsPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light p-8">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate p-8">
               <CardHeader className="text-center pb-6">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Target className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -132,7 +130,7 @@ export default function ProgramsPage() {
       </section>
 
              {/* Core Academic Areas */}
-       <section className="py-12 md:py-16 bg-slate-light">
+       <section className="py-12 md:py-16 bg-slate">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl font-ivry font-bold text-white mb-4">Core Academic Areas</h2>
@@ -144,7 +142,7 @@ export default function ProgramsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                          <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 text-center">
                <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate transition-colors duration-300">
+                 <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
                    <BookOpen className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
                  <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Daily Academics</h3>
@@ -174,9 +172,9 @@ export default function ProgramsPage() {
 
                          <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 text-center">
                <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-slate-medium rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate transition-colors duration-300">
-                   <Palette className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                 </div>
+                                   <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
+                    <Palette className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                  </div>
                  <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Specials</h3>
                  <p className="text-slate-medium text-sm font-questa">Art, Music, Cooking, Gardening, Movement</p>
                </CardContent>
@@ -253,7 +251,7 @@ export default function ProgramsPage() {
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-slate-light rounded-lg">
+              <div className="mt-8 p-6 bg-slate rounded-lg">
                 <h4 className="text-lg font-ivry font-semibold text-white mb-2">Culmination Event</h4>
                 <p className="text-white/50 font-questa">
                   <strong>Student-led Latin America Fair:</strong> Students showcase their learning through
@@ -267,7 +265,7 @@ export default function ProgramsPage() {
       </section>
 
              {/* Daily Schedule */}
-       <section className="py-12 md:py-16 bg-slate-light">
+       <section className="py-12 md:py-16 bg-slate">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl font-ivry font-bold text-white mb-4">Kindergarten Daily Schedule</h2>
@@ -278,7 +276,7 @@ export default function ProgramsPage() {
              <CardContent className="p-0">
                <div className="divide-y divide-gray-200">
                  {dailySchedule.map((item, index) => (
-                   <div key={index} className="p-3 hover:bg-slate-light text-slate  hover:text-white transition-colors">
+                   <div key={index} className="p-3 hover:bg-slate text-slate  hover:text-white transition-colors">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                       <div className="flex items-center mb-2 md:mb-0">
                         <Clock className="h-5 w-5 mr-3" />
@@ -314,9 +312,9 @@ export default function ProgramsPage() {
           <div className="grid md:grid-cols-3 gap-8">
                          <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6">
                <CardContent className="pt-4 text-center">
-                 <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate transition-colors duration-300">
-                  <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
+                                   <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
+                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                 </div>
                 <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Small Class Sizes</h3>
                 <p className="text-slate-medium font-questa">
                   12–16 students per grade with one classroom per grade level for personalized attention

@@ -109,9 +109,9 @@ export default function CampAlegriaPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-slate/5 to-slate/10">
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-slate rounded-full flex items-center justify-center mx-auto mb-4">
                   <Phone className="w-8 h-8 text-white" />
                 </div>
                 <CardTitle className="font-questa text-xl text-slate">Phone</CardTitle>
@@ -242,10 +242,10 @@ export default function CampAlegriaPage() {
             </Card>
 
             {/* Session 3 */}
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-50 to-blue-100">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-slate/5 to-slate/10">
               <CardHeader>
                 <div className="flex items-center mb-4">
-                                     <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                     <div className="w-12 h-12 bg-slate rounded-full flex items-center justify-center mr-4">
                      <Target className="w-6 h-6 text-white" />
                    </div>
                   <div>
@@ -340,18 +340,18 @@ export default function CampAlegriaPage() {
                   <td className="px-6 py-4 text-gray-600">07/21/2025</td>
                   <td className="px-6 py-4 text-gray-600">07/25/2025</td>
                 </tr>
-                <tr className="bg-blue-50">
+                <tr className="bg-slate/5">
                   <td className="px-6 py-4 font-semibold text-slate" rowSpan={3}>WORLD CUP EXTRAVAGANZA</td>
                   <td className="px-6 py-4 text-gray-600">WEEK 1</td>
                   <td className="px-6 py-4 text-gray-600">07/28/2025</td>
                   <td className="px-6 py-4 text-gray-600">08/01/2025</td>
                 </tr>
-                <tr className="bg-blue-50">
+                <tr className="bg-slate/5">
                   <td className="px-6 py-4 text-gray-600">WEEK 2</td>
                   <td className="px-6 py-4 text-gray-600">08/04/2025</td>
                   <td className="px-6 py-4 text-gray-600">08/08/2025</td>
                 </tr>
-                <tr className="bg-blue-50">
+                <tr className="bg-slate/5">
                   <td className="px-6 py-4 text-gray-600">WEEK 3</td>
                   <td className="px-6 py-4 text-gray-600">08/11/2025</td>
                   <td className="px-6 py-4 text-gray-600">08/15/2025</td>
@@ -453,11 +453,11 @@ export default function CampAlegriaPage() {
           </div>
 
           {/* Extended Care */}
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
-            <CardHeader className="text-center">
-              <CardTitle className="font-questa text-2xl text-slate">Extended Care Pricing</CardTitle>
-              <CardDescription className="text-lg">Extended Care Option (3:15 PM – 5:45 PM)</CardDescription>
-            </CardHeader>
+                     <Card className="border-0 shadow-lg bg-gradient-to-br from-slate/5 to-slate/10">
+             <CardHeader className="text-center">
+               <CardTitle className="font-questa text-2xl text-slate">Extended Care Pricing</CardTitle>
+               <CardDescription className="text-lg">Extended Care Option (3:15 PM – 5:45 PM)</CardDescription>
+             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-white rounded-lg p-4 text-center">
