@@ -46,11 +46,10 @@ export default function TuitionPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-slate py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
               <DollarSign className="h-4 w-4 mr-2" />
               Transparent Pricing
             </div>
@@ -81,7 +80,7 @@ export default function TuitionPage() {
           </div>
 
           <Card className="max-w-6xl mx-auto shadow-2xl border-0 bg-white">
-            <CardHeader className="bg-slate-light border-b border-slate-light">
+            <CardHeader className="bg-slate border-b border-slate">
               <CardTitle className="text-center text-3xl font-ivry font-bold text-white">Annual Tuition Rates</CardTitle>
             </CardHeader>
             <CardContent className="p-8">
@@ -97,7 +96,7 @@ export default function TuitionPage() {
                   </thead>
                   <tbody>
                     {tuitionData.map((row, index) => (
-                      <tr key={index} className="border-b border-gray-100 hover:bg-slate-light hover:text-white">
+                      <tr key={index} className="border-b border-gray-100 hover:bg-slate hover:text-white">
                         <td className="py-4 px-4 font-questa font-medium ">{row.paymentOption}</td>
                         <td className="py-4 px-4 text-center  font-questa font-semibold">{row.kindergarten}</td>
                         <td className="py-4 px-4 text-center  font-questa font-semibold">{row.grades1to5}</td>
@@ -108,7 +107,7 @@ export default function TuitionPage() {
                 </table>
               </div>
 
-              <div className="mt-6 p-4 bg-slate-light rounded-lg">
+                             <div className="mt-6 p-4 bg-slate rounded-lg">
                 <div className="flex items-center mb-2">
                   <DollarSign className="h-5 w-5 text-slate mr-2" />
                   <h4 className="font-questa font-semibold text-white">Enrollment Fee</h4>
@@ -123,7 +122,7 @@ export default function TuitionPage() {
       </section>
 
       {/* Additional Costs */}
-      <section className="py-16 bg-slate-light">
+             <section className="py-16 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-ivry font-bold text-white mb-4">Additional Services</h2>
@@ -210,7 +209,7 @@ export default function TuitionPage() {
                   ))}
                 </div>
 
-                <div className="mt-4 p-3 bg-slate-light rounded-lg">
+                                 <div className="mt-4 p-3 bg-slate rounded-lg">
                   <p className="text-sm text-white font-questa">
                     <strong>Includes:</strong> Snacks, cultural activities, homework help (Grades 2+), outdoor play, and
                     mindfulness activities
@@ -233,41 +232,41 @@ export default function TuitionPage() {
            </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-6 bg-slate-light">
-              <CardContent className="pt-6">
-                <Heart className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Need-Based Scholarships</h3>
-                <p className="text-white/90 font-questa">
-                  Financial assistance available based on family income and demonstrated need. Apply during the
-                  admissions process.
-                </p>
-              </CardContent>
-            </Card>
+                         <Card className="text-center p-6 bg-slate">
+               <CardContent className="pt-6">
+                 <Heart className="h-12 w-12 text-white mx-auto mb-4" />
+                 <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Need-Based Scholarships</h3>
+                 <p className="text-white/90 font-questa">
+                   Financial assistance available based on family income and demonstrated need. Apply during the
+                   admissions process.
+                 </p>
+               </CardContent>
+             </Card>
 
-            <Card className="text-center p-6 bg-slate-light">
-              <CardContent className="pt-6">
-                <Users className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Equity-Based Assistance</h3>
-                <p className="text-white/90 font-questa">
-                  Scholarships designed to support diverse families and ensure our community reflects the broader
-                  population we serve.
-                </p>
-              </CardContent>
-            </Card>
+                         <Card className="text-center p-6 bg-slate">
+               <CardContent className="pt-6">
+                 <Users className="h-12 w-12 text-white mx-auto mb-4" />
+                 <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Equity-Based Assistance</h3>
+                 <p className="text-white/90 font-questa">
+                   Scholarships designed to support diverse families and ensure our community reflects the broader
+                   population we serve.
+                 </p>
+               </CardContent>
+             </Card>
 
-            <Card className="text-center p-6 bg-slate-light">
-              <CardContent className="pt-6">
-                <Calculator className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Sibling Discount</h3>
-                <p className="text-white/90 font-questa">
-                  <strong>10% off tuition</strong> for second child (applies to tuition only, not additional fees).
-                  Available for aftercare as well.
-                </p>
-              </CardContent>
-            </Card>
+                         <Card className="text-center p-6 bg-slate">
+               <CardContent className="pt-6">
+                 <Calculator className="h-12 w-12 text-white mx-auto mb-4" />
+                 <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Sibling Discount</h3>
+                 <p className="text-white/90 font-questa">
+                   <strong>10% off tuition</strong> for second child (applies to tuition only, not additional fees).
+                   Available for aftercare as well.
+                 </p>
+               </CardContent>
+             </Card>
           </div>
 
-          <Card className="max-w-4xl mx-auto mt-12 bg-slate-light">
+                     <Card className="max-w-4xl mx-auto mt-12 bg-slate">
             <CardContent className="p-8 text-center">
               <HelpCircle className="h-12 w-12 text-white mx-auto mb-4" />
               <h3 className="text-xl font-ivry font-semibold text-white mb-4">Questions About Financial Assistance?</h3>
@@ -284,7 +283,7 @@ export default function TuitionPage() {
       </section>
 
              {/* Important Notes */}
-       <section className="py-16 bg-slate-light">
+       <section className="py-16 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                      <Card className="max-w-4xl mx-auto">
              <CardHeader className="pb-0">

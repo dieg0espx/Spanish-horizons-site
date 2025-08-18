@@ -32,7 +32,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -43,7 +43,7 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -54,7 +54,7 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -84,13 +84,13 @@ export default function HomePage() {
       </section>
 
       {/* Mission & Vision with Images */}
-      <section className="py-20 bg-slate-light">
+      <section className="py-20 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 items-start">
             {/* Mission */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-3xl p-10 shadow-xl h-full">
-                <div className="w-16 h-16 bg-slate-light rounded-2xl flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-slate rounded-2xl flex items-center justify-center mb-6">
                   <Heart className="h-8 w-8 text-white" />
                 </div>
                 <h2 className="text-3xl font-ivry font-bold text-slate mb-6">Our Mission</h2>
@@ -134,7 +134,7 @@ export default function HomePage() {
               <p className="text-slate-medium text-sm font-questa">Fostering wonder and inquiry</p>
             </div>
             <div className="text-center group">
-              <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+              <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate-medium transition-colors duration-300">
                 <FiGlobe className="h-10 w-10 text-white" />
               </div>
               <h3 className="font-ivry font-bold text-xl text-slate mb-2">Culture</h3>
@@ -148,7 +148,7 @@ export default function HomePage() {
               <p className="text-slate-medium text-sm font-questa">Building connections together</p>
             </div>
             <div className="text-center group">
-              <div className="w-20 h-20 bg-slate-medium rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
+              <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate-medium transition-colors duration-300">
                 <FiMessageCircle className="h-10 w-10 text-white" />
               </div>
               <h3 className="font-ivry font-bold text-xl text-slate mb-2">Language</h3>

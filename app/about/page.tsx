@@ -269,7 +269,7 @@ export default function AboutPage() {
       </section>
 
       {/* Founder Section with Enhanced Images */}
-      <section id="leadership" className="py-16 bg-slate-light">
+      <section id="leadership" className="py-16 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-ivry font-bold text-white mb-4">Meet Our Founder</h2>
@@ -304,7 +304,7 @@ export default function AboutPage() {
                       integrates cutting-edge research in child development with authentic cultural experiences and
                       bilingual education.
                     </p>
-                    <blockquote className=" pl-6 italic text-xl text-white bg-slate-light p-6 rounded-lg font-questa">
+                    <blockquote className=" pl-6 italic text-xl text-white bg-slate p-6 rounded-lg font-questa">
                       "Children learn best when they feel loved, seen, and inspired."
                     </blockquote>
 
@@ -346,7 +346,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -365,7 +365,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -384,7 +384,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -403,7 +403,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -422,7 +422,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 
@@ -441,7 +441,7 @@ export default function AboutPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
                   <img 

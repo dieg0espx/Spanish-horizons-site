@@ -45,11 +45,10 @@ export default function AdmissionsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-slate py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
               <Users className="h-4 w-4 mr-2" />
               Join Our Community
             </div>
@@ -93,7 +92,7 @@ export default function AdmissionsPage() {
 
                          <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
                <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate transition-colors duration-300">
+                 <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
                    <FileText className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
                                    <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Priority Deadline</h3>
@@ -128,7 +127,7 @@ export default function AdmissionsPage() {
       </section>
 
              {/* Application Process Steps */}
-       <section className="py-12 md:py-16 bg-slate-light">
+       <section className="py-12 md:py-16 bg-slate">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl font-ivry font-bold text-white mb-4">Application Process</h2>
@@ -141,13 +140,13 @@ export default function AdmissionsPage() {
                  <CardContent className="p-6 md:p-8">
                   <div className="flex flex-col md:flex-row items-center md:items-start">
                                          <div className="flex-shrink-0 mb-3 md:mb-0 md:mr-6">
-                       <div className="w-16 h-16 bg-slate-light rounded-full flex items-center justify-center">
+                       <div className="w-16 h-16 bg-slate rounded-full flex items-center justify-center">
                         <step.icon className="h-8 w-8 text-white" />
                       </div>
                     </div>
                     <div className="flex-1 text-center md:text-left">
                       <div className="flex flex-col sm:flex-row items-center sm:justify-center md:justify-start mb-2 gap-2 sm:gap-0">
-                        <Badge className="bg-slate-light text-white sm:mr-3 font-questa">Step {step.step}</Badge>
+                        <Badge className="bg-slate text-white sm:mr-3 font-questa">Step {step.step}</Badge>
                         <h3 className="text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
                       </div>
                       <p className="text-slate-medium mb-4 font-questa text-center sm:text-left">{step.description}</p>
@@ -173,7 +172,7 @@ export default function AdmissionsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 text-center bg-slate-light">
+            <Card className="p-6 text-center bg-slate">
               <CardContent className="pt-6">
                 <Heart className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">No Spanish Required</h3>
@@ -183,7 +182,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-light">
+            <Card className="p-6 text-center bg-slate">
               <CardContent className="pt-6">
                 <Users className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Small Class Sizes</h3>
@@ -193,7 +192,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-light">
+            <Card className="p-6 text-center bg-slate">
               <CardContent className="pt-6">
                 <DollarSign className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Financial Assistance</h3>
@@ -203,7 +202,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-light">
+            <Card className="p-6 text-center bg-slate">
               <CardContent className="pt-6">
                 <CheckCircle className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Rolling Admissions</h3>

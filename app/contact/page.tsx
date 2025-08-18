@@ -100,11 +100,10 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-slate py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
               <MessageCircle className="h-4 w-4 mr-2" />
               Get In Touch
             </div>
@@ -129,7 +128,7 @@ export default function ContactPage() {
                 <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white">
                   <CardContent className="p-6 md:p-8">
                     <div className="flex items-start">
-                      <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-light rounded-2xl flex items-center justify-center mr-4 md:mr-6 group-hover:bg-slate transition-colors duration-300">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-slate rounded-2xl flex items-center justify-center mr-4 md:mr-6 group-hover:bg-slate-medium transition-colors duration-300">
                         <MapPin className="h-6 w-6 md:h-8 md:w-8 text-white transition-colors duration-300" />
                       </div>
                       <div>
@@ -300,7 +299,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-12 md:py-16 bg-slate-light">
+             <section className="py-12 md:py-16 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 md:mb-8">
             <h2 className="text-2xl md:text-3xl font-ivry font-bold text-white mb-3 md:mb-4">Visit Our Campus</h2>
