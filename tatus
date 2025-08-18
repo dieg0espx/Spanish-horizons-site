@@ -1,0 +1,10 @@
+[33m3459a83[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdev[m[33m)[m feat: implement Spanish Horizons color palette across all pages - Add slate color variations to tailwind config - Update card backgrounds with brand colors - Apply blue slate colors to main page, about, programs, admissions - Apply amber/golden colors to tuition page - Improve mobile alignment for application process - Maintain consistent brand identity throughout site
+[33mb99ebec[m Fix mobile menu layout - remove scrollable container and optimize content to fit screen
+[33mc853b14[m Add Casita Azul and Camp Alegria pages with updated content and mobile header fixes
+[33ma05ae69[m Merge pull request #1 from dieg0espx/dev
+[33m4f9162e[m Fix header menu centering - center navigation between logo and CTA buttons
+[33m357ad90[m Cambios aletxa font y nav bar
+[33m8ce6729[m Update hero component to use favorite pictures (whats1, whats2, whats3, whats4)
+[33m0322ad4[m Update layout, hero component, testimonials carousel, and tailwind config
+[33m094bc56[m Improve mobile header layout: hide top bar on mobile, adjust logo positioning and sizing
+[33m28bbc02[m Remove animations and add comprehensive SEO setup with favicons

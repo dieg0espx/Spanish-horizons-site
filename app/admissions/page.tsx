@@ -45,7 +45,7 @@ export default function AdmissionsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-24 relative overflow-hidden">
+      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
@@ -71,77 +71,77 @@ export default function AdmissionsPage() {
         </div>
       </section>
 
-      {/* Application Timeline */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+             {/* Application Timeline */}
+       <section className="py-12 md:py-16 bg-white">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl font-ivry font-bold text-slate mb-4">2025-2026 Application Timeline</h2>
             <p className="text-lg text-slate-medium font-questa">Important dates for the upcoming school year</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-8">
-              <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
-                  <Calendar className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 h-[80px] flex items-center text-slate">Applications Open</h3>
-                <p className="text-3xl font-ivry font-bold text-golden mb-4">November 1, 2024</p>
-                <p className="text-slate-medium font-questa">Begin your application process</p>
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
+               <CardContent className="pt-4">
+                 <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-golden transition-colors duration-300">
+                   <Calendar className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                 </div>
+                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Applications Open</h3>
+                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">November 1, 2024</p>
+                  <p className="text-slate-medium font-questa text-center md:text-left">Begin your application process</p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-8">
-              <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-slate transition-colors duration-300">
-                  <FileText className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 h-[80px] flex items-center text-slate">Priority Deadline</h3>
-                <p className="text-3xl font-ivry font-bold text-slate mb-4">January 31, 2025</p>
-                <p className="text-slate-medium font-questa">Submit for priority consideration</p>
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
+               <CardContent className="pt-4">
+                 <div className="w-20 h-20 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate transition-colors duration-300">
+                   <FileText className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                 </div>
+                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Priority Deadline</h3>
+                  <p className="text-3xl font-ivry font-bold text-slate mb-3 text-center md:text-left">January 31, 2025</p>
+                  <p className="text-slate-medium font-questa text-center md:text-left">Submit for priority consideration</p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-8">
-              <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-amber transition-colors duration-300">
-                  <MessageCircle className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 h-[80px] flex items-center text-slate">Interview Period</h3>
-                <p className="text-3xl font-ivry font-bold text-amber mb-4">February–March</p>
-                <p className="text-slate-medium font-questa">Family interviews scheduled</p>
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
+               <CardContent className="pt-4">
+                 <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber transition-colors duration-300">
+                   <MessageCircle className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                 </div>
+                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Interview Period</h3>
+                  <p className="text-3xl font-ivry font-bold text-amber mb-3 text-center md:text-left">February–March</p>
+                  <p className="text-slate-medium font-questa text-center md:text-left">Family interviews scheduled</p>
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-8">
-              <CardContent className="pt-6">
-                <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-golden transition-colors duration-300">
-                  <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 h-[80px] flex items-center text-slate">First Day of School</h3>
-                <p className="text-3xl font-ivry font-bold text-golden mb-4">September 2, 2025</p>
-                <p className="text-slate-medium font-questa">Welcome to our community!</p>
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
+               <CardContent className="pt-4">
+                 <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-golden transition-colors duration-300">
+                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                 </div>
+                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">First Day of School</h3>
+                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">September 2, 2025</p>
+                  <p className="text-slate-medium font-questa text-center md:text-left">Welcome to our community!</p>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Application Process Steps */}
-      <section className="py-16 bg-slate-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+             {/* Application Process Steps */}
+       <section className="py-12 md:py-16 bg-slate-light">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl font-ivry font-bold text-white mb-4">Application Process</h2>
             <p className="text-lg text-white/50 font-questa">Five simple steps to join our learning community</p>
           </div>
 
-          <div className="space-y-8">
-            {applicationSteps.map((step, index) => (
-              <Card key={index} className="max-w-4xl mx-auto">
-                <CardContent className="p-8">
+                     <div className="space-y-6 md:space-y-8">
+             {applicationSteps.map((step, index) => (
+               <Card key={index} className="max-w-4xl mx-auto">
+                 <CardContent className="p-6 md:p-8">
                   <div className="flex flex-col md:flex-row items-center md:items-start">
-                    <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
-                      <div className="w-16 h-16 bg-slate-light rounded-full flex items-center justify-center">
+                                         <div className="flex-shrink-0 mb-3 md:mb-0 md:mr-6">
+                       <div className="w-16 h-16 bg-slate-light rounded-full flex items-center justify-center">
                         <step.icon className="h-8 w-8 text-white" />
                       </div>
                     </div>
@@ -165,10 +165,10 @@ export default function AdmissionsPage() {
         </div>
       </section>
 
-      {/* Important Notes */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+             {/* Important Notes */}
+       <section className="py-12 md:py-16 bg-white">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Important Information</h2>
           </div>
 

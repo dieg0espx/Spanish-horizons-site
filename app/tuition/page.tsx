@@ -46,7 +46,7 @@ export default function TuitionPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-24 relative overflow-hidden">
+      <section className="bg-slate py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center">
@@ -222,15 +222,15 @@ export default function TuitionPage() {
         </div>
       </section>
 
-      {/* Financial Assistance */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Financial Assistance</h2>
-            <p className="text-lg text-slate-medium font-questa">
-              We believe in making quality bilingual education accessible to all families
-            </p>
-          </div>
+             {/* Financial Assistance */}
+       <section className="py-12 md:py-16 bg-white">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="text-center mb-8 md:mb-12">
+             <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Financial Assistance</h2>
+             <p className="text-lg text-slate-medium font-questa">
+               We believe in making quality bilingual education accessible to all families
+             </p>
+           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center p-6 bg-amber">
@@ -283,13 +283,13 @@ export default function TuitionPage() {
         </div>
       </section>
 
-      {/* Important Notes */}
-      <section className="py-16 bg-slate-light">
+             {/* Important Notes */}
+       <section className="py-16 bg-slate-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="max-w-4xl mx-auto">
-            <CardHeader>
-              <CardTitle className="text-center text-2xl font-ivry text-slate">Important Tuition Information</CardTitle>
-            </CardHeader>
+                     <Card className="max-w-4xl mx-auto">
+             <CardHeader className="pb-0">
+               <CardTitle className="text-center text-2xl font-ivry text-slate">Important Tuition Information</CardTitle>
+             </CardHeader>
             <CardContent className="p-8">
               <div className="space-y-4 text-slate-medium font-questa">
                 <div className="flex items-start">

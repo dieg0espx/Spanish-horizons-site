@@ -154,10 +154,10 @@ export default function AboutPage() {
       />
 
       {/* Our Story Section - Clean Modern Design */}
-      <section className="py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="mb-20">
+          <div className="mb-12 md:mb-20">
             <h2 className="text-5xl md:text-6xl font-ivry font-bold text-slate mb-4">Our Story</h2>
             <p className="text-xl text-slate-medium max-w-3xlfont-questa">
               A journey of passion, innovation, and commitment to bilingual excellence
@@ -335,10 +335,10 @@ export default function AboutPage() {
 
 
 
-      {/* Our Values in Action with Images */}
-      <section id="values" className="py-16 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+             {/* Our Values in Action with Images */}
+       <section id="values" className="py-12 md:py-16 ">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Our Values in Action</h2>
             <p className="text-xl text-slate-medium font-questa">
               See how our core values shape every aspect of our educational approach
