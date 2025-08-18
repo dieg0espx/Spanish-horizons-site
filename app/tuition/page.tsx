@@ -233,7 +233,7 @@ export default function TuitionPage() {
            </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-6 bg-amber">
+            <Card className="text-center p-6 bg-slate-light">
               <CardContent className="pt-6">
                 <Heart className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Need-Based Scholarships</h3>
@@ -244,7 +244,7 @@ export default function TuitionPage() {
               </CardContent>
             </Card>
 
-            <Card className="text-center p-6 bg-golden">
+            <Card className="text-center p-6 bg-slate-light">
               <CardContent className="pt-6">
                 <Users className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Equity-Based Assistance</h3>
@@ -255,7 +255,7 @@ export default function TuitionPage() {
               </CardContent>
             </Card>
 
-            <Card className="text-center p-6 bg-amber-light">
+            <Card className="text-center p-6 bg-slate-light">
               <CardContent className="pt-6">
                 <Calculator className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Sibling Discount</h3>

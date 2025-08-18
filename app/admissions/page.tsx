@@ -173,7 +173,7 @@ export default function AdmissionsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 text-center bg-slate-lightest">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
                 <Heart className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">No Spanish Required</h3>
@@ -183,7 +183,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-lighter">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
                 <Users className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Small Class Sizes</h3>
@@ -203,7 +203,7 @@ export default function AdmissionsPage() {
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate-medium">
+            <Card className="p-6 text-center bg-slate-light">
               <CardContent className="pt-6">
                 <CheckCircle className="h-12 w-12 text-white mx-auto mb-4" />
                 <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Rolling Admissions</h3>
