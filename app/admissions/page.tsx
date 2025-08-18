@@ -147,7 +147,7 @@ export default function AdmissionsPage() {
                     </div>
                     <div className="flex-1 text-center md:text-left">
                       <div className="flex flex-col sm:flex-row items-center sm:justify-center md:justify-start mb-2 gap-2 sm:gap-0">
-                        <Badge className="bg-slate text-white sm:mr-3 font-questa">Step {step.step}</Badge>
+                        <Badge className="bg-slate-light text-white sm:mr-3 font-questa">Step {step.step}</Badge>
                         <h3 className="text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
                       </div>
                       <p className="text-slate-medium mb-4 font-questa text-center sm:text-left">{step.description}</p>

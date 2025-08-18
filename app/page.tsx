@@ -32,7 +32,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -43,7 +43,7 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
@@ -54,7 +54,7 @@ export default function HomePage() {
                 </p>
               </CardContent>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate-light">
               <CardContent className="p-8 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
