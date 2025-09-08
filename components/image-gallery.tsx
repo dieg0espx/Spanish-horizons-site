@@ -1,5 +1,14 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
+import dynamic from "next/dynamic"
+import { useEffect } from "react"
+
+const Slider = dynamic(() => import("react-slick"), { 
+  ssr: false,
+  loading: () => <div className="flex justify-center items-center h-64">Loading...</div>
+})
 
 interface ImageGalleryProps {
   title?: string
@@ -66,6 +75,26 @@ export default function ImageGallery({
     },
   ],
 }: ImageGalleryProps) {
+
+  const settings = {
+    dots: true,
+    arrows: false,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    speed: 1000,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ]
+  }
   return (
     <section className="py-12 md:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,32 +103,33 @@ export default function ImageGallery({
           <p className="text-xl text-slate-medium font-questa">{subtitle}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {images.map((image, index) => (
-            <Card
-              key={index}
-              className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white overflow-hidden cursor-pointer"
-            >
-              <CardContent className="p-0">
-                <div className="aspect-[4/3] relative overflow-hidden">
-                  <div className="absolute inset-0">
-                    <Image
-                      src={image.imageSrc}
-                      alt={image.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4">
-                    <div className="flex justify-between items-start mb-0">
-                      <h3 className="font-ivry font-bold text-white text-lg drop-shadow-lg">{image.title}</h3>
+        <div className="px-4">
+          <Slider {...settings}>
+            {images.map((image, index) => (
+              <div key={index} className="px-2">
+                <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white overflow-hidden cursor-pointer">
+                  <CardContent className="p-0">
+                    <div className="aspect-[4/3] relative overflow-hidden">
+                      <div className="absolute inset-0">
+                        <Image
+                          src={image.imageSrc}
+                          alt={image.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 via-black/40 to-transparent p-10">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="font-ivry font-bold text-white text-xl drop-shadow-2xl">{image.title}</h3>
+                        </div>
+                        <p className="text-base text-white font-questa drop-shadow-xl leading-relaxed">{image.description}</p>
+                      </div>
                     </div>
-                    <p className="text-sm text-white/90 font-questa drop-shadow-md mb-3 leading-relaxed">{image.description}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
     </section>

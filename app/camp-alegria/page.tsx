@@ -35,13 +35,13 @@ export default function CampAlegriaPage() {
               <div className="space-y-4">
                 <Badge variant="secondary" className="bg-slate-100 text-slate-800 border-slate-200 px-4 py-2 text-sm">
                   <Sun className="w-4 h-4 mr-2" />
-                  Coming Soon!
+                  Summer 2025 Registration Open
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold font-questa leading-tight text-slate">
                   Camp Alegría
                 </h1>
                 <p className="text-xl lg:text-2xl text-slate-600 font-questa">
-                  We are working hard to bring you the best experience
+                  Immersive Summer Camp for Ages 5-12
                 </p>
               </div>
               <p className="text-lg text-slate-600 leading-relaxed">

@@ -13,23 +13,126 @@ import {
   Users,
   Target,
   ChevronRight,
+  Sun,
+  Coffee,
+  Book,
+  Lightbulb,
+  TreePine,
+  Calculator,
+  BookMarked,
+  Utensils,
+  Brain,
+  Mic,
+  Apple,
+  Home,
 } from "lucide-react"
 
 export default function ProgramsPage() {
   const dailySchedule = [
-    { time: "8:15 – 8:30", activity: "Arrival & Morning Greeting", description: "Warm welcome in Spanish" },
-    { time: "8:30 – 9:00", activity: "Breakfast & Community Circle", description: "Shared meal and daily planning" },
-    { time: "9:00 – 9:30", activity: "Phonics / Literacy (Small Groups)", description: "Targeted reading instruction" },
-    { time: "9:30 – 10:15", activity: "Expeditionary Block", description: "Project-based learning" },
-    { time: "10:15 – 10:45", activity: "Outdoor Play", description: "Physical activity and fresh air" },
-    { time: "10:45 – 11:15", activity: "Math", description: "Mathematical thinking and problem solving" },
-    { time: "11:15 – 11:45", activity: "Storytime", description: "Bilingual literature and discussion" },
-    { time: "11:45 – 12:15", activity: "Lunch", description: "Community dining experience" },
-    { time: "12:15 – 12:45", activity: "Mindfulness / Journaling", description: "Reflection and emotional regulation" },
-    { time: "12:45 – 1:30", activity: "Specials (Music, Cooking, etc.)", description: "Arts and cultural enrichment" },
-    { time: "1:30 – 2:15", activity: "Expeditionary Block (Continued)", description: "Extended project work" },
-    { time: "2:15 – 2:45", activity: "Snack & Reflection", description: "Community sharing time" },
-    { time: "2:45 – 3:15", activity: "Outdoor Play / Pick-Up", description: "End of day activities" },
+    { 
+      time: "8:15 – 8:30", 
+      activity: "Arrival & Morning Greeting", 
+      description: "Warm welcome in Spanish",
+      icon: Sun,
+      color: "bg-yellow-100 text-yellow-600",
+      iconColor: "text-yellow-500"
+    },
+    { 
+      time: "8:30 – 9:00", 
+      activity: "Breakfast & Community Circle", 
+      description: "Shared meal and daily planning",
+      icon: Coffee,
+      color: "bg-orange-100 text-orange-600",
+      iconColor: "text-orange-500"
+    },
+    { 
+      time: "9:00 – 9:30", 
+      activity: "Phonics / Literacy (Small Groups)", 
+      description: "Targeted reading instruction",
+      icon: Book,
+      color: "bg-blue-100 text-blue-600",
+      iconColor: "text-blue-500"
+    },
+    { 
+      time: "9:30 – 10:15", 
+      activity: "Expeditionary Block", 
+      description: "Project-based learning",
+      icon: Lightbulb,
+      color: "bg-purple-100 text-purple-600",
+      iconColor: "text-purple-500"
+    },
+    { 
+      time: "10:15 – 10:45", 
+      activity: "Outdoor Play", 
+      description: "Physical activity and fresh air",
+      icon: TreePine,
+      color: "bg-green-100 text-green-600",
+      iconColor: "text-green-500"
+    },
+    { 
+      time: "10:45 – 11:15", 
+      activity: "Math", 
+      description: "Mathematical thinking and problem solving",
+      icon: Calculator,
+      color: "bg-indigo-100 text-indigo-600",
+      iconColor: "text-indigo-500"
+    },
+    { 
+      time: "11:15 – 11:45", 
+      activity: "Storytime", 
+      description: "Bilingual literature and discussion",
+      icon: BookMarked,
+      color: "bg-pink-100 text-pink-600",
+      iconColor: "text-pink-500"
+    },
+    { 
+      time: "11:45 – 12:15", 
+      activity: "Lunch", 
+      description: "Community dining experience",
+      icon: Utensils,
+      color: "bg-red-100 text-red-600",
+      iconColor: "text-red-500"
+    },
+    { 
+      time: "12:15 – 12:45", 
+      activity: "Mindfulness / Journaling", 
+      description: "Reflection and emotional regulation",
+      icon: Brain,
+      color: "bg-teal-100 text-teal-600",
+      iconColor: "text-teal-500"
+    },
+    { 
+      time: "12:45 – 1:30", 
+      activity: "Specials (Music, Cooking, etc.)", 
+      description: "Arts and cultural enrichment",
+      icon: Mic,
+      color: "bg-rose-100 text-rose-600",
+      iconColor: "text-rose-500"
+    },
+    { 
+      time: "1:30 – 2:15", 
+      activity: "Expeditionary Block (Continued)", 
+      description: "Extended project work",
+      icon: Lightbulb,
+      color: "bg-purple-100 text-purple-600",
+      iconColor: "text-purple-500"
+    },
+    { 
+      time: "2:15 – 2:45", 
+      activity: "Snack & Reflection", 
+      description: "Community sharing time",
+      icon: Apple,
+      color: "bg-emerald-100 text-emerald-600",
+      iconColor: "text-emerald-500"
+    },
+    { 
+      time: "2:45 – 3:15", 
+      activity: "Outdoor Play / Pick-Up", 
+      description: "End of day activities",
+      icon: Home,
+      color: "bg-amber-100 text-amber-600",
+      iconColor: "text-amber-500"
+    },
   ]
 
   return (
@@ -274,32 +377,58 @@ export default function ProgramsPage() {
             <p className="text-lg text-white/50 font-questa">A balanced day of learning, play, and discovery</p>
           </div>
 
-          <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-8 max-w-4xl mx-auto">
-            <CardContent className="p-0">
-              <div className="divide-y divide-gray-200">
-                {dailySchedule.map((item, index) => (
-                  <div key={index} className="p-4 hover:bg-slate-light text-slate  hover:text-white transition-colors">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                      <div className="flex items-center mb-2 md:mb-0">
-                        <Clock className="h-5 w-5 mr-3" />
-                        <span className="font-questa font-semibold min-w-[120px]">{item.time}</span>
-                        <span className="font-questa font-medium ml-4">{item.activity}</span>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid gap-4">
+              {dailySchedule.map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-white overflow-hidden">
+                    <CardContent className="p-0">
+                      <div className="flex items-center p-6 hover:bg-gray-50 transition-colors">
+                        {/* Icon with colored background */}
+                        <div className={`flex-shrink-0 w-16 h-16 rounded-2xl ${item.color} flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300`}>
+                          <IconComponent className={`h-8 w-8 ${item.iconColor}`} />
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                              <div className="flex items-center gap-2">
+                                <Clock className="h-4 w-4 text-gray-400" />
+                                <span className="font-questa font-semibold text-gray-700 text-sm">{item.time}</span>
+                              </div>
+                              <h3 className="font-questa font-semibold text-gray-900 text-lg leading-tight">
+                                {item.activity}
+                              </h3>
+                            </div>
+                          </div>
+                          <p className="text-gray-600 font-questa text-sm mt-2 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                        
+                        {/* Decorative element */}
+                        <div className="flex-shrink-0 ml-4">
+                          <div className="w-2 h-2 rounded-full bg-gray-200 group-hover:bg-gray-400 transition-colors"></div>
+                        </div>
                       </div>
-                      <span className="medium text-sm md:ml-4 font-questa">{item.description}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
 
-          <div className="text-center mt-8">
-            <p className="text-white mb-4 font-questa">
-              <em>Schedule may vary slightly for grades 1-5 to accommodate developmental needs</em>
-            </p>
-            <Button variant="outline" className="font-questa">
-              <a href="/admissions">Schedule a Visit to See Our Program in Action</a>
-            </Button>
+          <div className="text-center mt-12">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto">
+              <p className="text-white mb-6 font-questa text-lg">
+                <em>Schedule may vary slightly for grades 1-5 to accommodate developmental needs</em>
+              </p>
+              <Button variant="outline" className="font-questa bg-white/10 border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all duration-300">
+                <a href="/admissions">Schedule a Visit to See Our Program in Action</a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

@@ -11,9 +11,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Hero Section with Images */}
       <HeroWithImages
-        title="Where Culture Meets"
-        subtitle="Curiosity"
-        description="Welcome to Spanish Horizons Academy, where children grow through immersive Spanish language learning and hands-on, project-based exploration. Rooted in the success of Casita Azul and Amanecer Academy."
+        title="Spanish Horizons Academy"
+        subtitle="K-5 Spanish Immersion"
+        description="Bilingual fluency through Expeditionary Learning and cultural experiences. Located in Hillsboro, Oregon."
         primaryButton={{ text: "Schedule a Tour", href: "/admissions" }}
         secondaryButton={{ text: "Learn About Our Programs", href: "/programs" }}
         heroImage={{
@@ -26,9 +26,9 @@ export default function HomePage() {
       <section className="py-20 md:py-20 py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Why Choose Spanish Horizons?</h2>
+            <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Why Choose Spanish Horizons Academy?</h2>
             <p className="text-xl text-slate-medium max-w-3xl mx-auto font-questa">
-              Three pillars that make our educational approach unique and effective
+              Our educational approach is built on three foundational pillars that create an exceptional learning environment for K-5 students
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -39,7 +39,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-2xl font-ivry font-bold mb-4 text-slate">Spanish Immersion</h3>
                 <p className="text-slate-medium leading-relaxed font-questa">
-                  80/20 model for authentic bilingual development through meaningful content learning
+                  Our 80/20 Spanish-English model provides authentic bilingual development through meaningful content learning, ensuring students develop true fluency while maintaining strong English language arts skills.
                 </p>
               </CardContent>
             </Card>
@@ -50,7 +50,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-2xl font-ivry font-bold mb-4 text-slate">Experiential Learning</h3>
                 <p className="text-slate-medium leading-relaxed font-questa">
-                  Through Cooking, Art, Gardening & Movement that makes learning memorable
+                  Hands-on learning through cooking, art, gardening, and movement activities that make education memorable and meaningful, connecting academic concepts to real-world experiences.
                 </p>
               </CardContent>
             </Card>
@@ -61,7 +61,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-2xl font-ivry font-bold mb-4 text-slate">Community Focus</h3>
                 <p className="text-slate-medium leading-relaxed font-questa">
-                  Culture, Connection, and Collaboration in a supportive learning environment
+                  We foster culture, connection, and collaboration in a supportive learning environment where families, teachers, and students work together to create a vibrant educational community.
                 </p>
               </CardContent>
             </Card>
@@ -95,8 +95,7 @@ export default function HomePage() {
                 </div>
                 <h2 className="text-3xl font-ivry font-bold text-slate mb-6">Our Mission</h2>
                 <p className="text-lg text-slate-medium leading-relaxed font-questa">
-                  At Spanish Horizons Academy, our mission is to nurture curious, compassionate, and culturally grounded
-                  students through an immersive Spanish-English education rooted in Expeditionary Learning.
+                  At Spanish Horizons Academy, our mission is to nurture curious, compassionate, and culturally grounded students through an immersive Spanish-English education rooted in Expeditionary Learning. We are committed to developing bilingual leaders who are prepared to thrive in our interconnected world.
                 </p>
               </div>
             </div>
@@ -109,8 +108,7 @@ export default function HomePage() {
                 </div>
                 <h2 className="text-3xl font-ivry font-bold text-slate mb-6">Our Vision</h2>
                 <p className="text-lg text-slate-medium leading-relaxed font-questa">
-                  We envision a vibrant, inclusive community of learners who grow into bilingual leaders, cultural
-                  ambassadors, and agents of change—equipped with the skills and empathy to thrive.
+                  We envision a vibrant, inclusive community of learners who grow into bilingual leaders, cultural ambassadors, and agents of change—equipped with the skills, empathy, and global perspective to thrive in an interconnected world and make meaningful contributions to society.
                 </p>
               </div>
             </div>
@@ -123,7 +121,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                      <div className="text-center mb-12 md:mb-16">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Our Core Values</h2>
-            <p className="text-xl text-slate-medium font-questa">The principles that guide everything we do</p>
+            <p className="text-xl text-slate-medium font-questa">The fundamental principles that guide our educational philosophy and daily practices</p>
           </div>
                      <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
             <div className="text-center group">

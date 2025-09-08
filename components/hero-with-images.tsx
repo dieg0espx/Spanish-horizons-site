@@ -100,10 +100,6 @@ export default function HeroWithImages({
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-black/50"></div>
       
-     
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-golden-light rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-amber-light rounded-full opacity-20 animate-pulse delay-1000"></div>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -112,7 +108,7 @@ export default function HeroWithImages({
           {badge}
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-sf-pro font-light text-white mb-6 leading-tight tracking-wide">
+        <h1 className="text-5xl md:text-7xl font-playfair font-light text-white mb-6 leading-tight tracking-wide">
           {title}
           {subtitle && <span className="text-golden block font-normal">{subtitle}</span>}
         </h1>
