@@ -66,7 +66,7 @@ export default function AboutPage() {
   const [storyImage1, setStoryImage1] = useState(shuffledImages[0]);
   const [storyImage2, setStoryImage2] = useState(shuffledImages[1]);
   const [storyImage3, setStoryImage3] = useState(shuffledImages[2]);
-  const [founderImage] = useState("/pictures/founder.png");
+  const [founderImage] = useState("/headshot.jpeg");
   const [valueImage1, setValueImage1] = useState(shuffledImages[4]);
   const [valueImage2, setValueImage2] = useState(shuffledImages[5]);
   const [valueImage3, setValueImage3] = useState(shuffledImages[6]);
@@ -282,7 +282,7 @@ export default function AboutPage() {
                 <img 
                   src={founderImage} 
                   alt="Laura Paz-Whitmore - Founder & Educational Director" 
-                  className="w-full h-full object-cover grayscale opacity-90"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <h3 className="text-2xl font-ivry font-bold text-white">Laura Paz-Whitmore</h3>
