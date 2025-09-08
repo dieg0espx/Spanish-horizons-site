@@ -1,94 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, AlertCircle } from "lucide-react"
+import { Calendar, AlertCircle } from "lucide-react"
+import SchoolCalendar from "@/components/school-calendar"
 
 export default function CalendarPage() {
-  const closureDates = [
-    {
-      date: "September 2, 2025",
-      event: "First Day of School",
-      type: "start",
-      description: "Welcome back! School begins for all K-5 students.",
-    },
-    {
-      date: "October 10, 2025",
-      event: "Professional Development Day",
-      type: "closure",
-      description: "No school - Teacher professional development",
-    },
-    {
-      date: "October 16-17, 2025",
-      event: "Fall Parent Conferences",
-      type: "early",
-      description: "Early dismissal both days for parent-teacher conferences",
-    },
-    {
-      date: "November 26-28, 2025",
-      event: "Thanksgiving Break",
-      type: "closure",
-      description: "School closed for Thanksgiving holiday",
-    },
-    {
-      date: "December 22, 2025 - January 2, 2026",
-      event: "Winter Break",
-      type: "closure",
-      description: "Extended winter holiday break",
-    },
-    {
-      date: "January 19, 2026",
-      event: "Martin Luther King Jr. Day",
-      type: "closure",
-      description: "School closed in observance of MLK Jr. Day",
-    },
-    {
-      date: "February 16, 2026",
-      event: "President's Day",
-      type: "closure",
-      description: "School closed for President's Day",
-    },
-    {
-      date: "March 23-27, 2026",
-      event: "Spring Break",
-      type: "closure",
-      description: "One week spring break for all students",
-    },
-    {
-      date: "May 22, 2026",
-      event: "Last Day of School",
-      type: "end",
-      description: "Final day of the 2025-2026 school year",
-    },
-  ]
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "start":
-        return "bg-golden-light text-slate"
-      case "end":
-        return "bg-slate text-white"
-      case "closure":
-        return "bg-amber-light text-slate"
-      case "early":
-        return "bg-golden-light text-slate"
-      default:
-        return "bg-slate text-white"
-    }
-  }
-
-  const getTypeLabel = (type: string) => {
-    switch (type) {
-      case "start":
-        return "School Starts"
-      case "end":
-        return "School Ends"
-      case "closure":
-        return "Full Day Closure"
-      case "early":
-        return "Early Closure"
-      default:
-        return "Event"
-    }
-  }
 
   return (
     <div className="min-h-screen ">
@@ -121,33 +35,12 @@ export default function CalendarPage() {
 
       {/* Calendar Content */}
       <section className="py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-6">
-            {closureDates.map((item, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white"
-              >
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center mb-4">
-                        <div className="w-12 h-12 bg-slate rounded-2xl flex items-center justify-center mr-4 group-hover:bg-slate-medium transition-colors duration-300">
-                          <Clock className="h-6 w-6 text-white transition-colors duration-300" />
-                        </div>
-                        <div>
-                          <span className="text-lg font-questa font-bold text-slate block">{item.date}</span>
-                          <Badge className={`mt-1 font-questa !text-white ${getTypeColor(item.type)}`}>{getTypeLabel(item.type)}</Badge>
-                        </div>
-                      </div>
-                      <h3 className="text-2xl font-ivry font-bold text-slate mb-3">{item.event}</h3>
-                      <p className="text-slate-medium leading-relaxed font-questa">{item.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Card className="shadow-lg border-0 bg-white">
+            <CardContent className="p-8">
+              <SchoolCalendar />
+            </CardContent>
+          </Card>
 
           {/* Additional Information */}
           <Card className="mt-12 bg-slate">
@@ -157,7 +50,7 @@ export default function CalendarPage() {
             <CardContent>
               <div className="space-y-4 text-white font-questa">
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-slate rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <p>
                     <strong>Early Closure Days:</strong> On early closure days, students will be dismissed early to
                     accommodate parent-teacher conferences. Specific dismissal times will be communicated closer to the
@@ -165,21 +58,21 @@ export default function CalendarPage() {
                   </p>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-slate rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <p>
                     <strong>Aftercare:</strong> Aftercare services may be modified or unavailable on early closure days.
                     Please check with the office for specific arrangements.
                   </p>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-slate rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <p>
                     <strong>Updates:</strong> Any changes to this calendar will be communicated through Brightwheel and
                     posted on our website immediately.
                   </p>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-slate rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <p>
                     <strong>Questions:</strong> Contact our office at (503) 916-9758 or
                     infospanishhorizons@casitaazulpdx.org for any calendar-related questions.
