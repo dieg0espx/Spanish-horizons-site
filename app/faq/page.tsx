@@ -9,7 +9,7 @@ export default function FAQPage() {
       <section className="bg-slate py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
               <HelpCircle className="h-4 w-4 mr-2" />
               Get Your Questions Answered
             </div>
@@ -30,7 +30,7 @@ export default function FAQPage() {
       </section>
 
       {/* Still Have Questions */}
-      <section className="py-20 bg-slate-light">
+      <section className="py-20 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-6">Still Have Questions?</h2>
@@ -41,7 +41,7 @@ export default function FAQPage() {
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white rounded-2xl p-8 shadow-xl">
-                <div className="w-16 h-16 bg-slate-light rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <Phone className="h-8 w-8 text-slate" />
                 </div>
                 <h3 className="text-2xl font-ivry font-bold text-slate mb-4">Call Us</h3>

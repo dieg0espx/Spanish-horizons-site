@@ -65,13 +65,13 @@ export default function CalendarPage() {
       case "start":
         return "bg-golden-light text-slate"
       case "end":
-        return "bg-slate-light text-slate"
+        return "bg-slate text-white"
       case "closure":
         return "bg-amber-light text-slate"
       case "early":
         return "bg-golden-light text-slate"
       default:
-        return "bg-slate-light text-slate"
+        return "bg-slate text-white"
     }
   }
 
@@ -93,11 +93,10 @@ export default function CalendarPage() {
   return (
     <div className="min-h-screen ">
       {/* Header */}
-      <section className="bg-slate py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="bg-slate py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate-light rounded-full text-white text-sm font-questa font-medium mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
               <Calendar className="h-4 w-4 mr-2" />
               Important School Dates
             </div>
@@ -133,7 +132,7 @@ export default function CalendarPage() {
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div className="flex-1">
                       <div className="flex items-center mb-4">
-                        <div className="w-12 h-12 bg-slate-light rounded-2xl flex items-center justify-center mr-4 group-hover:bg-slate transition-colors duration-300">
+                        <div className="w-12 h-12 bg-slate rounded-2xl flex items-center justify-center mr-4 group-hover:bg-slate-medium transition-colors duration-300">
                           <Clock className="h-6 w-6 text-white transition-colors duration-300" />
                         </div>
                         <div>
@@ -151,7 +150,7 @@ export default function CalendarPage() {
           </div>
 
           {/* Additional Information */}
-          <Card className="mt-12 bg-slate-light">
+          <Card className="mt-12 bg-slate">
             <CardHeader>
               <CardTitle className="text-white font-ivry">Important Notes</CardTitle>
             </CardHeader>

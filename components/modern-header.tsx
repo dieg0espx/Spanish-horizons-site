@@ -130,8 +130,8 @@ export default function ModernHeader() {
                       <button
                         className={`flex items-center px-6 py-3 rounded-xl text-base font-questa font-semibold transition-all duration-200 ${
                           isActivePage(item.href, item.submenu)
-                            ? "bg-slate-light text-white shadow-md"
-                            : "text-slate hover:bg-slate-light hover:text-white"
+                            ? "bg-slate text-white shadow-md"
+                            : "text-slate hover:bg-slate hover:text-white"
                         }`}
                         onClick={(e) => handleDropdownToggle(item.name, e)}
                       >
@@ -151,8 +151,8 @@ export default function ModernHeader() {
                               href={subItem.href}
                               className={`block px-4 py-3 text-sm font-questa transition-colors duration-200 ${
                                 pathname === subItem.href || pathname.startsWith(subItem.href.split("#")[0])
-                                  ? "bg-slate-light text-white font-semibold"
-                                  : "text-slate hover:bg-slate-light hover:text-white"
+                                  ? "bg-slate text-white font-semibold"
+                                  : "text-slate hover:bg-slate hover:text-white"
                               }`}
                               onClick={() => setActiveDropdown(null)}
                             >
@@ -167,8 +167,8 @@ export default function ModernHeader() {
                       href={item.href}
                       className={`px-6 py-3 rounded-xl text-base font-questa font-semibold transition-all duration-200 ${
                         pathname === item.href
-                          ? "bg-slate-light text-white shadow-md"
-                          : "text-slate hover:bg-slate-light hover:text-white"
+                          ? "bg-slate text-white shadow-md"
+                          : "text-slate hover:bg-slate hover:text-white"
                       }`}
                     >
                       {item.name}
@@ -198,16 +198,30 @@ export default function ModernHeader() {
                   <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50">
                     <Link
                       href="/casita-azul"
-                      className="block px-4 py-3 text-sm font-questa text-slate hover:bg-slate-light hover:text-white transition-colors duration-200"
+                      className="flex items-center px-4 py-3 text-sm font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
                       onClick={() => setActiveDropdown(null)}
                     >
+                      <Image 
+                        src="/casita-azul.png" 
+                        alt="Casita Azul Logo" 
+                        width={20} 
+                        height={20} 
+                        className="mr-3 object-contain" 
+                      />
                       Casita Azul
                     </Link>
                     <Link
                       href="/camp-alegria"
-                      className="block px-4 py-3 text-sm font-questa text-slate hover:bg-slate-light hover:text-white transition-colors duration-200"
+                      className="flex items-center px-4 py-3 text-sm font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
                       onClick={() => setActiveDropdown(null)}
                     >
+                      <Image 
+                        src="/camp-alegria.png" 
+                        alt="Camp Alegria Logo" 
+                        width={20} 
+                        height={20} 
+                        className="mr-3 object-contain" 
+                      />
                       Camp Alegria
                     </Link>
                   </div>
@@ -223,7 +237,7 @@ export default function ModernHeader() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden mobile-menu-button p-2 rounded-xl bg-slate-light text-white hover:bg-slate-medium hover:text-white transition-colors duration-200"
+              className="lg:hidden mobile-menu-button p-2 rounded-xl bg-slate text-white hover:bg-slate-medium hover:text-white transition-colors duration-200"
               onClick={() => {
                 if (!isMenuOpen) {
                   setIsMenuAnimating(true)
@@ -356,7 +370,7 @@ export default function ModernHeader() {
                         <div className="mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
                           <Link
                             href="/casita-azul"
-                            className="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                            className="flex items-center px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                             onClick={() => {
                               setIsMenuAnimating(false)
                               setTimeout(() => {
@@ -365,11 +379,18 @@ export default function ModernHeader() {
                               }, 300)
                             }}
                           >
+                            <Image 
+                              src="/casita-azul.png" 
+                              alt="Casita Azul Logo" 
+                              width={18} 
+                              height={18} 
+                              className="mr-3 object-contain" 
+                            />
                             Casita Azul
                           </Link>
                           <Link
                             href="/camp-alegria"
-                            className="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                            className="flex items-center px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                             onClick={() => {
                               setIsMenuAnimating(false)
                               setTimeout(() => {
@@ -378,6 +399,13 @@ export default function ModernHeader() {
                               }, 300)
                             }}
                           >
+                            <Image 
+                              src="/camp-alegria.png" 
+                              alt="Camp Alegria Logo" 
+                              width={18} 
+                              height={18} 
+                              className="mr-3 object-contain" 
+                            />
                             Camp Alegria
                           </Link>
                         </div>

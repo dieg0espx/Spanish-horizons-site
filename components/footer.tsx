@@ -30,14 +30,14 @@ export default function Footer() {
             <p className="text-slate-200 text-base max-w-md font-questa mb-4">
               Nurturing bilingual minds through authentic Spanish immersion education. We inspire curiosity, celebrate culture, and prepare students for a global future.
             </p>
-            <div className="flex gap-4">
-              <a href="https://instagram.com/spanishhorizonsacademy" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-blue-400 transition-colors">
-                <FiInstagram className="h-6 w-6" />
-              </a>
-              <a href="https://casitaazulpdx.com" target="_blank" rel="noopener noreferrer" aria-label="Casita Azul" className="hover:text-blue-400 transition-colors">
-                <FiExternalLink className="h-6 w-6" />
-              </a>
-            </div>
+                         <div className="flex gap-4">
+               <a href="https://instagram.com/spanishhorizonsacademy" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-slate-light transition-colors">
+                 <FiInstagram className="h-6 w-6" />
+               </a>
+               <a href="https://casitaazulpdx.com" target="_blank" rel="noopener noreferrer" aria-label="Casita Azul" className="hover:text-slate-light transition-colors">
+                 <FiExternalLink className="h-6 w-6" />
+               </a>
+             </div>
           </div>
 
           <div className="flex flex-col justify-between md:items-end text-center md:text-right">
@@ -59,25 +59,25 @@ export default function Footer() {
                 8:00 AM – 4:00 PM (Mon-Fri)
               </div>
             </div>
-            <div className="flex flex-wrap gap-3 justify-center md:justify-end">
-              <Link href="/admissions" className="underline hover:text-blue-400 transition-colors text-sm">Admissions</Link>
-              <Link href="/tuition" className="underline hover:text-blue-400 transition-colors text-sm">Tuition</Link>
-              <Link href="/calendar" className="underline hover:text-blue-400 transition-colors text-sm">Calendar</Link>
-              <Link href="/programs" className="underline hover:text-blue-400 transition-colors text-sm">Programs</Link>
-              <Link href="/about" className="underline hover:text-blue-400 transition-colors text-sm">About</Link>
-              <Link href="/contact" className="underline hover:text-blue-400 transition-colors text-sm">Contact</Link>
-            </div>
+                         <div className="flex flex-wrap gap-3 justify-center md:justify-end">
+               <Link href="/admissions" className="underline hover:text-slate-light transition-colors text-sm">Admissions</Link>
+               <Link href="/tuition" className="underline hover:text-slate-light transition-colors text-sm">Tuition</Link>
+               <Link href="/calendar" className="underline hover:text-slate-light transition-colors text-sm">Calendar</Link>
+               <Link href="/programs" className="underline hover:text-slate-light transition-colors text-sm">Programs</Link>
+               <Link href="/about" className="underline hover:text-slate-light transition-colors text-sm">About</Link>
+               <Link href="/contact" className="underline hover:text-slate-light transition-colors text-sm">Contact</Link>
+             </div>
           </div>
         </div>
 
         {/* Middle Section - Additional Info */}
         <div className="grid md:grid-cols-3 gap-8 mb-12 border-t border-slate-700 pt-8">
-          <div className="text-center md:text-left">
-            <h3 className="text-lg font-bold mb-3 text-blue-400">Our Mission</h3>
-            <p className="text-slate-300 text-sm font-questa">
-              To provide exceptional Spanish immersion education that fosters bilingualism, cultural appreciation, and academic excellence in a nurturing environment.
-            </p>
-          </div>
+                     <div className="text-center md:text-left">
+             <h3 className="text-lg font-bold mb-3 text-slate-light">Our Mission</h3>
+             <p className="text-slate-300 text-sm font-questa">
+               To provide exceptional Spanish immersion education that fosters bilingualism, cultural appreciation, and academic excellence in a nurturing environment.
+             </p>
+           </div>
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold mb-3 text-amber-400">Programs</h3>
             <p className="text-slate-300 text-sm font-questa">
@@ -94,13 +94,13 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <div className="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-4 text-slate-300 text-xs font-questa mb-2 md:mb-0">
-            <span>Spanish Immersion</span>
-            <span className="h-1 w-1 bg-blue-400 rounded-full inline-block"></span>
-            <span>K-5 Education</span>
-            <span className="h-1 w-1 bg-amber-400 rounded-full inline-block"></span>
-            <span>Hillsboro, OR</span>
-          </div>
+                     <div className="flex items-center gap-4 text-slate-300 text-xs font-questa mb-2 md:mb-0">
+             <span>Spanish Immersion</span>
+             <span className="h-1 w-1 bg-slate-light rounded-full inline-block"></span>
+             <span>K-5 Education</span>
+             <span className="h-1 w-1 bg-amber-400 rounded-full inline-block"></span>
+             <span>Hillsboro, OR</span>
+           </div>
           <p className="text-slate-400 text-xs font-questa">
             © {new Date().getFullYear()} Spanish Horizons Academy. All rights reserved.
           </p>
