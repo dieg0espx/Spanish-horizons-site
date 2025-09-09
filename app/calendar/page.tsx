@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar, AlertCircle } from "lucide-react"
-import SchoolCalendar from "@/components/school-calendar"
+import InteractiveSchoolCalendar from "@/components/interactive-school-calendar"
 
 export default function CalendarPage() {
 
@@ -38,7 +38,7 @@ export default function CalendarPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="shadow-lg border-0 bg-white">
             <CardContent className="p-8">
-              <SchoolCalendar />
+              <InteractiveSchoolCalendar />
             </CardContent>
           </Card>
 

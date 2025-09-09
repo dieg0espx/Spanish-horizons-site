@@ -1,11 +1,38 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Globe, Users } from "lucide-react"
 import { FiZap, FiGlobe, FiUsers, FiMessageCircle, FiSearch } from "react-icons/fi"
-import TestimonialsCarousel from "@/components/testimonials-carousel"
+// import TestimonialsCarousel from "@/components/testimonials-carousel" // Commented out until testimonials are available
 import HeroWithImages from "@/components/hero-with-images"
 import ImageGallery from "@/components/image-gallery"
+import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
 
 export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardsRef.current) {
+      observer.observe(cardsRef.current);
+    }
+
+    return () => {
+      if (cardsRef.current) {
+        observer.unobserve(cardsRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -31,39 +58,51 @@ export default function HomePage() {
               Our educational approach is built on three foundational pillars that create an exceptional learning environment for K-5 students
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
-                  <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Spanish Immersion</h3>
-                <p className="text-white/90 leading-relaxed font-questa">
-                  Our 80/20 Spanish-English model provides authentic bilingual development through meaningful content learning, ensuring students develop true fluency while maintaining strong English language arts skills.
-                </p>
-              </CardContent>
+          <div ref={cardsRef} className="grid md:grid-cols-3 gap-8">
+            <Card className={`group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate cursor-pointer transform transition-all duration-700 ease-out ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`} style={{ transitionDelay: '0ms' }}>
+              <Link href="/programs" className="block">
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                    <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Spanish Immersion</h3>
+                  <p className="text-white/90 leading-relaxed font-questa">
+                    Our 80/20 Spanish-English model provides authentic bilingual development through meaningful content learning, ensuring students develop true fluency while maintaining strong English language arts skills.
+                  </p>
+                </CardContent>
+              </Link>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
-                  <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Experiential Learning</h3>
-                <p className="text-white/90 leading-relaxed font-questa">
-                  Hands-on learning through cooking, art, gardening, and movement activities that make education memorable and meaningful, connecting academic concepts to real-world experiences.
-                </p>
-              </CardContent>
+            <Card className={`group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate cursor-pointer transform transition-all duration-700 ease-out ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`} style={{ transitionDelay: '150ms' }}>
+              <Link href="/programs" className="block">
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                    <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Expeditionary Learning</h3>
+                  <p className="text-white/90 leading-relaxed font-questa">
+                    Hands-on learning through cooking, art, gardening, and movement activities that make education memorable and meaningful, connecting academic concepts to real-world experiences.
+                  </p>
+                </CardContent>
+              </Link>
             </Card>
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8 text-center">
-                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
-                  <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Community Focus</h3>
-                <p className="text-white/90 leading-relaxed font-questa">
-                  We foster culture, connection, and collaboration in a supportive learning environment where families, teachers, and students work together to create a vibrant educational community.
-                </p>
-              </CardContent>
+            <Card className={`group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate cursor-pointer transform transition-all duration-700 ease-out ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`} style={{ transitionDelay: '300ms' }}>
+              <Link href="/about" className="block">
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                    <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-2xl font-ivry font-bold mb-4 text-white">Community Focus</h3>
+                  <p className="text-white/90 leading-relaxed font-questa">
+                    We foster culture, connection, and collaboration in a supportive learning environment where families, teachers, and students work together to create a vibrant educational community.
+                  </p>
+                </CardContent>
+              </Link>
             </Card>
           </div>
         </div>
@@ -72,8 +111,8 @@ export default function HomePage() {
       {/* Image Gallery Section */}
       <ImageGallery />
 
-             {/* Testimonials Carousel */}
-       <section className="py-12 md:py-20 bg-white">
+             {/* Testimonials Carousel - Commented out until testimonials are available */}
+       {/* <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-ivry font-bold text-slate mb-4">What Parents Are Saying</h2>
@@ -81,7 +120,7 @@ export default function HomePage() {
           </div>
           <TestimonialsCarousel />
         </div>
-      </section>
+      </section> */}
 
       {/* Mission & Vision with Images */}
       <section className="py-20 bg-slate">

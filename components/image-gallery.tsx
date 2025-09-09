@@ -3,7 +3,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-import { useEffect } from "react"
 
 const Slider = dynamic(() => import("react-slick"), { 
   ssr: false,
@@ -56,18 +55,6 @@ export default function ImageGallery({
       imageSrc: "/pictures/26-DSC02753.jpg",
     },
     { 
-      title: "Reading Circle", 
-      description: "Bilingual literature time", 
-      category: "academics",
-      imageSrc: "/pictures/14-DSC02635.jpg",
-    },
-    { 
-      title: "Science Projects", 
-      description: "Hands-on STEM learning", 
-      category: "academics",
-      imageSrc: "/pictures/30-DSC02799.jpg",
-    },
-    { 
       title: "Community Time", 
       description: "Building friendships", 
       category: "community",
@@ -83,9 +70,16 @@ export default function ImageGallery({
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 1000,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      },
       {
         breakpoint: 768,
         settings: {
@@ -96,33 +90,33 @@ export default function ImageGallery({
     ]
   }
   return (
-    <section className="py-12 md:py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-4xl font-ivry font-bold text-slate mb-4">{title}</h2>
-          <p className="text-xl text-slate-medium font-questa">{subtitle}</p>
+    <section className="py-16 md:py-24 bg-gray-50">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-5xl font-ivry font-bold text-slate mb-6">{title}</h2>
+          <p className="text-2xl text-slate-medium font-questa max-w-4xl mx-auto">{subtitle}</p>
         </div>
 
-        <div className="px-4">
+        <div className="px-2">
           <Slider {...settings}>
             {images.map((image, index) => (
-              <div key={index} className="px-2">
-                <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white overflow-hidden cursor-pointer">
+              <div key={index} className="px-4">
+                <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-xl bg-white overflow-hidden cursor-pointer">
                   <CardContent className="p-0">
-                    <div className="aspect-[4/3] relative overflow-hidden">
+                    <div className="aspect-[16/10] relative overflow-hidden">
                       <div className="absolute inset-0">
                         <Image
                           src={image.imageSrc}
                           alt={image.title}
                           fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-300"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 via-black/40 to-transparent p-10">
-                        <div className="flex justify-between items-start mb-2">
-                          <h3 className="font-ivry font-bold text-white text-xl drop-shadow-2xl">{image.title}</h3>
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 via-black/50 to-transparent p-12">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="font-ivry font-bold text-white text-3xl drop-shadow-2xl">{image.title}</h3>
                         </div>
-                        <p className="text-base text-white font-questa drop-shadow-xl leading-relaxed">{image.description}</p>
+                        <p className="text-lg text-white font-questa drop-shadow-xl leading-relaxed max-w-2xl">{image.description}</p>
                       </div>
                     </div>
                   </CardContent>
