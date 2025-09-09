@@ -8,6 +8,7 @@ import HeroWithImages from "@/components/hero-with-images"
 import { useState, useEffect } from "react"
 
 export default function AboutPage() {
+
   // Array of all available images
   const allImages = [
     "/pictures/1-DSC02558.jpg",
@@ -235,33 +236,36 @@ export default function AboutPage() {
             {/* Images Side */}
             <div className="space-y-8">
               <div className="grid grid-cols-2 gap-8">
-                <div className="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
+                <div className="aspect-[4/5] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                   <img 
                     src={storyImage1} 
                     alt="School History" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
                       changingImage === 'story1' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <div className="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
+                <div className="aspect-[4/5] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                   <img 
                     src={storyImage2} 
                     alt="Our Community" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
                       changingImage === 'story2' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
-              <div className="aspect-video bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
+              <div className="aspect-[16/9] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                 <img 
                   src={storyImage3} 
                   alt="Campus Overview" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${
+                  className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
                     changingImage === 'story3' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                   }`}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             </div>
           </div>
@@ -345,19 +349,20 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8">
-                <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
+              <CardContent className="p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage1} 
                     alt="Curiosity in Action" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
                       changingImage === 'value1' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Curiosity</h3>
+                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Curiosity</h3>
                 <p className="text-white/90 font-questa">
                   We foster natural wonder through hands-on exploration, encouraging students to ask questions and seek
                   answers through investigation.
@@ -366,17 +371,18 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8">
-                <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
+              <CardContent className="p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage2} 
                     alt="Cultural Learning" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
                       changingImage === 'value2' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Culture</h3>
+                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Culture</h3>
                 <p className="text-white/90 font-questa">
                   Rich cultural experiences through cooking, music, art, and storytelling connect students to the
                   broader Spanish-speaking world.
@@ -385,17 +391,18 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8">
-                <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
+              <CardContent className="p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage3} 
                     alt="Community Building" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
                       changingImage === 'value3' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Community</h3>
+                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Community</h3>
                 <p className="text-white/90 font-questa">
                   Strong partnerships between families, teachers, and students create a supportive learning environment
                   for everyone.
@@ -404,17 +411,18 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8">
-                <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
+              <CardContent className="p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage4} 
                     alt="Language Immersion" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
                       changingImage === 'value4' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Language</h3>
+                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Language</h3>
                 <p className="text-white/90 font-questa">
                   Authentic Spanish immersion develops true bilingual competency while maintaining strong English
                   language arts skills.
@@ -423,17 +431,18 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8">
-                <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
+              <CardContent className="p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage5} 
                     alt="Project Discovery" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
                       changingImage === 'value5' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Discovery</h3>
+                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Discovery</h3>
                 <p className="text-white/90 font-questa">
                   Project-based expeditions allow students to uncover connections between subjects and real-world
                   applications.
@@ -442,17 +451,18 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-8">
-                <div className="aspect-video bg-gray-100 rounded-xl mb-6 overflow-hidden">
+              <CardContent className="p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage6} 
                     alt="Emotional Learning" 
-                    className={`w-full h-full object-cover transition-all duration-1000 ${
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
                       changingImage === 'value6' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
                     }`}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-white">Heart-Centered Learning</h3>
+                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Heart-Centered Learning</h3>
                 <p className="text-white/90 font-questa">
                   Emotional regulation and social-emotional learning are woven throughout our curriculum and daily
                   practices.
