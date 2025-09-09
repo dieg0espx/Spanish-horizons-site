@@ -140,7 +140,7 @@ export default function SimpleMonthlyCalendar() {
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       days.push(
-        <div key={`empty-${i}`} className="h-24 border border-gray-200 bg-gray-50 print:bg-white print:border-gray-300"></div>
+        <div key={`empty-${i}`} className="h-16 sm:h-20 lg:h-24 border border-gray-200 bg-gray-50 print:bg-white print:border-gray-300"></div>
       )
     }
 
@@ -154,7 +154,7 @@ export default function SimpleMonthlyCalendar() {
       days.push(
         <div
           key={day}
-          className={`h-24 border border-gray-200 p-2 relative ${
+          className={`h-16 sm:h-20 lg:h-24 border border-gray-200 p-1 sm:p-2 relative ${
             isCurrentDay 
               ? 'bg-amber-light print:bg-amber-light' 
               : isWeekendDay 
@@ -163,7 +163,7 @@ export default function SimpleMonthlyCalendar() {
           } transition-colors duration-200 print:transition-none`}
         >
           {/* Date Number */}
-          <div className={`text-sm font-questa font-medium mb-1 ${
+          <div className={`text-xs sm:text-sm font-questa font-medium mb-0.5 sm:mb-1 ${
             isCurrentDay 
               ? 'text-slate font-bold' 
               : isWeekendDay 
@@ -174,11 +174,11 @@ export default function SimpleMonthlyCalendar() {
           </div>
 
           {/* Events */}
-          <div className="space-y-1 overflow-hidden">
+          <div className="space-y-0.5 sm:space-y-1 overflow-hidden">
             {dayEvents.slice(0, 2).map((event) => (
               <div
                 key={event.id}
-                className={`text-xs p-1 rounded font-questa font-medium ${
+                className={`text-xs p-0.5 sm:p-1 rounded font-questa font-medium ${
                   event.type === 'start' ? 'bg-slate-light text-white' :
                   event.type === 'end' ? 'bg-slate text-white' :
                   event.type === 'closure' ? 'bg-amber-light text-slate' :
@@ -187,7 +187,8 @@ export default function SimpleMonthlyCalendar() {
                 }`}
               >
                 <span className="truncate">
-                  {event.title}
+                  <span className="sm:hidden">{event.title.split(' ')[0]}</span>
+                  <span className="hidden sm:inline">{event.title}</span>
                 </span>
               </div>
             ))}
@@ -207,59 +208,59 @@ export default function SimpleMonthlyCalendar() {
   return (
     <div className="w-full space-y-6 print:space-y-4">
       {/* Header with Navigation and Print Button */}
-      <div className="flex items-center justify-between bg-slate rounded-2xl p-6 text-white print:bg-slate print:rounded-none print:p-4">
+      <div className="flex items-center justify-between bg-slate rounded-2xl p-4 sm:p-6 text-white print:bg-slate print:rounded-none print:p-4">
         <Button
           onClick={prevMonth}
-          className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-3 transition-colors duration-200 print:hidden"
+          className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-2 sm:p-3 transition-colors duration-200 print:hidden"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
-        <div className="text-center">
-          <h2 className="text-3xl font-ivry font-bold print:text-2xl">
+        <div className="text-center flex-1 px-2">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-ivry font-bold print:text-2xl">
             {months[currentMonth.getMonth()]} {currentMonth.getFullYear()}
           </h2>
-          <p className="text-white/80 font-questa print:text-sm">
+          <p className="text-white/80 font-questa print:text-sm text-xs sm:text-sm">
             Spanish Horizons Academy
           </p>
         </div>
-        <div className="flex space-x-2 print:hidden">
+        <div className="flex space-x-1 sm:space-x-2 print:hidden">
           <Button
             onClick={nextMonth}
-            className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-3 transition-colors duration-200"
+            className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-2 sm:p-3 transition-colors duration-200"
           >
-            <ChevronRight className="h-5 w-5" />
+            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
           <Button
             onClick={handlePrint}
-            className="bg-amber hover:bg-amber-dark text-white border-0 rounded-full p-3 transition-colors duration-200"
+            className="bg-amber hover:bg-amber-dark text-white border-0 rounded-full p-2 sm:p-3 transition-colors duration-200"
           >
-            <Printer className="h-5 w-5" />
+            <Printer className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
       </div>
 
       {/* Simple Legend */}
-      <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 print:shadow-none print:border-gray-300 print:rounded-none">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 print:grid-cols-5">
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-3 sm:p-4 print:shadow-none print:border-gray-300 print:rounded-none">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 print:grid-cols-5">
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-slate-light rounded"></div>
-            <span className="text-sm font-questa text-slate">School Starts</span>
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-slate-light rounded"></div>
+            <span className="text-xs sm:text-sm font-questa text-slate">School Starts</span>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-slate rounded"></div>
-            <span className="text-sm font-questa text-slate">School Ends</span>
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-slate rounded"></div>
+            <span className="text-xs sm:text-sm font-questa text-slate">School Ends</span>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-amber-light rounded"></div>
-            <span className="text-sm font-questa text-slate">No School</span>
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-amber-light rounded"></div>
+            <span className="text-xs sm:text-sm font-questa text-slate">No School</span>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-amber rounded"></div>
-            <span className="text-sm font-questa text-slate">Holiday</span>
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-amber rounded"></div>
+            <span className="text-xs sm:text-sm font-questa text-slate">Holiday</span>
           </div>
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-slate-light rounded"></div>
-            <span className="text-sm font-questa text-slate">Early Dismissal</span>
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-slate-light rounded"></div>
+            <span className="text-xs sm:text-sm font-questa text-slate">Early Dismissal</span>
           </div>
         </div>
       </div>
@@ -269,7 +270,7 @@ export default function SimpleMonthlyCalendar() {
         {/* Calendar Header */}
         <div className="grid grid-cols-7 bg-slate text-white print:bg-slate">
           {weekDays.map((day) => (
-            <div key={day} className="p-4 text-center font-questa font-bold text-sm print:p-2 print:text-xs">
+            <div key={day} className="p-2 sm:p-3 lg:p-4 text-center font-questa font-bold text-xs sm:text-sm print:p-2 print:text-xs">
               {day}
             </div>
           ))}

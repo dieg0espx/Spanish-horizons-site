@@ -485,7 +485,7 @@ export default function InteractiveSchoolCalendar() {
 
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className="h-24 border border-gray-200 bg-gray-50 print:bg-white print:border-gray-300"></div>)
+      days.push(<div key={`empty-${i}`} className="h-16 sm:h-20 lg:h-24 border border-gray-200 bg-gray-50 print:bg-white print:border-gray-300"></div>)
     }
 
     // Add days of the month
@@ -497,21 +497,21 @@ export default function InteractiveSchoolCalendar() {
       days.push(
         <div
           key={day}
-          className={`h-24 border border-gray-200 p-2 relative ${
+          className={`h-16 sm:h-20 lg:h-24 border border-gray-200 p-1 sm:p-2 relative ${
             isCurrentDay ? 'bg-amber-light print:bg-amber-light' : 'bg-white hover:bg-gray-50 print:bg-white'
           } transition-colors duration-200 print:transition-none`}
         >
-          <div className={`text-sm font-questa font-medium ${
+          <div className={`text-xs sm:text-sm font-questa font-medium ${
             isCurrentDay ? 'text-slate font-bold' : 'text-slate'
           }`}>
             {day}
           </div>
-          <div className="mt-1 space-y-1">
+          <div className="mt-0.5 sm:mt-1 space-y-0.5 sm:space-y-1">
             {dayEvents.slice(0, 2).map((event) => (
               <div
                 key={event.id}
                 onClick={() => handleEventClick(event)}
-                className={`text-xs p-1 rounded cursor-pointer transition-all duration-200 hover:scale-105 print:hover:scale-100 print:cursor-default ${
+                className={`text-xs p-0.5 sm:p-1 rounded cursor-pointer transition-all duration-200 hover:scale-105 print:hover:scale-100 print:cursor-default ${
                   event.type === 'start' ? 'bg-slate-light text-white' :
                   event.type === 'end' ? 'bg-slate text-white' :
                   event.type === 'closure' ? 'bg-amber-light text-slate' :
@@ -519,10 +519,11 @@ export default function InteractiveSchoolCalendar() {
                   'bg-amber text-white'
                 }`}
               >
-                <div className="flex items-center space-x-1">
-                  {event.icon}
-                  <span className="truncate font-questa font-medium">
-                    {event.title}
+                <div className="flex items-center space-x-0.5 sm:space-x-1">
+                  <div className="hidden sm:block">{event.icon}</div>
+                  <span className="truncate font-questa font-medium text-xs">
+                    <span className="sm:hidden">{event.title.split(' ')[0]}</span>
+                    <span className="hidden sm:inline">{event.title}</span>
                   </span>
                 </div>
               </div>
@@ -543,60 +544,63 @@ export default function InteractiveSchoolCalendar() {
   return (
     <div className="w-full space-y-6" data-calendar-content>
       {/* Month Navigation and View Toggle */}
-      <div className="flex items-center justify-between bg-slate rounded-2xl p-6 text-white print:bg-slate print:rounded-none print:p-4">
+      <div className="flex items-center justify-between bg-slate rounded-2xl p-4 sm:p-6 text-white print:bg-slate print:rounded-none print:p-4">
         <Button
           onClick={prevMonth}
-          className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-3 transition-colors duration-200 print:hidden"
+          className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-2 sm:p-3 transition-colors duration-200 print:hidden"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
-        <div className="text-center">
-          <h2 className="text-3xl font-ivry font-bold print:text-2xl">
+        <div className="text-center flex-1 px-2">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-ivry font-bold print:text-2xl">
             {months[currentMonth.getMonth()]} {currentMonth.getFullYear()}
           </h2>
-          <p className="text-white/80 font-questa print:text-sm">
+          <p className="text-white/80 font-questa print:text-sm text-xs sm:text-sm">
             {currentEvents.length} special {currentEvents.length === 1 ? 'event' : 'events'}
           </p>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex space-x-1 sm:space-x-2">
           <Button
             onClick={nextMonth}
-            className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-3 transition-colors duration-200 print:hidden"
+            className="bg-slate-light hover:bg-slate-medium text-white border-0 rounded-full p-2 sm:p-3 transition-colors duration-200 print:hidden"
           >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-          <Button
-            onClick={handlePrint}
-            className="bg-amber hover:bg-amber-dark text-white border-0 rounded-full p-3 transition-colors duration-200 print:hidden"
-          >
-            <Printer className="h-5 w-5" />
+            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
       </div>
 
-      {/* View Toggle Buttons */}
-      <div className="flex justify-center space-x-2 print:hidden">
+      {/* View Toggle Buttons and Print */}
+      <div className="flex justify-center items-center space-x-1 sm:space-x-2 print:hidden">
         <Button
           onClick={() => setViewMode('calendar')}
-          className={`px-6 py-2 rounded-full font-questa font-medium transition-all duration-200 ${
+          className={`px-3 py-2 sm:px-6 sm:py-2 rounded-full font-questa font-medium transition-all duration-200 text-xs sm:text-sm ${
             viewMode === 'calendar'
               ? 'bg-slate text-white shadow-lg'
               : 'bg-white text-slate border border-slate hover:bg-slate-light hover:text-white'
           }`}
         >
-          <Calendar className="h-4 w-4 mr-2" />
-          Calendar View
+          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+          <span className="hidden sm:inline">Calendar View</span>
+          <span className="sm:hidden">Calendar</span>
         </Button>
         <Button
           onClick={() => setViewMode('cards')}
-          className={`px-6 py-2 rounded-full font-questa font-medium transition-all duration-200 ${
+          className={`px-3 py-2 sm:px-6 sm:py-2 rounded-full font-questa font-medium transition-all duration-200 text-xs sm:text-sm ${
             viewMode === 'cards'
               ? 'bg-slate text-white shadow-lg'
               : 'bg-white text-slate border border-slate hover:bg-slate-light hover:text-white'
           }`}
         >
-          <Star className="h-4 w-4 mr-2" />
-          Event Cards
+          <Star className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+          <span className="hidden sm:inline">Event Cards</span>
+          <span className="sm:hidden">Cards</span>
+        </Button>
+        <Button
+          onClick={handlePrint}
+          className="px-3 py-2 sm:px-4 sm:py-2 rounded-full font-questa font-medium transition-all duration-200 text-xs sm:text-sm bg-amber hover:bg-amber-dark text-white border-0 flex items-center justify-center"
+        >
+          <Printer className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
+          <span className="hidden sm:inline">Print</span>
         </Button>
       </div>
 
@@ -606,7 +610,7 @@ export default function InteractiveSchoolCalendar() {
           {/* Calendar Header */}
           <div className="grid grid-cols-7 bg-slate text-white print:bg-slate">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-              <div key={day} className="p-4 text-center font-questa font-bold text-sm print:p-2 print:text-xs">
+              <div key={day} className="p-2 sm:p-3 lg:p-4 text-center font-questa font-bold text-xs sm:text-sm print:p-2 print:text-xs">
                 {day}
               </div>
             ))}
@@ -621,16 +625,16 @@ export default function InteractiveSchoolCalendar() {
 
       {/* Events Cards View */}
       {viewMode === 'cards' && (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {currentEvents.map((event) => (
             <Card
               key={event.id}
               className="group cursor-pointer hover:scale-105 hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white"
               onClick={() => handleEventClick(event)}
             >
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-2xl flex-shrink-0 ${getTypeColor(event.type)}`}>
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <div className={`p-2 sm:p-3 rounded-2xl flex-shrink-0 ${getTypeColor(event.type)}`}>
                     {event.icon}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -641,7 +645,7 @@ export default function InteractiveSchoolCalendar() {
                         {getTypeLabel(event.type)}
                       </Badge>
                     </div>
-                    <h3 className="font-bold text-lg text-slate mb-2 font-ivry">
+                    <h3 className="font-bold text-base sm:text-lg text-slate mb-2 font-ivry">
                       {event.title}
                     </h3>
                     <p className="text-slate-medium text-sm font-questa mb-3">
@@ -654,13 +658,13 @@ export default function InteractiveSchoolCalendar() {
                 </div>
                 
                 {/* Interactive hover effect */}
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-3 sm:mt-4 flex items-center justify-between">
                   <div className="flex items-center space-x-2 text-slate-medium">
-                    <Info className="h-4 w-4" />
+                    <Info className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span className="text-xs font-questa">Click for details</span>
                   </div>
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Calendar className="h-4 w-4 text-slate" />
+                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-slate" />
                   </div>
                 </div>
               </CardContent>
@@ -686,35 +690,35 @@ export default function InteractiveSchoolCalendar() {
 
       {/* Event Detail Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-ivry font-bold text-slate flex items-center space-x-3">
-              <div className={`p-2 rounded-xl ${selectedEvent ? getTypeColor(selectedEvent.type) : ''}`}>
+        <DialogContent className="w-[95vw] max-w-md mx-auto my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
+          <DialogHeader className="pb-2 sm:pb-4">
+            <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-ivry font-bold text-slate flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
+              <div className={`p-2 sm:p-2 rounded-xl flex-shrink-0 ${selectedEvent ? getTypeColor(selectedEvent.type) : ''}`}>
                 {selectedEvent?.icon}
               </div>
-              <span>{selectedEvent?.title}</span>
+              <span className="break-words leading-tight">{selectedEvent?.title}</span>
             </DialogTitle>
           </DialogHeader>
           {selectedEvent && (
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4 px-1">
               <div className="flex items-center space-x-2">
-                <Calendar className="h-5 w-5 text-slate" />
-                <span className="text-slate font-questa font-medium">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-slate flex-shrink-0" />
+                <span className="text-slate font-questa font-medium text-sm sm:text-base break-words">
                   {selectedEvent.date}
                 </span>
               </div>
               
               <div className="flex items-center space-x-2">
                 <Badge 
-                  className={`font-questa !text-white ${getTypeColor(selectedEvent.type)}`}
+                  className={`font-questa !text-white text-xs sm:text-sm ${getTypeColor(selectedEvent.type)}`}
                 >
                   {getTypeLabel(selectedEvent.type)}
                 </Badge>
               </div>
 
               <div className="flex items-start space-x-2">
-                <Clock className="h-5 w-5 text-slate mt-0.5 flex-shrink-0" />
-                <p className="text-slate-medium leading-relaxed font-questa">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-slate mt-0.5 flex-shrink-0" />
+                <p className="text-slate-medium leading-relaxed font-questa text-sm sm:text-base break-words">
                   {selectedEvent.description}
                 </p>
               </div>
@@ -722,12 +726,12 @@ export default function InteractiveSchoolCalendar() {
               {selectedEvent.type === "early" && (
                 <div className="bg-amber-light p-3 rounded-lg">
                   <div className="flex items-start space-x-2">
-                    <AlertCircle className="h-5 w-5 text-amber mt-0.5 flex-shrink-0" />
-                    <div>
+                    <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-amber mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
                       <p className="text-slate font-questa font-medium text-sm">
                         Early Dismissal Notice
                       </p>
-                      <p className="text-slate-medium font-questa text-sm mt-1">
+                      <p className="text-slate-medium font-questa text-sm mt-1 break-words">
                         Aftercare services may be modified or unavailable on early closure days. 
                         Please check with the office for specific arrangements.
                       </p>
@@ -736,37 +740,6 @@ export default function InteractiveSchoolCalendar() {
                 </div>
               )}
 
-              {/* Add to Calendar Buttons */}
-              <div className="pt-4 border-t border-gray-200">
-                <p className="text-slate font-questa font-medium text-sm mb-3">
-                  Add to your calendar:
-                </p>
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <Button
-                    onClick={() => {
-                      // Generate ICS file logic here
-                    }}
-                    className="flex items-center space-x-2 bg-slate hover:bg-slate-medium text-white font-questa"
-                    size="sm"
-                  >
-                    <Download className="h-4 w-4" />
-                    <span>Download .ics file</span>
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      // Google Calendar logic here
-                    }}
-                    className="flex items-center space-x-2 bg-amber hover:bg-amber-dark text-white font-questa"
-                    size="sm"
-                  >
-                    <Calendar className="h-4 w-4" />
-                    <span>Google Calendar</span>
-                  </Button>
-                </div>
-                <p className="text-slate-medium font-questa text-xs mt-2">
-                  The .ics file works with Apple Calendar, Outlook, and most calendar apps.
-                </p>
-              </div>
             </div>
           )}
         </DialogContent>
