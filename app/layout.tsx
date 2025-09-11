@@ -6,6 +6,7 @@ import ModernHeader from "@/components/modern-header"
 import Footer from "@/components/footer"
 import StickyApplyButton from "@/components/sticky-apply-button"
 import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, Poppins } from 'next/font/google'
+import FloatingCTA from "@/components/floating-cta"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -195,7 +196,7 @@ export default function RootLayout({
         <ModernHeader />
         {children}
         <Footer />
-        <StickyApplyButton />
+        <FloatingCTA />
       </body>
     </html>
   )
