@@ -71,11 +71,23 @@ export default function AdmissionsPage() {
       </section>
 
              {/* Application Timeline */}
-       <section className="py-12 md:py-16 bg-white">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <section className="relative py-12 md:py-16 overflow-hidden">
+         {/* Background Image with Parallax */}
+         <div 
+           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+           style={{
+             backgroundImage: `url('/pictures/classroom8.jpeg')`,
+           }}
+         />
+         
+         {/* Blue Gradient Overlay */}
+         <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+         
+         {/* Content */}
+         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">2025-2026 Application Timeline</h2>
-            <p className="text-lg text-slate-medium font-questa">Important dates for the upcoming school year</p>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">2025-2026 Application Timeline</h2>
+            <p className="text-lg text-white/90 font-questa">Important dates for the upcoming school year</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -165,10 +177,22 @@ export default function AdmissionsPage() {
       </section>
 
              {/* Important Notes */}
-       <section className="py-12 md:py-16 bg-white">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <section className="relative py-12 md:py-16 overflow-hidden">
+         {/* Background Image with Parallax */}
+         <div 
+           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+           style={{
+             backgroundImage: `url('/pictures/classroom7.jpeg')`,
+           }}
+         />
+         
+         {/* Blue Gradient Overlay */}
+         <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+         
+         {/* Content */}
+         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Important Information</h2>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Important Information</h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

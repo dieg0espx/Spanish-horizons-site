@@ -172,10 +172,22 @@ export default function ProgramsPage() {
       </section>
 
              {/* Program Pillars */}
-       <section className="py-12 md:py-16 bg-white">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <section className="relative py-12 md:py-16 overflow-hidden">
+         {/* Background Image with Parallax */}
+         <div 
+           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+           style={{
+             backgroundImage: `url('/pictures/classroom5.png')`,
+           }}
+         />
+         
+         {/* Blue Gradient Overlay */}
+         <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+         
+         {/* Content */}
+         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Built on Two Pillars</h2>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Built on Two Pillars</h2>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -287,13 +299,25 @@ export default function ProgramsPage() {
       </section>
 
              {/* Sample Curriculum Showcase */}
-       <section className="py-12 md:py-16 bg-white">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <section className="relative py-12 md:py-16 overflow-hidden">
+         {/* Background Image with Parallax */}
+         <div 
+           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+           style={{
+             backgroundImage: `url('/pictures/classroom2.jpeg')`,
+           }}
+         />
+         
+         {/* Blue Gradient Overlay */}
+         <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+         
+         {/* Content */}
+         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">
               Sample Curriculum: Adventures Across Latin America
             </h2>
-            <p className="text-lg text-slate-medium font-questa">See how our expeditionary approach brings learning to life</p>
+            <p className="text-lg text-white/90 font-questa">See how our expeditionary approach brings learning to life</p>
           </div>
 
                      <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 max-w-4xl mx-auto">
@@ -432,10 +456,22 @@ export default function ProgramsPage() {
       </section>
 
              {/* Program Features */}
-       <section className="py-12 md:py-16 bg-white">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <section className="relative py-12 md:py-16 overflow-hidden">
+         {/* Background Image with Parallax */}
+         <div 
+           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+           style={{
+             backgroundImage: `url('/pictures/classroom6.jpeg')`,
+           }}
+         />
+         
+         {/* Blue Gradient Overlay */}
+         <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+         
+         {/* Content */}
+         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-slate mb-4">Program Highlights</h2>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Program Highlights</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
