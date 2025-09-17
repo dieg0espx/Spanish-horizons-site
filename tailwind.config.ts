@@ -20,27 +20,38 @@ const config: Config = {
   			'cormorant': ['var(--font-cormorant)', 'Georgia', 'serif'],
   			'libre-baskerville': ['var(--font-libre-baskerville)', 'Georgia', 'serif'],
   			'poppins': ['var(--font-poppins)', 'system-ui', 'sans-serif'],
+  			'questa': ['var(--font-playfair)', 'Georgia', 'serif'],
   			'mono': ['JetBrains Mono', 'Fira Code', 'monospace']
   		},
-  		colors: {
-  			// Custom color palette
-  			golden: {
-  				DEFAULT: '#FFD700', // Golden yellow - C: 0%, M: 26%, Y: 89%, K: 0%
-  				light: '#FFE44D',
-  				dark: '#FFB300'
-  			},
-  			amber: {
-  				DEFAULT: '#FF8C00', // Deep orange - C: 0%, M: 45%, Y: 100%, K: 0%
-  				light: '#FFA726',
-  				dark: '#E65100'
-  			},
-  			slate: {
-  				DEFAULT: '#000638', // Dark slate blue - C: 100%, M: 32%, Y: 20%, K: 58%
-  				medium: '#1a1f5c', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
-  				light: '#2a2f6c', // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
-  				lighter: '#3a3f7c', // Lighter slate blue
-  				lightest: '#4a4f8c' // Lightest slate blue
-  			},
+		colors: {
+			// Custom color palette
+			golden: {
+				DEFAULT: '#FFD700', // Golden yellow - C: 0%, M: 26%, Y: 89%, K: 0%
+				light: '#FFE44D',
+				dark: '#FFB300'
+			},
+			amber: {
+				DEFAULT: '#FF8C00', // Deep orange - C: 0%, M: 45%, Y: 100%, K: 0%
+				light: '#FFA726',
+				dark: '#E65100'
+			},
+			slate: {
+				DEFAULT: '#000638', // Dark slate blue - C: 100%, M: 32%, Y: 20%, K: 58%
+				medium: '#1a1f5c', // Medium slate blue - C: 100%, M: 32%, Y: 20%, K: 47%
+				light: '#2a2f6c', // Light slate blue - C: 100%, M: 32%, Y: 20%, K: 37%
+				lighter: '#3a3f7c', // Lighter slate blue
+				lightest: '#4a4f8c' // Lightest slate blue
+			},
+			// Cocinarte Color Palette
+			cocinarte: {
+				orange: '#F48E77', // Light orange
+				red: '#F0614F', // Red
+				white: '#FEFEFE', // Pure white
+				blue: '#CDECF9', // Light blue
+				yellow: '#FCB414', // Yellow
+				navy: '#00ADEE', // Navy blue
+				black: '#000000' // Black
+			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

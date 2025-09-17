@@ -120,12 +120,12 @@ export default function HeroWithImages({
           {badge}
         </div>
         
-        <h1 className={`${titleFont === 'font-poppins' ? 'text-4xl md:text-6xl' : 'text-5xl md:text-7xl'} ${titleFont} font-light text-white mb-6 leading-tight tracking-wide`}>
+        <h1 className={`${titleFont === 'font-poppins' ? 'text-4xl md:text-6xl' : 'text-5xl md:text-7xl'} font-light text-white mb-6 leading-tight tracking-wide`} style={{ fontFamily: titleFont === 'font-poppins' ? 'var(--font-poppins), system-ui, sans-serif' : 'var(--font-playfair), Georgia, serif' }}>
           {title}
           {subtitle && <span className="text-golden block font-normal">{subtitle}</span>}
         </h1>
         
-        <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto font-sans">
+        <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
           {description}
         </p>
         

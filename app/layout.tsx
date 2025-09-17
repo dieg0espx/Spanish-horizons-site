@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import StickyApplyButton from "@/components/sticky-apply-button"
 import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, Poppins } from 'next/font/google'
 import FloatingCTA from "@/components/floating-cta"
+import ConditionalLayout from "@/components/conditional-layout"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -198,11 +199,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans" style={{ marginTop: "70px" }}>
-        <ModernHeader />
-        {children}
-        <Footer />
-        <FloatingCTA />
+      <body className="font-sans">
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   )
