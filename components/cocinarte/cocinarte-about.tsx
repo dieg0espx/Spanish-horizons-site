@@ -17,45 +17,45 @@ export default function CocinarteAbout() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-amber-50 to-amber-100">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-amber-50 to-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ChefHat className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-cocinarte-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <ChefHat className="w-8 h-8 text-cocinarte-navy" />
               </div>
-              <CardTitle className="text-2xl text-slate">Hands-On Learning</CardTitle>
+              <CardTitle className="text-2xl text-slate font-bold">Hands-On Learning</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-slate-medium text-lg font-questa">
+              <CardDescription className="text-slate-medium text-lg">
                 Interactive cooking experiences where kids learn by doing, building confidence 
                 and skills in the kitchen.
               </CardDescription>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-slate-50 to-slate-100">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Utensils className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-cocinarte-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <Utensils className="w-8 h-8 text-cocinarte-navy" />
               </div>
-              <CardTitle className="text-2xl text-slate">Latin Flavors</CardTitle>
+              <CardTitle className="text-2xl text-slate font-bold">Latin Flavors</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-slate-medium text-lg font-questa">
+              <CardDescription className="text-slate-medium text-lg">
                 Explore authentic Latin American cuisine and discover new flavors, ingredients, 
                 and cooking techniques.
               </CardDescription>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-golden-50 to-golden-100">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-golden-50 to-golden-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-cocinarte-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-cocinarte-navy" />
               </div>
-              <CardTitle className="text-2xl text-slate">Family Fun</CardTitle>
+              <CardTitle className="text-2xl text-slate font-bold">Family Fun</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <CardDescription className="text-slate-medium text-lg font-questa">
+              <CardDescription className="text-slate-medium text-lg">
                 Perfect for kids and families to cook together, creating lasting memories 
                 and bonding experiences.
               </CardDescription>

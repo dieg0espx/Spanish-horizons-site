@@ -16,8 +16,8 @@ export default function CocinartePage() {
     <div className="min-h-screen bg-white">
       <CocinarteHeader />
       <CocinarteHero />
-      <CocinarteCalendar />
       <CocinarteAbout />
+      <CocinarteCalendar />
       <CocinarteClassTypes />
       <CocinarteSafety />
       <CocinarteBirthday />

@@ -1,3 +1,5 @@
+"use client"
+
 import CocinarteMonthlyCalendar from "./cocinarte-monthly-calendar"
 
 export default function CocinarteCalendar() {

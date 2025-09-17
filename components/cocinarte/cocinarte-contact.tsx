@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin } from "lucide-react"
 
 export default function CocinarteContact() {
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-gradient-to-br from-cocinarte-blue/5 via-cocinarte-yellow/5 to-cocinarte-orange/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-slate mb-4">
@@ -15,9 +15,9 @@ export default function CocinarteContact() {
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-50 to-amber-100">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-cocinarte-yellow/10 to-cocinarte-yellow/20 hover:shadow-xl transition-all duration-300">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-amber rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-cocinarte-yellow rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <CardTitle className="text-2xl text-slate">Phone</CardTitle>
@@ -29,10 +29,10 @@ export default function CocinarteContact() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-green-50 to-green-100">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-cocinarte-orange/10 to-cocinarte-orange/20 hover:shadow-xl transition-all duration-300">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-amber rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-cocinarte-orange rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-cocinarte-white" />
               </div>
               <CardTitle className="text-2xl text-slate">Email</CardTitle>
             </CardHeader>
@@ -43,10 +43,10 @@ export default function CocinarteContact() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-cocinarte-navy/10 to-cocinarte-navy/20 hover:shadow-xl transition-all duration-300">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-golden rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-cocinarte-navy rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-8 h-8 text-cocinarte-white" />
               </div>
               <CardTitle className="text-2xl text-slate">Location</CardTitle>
             </CardHeader>

@@ -6,7 +6,7 @@ import { ChefHat, Calendar } from "lucide-react"
 
 export default function CocinarteHero() {
   return (
-    <section className="py-20 md:py-20 py-12 bg-cocinarte-white">
+    <section className="pt-24 pb-20 md:pt-28 md:pb-20 bg-cocinarte-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">

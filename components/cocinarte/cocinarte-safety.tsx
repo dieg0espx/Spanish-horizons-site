@@ -7,10 +7,10 @@ export default function CocinarteSafety() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">
+              <h2 className="text-4xl lg:text-5xl font-bold text-slate">
                 Safety & Learning Experience
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-slate-medium">
                 Safety is our top priority. We create a fun, educational environment where kids 
                 can learn essential cooking skills while staying safe and having a great time.
               </p>
@@ -22,8 +22,8 @@ export default function CocinarteSafety() {
                   <Shield className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-xl text-slate-900 mb-2">Safety First</h3>
-                  <p className="text-slate-600 text-lg">Kids use age-appropriate tools with close instructor supervision</p>
+                  <h3 className="font-semibold text-xl text-slate mb-2">Safety First</h3>
+                  <p className="text-slate-medium text-lg">Kids use age-appropriate tools with close instructor supervision</p>
                 </div>
               </div>
 
@@ -32,8 +32,8 @@ export default function CocinarteSafety() {
                   <CheckCircle className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-xl text-slate-900 mb-2">Kitchen Basics</h3>
-                  <p className="text-slate-600 text-lg">Learn hand washing, safe chopping techniques, and careful heat use</p>
+                  <h3 className="font-semibold text-xl text-slate mb-2">Kitchen Basics</h3>
+                  <p className="text-slate-medium text-lg">Learn hand washing, safe chopping techniques, and careful heat use</p>
                 </div>
               </div>
 
@@ -42,8 +42,8 @@ export default function CocinarteSafety() {
                   <Utensils className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-xl text-slate-900 mb-2">Enjoy Your Creations</h3>
-                  <p className="text-slate-600 text-lg">Part of the fun is enjoying the finished dish together, with leftovers to take home</p>
+                  <h3 className="font-semibold text-xl text-slate mb-2">Enjoy Your Creations</h3>
+                  <p className="text-slate-medium text-lg">Part of the fun is enjoying the finished dish together, with leftovers to take home</p>
                 </div>
               </div>
 
@@ -52,8 +52,8 @@ export default function CocinarteSafety() {
                   <AlertTriangle className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-xl text-slate-900 mb-2">Allergy Accommodations</h3>
-                  <p className="text-slate-600 text-lg">We adapt recipes for allergies and dietary restrictions when possible</p>
+                  <h3 className="font-semibold text-xl text-slate mb-2">Allergy Accommodations</h3>
+                  <p className="text-slate-medium text-lg">We adapt recipes for allergies and dietary restrictions when possible</p>
                 </div>
               </div>
             </div>
@@ -62,27 +62,27 @@ export default function CocinarteSafety() {
           <div className="relative">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-xl p-6 text-center">
-                  <Clock className="w-12 h-12 text-amber mx-auto mb-3" />
-                  <h3 className="font-semibold text-slate-900 text-xl">1.5-2 Hours</h3>
-                  <p className="text-sm text-slate-600">Per class session</p>
+                <div className="bg-gradient-to-br from-cocinarte-yellow/20 to-cocinarte-yellow/40 rounded-xl p-6 text-center">
+                  <Clock className="w-12 h-12 text-cocinarte-yellow mx-auto mb-3" />
+                  <h3 className="font-semibold text-slate text-xl">1.5-2 Hours</h3>
+                  <p className="text-sm text-slate-medium">Per class session</p>
                 </div>
-                <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-xl p-6 text-center">
-                  <Users className="w-12 h-12 text-green-600 mx-auto mb-3" />
-                  <h3 className="font-semibold text-slate-900 text-xl">Ages 7-12</h3>
-                  <p className="text-sm text-slate-600">Main program focus</p>
+                <div className="bg-gradient-to-br from-cocinarte-red/20 to-cocinarte-red/40 rounded-xl p-6 text-center">
+                  <Users className="w-12 h-12 text-cocinarte-red mx-auto mb-3" />
+                  <h3 className="font-semibold text-slate text-xl">Ages 7-12</h3>
+                  <p className="text-sm text-slate-medium">Main program focus</p>
                 </div>
               </div>
               <div className="space-y-4 mt-8">
-                <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl p-6 text-center">
-                  <DollarSign className="w-12 h-12 text-blue-600 mx-auto mb-3" />
-                  <h3 className="font-semibold text-slate-900 text-xl">$60-80</h3>
-                  <p className="text-sm text-slate-600">Per child</p>
+                <div className="bg-cocinarte-blue rounded-xl p-6 text-center">
+                  <DollarSign className="w-12 h-12 text-cocinarte-navy mx-auto mb-3" />
+                  <h3 className="font-semibold text-slate text-xl">$60-80</h3>
+                  <p className="text-sm text-slate-medium">Per child</p>
                 </div>
-                <div className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl p-6 text-center">
-                  <Heart className="w-12 h-12 text-purple-600 mx-auto mb-3" />
-                  <h3 className="font-semibold text-slate-900 text-xl">Family Fun</h3>
-                  <p className="text-sm text-slate-600">$120-150 per family</p>
+                <div className="bg-gradient-to-br from-cocinarte-yellow/20 to-cocinarte-yellow/40 rounded-xl p-6 text-center">
+                  <Heart className="w-12 h-12 text-cocinarte-yellow mx-auto mb-3" />
+                  <h3 className="font-semibold text-slate text-xl">Family Fun</h3>
+                  <p className="text-sm text-slate-medium">$120-150 per family</p>
                 </div>
               </div>
             </div>

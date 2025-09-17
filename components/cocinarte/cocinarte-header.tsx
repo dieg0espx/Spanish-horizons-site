@@ -17,7 +17,7 @@ export default function CocinarteHeader() {
   // Prevent hydration mismatch by not rendering interactive elements until mounted
   if (!isMounted) {
     return (
-      <header className="bg-cocinarte-navy shadow-xl w-full sticky top-0 z-50">
+      <header className="bg-cocinarte-navy shadow-xl w-full fixed top-0 left-0 right-0 z-50">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 lg:h-24">
             {/* Logo */}
@@ -39,19 +39,19 @@ export default function CocinarteHeader() {
                 href="#calendar"
                 className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
-                Home
+                Calendar
               </Link>
               <Link
                 href="#about"
                 className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
-                About Our Classes
+                About
               </Link>
               <Link
-                href="#faq"
+                href="#classes"
                 className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
-                FAQ
+                Classes
               </Link>
               <Link
                 href="#birthday-parties"
@@ -64,6 +64,12 @@ export default function CocinarteHeader() {
                 className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 Private Events
+              </Link>
+              <Link
+                href="#faq"
+                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              >
+                FAQ
               </Link>
             </nav>
 
@@ -95,19 +101,19 @@ export default function CocinarteHeader() {
                 href="#calendar"
                 className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
-                Home
+                Calendar
               </Link>
               <Link
                 href="#about"
                 className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
-                About Our Classes
+                About
               </Link>
               <Link
-                href="#faq"
+                href="#classes"
                 className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
-                FAQ
+                Classes
               </Link>
               <Link
                 href="#birthday-parties"
@@ -120,6 +126,12 @@ export default function CocinarteHeader() {
                 className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 Private Events
+              </Link>
+              <Link
+                href="#faq"
+                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              >
+                FAQ
               </Link>
               <Button className="w-full bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
                 <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
@@ -135,7 +147,7 @@ export default function CocinarteHeader() {
   }
 
   return (
-    <header className="bg-cocinarte-navy shadow-xl w-full sticky top-0 z-50">
+    <header className="bg-cocinarte-navy shadow-xl w-full fixed top-0 left-0 right-0 z-50">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
@@ -157,19 +169,19 @@ export default function CocinarteHeader() {
               href="#calendar"
               className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
-              Home
+              Calendar
             </Link>
             <Link
               href="#about"
               className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
-              About Our Classes
+              About
             </Link>
             <Link
-              href="#faq"
+              href="#classes"
               className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
-              FAQ
+              Classes
             </Link>
             <Link
               href="#birthday-parties"
@@ -182,6 +194,12 @@ export default function CocinarteHeader() {
               className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               Private Events
+            </Link>
+            <Link
+              href="#faq"
+              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+            >
+              FAQ
             </Link>
           </nav>
 
@@ -215,21 +233,21 @@ export default function CocinarteHeader() {
               className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
+              Calendar
             </Link>
             <Link
               href="#about"
               className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               onClick={() => setIsMenuOpen(false)}
             >
-              About Our Classes
+              About
             </Link>
             <Link
-              href="#faq"
+              href="#classes"
               className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               onClick={() => setIsMenuOpen(false)}
             >
-              FAQ
+              Classes
             </Link>
             <Link
               href="#birthday-parties"
@@ -244,6 +262,13 @@ export default function CocinarteHeader() {
               onClick={() => setIsMenuOpen(false)}
             >
               Private Events
+            </Link>
+            <Link
+              href="#faq"
+              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              FAQ
             </Link>
             <Button className="w-full bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
               <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">

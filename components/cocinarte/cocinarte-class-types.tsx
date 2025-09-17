@@ -15,10 +15,10 @@ export default function CocinarteClassTypes() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-amber-50 to-amber-100">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-amber-100 to-amber-200">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ChefHat className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ChefHat className="w-8 h-8 text-amber" />
               </div>
               <CardTitle className="text-2xl text-slate">Mini Chef Classes</CardTitle>
               <CardDescription className="text-amber font-semibold text-lg">Ages 7-12</CardDescription>
@@ -36,10 +36,10 @@ export default function CocinarteClassTypes() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-slate-50 to-slate-100">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-amber-100 to-amber-200">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-golden-50 to-golden-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-amber" />
               </div>
               <CardTitle className="text-2xl text-slate">Mom & Me Classes</CardTitle>
               <CardDescription className="text-golden font-semibold text-lg">All Ages with Adult</CardDescription>
@@ -57,10 +57,10 @@ export default function CocinarteClassTypes() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-golden-50 to-golden-100">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-amber-100 to-amber-200">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-slate rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Sparkles className="w-8 h-8 text-amber" />
               </div>
               <CardTitle className="text-2xl text-slate">Specialty Workshops</CardTitle>
               <CardDescription className="text-amber font-semibold text-lg">Teens & Adults</CardDescription>
