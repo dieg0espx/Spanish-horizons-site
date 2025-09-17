@@ -121,6 +121,48 @@
     font-family: var(--font-lora), 'Lora', serif !important;
   }
   
+  /* Cocinarte navigation hover fix */
+  .cocinarte-nav-link:hover {
+    color: white !important;
+  }
+  
+  /* More specific Cocinarte navigation hover fix */
+  nav .cocinarte-nav-link:hover {
+    color: white !important;
+  }
+  
+  /* Force white text on hover for Cocinarte nav */
+  .cocinarte-nav-link.hover\:bg-cocinarte-orange:hover {
+    color: white !important;
+  }
+  
+  /* Target specific Cocinarte navigation elements */
+  .cocinarte-nav-link[class*="hover:bg-cocinarte-orange"]:hover {
+    color: white !important;
+  }
+  
+  /* Override any Tailwind text color on hover */
+  .cocinarte-nav-link[class*="text-cocinarte"]:hover {
+    color: white !important;
+  }
+  
+  /* Most specific rule for Cocinarte navigation */
+  .cocinarte-nav-link.px-6.py-3.rounded-xl.text-base.font-semibold.transition-all.duration-200.text-cocinarte-white.hover\:bg-cocinarte-orange:hover {
+    color: white !important;
+  }
+  
+  /* Force white on all Cocinarte nav links regardless of other classes */
+  .cocinarte-nav-link:hover,
+  .cocinarte-nav-link:focus,
+  .cocinarte-nav-link:active {
+    color: white !important;
+  }
+  
+  /* Target the specific Tailwind classes that might be causing issues */
+  .cocinarte-nav-link[class*="hover:bg-cocinarte-orange"]:hover {
+    color: white !important;
+  }
+  
   /* Hide scrollbars for all elements */
   * {
     scrollbar-width: none; /* Firefox */

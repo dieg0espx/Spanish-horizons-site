@@ -28,7 +28,7 @@ export default function CocinarteHeader() {
                   alt="Cocinarte Logo" 
                   width={200} 
                   height={64} 
-                  className="object-contain h-14 sm:h-16 lg:h-20 max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]" 
+                  className="object-contain h-16 sm:h-20 lg:h-24 max-w-[140px] sm:max-w-[180px] lg:max-w-[240px]" 
                 />
               </Link>
             </div>
@@ -37,37 +37,55 @@ export default function CocinarteHeader() {
             <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
               <Link
                 href="#calendar"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Calendar
               </Link>
               <Link
                 href="#about"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 About
               </Link>
               <Link
                 href="#classes"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Classes
               </Link>
               <Link
                 href="#birthday-parties"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Birthday Parties
               </Link>
               <Link
                 href="#private-events"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Private Events
               </Link>
               <Link
                 href="#faq"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 FAQ
               </Link>
@@ -99,37 +117,55 @@ export default function CocinarteHeader() {
             <nav className="px-4 py-4 space-y-2">
               <Link
                 href="#calendar"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Calendar
               </Link>
               <Link
                 href="#about"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 About
               </Link>
               <Link
                 href="#classes"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Classes
               </Link>
               <Link
                 href="#birthday-parties"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Birthday Parties
               </Link>
               <Link
                 href="#private-events"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 Private Events
               </Link>
               <Link
                 href="#faq"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+                style={{ color: 'white' }}
+                onMouseEnter={(e) => e.target.style.color = 'white'}
+                onMouseLeave={(e) => e.target.style.color = 'white'}
               >
                 FAQ
               </Link>
@@ -158,7 +194,7 @@ export default function CocinarteHeader() {
                 alt="Cocinarte Logo" 
                 width={200} 
                 height={64} 
-                className="object-contain h-14 sm:h-16 lg:h-20 max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]" 
+                className="object-contain h-16 sm:h-20 lg:h-24 max-w-[140px] sm:max-w-[180px] lg:max-w-[240px]" 
               />
             </Link>
           </div>
@@ -167,37 +203,55 @@ export default function CocinarteHeader() {
           <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
             <Link
               href="#calendar"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+              style={{ color: 'white' }}
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               Calendar
             </Link>
             <Link
               href="#about"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+              style={{ color: 'white' }}
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               About
             </Link>
             <Link
               href="#classes"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+              style={{ color: 'white' }}
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               Classes
             </Link>
             <Link
               href="#birthday-parties"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+              style={{ color: 'white' }}
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               Birthday Parties
             </Link>
             <Link
               href="#private-events"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+              style={{ color: 'white' }}
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               Private Events
             </Link>
             <Link
               href="#faq"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
+              style={{ color: 'white' }}
+              onMouseEnter={(e) => e.target.style.color = 'white'}
+              onMouseLeave={(e) => e.target.style.color = 'white'}
             >
               FAQ
             </Link>
@@ -230,42 +284,42 @@ export default function CocinarteHeader() {
           <nav className="px-4 py-4 space-y-2">
             <Link
               href="#calendar"
-              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
               onClick={() => setIsMenuOpen(false)}
             >
               Calendar
             </Link>
             <Link
               href="#about"
-              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="#classes"
-              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
               onClick={() => setIsMenuOpen(false)}
             >
               Classes
             </Link>
             <Link
               href="#birthday-parties"
-              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
               onClick={() => setIsMenuOpen(false)}
             >
               Birthday Parties
             </Link>
             <Link
               href="#private-events"
-              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
               onClick={() => setIsMenuOpen(false)}
             >
               Private Events
             </Link>
             <Link
               href="#faq"
-              className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="cocinarte-nav-link flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange"
               onClick={() => setIsMenuOpen(false)}
             >
               FAQ
