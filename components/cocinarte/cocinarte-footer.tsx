@@ -12,11 +12,12 @@ export default function CocinarteFooter() {
             <Image 
               src="/cocinarte/cocinarteLogo.png" 
               alt="Cocinarte Logo" 
-              width={150} 
-              height={48} 
-              className="object-contain h-12 mb-4" 
+              width={300} 
+              height={96} 
+              className="object-contain -mt-8" 
+              style={{ height: '160px', width: 'auto' }}
             />
-            <p className="text-cocinarte-blue text-sm">
+            <p className="text-cocinarte-blue text-sm -mt-4">
               Cooking adventures for kids and families to explore Latin flavors while learning hands-on cooking skills.
             </p>
           </div>
@@ -53,24 +54,19 @@ export default function CocinarteFooter() {
           
           <div>
             <h3 className="font-bold text-lg mb-4 text-cocinarte-yellow">Follow Us</h3>
-            <div className="space-y-4">
-              <Button className="bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-bold px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  <Instagram className="w-4 h-4 mr-2" />
-                  Instagram
-                </Link>
-              </Button>
-              <div className="flex space-x-2">
-                <Link href="https://facebook.com/cocinarte" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
-                  <Facebook className="w-4 h-4 text-cocinarte-black" />
-                </Link>
-                <Link href="https://twitter.com/cocinarte" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
-                  <Twitter className="w-4 h-4 text-cocinarte-black" />
-                </Link>
-                <Link href="mailto:info@cocinarte.com" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
-                  <Mail className="w-4 h-4 text-cocinarte-black" />
-                </Link>
-              </div>
+            <div className="flex space-x-4">
+              <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="text-cocinarte-white hover:text-cocinarte-yellow transition-colors cursor-pointer">
+                <Instagram className="w-6 h-6" />
+              </Link>
+              <Link href="https://facebook.com/cocinarte" target="_blank" rel="noopener noreferrer" className="text-cocinarte-white hover:text-cocinarte-yellow transition-colors cursor-pointer">
+                <Facebook className="w-6 h-6" />
+              </Link>
+              <Link href="https://twitter.com/cocinarte" target="_blank" rel="noopener noreferrer" className="text-cocinarte-white hover:text-cocinarte-yellow transition-colors cursor-pointer">
+                <Twitter className="w-6 h-6" />
+              </Link>
+              <Link href="mailto:info@cocinarte.com" className="text-cocinarte-white hover:text-cocinarte-yellow transition-colors cursor-pointer">
+                <Mail className="w-6 h-6" />
+              </Link>
             </div>
           </div>
         </div>
