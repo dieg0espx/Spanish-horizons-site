@@ -90,6 +90,35 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Set Inter as default font for all text elements */
+  h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, label, li, td, th {
+    font-family: 'Inter', sans-serif !important;
+  }
+  
+  /* Override all specific font classes to use Inter */
+  .font-questa, .font-playfair, .font-lora, .font-cormorant, .font-libre-baskerville, .font-poppins, .font-sf-pro, .font-ivry {
+    font-family: 'Inter', sans-serif !important;
+  }
+  
+  /* CTA font class - uses Playfair Display for call-to-action text */
+  .font-cta {
+    font-family: var(--font-playfair), 'Playfair Display', serif !important;
+  }
+  
+  /* Font testing classes - override global Inter font for testing */
+  .font-test-poppins {
+    font-family: var(--font-poppins), 'Poppins', sans-serif !important;
+  }
+  
+  .font-test-playfair {
+    font-family: var(--font-playfair), 'Playfair Display', serif !important;
+  }
+  
+  .font-test-lora {
+    font-family: var(--font-lora), 'Lora', serif !important;
   }
   
   /* Hide scrollbars for all elements */
