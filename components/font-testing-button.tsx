@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Type } from "lucide-react"
 
@@ -10,13 +10,14 @@ interface FontTestingButtonProps {
 }
 
 const fonts = [
-  { name: "Poppins", class: "font-poppins" },
-  { name: "Playfair Display", class: "font-playfair" },
-  { name: "Lora", class: "font-lora" }
+  { name: "Poppins", class: "font-test-poppins" },
+  { name: "Playfair Display", class: "font-test-playfair" },
+  { name: "Lora", class: "font-test-lora" }
 ]
 
 export default function FontTestingButton({ onFontChange, currentFont }: FontTestingButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const handleFontSelect = (font: { name: string; class: string }) => {
     onFontChange(font.class)
@@ -27,8 +28,25 @@ export default function FontTestingButton({ onFontChange, currentFont }: FontTes
     return fonts.find(font => font.class === currentFont)?.name || "Playfair Display"
   }
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <Button
         onClick={() => setIsOpen(!isOpen)}
         variant="outline"
@@ -40,7 +58,7 @@ export default function FontTestingButton({ onFontChange, currentFont }: FontTes
       </Button>
       
       {isOpen && (
-        <div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[200px] z-50">
+        <div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-xl border border-gray-200 py-2 min-w-[200px] z-[9999]">
           {fonts.map((font) => (
             <button
               key={font.class}

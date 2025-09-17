@@ -57,7 +57,7 @@ export default function HeroWithImages({
   const [isChanging, setIsChanging] = useState(false);
   
   // State for font testing
-  const [titleFont, setTitleFont] = useState("font-playfair");
+  const [titleFont, setTitleFont] = useState("font-test-playfair");
 
   // Function to get random image
   const getRandomImage = () => {
@@ -120,9 +120,9 @@ export default function HeroWithImages({
           {badge}
         </div>
         
-        <h1 className={`${titleFont === 'font-poppins' ? 'text-4xl md:text-6xl' : 'text-5xl md:text-7xl'} font-light text-white mb-6 leading-tight tracking-wide`} style={{ fontFamily: titleFont === 'font-poppins' ? 'var(--font-poppins), system-ui, sans-serif' : 'var(--font-playfair), Georgia, serif' }}>
+        <h1 className={`${titleFont === 'font-test-poppins' ? 'text-4xl md:text-6xl' : 'text-5xl md:text-7xl'} font-light text-white mb-6 leading-tight tracking-wide ${titleFont}`}>
           {title}
-          {subtitle && <span className="text-golden block font-normal">{subtitle}</span>}
+          {subtitle && <span className={`text-golden block font-normal ${titleFont}`}>{subtitle}</span>}
         </h1>
         
         <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
@@ -132,7 +132,7 @@ export default function HeroWithImages({
         <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
           <Button
             size="lg"
-            className="bg-amber hover:bg-golden hover:text-slate text-white px-6 sm:px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 text-sm sm:text-base"
+            className="bg-amber hover:bg-golden hover:text-slate text-white px-6 sm:px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 text-sm sm:text-base font-cta"
           >
             <Link href={primaryButton.href} className="flex items-center">
               {primaryButton.text}
@@ -144,7 +144,7 @@ export default function HeroWithImages({
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-slate px-6 sm:px-8 py-4 rounded-xl font-semibold bg-transparent backdrop-blur-sm text-sm sm:text-base"
+              className="border-2 border-white text-white hover:bg-white hover:text-slate px-6 sm:px-8 py-4 rounded-xl font-semibold bg-transparent backdrop-blur-sm text-sm sm:text-base font-cta"
             >
               <Link href={secondaryButton.href}>{secondaryButton.text}</Link>
             </Button>

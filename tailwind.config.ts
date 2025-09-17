@@ -21,6 +21,7 @@ const config: Config = {
   			'libre-baskerville': ['var(--font-libre-baskerville)', 'Georgia', 'serif'],
   			'poppins': ['var(--font-poppins)', 'system-ui', 'sans-serif'],
   			'questa': ['var(--font-playfair)', 'Georgia', 'serif'],
+  			'ivry': ['IvryOra Display', 'serif'],
   			'mono': ['JetBrains Mono', 'Fira Code', 'monospace']
   		},
 		colors: {
