@@ -298,52 +298,73 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map Section */}
-             <section className="py-12 md:py-16 bg-slate">
+      {/* Visit Our Campus Section */}
+      <section className="py-12 md:py-16 bg-slate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 md:mb-8">
             <h2 className="text-2xl md:text-3xl font-ivry font-bold text-white mb-3 md:mb-4">Visit Our Campus</h2>
             <p className="text-base md:text-lg text-white/50 font-questa">Located in the heart of Hillsboro, Oregon</p>
           </div>
 
-          <Card className="max-w-4xl mx-auto">
-            <CardContent className="p-0">
-              <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden relative">
-                <img 
-                  src={campusImage} 
-                  alt="Spanish Horizons Academy Campus" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${
-                    changingImage === 'campus' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                  }`}
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
-                  <div className="text-center text-white">
-                    <MapPin className="h-12 w-12 md:h-16 md:w-16 mx-auto mb-3 md:mb-4" />
-                    <p className="font-questa font-medium text-sm md:text-base">Visit Our Campus</p>
-                    <p className="text-xs md:text-sm mt-2 font-questa px-2">770 NE Rogahn Street, Hillsboro, OR 97124</p>
-                    <Button className="mt-3 md:mt-4 bg-white text-slate hover:bg-gray-100 font-questa text-sm" variant="outline">
-                      <a
-                        href="https://maps.google.com/?q=770+NE+Rogahn+Street+Hillsboro+OR+97124"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Open in Google Maps
-                      </a>
-                    </Button>
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
+            {/* Campus Photos - Left Column */}
+            <div>
+              <Card className="h-full">
+                <CardContent className="p-0">
+                  <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden relative">
+                    <img 
+                      src={campusImage} 
+                      alt="Spanish Horizons Academy Campus" 
+                      className={`w-full h-full object-cover transition-all duration-1000 ${
+                        changingImage === 'campus' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
+                      }`}
+                    />
                   </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Google Maps - Right Column */}
+            <div>
+              <Card className="h-full">
+                <CardContent className="p-0">
+                  <div className="aspect-video rounded-lg overflow-hidden">
+                    <iframe
+                      src="https://maps.google.com/maps?q=770+NE+Rogahn+Street+Hillsboro+OR+97124&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Spanish Horizons Academy Location"
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Quick Links */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-12 md:py-16 overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{
+            backgroundImage: `url('/pictures/classroom4.png')`,
+          }}
+        />
+        
+        {/* Blue Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl font-ivry font-bold text-slate mb-3 md:mb-4">Frequently Requested Information</h2>
-            <p className="text-base md:text-lg text-slate-medium font-questa">Quick access to the information families need most</p>
+            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Frequently Requested Information</h2>
+            <p className="text-lg text-white/90 font-questa">Quick access to the information families need most</p>
           </div>
 
                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">

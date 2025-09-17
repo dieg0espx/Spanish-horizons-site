@@ -7,23 +7,27 @@ import Footer from "@/components/footer"
 import StickyApplyButton from "@/components/sticky-apply-button"
 import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, Poppins } from 'next/font/google'
 import FloatingCTA from "@/components/floating-cta"
+import ConditionalLayout from "@/components/conditional-layout"
 
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 })
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
+  preload: true,
 })
 
 const lora = Lora({ 
   subsets: ['latin'],
   variable: '--font-lora',
   display: 'swap',
+  preload: false,
 })
 
 const cormorant = Cormorant_Garamond({ 
@@ -31,6 +35,7 @@ const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
   weight: ['300', '400', '500'],
   display: 'swap',
+  preload: false,
 })
 
 const libreBaskerville = Libre_Baskerville({ 
@@ -38,6 +43,7 @@ const libreBaskerville = Libre_Baskerville({
   variable: '--font-libre-baskerville',
   weight: ['400', '700'],
   display: 'swap',
+  preload: false,
 })
 
 const poppins = Poppins({ 
@@ -45,6 +51,7 @@ const poppins = Poppins({
   variable: '--font-poppins',
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
+  preload: false,
 })
 
 
@@ -192,11 +199,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans" style={{ marginTop: "70px" }}>
-        <ModernHeader />
-        {children}
-        <Footer />
-        <FloatingCTA />
+      <body className="font-sans">
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   )

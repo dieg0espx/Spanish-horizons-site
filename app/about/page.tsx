@@ -273,8 +273,20 @@ export default function AboutPage() {
       </section>
 
       {/* Founder Section with Enhanced Images */}
-      <section id="leadership" className="py-16 bg-slate">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="leadership" className="relative py-16 overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{
+            backgroundImage: `url('/pictures/classroom4.png')`,
+          }}
+        />
+        
+        {/* Blue Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-ivry font-bold text-white mb-4">Meet Our Founder</h2>
           </div>
