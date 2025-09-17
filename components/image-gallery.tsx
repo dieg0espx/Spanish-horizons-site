@@ -28,7 +28,7 @@ export default function ImageGallery({
       description: "Students engaged in Spanish immersion",
       category: "academics",
       imageSrc: "/pictures/5-DSC02576.jpg",
-      videoSrc: "/videos/classroom-learning.mp4",
+      videoSrc: "/videos/video1.mp4",
       detailedDescription: "Our students participate in immersive Spanish language learning through interactive activities, storytelling, and collaborative projects that make language acquisition natural and engaging.",
       learningOutcomes: [
         "Spanish vocabulary expansion",
@@ -82,7 +82,7 @@ export default function ImageGallery({
       description: "Garden and nature exploration", 
       category: "outdoor",
       imageSrc: "/pictures/26-DSC02753.jpg",
-      videoSrc: "/videos/outdoor-learning.mp4",
+      videoSrc: "/videos/video1.mp4",
       detailedDescription: "Our garden classroom provides hands-on learning about nature, sustainability, and Spanish vocabulary related to plants, animals, and environmental concepts.",
       learningOutcomes: [
         "Environmental awareness",
