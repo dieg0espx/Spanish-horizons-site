@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ChevronRight, Users, Globe, Heart } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import FontTestingButton from "./font-testing-button"
 
 interface HeroWithImagesProps {
   badge?: string
@@ -56,8 +55,6 @@ export default function HeroWithImages({
   const [currentImage, setCurrentImage] = useState(shuffledImages[0]);
   const [isChanging, setIsChanging] = useState(false);
   
-  // State for font testing
-  const [titleFont, setTitleFont] = useState("font-test-playfair");
 
   // Function to get random image
   const getRandomImage = () => {
@@ -107,22 +104,15 @@ export default function HeroWithImages({
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        {/* Font Testing Button - positioned at top right */}
-        <div className="absolute top-4 right-4 z-20 hidden sm:block">
-          <FontTestingButton 
-            onFontChange={setTitleFont} 
-            currentFont={titleFont}
-          />
-        </div>
         
         <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6 border border-white/30">
           <Globe className="h-4 w-4 mr-2" />
           {badge}
         </div>
         
-        <h1 className={`${titleFont === 'font-test-poppins' ? 'text-4xl md:text-6xl' : 'text-5xl md:text-7xl'} font-light text-white mb-6 leading-tight tracking-wide ${titleFont}`}>
+        <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-tight tracking-wide">
           {title}
-          {subtitle && <span className={`text-golden block font-normal ${titleFont}`}>{subtitle}</span>}
+          {subtitle && <span className="text-golden block font-normal">{subtitle}</span>}
         </h1>
         
         <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
@@ -151,13 +141,6 @@ export default function HeroWithImages({
           )}
         </div>
         
-        {/* Mobile Font Testing Button - positioned below buttons */}
-        <div className="sm:hidden mt-6">
-          <FontTestingButton 
-            onFontChange={setTitleFont} 
-            currentFont={titleFont}
-          />
-        </div>
       </div>
     </section>
   )

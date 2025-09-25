@@ -64,80 +64,26 @@ export default function AboutPage() {
   const shuffledImages = shuffleArray(allImages);
 
   // State for current images
-  const [storyImage1, setStoryImage1] = useState(shuffledImages[0]);
-  const [storyImage2, setStoryImage2] = useState(shuffledImages[1]);
-  const [storyImage3, setStoryImage3] = useState(shuffledImages[2]);
+  const [storyImage1] = useState("/pictures/legacy/ourLegacy1.jpeg");
+  const [storyImage2] = useState("/pictures/legacy/ourLegacy2.jpeg");
+  const [storyImage3] = useState("/pictures/legacy/ourLegacy3.jpeg");
   const [founderImage] = useState("/headshot.jpeg");
-  const [valueImage1, setValueImage1] = useState(shuffledImages[4]);
-  const [valueImage2, setValueImage2] = useState(shuffledImages[5]);
-  const [valueImage3, setValueImage3] = useState(shuffledImages[6]);
-  const [valueImage4, setValueImage4] = useState(shuffledImages[7]);
-  const [valueImage5, setValueImage5] = useState(shuffledImages[8]);
-  const [valueImage6, setValueImage6] = useState(shuffledImages[9]);
-  const [changingImage, setChangingImage] = useState<'story1' | 'story2' | 'story3' | 'value1' | 'value2' | 'value3' | 'value4' | 'value5' | 'value6' | null>(null);
+  const [valueImage1] = useState("/pictures/values/curiosity.jpeg");
+  const [valueImage2] = useState("/pictures/values/culture.jpeg");
+  const [valueImage3] = useState("/pictures/values/community.png");
+  const [valueImage4] = useState("/pictures/values/language.jpeg");
+  const [valueImage5] = useState("/pictures/values/discovery.jpeg");
+  const [valueImage6] = useState("/pictures/values/heartCentered.jpeg");
+  // No longer needed - all images are static
 
   // Function to get random image
   const getRandomImage = () => {
     return shuffledImages[Math.floor(Math.random() * shuffledImages.length)];
   };
 
-  // Function to change one image at a time
-  const changeOneImage = () => {
-    const imageTypes = ['story1', 'story2', 'story3', 'value1', 'value2', 'value3', 'value4', 'value5', 'value6'] as const;
-    const randomType = imageTypes[Math.floor(Math.random() * imageTypes.length)];
-    
-    setChangingImage(randomType);
-    
-    setTimeout(() => {
-      switch (randomType) {
-        case 'story1':
-          setStoryImage1(getRandomImage());
-          break;
-        case 'story2':
-          setStoryImage2(getRandomImage());
-          break;
-        case 'story3':
-          setStoryImage3(getRandomImage());
-          break;
-        case 'value1':
-          setValueImage1(getRandomImage());
-          break;
-        case 'value2':
-          setValueImage2(getRandomImage());
-          break;
-        case 'value3':
-          setValueImage3(getRandomImage());
-          break;
-        case 'value4':
-          setValueImage4(getRandomImage());
-          break;
-        case 'value5':
-          setValueImage5(getRandomImage());
-          break;
-        case 'value6':
-          setValueImage6(getRandomImage());
-          break;
-      }
-      setChangingImage(null);
-    }, 500);
-  };
+  // No longer changing images - all images are now static
 
-  // Effect to change one image at random intervals (4-10 seconds)
-  useEffect(() => {
-    const scheduleNextChange = () => {
-      const randomDelay = Math.random() * 6000 + 4000; // Random delay between 4-10 seconds
-      setTimeout(() => {
-        changeOneImage();
-        scheduleNextChange(); // Schedule the next change
-      }, randomDelay);
-    };
-
-    scheduleNextChange(); // Start the first change
-
-    return () => {
-      // Cleanup is handled by the timeout
-    };
-  }, []);
+  // No longer needed - all images are static
 
   return (
     <div className="min-h-screen bg-white">
@@ -239,20 +185,16 @@ export default function AboutPage() {
                 <div className="aspect-[4/5] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                   <img 
                     src={storyImage1} 
-                    alt="School History" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
-                      changingImage === 'story1' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    alt="Our Legacy" 
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
                 <div className="aspect-[4/5] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                   <img 
                     src={storyImage2} 
-                    alt="Our Community" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
-                      changingImage === 'story2' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    alt="Our Legacy" 
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
@@ -260,10 +202,8 @@ export default function AboutPage() {
               <div className="aspect-[16/9] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                 <img 
                   src={storyImage3} 
-                  alt="Campus Overview" 
-                  className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
-                    changingImage === 'story3' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                  }`}
+                  alt="Our Legacy" 
+                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
@@ -328,15 +268,15 @@ export default function AboutPage() {
                     <div className="grid grid-cols-2 gap-4 mt-8">
                       <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
                         <img 
-                          src="/pictures/3-DSC02563.jpg" 
-                          alt="Laura Teaching" 
+                          src="/pictures/children/children1.jpeg" 
+                          alt="Children Learning" 
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
                         <img 
-                          src="/pictures/5-DSC02576.jpg" 
-                          alt="With Students" 
+                          src="/pictures/children/children2.jpeg" 
+                          alt="Children Inspired" 
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -368,9 +308,7 @@ export default function AboutPage() {
                   <img 
                     src={valueImage1} 
                     alt="Curiosity in Action" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
-                      changingImage === 'value1' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
@@ -388,9 +326,7 @@ export default function AboutPage() {
                   <img 
                     src={valueImage2} 
                     alt="Cultural Learning" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
-                      changingImage === 'value2' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
@@ -408,9 +344,7 @@ export default function AboutPage() {
                   <img 
                     src={valueImage3} 
                     alt="Community Building" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
-                      changingImage === 'value3' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
@@ -428,9 +362,7 @@ export default function AboutPage() {
                   <img 
                     src={valueImage4} 
                     alt="Language Immersion" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
-                      changingImage === 'value4' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
@@ -448,9 +380,7 @@ export default function AboutPage() {
                   <img 
                     src={valueImage5} 
                     alt="Project Discovery" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
-                      changingImage === 'value5' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
@@ -468,9 +398,7 @@ export default function AboutPage() {
                   <img 
                     src={valueImage6} 
                     alt="Emotional Learning" 
-                    className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
-                      changingImage === 'value6' ? 'opacity-50 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>

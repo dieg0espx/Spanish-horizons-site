@@ -27,8 +27,7 @@ export default function ImageGallery({
       title: "Classroom Learning",
       description: "Students engaged in Spanish immersion",
       category: "academics",
-      imageSrc: "/pictures/5-DSC02576.jpg",
-      videoSrc: "/videos/video1.mp4",
+      imageSrc: "/pictures/2.png",
       detailedDescription: "Our students participate in immersive Spanish language learning through interactive activities, storytelling, and collaborative projects that make language acquisition natural and engaging.",
       learningOutcomes: [
         "Spanish vocabulary expansion",
@@ -54,8 +53,7 @@ export default function ImageGallery({
       title: "Art Projects", 
       description: "Creative expression in Spanish", 
       category: "arts",
-      imageSrc: "/pictures/33-DSC02875.jpg",
-      videoSrc: "/videos/video1.mp4",
+      imageSrc: "/pictures/1.jpeg",
       detailedDescription: "Art becomes a medium for Spanish language learning as students create projects inspired by Latin American artists and cultural themes.",
       learningOutcomes: [
         "Creative expression",
@@ -81,8 +79,7 @@ export default function ImageGallery({
       title: "Outdoor Learning", 
       description: "Garden and nature exploration", 
       category: "outdoor",
-      imageSrc: "/pictures/26-DSC02753.jpg",
-      videoSrc: "/videos/video1.mp4",
+      imageSrc: "/pictures/outdoorLearning.png",
       detailedDescription: "Our garden classroom provides hands-on learning about nature, sustainability, and Spanish vocabulary related to plants, animals, and environmental concepts.",
       learningOutcomes: [
         "Environmental awareness",
@@ -94,8 +91,8 @@ export default function ImageGallery({
     { 
       title: "Community Time", 
       description: "Building friendships", 
-      category: "community",
-      imageSrc: "/pictures/8-DSC02584.jpg",
+      category: "community", 
+      imageSrc: "/pictures/classroom3.png",
       detailedDescription: "Students develop social skills and friendships through structured community time, practicing Spanish conversation and building a supportive learning community.",
       learningOutcomes: [
         "Social communication skills",
