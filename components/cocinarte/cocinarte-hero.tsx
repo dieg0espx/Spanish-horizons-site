@@ -7,7 +7,7 @@ import { Calendar } from "lucide-react"
 
 export default function CocinarteHero() {
   return (
-    <section className="relative pt-24 pb-20 md:pt-28 md:pb-32 bg-cocinarte-white overflow-hidden">
+    <section className="relative pt-24 pb-20 md:pt-[200px] md:pb-32 bg-cocinarte-white overflow-hidden h-[800px]">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-cocinarte-orange rounded-full opacity-20 animate-pulse"></div>
@@ -21,9 +21,27 @@ export default function CocinarteHero() {
             {/* Enhanced title section with animation */}
             <div className="space-y-8 text-left">
               <div className="inline-block">
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-cocinarte-black animate-in fade-in duration-1000">
-                  Cocinarte
-                </h1>
+                <div className="flex items-center gap-6">
+                  <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-cocinarte-black animate-in fade-in duration-1000">
+                    Cocinarte
+                  </h1>
+                  <div className="flex flex-col gap-3">
+                    <Image
+                      src="/cocinarte/floating_elements/COCINARTE_cupcakes.svg"
+                      alt="Cupcakes"
+                      width={100}
+                      height={100}
+                      className="opacity-70 animate-float-slow"
+                    />
+                    <Image
+                      src="/cocinarte/floating_elements/COCINARTE_batidora.svg"
+                      alt="Mixer"
+                      width={90}
+                      height={90}
+                      className="opacity-70 animate-float-medium"
+                    />
+                  </div>
+                </div>
                 <div className="h-2 bg-cocinarte-orange rounded-full mt-4 animate-in slide-in-from-left duration-800 delay-300"></div>
               </div>
               

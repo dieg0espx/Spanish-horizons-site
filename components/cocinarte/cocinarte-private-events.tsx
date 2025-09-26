@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { useState } from "react"
+import Image from "next/image"
 
 export default function CocinartePrivateEvents() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -12,9 +13,25 @@ export default function CocinartePrivateEvents() {
     <section id="private-events" className="py-20 bg-gradient-to-br from-cocinarte-blue/10 via-cocinarte-yellow/10 to-cocinarte-orange/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate mb-4">
-            Private Events
-          </h2>
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <Image
+              src="/cocinarte/floating_elements/COCINARTE_utensilios.svg"
+              alt="Utensils"
+              width={90}
+              height={90}
+              className="opacity-70 animate-float-slow"
+            />
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate">
+              Private Events
+            </h2>
+            <Image
+              src="/cocinarte/floating_elements/COCINARTE_niคo3.svg"
+              alt="Child cooking"
+              width={80}
+              height={80}
+              className="opacity-70 animate-float-medium"
+            />
+          </div>
           <p className="text-xl text-slate-medium max-w-3xl mx-auto">
             Host your own cooking event! Perfect for team building, celebrations, or special occasions.
           </p>

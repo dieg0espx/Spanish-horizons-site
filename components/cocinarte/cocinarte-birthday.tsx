@@ -5,6 +5,7 @@ import { Cake, PartyPopper, Star } from "lucide-react"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { useState } from "react"
+import Image from "next/image"
 
 export default function CocinarteBirthday() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -13,15 +14,31 @@ export default function CocinarteBirthday() {
     <section id="birthday-parties" className="py-20 bg-gradient-to-br from-cocinarte-yellow/10 via-cocinarte-orange/10 to-cocinarte-red/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate mb-4">
-            Birthday Party Packages
-          </h2>
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <Image
+              src="/cocinarte/floating_elements/COCINARTE_cupcakes.svg"
+              alt="Cupcakes"
+              width={90}
+              height={90}
+              className="opacity-70 animate-float-slow"
+            />
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate">
+              Birthday Party Packages
+            </h2>
+            <Image
+              src="/cocinarte/floating_elements/COCINARTE_niคo2.svg"
+              alt="Child cooking"
+              width={80}
+              height={80}
+              className="opacity-70 animate-float-medium"
+            />
+          </div>
           <p className="text-xl text-slate-medium max-w-3xl mx-auto">
             Make your child's birthday unforgettable with our fun cooking party packages!
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="bg-gradient-to-br from-cocinarte-yellow/20 to-cocinarte-yellow/40 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
             <Cake className="w-12 h-12 text-cocinarte-yellow mx-auto mb-3" />
             <h3 className="font-semibold text-slate text-2xl mb-2">Mini Party</h3>

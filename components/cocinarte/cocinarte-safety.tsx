@@ -1,4 +1,5 @@
 import { Shield, CheckCircle, Utensils, AlertTriangle, Clock, Users, DollarSign, Heart } from "lucide-react"
+import Image from "next/image"
 
 export default function CocinarteSafety() {
   return (
@@ -7,9 +8,25 @@ export default function CocinarteSafety() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate">
-                Safety & Learning Experience
-              </h2>
+              <div className="flex items-center gap-6">
+                <Image
+                  src="/cocinarte/floating_elements/COCINARTE_guante.svg"
+                  alt="Oven mitt"
+                  width={80}
+                  height={80}
+                  className="opacity-70 animate-float-slow"
+                />
+                <h2 className="text-4xl lg:text-5xl font-bold text-slate">
+                  Safety & Learning Experience
+                </h2>
+                <Image
+                  src="/cocinarte/floating_elements/COCINARTE_tabla corte.svg"
+                  alt="Cutting board"
+                  width={70}
+                  height={70}
+                  className="opacity-70 animate-float-medium"
+                />
+              </div>
               <p className="text-xl text-slate-medium">
                 Safety is our top priority. We create a fun, educational environment where kids 
                 can learn essential cooking skills while staying safe and having a great time.

@@ -1,14 +1,31 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChefHat, Utensils, Users } from "lucide-react"
+import Image from "next/image"
 
 export default function CocinarteAbout() {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate mb-4">
-            What is Cocinarte?
-          </h2>
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <Image
+              src="/cocinarte/floating_elements/COCINARTE_cuchara.svg"
+              alt="Spoon"
+              width={80}
+              height={80}
+              className="opacity-70 animate-float-slow"
+            />
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate">
+              What is Cocinarte?
+            </h2>
+            <Image
+              src="/cocinarte/floating_elements/COCINARTE_cuchillo.svg"
+              alt="Knife"
+              width={70}
+              height={70}
+              className="opacity-70 animate-float-medium"
+            />
+          </div>
           <p className="text-xl text-slate-medium max-w-3xl mx-auto">
             A cooking program designed for kids and families to explore Latin flavors while learning 
             hands-on cooking skills. Each class is fun, interactive, and age-appropriate — no prior 

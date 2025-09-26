@@ -14,7 +14,7 @@ import CocinarteCTA from "@/components/cocinarte/cocinarte-cta"
 export default function CocinartePage() {
   return (
     <>
-      <div className="min-h-screen bg-white font-coming-soon" style={{ fontFamily: 'Coming Soon, cursive' }} data-page="cocinarte">
+      <div className="min-h-screen bg-white font-coming-soon relative" style={{ fontFamily: 'Coming Soon, cursive' }} data-page="cocinarte">
         <CocinarteHeader />
         <CocinarteHero />
         <CocinarteAbout />
