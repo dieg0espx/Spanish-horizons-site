@@ -13,19 +13,21 @@ import CocinarteCTA from "@/components/cocinarte/cocinarte-cta"
 
 export default function CocinartePage() {
   return (
-    <div className="min-h-screen bg-white">
-      <CocinarteHeader />
-      <CocinarteHero />
-      <CocinarteAbout />
-      <CocinarteCalendar />
-      <CocinarteClassTypes />
-      <CocinarteSafety />
-      <CocinarteBirthday />
-      <CocinartePrivateEvents />
-      <CocinarteFAQ />
-      <CocinarteContact />
-      <CocinarteCTA />
-      <CocinarteFooter />
-    </div>
+    <>
+      <div className="min-h-screen bg-white font-coming-soon" style={{ fontFamily: 'Coming Soon, cursive' }} data-page="cocinarte">
+        <CocinarteHeader />
+        <CocinarteHero />
+        <CocinarteAbout />
+        <CocinarteCalendar />
+        <CocinarteClassTypes />
+        <CocinarteSafety />
+        <CocinarteBirthday />
+        <CocinartePrivateEvents />
+        <CocinarteFAQ />
+        <CocinarteContact />
+        <CocinarteCTA />
+        <CocinarteFooter />
+      </div>
+    </>
   )
 }

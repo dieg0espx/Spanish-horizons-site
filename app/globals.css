@@ -108,6 +108,20 @@
     font-family: var(--font-playfair), 'Playfair Display', serif !important;
   }
   
+  /* Coming Soon font class for Cocinarte page */
+  .font-coming-soon {
+    font-family: 'Coming Soon', cursive !important;
+  }
+  
+  /* Local Coming Soon font face */
+  @font-face {
+    font-family: 'Coming Soon';
+    src: url('/fonts/Coming_Soon/ComingSoon-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
   /* Exclude Cocinarte and Casita Azul pages from Poppins font */
   [data-page="cocinarte"] body,
   [data-page="cocinarte"] h1,
