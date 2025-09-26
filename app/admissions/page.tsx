@@ -97,7 +97,7 @@ export default function AdmissionsPage() {
                    <Calendar className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
                                    <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Applications Open</h3>
-                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">November 1, 2024</p>
+                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">November 3, 2025</p>
                   <p className="text-slate-medium font-questa text-center md:text-left">Begin your application process</p>
               </CardContent>
             </Card>
@@ -108,7 +108,7 @@ export default function AdmissionsPage() {
                    <FileText className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
                                    <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Priority Deadline</h3>
-                  <p className="text-3xl font-ivry font-bold text-slate mb-3 text-center md:text-left">January 31, 2025</p>
+                  <p className="text-3xl font-ivry font-bold text-slate mb-3 text-center md:text-left">January 30, 2026</p>
                   <p className="text-slate-medium font-questa text-center md:text-left">Submit for priority consideration</p>
               </CardContent>
             </Card>
@@ -130,7 +130,7 @@ export default function AdmissionsPage() {
                    <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
                                    <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">First Day of School</h3>
-                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">September 2, 2025</p>
+                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">September 1, 2026</p>
                   <p className="text-slate-medium font-questa text-center md:text-left">Welcome to our community!</p>
               </CardContent>
             </Card>

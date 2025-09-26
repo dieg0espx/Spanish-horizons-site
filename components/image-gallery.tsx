@@ -56,7 +56,7 @@ export default function ImageGallery({
       title: "Cooking Activities", 
       description: "Cultural cooking experiences", 
       category: "culture",
-      imageSrc: "/pictures/18-DSC02649.jpg",
+      imageSrc: "/kid-cooking.jpeg",
       detailedDescription: "Students explore Latin American cuisine through hands-on cooking activities, learning about ingredients, traditions, and cultural significance while practicing Spanish vocabulary.",
       learningOutcomes: [
         "Cultural appreciation",
@@ -80,34 +80,6 @@ export default function ImageGallery({
       ]
     },
     { 
-      title: "Outdoor Learning", 
-      description: "Garden and nature exploration", 
-      category: "outdoor",
-      imageSrc: "/pictures/outdoorLearning.png",
-      detailedDescription: "Our garden classroom provides hands-on learning about nature, sustainability, and Spanish vocabulary related to plants, animals, and environmental concepts.",
-      learningOutcomes: [
-        "Environmental awareness",
-        "Nature vocabulary in Spanish",
-        "Scientific observation skills",
-        "Responsibility for living things"
-      ]
-    },
-    { 
-      title: "Music & Dance", 
-      description: "Latin American cultural activities", 
-      category: "culture",
-      imageSrc: "/pictures/11-DSC02612.jpg",
-      videoSrc: "/videos/video 2.mp4",
-      videoPosition: "center 60%",
-      detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
-      learningOutcomes: [
-        "Musical rhythm and coordination",
-        "Spanish song lyrics",
-        "Cultural dance traditions",
-        "Confidence in performance"
-      ]
-    },
-    { 
       title: "Community Time", 
       description: "Building friendships", 
       category: "community", 
@@ -120,6 +92,37 @@ export default function ImageGallery({
         "Community responsibility"
       ]
     },
+    { 
+      title: "Outdoor Learning", 
+      description: "Garden and nature exploration", 
+      category: "outdoor",
+      imageSrc: "/pictures/11-DSC02612.jpg",
+      videoSrc: "/videos/clip_jumping.mp4",
+      videoPosition: "center 60%",
+      detailedDescription: "Our garden classroom provides hands-on learning about nature, sustainability, and Spanish vocabulary related to plants, animals, and environmental concepts.",
+      learningOutcomes: [
+        "Environmental awareness",
+        "Nature vocabulary in Spanish",
+        "Scientific observation skills",
+        "Responsibility for living things"
+      ]
+    },
+    // { 
+    //   title: "Music & Dance", 
+    //   description: "Latin American cultural activities", 
+    //   category: "culture",
+    //   imageSrc: "/pictures/11-DSC02612.jpg",
+    //   videoSrc: "/videos/video 2.mp4",
+    //   videoPosition: "center 60%",
+    //   detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
+    //   learningOutcomes: [
+    //     "Musical rhythm and coordination",
+    //     "Spanish song lyrics",
+    //     "Cultural dance traditions",
+    //     "Confidence in performance"
+    //   ]
+    // },
+   
   ],
 }: ImageGalleryProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)

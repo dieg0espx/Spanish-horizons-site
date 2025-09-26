@@ -47,7 +47,7 @@ export default function CasitaAzulPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="bg-amber hover:bg-golden text-white font-questa px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                  <Link href="/admissions">Join us!</Link>
+                  <Link href="https://www.casitaazulpdx.com/">Join us!</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-50 font-questa px-8 py-4 text-lg rounded-xl transition-all duration-200">
                   <Link href="https://www.casitaazulpdx.com/contact-us" target="_blank" rel="noopener noreferrer">Contact Us</Link>
@@ -218,6 +218,161 @@ export default function CasitaAzulPage() {
                 <Image
                   src="/casitaAzul/casita5.jpeg"
                   alt="Bilingual minds and hearts"
+                  width={300}
+                  height={200}
+                  className="rounded-xl object-cover h-48"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Preschool & Daycare Services Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold font-questa text-slate mb-4">
+              Preschool & Daycare Services
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We offer comprehensive preschool and daycare programs that combine Spanish immersion 
+              with quality early childhood education in a warm, nurturing environment.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-50 to-green-100">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="font-questa text-xl text-slate">Preschool Program</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-gray-600">
+                  Structured Spanish immersion preschool curriculum designed to prepare children 
+                  for kindergarten while building bilingual skills through play and exploration.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-amber-50 to-amber-100">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-amber rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="font-questa text-xl text-slate">Daycare Services</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-gray-600">
+                  Full-time and part-time daycare options with Spanish immersion, providing 
+                  flexible care for working families in a loving, bilingual environment.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-50 to-blue-100">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="font-questa text-xl text-slate">Flexible Scheduling</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-gray-600">
+                  We understand families need flexibility. Our programs accommodate various 
+                  schedules to meet your family's unique needs and lifestyle.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-16 grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-2xl lg:text-3xl font-bold font-questa text-slate">
+                  Why Choose Our Preschool & Daycare?
+                </h3>
+                <p className="text-lg text-gray-600">
+                  Our programs combine the best of early childhood education with Spanish immersion, 
+                  creating an environment where children thrive academically, socially, and linguistically.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-amber rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-questa font-semibold text-lg text-slate mb-2">Age-Appropriate Curriculum</h4>
+                    <p className="text-gray-600">Developmentally appropriate activities that support learning at every stage</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-amber rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-questa font-semibold text-lg text-slate mb-2">Small Class Sizes</h4>
+                    <p className="text-gray-600">Personalized attention with low teacher-to-child ratios for optimal learning</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-amber rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-questa font-semibold text-lg text-slate mb-2">Qualified Educators</h4>
+                    <p className="text-gray-600">Experienced teachers trained in early childhood education and Spanish immersion</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-amber rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <CheckCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-questa font-semibold text-lg text-slate mb-2">Safe & Nurturing</h4>
+                    <p className="text-gray-600">Secure environment where children feel safe to explore, learn, and grow</p>
+                  </div>
+                </div>
+              </div>
+
+              <Button size="lg" className="bg-amber hover:bg-golden text-white font-questa px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+                <Link href="https://www.casitaazulpdx.com/contact-us" target="_blank" rel="noopener noreferrer">Learn More</Link>
+              </Button>
+            </div>
+
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                <Image
+                  src="/casitaAzul/casita1.jpeg"
+                  alt="Preschool activities in Spanish"
+                  width={300}
+                  height={200}
+                  className="rounded-xl object-cover h-48"
+                />
+                <Image
+                  src="/casitaAzul/casita2.jpeg"
+                  alt="Daycare environment"
+                  width={300}
+                  height={200}
+                  className="rounded-xl object-cover h-48"
+                />
+                <Image
+                  src="/casitaAzul/casita3.jpeg"
+                  alt="Children learning together"
+                  width={300}
+                  height={200}
+                  className="rounded-xl object-cover h-48"
+                />
+                <Image
+                  src="/casitaAzul/casita4.jpeg"
+                  alt="Bilingual education"
                   width={300}
                   height={200}
                   className="rounded-xl object-cover h-48"
