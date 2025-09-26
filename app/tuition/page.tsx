@@ -204,7 +204,7 @@ export default function TuitionPage() {
                         <div className="font-questa font-semibold text-slate">{plan.plan}</div>
                         <div className="text-sm text-slate-medium font-questa">{plan.description}</div>
                       </div>
-                      <div className="font-questa font-bold text-golden">{plan.price}</div>
+                      <div className="font-questa font-bold text-black">{plan.price}</div>
                     </div>
                   ))}
                 </div>
