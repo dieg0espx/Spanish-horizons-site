@@ -4,10 +4,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { MapPin, Phone, Mail, Clock, Instagram, MessageCircle } from "lucide-react"
+import { MapPin, Phone, Mail, Clock, Instagram, MessageCircle, CheckCircle, AlertCircle } from "lucide-react"
 import { useState, useEffect } from "react"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ContactPage() {
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    childAge: '',
+    interest: '',
+    message: ''
+  })
+
   // Array of all available images
   const allImages = [
     "/pictures/1-DSC02558.jpg",
@@ -61,6 +74,65 @@ export default function ContactPage() {
 
   // Shuffle the images array
   const shuffledImages = shuffleArray(allImages);
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          subject: formData.interest ? `Interest: ${formData.interest}` : 'General Inquiry'
+        }),
+      })
+
+      if (response.ok) {
+        await response.json()
+        
+        toast({
+          title: "✅ Message sent successfully!",
+          description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+        })
+        
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          childAge: '',
+          interest: '',
+          message: ''
+        })
+      } else {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to send message')
+      }
+    } catch (error) {
+      toast({
+        title: "❌ Error sending message",
+        description: error instanceof Error ? error.message : "Please try again later or contact us directly.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   // State for current image
   const [campusImage, setCampusImage] = useState(shuffledImages[0]);
@@ -222,19 +294,35 @@ export default function ContactPage() {
                   <CardTitle className="text-xl md:text-2xl font-ivry text-slate">Send Us a Message</CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 md:p-6">
-                  <form className="space-y-4 md:space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="firstName" className="block text-sm font-questa font-medium text-slate mb-2">
                           First Name *
                         </label>
-                        <Input id="firstName" type="text" required className="text-sm md:text-base" />
+                        <Input 
+                          id="firstName" 
+                          name="firstName" 
+                          type="text" 
+                          required 
+                          value={formData.firstName}
+                          onChange={handleInputChange}
+                          className="text-sm md:text-base" 
+                        />
                       </div>
                       <div>
                         <label htmlFor="lastName" className="block text-sm font-questa font-medium text-slate mb-2">
                           Last Name *
                         </label>
-                        <Input id="lastName" type="text" required className="text-sm md:text-base" />
+                        <Input 
+                          id="lastName" 
+                          name="lastName" 
+                          type="text" 
+                          required 
+                          value={formData.lastName}
+                          onChange={handleInputChange}
+                          className="text-sm md:text-base" 
+                        />
                       </div>
                     </div>
 
@@ -242,28 +330,56 @@ export default function ContactPage() {
                       <label htmlFor="email" className="block text-sm font-questa font-medium text-slate mb-2">
                         Email Address *
                       </label>
-                      <Input id="email" type="email" required className="text-sm md:text-base" />
+                      <Input 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        required 
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="text-sm md:text-base" 
+                      />
                     </div>
 
                     <div>
                       <label htmlFor="phone" className="block text-sm font-questa font-medium text-slate mb-2">
                         Phone Number
                       </label>
-                      <Input id="phone" type="tel" className="text-sm md:text-base" />
+                      <Input 
+                        id="phone" 
+                        name="phone" 
+                        type="tel" 
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="text-sm md:text-base" 
+                      />
                     </div>
 
                     <div>
                       <label htmlFor="childAge" className="block text-sm font-questa font-medium text-slate mb-2">
                         Child's Age/Grade Level
                       </label>
-                      <Input id="childAge" type="text" placeholder="e.g., 5 years old, Kindergarten, 2nd grade" className="text-sm md:text-base" />
+                      <Input 
+                        id="childAge" 
+                        name="childAge" 
+                        type="text" 
+                        placeholder="e.g., 5 years old, Kindergarten, 2nd grade" 
+                        value={formData.childAge}
+                        onChange={handleInputChange}
+                        className="text-sm md:text-base" 
+                      />
                     </div>
 
                     <div>
                       <label htmlFor="interest" className="block text-sm font-questa font-medium text-slate mb-2">
                         I'm interested in:
                       </label>
-                      <select className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-slate focus:border-slate font-questa text-sm md:text-base">
+                      <select 
+                        name="interest" 
+                        value={formData.interest}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-slate focus:border-slate font-questa text-sm md:text-base"
+                      >
                         <option value="">Please select...</option>
                         <option value="tour">Scheduling a tour</option>
                         <option value="admissions">Admissions information</option>
@@ -280,15 +396,31 @@ export default function ContactPage() {
                       </label>
                       <Textarea
                         id="message"
+                        name="message"
                         rows={4}
                         placeholder="Tell us about your questions or what you'd like to know about Spanish Horizons Academy..."
+                        value={formData.message}
+                        onChange={handleInputChange}
                         className="text-sm md:text-base"
                       />
                     </div>
 
-                    <Button type="submit" className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-sm md:text-base py-3">
-                      <MessageCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-sm md:text-base py-3 disabled:opacity-50"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin h-4 w-4 md:h-5 md:w-5 mr-2 border-2 border-slate border-t-transparent rounded-full" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <MessageCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
                   </form>
                 </CardContent>

@@ -8,6 +8,7 @@ import StickyApplyButton from "@/components/sticky-apply-button"
 import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, Poppins } from 'next/font/google'
 import FloatingCTA from "@/components/floating-cta"
 import ConditionalLayout from "@/components/conditional-layout"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -203,6 +204,7 @@ export default function RootLayout({
         <ConditionalLayout>
           {children}
         </ConditionalLayout>
+        <Toaster />
       </body>
     </html>
   )

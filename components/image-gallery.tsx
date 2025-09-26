@@ -38,6 +38,21 @@ export default function ImageGallery({
       ]
     },
     { 
+      title: "Music & Dance", 
+      description: "Latin American cultural activities", 
+      category: "culture",
+      imageSrc: "/pictures/11-DSC02612.jpg",
+      videoSrc: "/videos/video 2.mp4",
+      videoPosition: "center 60%",
+      detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
+      learningOutcomes: [
+        "Musical rhythm and coordination",
+        "Spanish song lyrics",
+        "Cultural dance traditions",
+        "Confidence in performance"
+      ]
+    },
+    { 
       title: "Cooking Activities", 
       description: "Cultural cooking experiences", 
       category: "culture",
