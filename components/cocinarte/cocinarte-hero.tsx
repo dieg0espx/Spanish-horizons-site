@@ -18,46 +18,53 @@ export default function CocinarteHero() {
           priority
         />
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/30"></div>
+        <div className="absolute inset-0 bg-white/60"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-10">
-            {/* Enhanced title section with animation */}
-            <div className="space-y-8 text-left">
-              <div className="inline-block">
-                <div className="flex items-center gap-6">
-                  <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-cocinarte-black animate-in fade-in duration-1000">
-                    Cocinarte
-                  </h1>
-                  <div className="flex flex-col gap-3">
-                    <Image
-                      src="/cocinarte/floating_elements/COCINARTE_cupcakes.svg"
-                      alt="Cupcakes"
-                      width={100}
-                      height={100}
-                      className="opacity-70 animate-float-slow"
-                    />
-                    <Image
-                      src="/cocinarte/floating_elements/COCINARTE_batidora.svg"
-                      alt="Mixer"
-                      width={90}
-                      height={90}
-                      className="opacity-70 animate-float-medium"
-                    />
-                  </div>
-                </div>
-                <div className="h-2 bg-cocinarte-orange rounded-full mt-4 animate-in slide-in-from-left duration-800 delay-300"></div>
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-2xl relative">
+          <div className="flex flex-col items-center justify-center text-center space-y-10">
+            {/* Content before logo */}
+            <div className="space-y-8">
+              <div>
+                <p className="text-xl text-cocinarte-black leading-relaxed">
+                  Pick your class, reserve your spot, and let's get cooking!
+                </p>
               </div>
               
-              <p className="text-2xl lg:text-3xl text-cocinarte-black leading-relaxed font-medium">
-                Cooking classes that celebrate <span className="text-cocinarte-orange font-semibold">Latin flavors</span>, designed for <span className="text-cocinarte-red font-semibold">kids and families</span>.
-              </p>
+              {/* Logo section */}
+              <div className="inline-block">
+                <div className="flex items-center justify-center">
+                  <Image
+                    src="/cocinarte/cocinarteLogo.png"
+                    alt="Cocinarte - Cooking Adventures for Kids & Families"
+                    width={400}
+                    height={400}
+                    className="drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
               
-              <p className="text-xl text-cocinarte-black leading-relaxed">
-                Pick your class, reserve your spot, and let's get cooking!
-              </p>
+              <div className="relative">
+                <p className="text-2xl lg:text-3xl text-cocinarte-black leading-relaxed font-medium">
+                  Cooking classes that celebrate <span className="text-cocinarte-orange font-semibold">Latin flavors</span>, designed for <span className="text-cocinarte-red font-semibold">kids and families</span>.
+                </p>
+                {/* Bottom floating elements around subtitle - moved further to sides */}
+                <Image
+                  src="/cocinarte/floating_elements/COCINARTE_para amasar .png"
+                  alt="Rolling Pin"
+                  width={70}
+                  height={70}
+                  className="absolute -bottom-2 -left-16 opacity-60 animate-float-slow"
+                />
+                <Image
+                  src="/cocinarte/floating_elements/COCINARTE_sarten.png"
+                  alt="Pan"
+                  width={75}
+                  height={75}
+                  className="absolute -bottom-2 -right-16 opacity-65 animate-float-medium"
+                />
+              </div>
             </div>
 
             {/* Enhanced CTA buttons with better styling */}
@@ -74,28 +81,8 @@ export default function CocinarteHero() {
             </div>
 
           </div>
-
-          {/* Enhanced image section with floating elements */}
-          <div className="relative">
-            <div className="relative z-10">
-              <Image
-                src="/cocinarte/cocinarteLogo.png"
-                alt="Cocinarte - Cooking Adventures for Kids & Families"
-                width={600}
-                height={600}
-                className="w-full drop-shadow-2xl transform hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            
-            {/* Floating decorative elements around the logo */}
-            <div className="absolute top-10 -left-10 w-20 h-20 bg-cocinarte-orange rounded-full opacity-70 animate-bounce"></div>
-            <div className="absolute bottom-20 -right-10 w-16 h-16 bg-cocinarte-red rounded-full opacity-60 animate-pulse"></div>
-            <div className="absolute top-1/2 -left-5 w-12 h-12 bg-cocinarte-yellow rounded-full opacity-50 animate-ping"></div>
-            <div className="absolute bottom-10 right-5 w-14 h-14 bg-cocinarte-navy rounded-full opacity-65 animate-bounce"></div>
-          </div>
         </div>
       </div>
-
     </section>
   )
 }

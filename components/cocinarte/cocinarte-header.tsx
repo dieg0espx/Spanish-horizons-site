@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Instagram } from "lucide-react"
+import { Menu, X, Instagram, Facebook } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export default function CocinarteHeader() {
@@ -75,9 +75,14 @@ export default function CocinarteHeader() {
 
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
-              <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
-                <Instagram className="h-6 w-6 text-cocinarte-white" />
-              </Link>
+              <div className="flex items-center space-x-1">
+                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
+                  <Instagram className="h-6 w-6 text-cocinarte-white" />
+                </Link>
+                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
+                  <Facebook className="h-6 w-6 text-cocinarte-white" />
+                </Link>
+              </div>
               <Button
                 size="lg"
                 className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-3 text-base"
@@ -133,12 +138,20 @@ export default function CocinarteHeader() {
               >
                 FAQ
               </Link>
-              <Button className="w-full bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
-                <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                  <span className="mr-2">📸</span>
-                  Instagram
-                </Link>
-              </Button>
+              <div className="flex space-x-2">
+                <Button className="flex-1 bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
+                  <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                    <Instagram className="w-4 h-4 mr-2" />
+                    Instagram
+                  </Link>
+                </Button>
+                <Button className="flex-1 bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
+                  <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                    <Facebook className="w-4 h-4 mr-2" />
+                    Facebook
+                  </Link>
+                </Button>
+              </div>
             </nav>
           </div>
         </div>
@@ -205,9 +218,14 @@ export default function CocinarteHeader() {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
-              <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
-                <Instagram className="h-6 w-6 text-cocinarte-white" />
-              </Link>
+              <div className="flex items-center space-x-1">
+                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
+                  <Instagram className="h-6 w-6 text-cocinarte-white" />
+                </Link>
+                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
+                  <Facebook className="h-6 w-6 text-cocinarte-white" />
+                </Link>
+              </div>
             <Button
               size="lg"
               className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-3 text-base"
@@ -270,12 +288,20 @@ export default function CocinarteHeader() {
             >
               FAQ
             </Link>
-            <Button className="w-full bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
-              <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                <span className="mr-2">📸</span>
-                Instagram
-              </Link>
-            </Button>
+            <div className="flex space-x-2">
+              <Button className="flex-1 bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
+                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                  <Instagram className="w-4 h-4 mr-2" />
+                  Instagram
+                </Link>
+              </Button>
+              <Button className="flex-1 bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
+                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                  <Facebook className="w-4 h-4 mr-2" />
+                  Facebook
+                </Link>
+              </Button>
+            </div>
           </nav>
         </div>
       </div>

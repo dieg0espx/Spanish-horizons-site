@@ -134,10 +134,7 @@ export default function CampAlegriaPage() {
               What Makes Camp Alegría Special?
             </h2>
             <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-              Camp Alegría is a one-of-a-kind immersive summer camp designed for children ages 5-12 to experience 
-              Latin American culture through storytelling, hands-on activities, and unforgettable experiences. 
-              Hosted by Casita Azul and Amanecer Academy, two well-established, culturally immersive Spanish-language 
-              programs, Camp Alegría blends fun, learning, and community connection.
+              Camp Alegría offers a unique blend of Spanish immersion, cultural activities, and summer fun. Our experienced staff creates an environment where children can learn, grow, and make lasting memories while developing their Spanish language skills. Each session offers unique themes and activities designed to engage children in Spanish language learning through play, exploration, and cultural experiences.
             </p>
           </div>
 
@@ -149,17 +146,17 @@ export default function CampAlegriaPage() {
                   Full Spanish Immersion
                 </h3>
                 <p className="text-gray-600">
-                  For children ready to dive into a fully Spanish-speaking environment.
+                  Complete Spanish language immersion with native speakers and cultural activities
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-8 shadow-lg">
                 <h3 className="text-2xl font-bold font-questa text-slate mb-4 flex items-center">
                   <Users className="w-8 h-8 mr-3 text-amber" />
-                  Bilingual Experience
+                  Bilingual Support
                 </h3>
                 <p className="text-gray-600">
-                  A mix of Spanish and English to support language learners at different levels.
+                  Supportive bilingual environment for children at different Spanish proficiency levels
                 </p>
               </div>
 
@@ -189,10 +186,10 @@ export default function CampAlegriaPage() {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold font-questa text-slate mb-4">
-              Registration is Now Open
+              Take a look to our sessions in 2026
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Explore our exciting sessions for 2025 and give your child an unforgettable summer experience!
+              Explore our exciting sessions for 2026 and give your child an unforgettable summer experience!
             </p>
           </div>
 

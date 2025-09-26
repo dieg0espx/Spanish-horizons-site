@@ -143,8 +143,8 @@ export default function CocinarteBirthday() {
                     className="mr-2 text-cocinarte-orange focus:ring-cocinarte-orange"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-slate text-sm">Mini Party</div>
-                    <div className="text-xs text-slate-medium">$350 • 8 kids</div>
+                    <div className="font-semibold text-slate text-sm">Mini Fiesta</div>
+                    <div className="text-xs text-slate-medium">$350 • 8 kids • 1.5 hours</div>
                   </div>
                 </label>
                 
@@ -156,8 +156,8 @@ export default function CocinarteBirthday() {
                     className="mr-2 text-cocinarte-orange focus:ring-cocinarte-orange"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-slate text-sm">Deluxe Party</div>
-                    <div className="text-xs text-slate-medium">$500 • 12 kids</div>
+                    <div className="font-semibold text-slate text-sm">Deluxe Fiesta</div>
+                    <div className="text-xs text-slate-medium">$500 • 12 kids • 2.5 hours</div>
                   </div>
                 </label>
                 
@@ -169,8 +169,8 @@ export default function CocinarteBirthday() {
                     className="mr-2 text-cocinarte-orange focus:ring-cocinarte-orange"
                   />
                   <div className="flex-1">
-                    <div className="font-semibold text-slate text-sm">Premium Party</div>
-                    <div className="text-xs text-slate-medium">$750 • 16 kids</div>
+                    <div className="font-semibold text-slate text-sm">Premium Fiesta</div>
+                    <div className="text-xs text-slate-medium">$750 • 16 kids • 3 hours</div>
                   </div>
                 </label>
               </div>
