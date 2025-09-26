@@ -14,6 +14,7 @@ interface ImageGalleryProps {
     category: string
     imageSrc: string
     videoSrc?: string
+    videoPosition?: string
     detailedDescription?: string
     learningOutcomes?: string[]
   }>
@@ -54,25 +55,13 @@ export default function ImageGallery({
       description: "Creative expression in Spanish", 
       category: "arts",
       imageSrc: "/pictures/1.jpeg",
+      videoSrc: "/videos/video1.mp4",
       detailedDescription: "Art becomes a medium for Spanish language learning as students create projects inspired by Latin American artists and cultural themes.",
       learningOutcomes: [
         "Creative expression",
         "Art vocabulary in Spanish",
         "Cultural art appreciation",
         "Fine motor skills development"
-      ]
-    },
-    { 
-      title: "Music & Dance", 
-      description: "Latin American cultural activities", 
-      category: "culture",
-      imageSrc: "/pictures/11-DSC02612.jpg",
-      detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
-      learningOutcomes: [
-        "Musical rhythm and coordination",
-        "Spanish song lyrics",
-        "Cultural dance traditions",
-        "Confidence in performance"
       ]
     },
     { 
@@ -86,6 +75,21 @@ export default function ImageGallery({
         "Nature vocabulary in Spanish",
         "Scientific observation skills",
         "Responsibility for living things"
+      ]
+    },
+    { 
+      title: "Music & Dance", 
+      description: "Latin American cultural activities", 
+      category: "culture",
+      imageSrc: "/pictures/11-DSC02612.jpg",
+      videoSrc: "/videos/video 2.mp4",
+      videoPosition: "center 60%",
+      detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
+      learningOutcomes: [
+        "Musical rhythm and coordination",
+        "Spanish song lyrics",
+        "Cultural dance traditions",
+        "Confidence in performance"
       ]
     },
     { 
@@ -143,17 +147,7 @@ export default function ImageGallery({
   }
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      {/* Background Image with Parallax */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-        style={{
-          backgroundImage: `url('/pictures/classroom.jpeg')`,
-        }}
-      />
-      
-      {/* Blue Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate/40 via-slate/30 to-slate/50"></div>
+    <section className="relative py-16 md:py-24 overflow-hidden bg-slate">
       
       {/* Content */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -204,6 +198,7 @@ export default function ImageGallery({
                 category={image.category}
                 imageSrc={image.imageSrc}
                 videoSrc={image.videoSrc}
+                videoPosition={image.videoPosition}
                 detailedDescription={image.detailedDescription}
                 learningOutcomes={image.learningOutcomes}
               />

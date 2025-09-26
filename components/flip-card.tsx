@@ -9,6 +9,7 @@ interface FlipCardProps {
   category: string
   imageSrc: string
   videoSrc?: string
+  videoPosition?: string
   detailedDescription?: string
   learningOutcomes?: string[]
 }
@@ -19,6 +20,7 @@ export default function FlipCard({
   category,
   imageSrc,
   videoSrc,
+  videoPosition = "center 20%",
   detailedDescription,
   learningOutcomes = []
 }: FlipCardProps) {
@@ -53,7 +55,7 @@ export default function FlipCard({
                 className="w-full h-full object-cover"
                 style={{ 
                   pointerEvents: 'none',
-                  objectPosition: 'center 20%'
+                  objectPosition: videoPosition
                 }}
               />
             ) : (
