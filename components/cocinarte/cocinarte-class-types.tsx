@@ -37,8 +37,8 @@ export default function CocinarteClassTypes() {
               <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <ChefHat className="w-8 h-8 text-amber" />
               </div>
-              <CardTitle className="text-2xl text-slate">Mini Chef Classes</CardTitle>
-              <CardDescription className="text-amber font-semibold text-lg">Ages 7-12</CardDescription>
+              <CardTitle className="text-2xl text-slate">Mini Chefcitos</CardTitle>
+              <CardDescription className="text-amber font-semibold text-lg">Kids Drop-off Classes</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-slate-medium mb-4 text-lg">
@@ -58,17 +58,17 @@ export default function CocinarteClassTypes() {
               <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Heart className="w-8 h-8 text-amber" />
               </div>
-              <CardTitle className="text-2xl text-slate">Mom & Me Classes</CardTitle>
-              <CardDescription className="text-golden font-semibold text-lg">All Ages with Adult</CardDescription>
+              <CardTitle className="text-2xl text-slate">Chefcitos Together</CardTitle>
+              <CardDescription className="text-golden font-semibold text-lg">Family Classes</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-slate-medium mb-4 text-lg">
-                Parents participate in the cooking experience together with their child. 
+                Parents or caregivers must participate in the cooking experience together with their child. 
                 Great for younger children and family bonding.
               </p>
               <div className="space-y-2 text-sm text-slate-medium">
                 <p>• Family participation</p>
-                <p>• Younger children welcome</p>
+                <p>• Younger children welcome - 3 and above</p>
                 <p>• Shared learning experience</p>
               </div>
             </CardContent>
@@ -79,13 +79,13 @@ export default function CocinarteClassTypes() {
               <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Sparkles className="w-8 h-8 text-amber" />
               </div>
-              <CardTitle className="text-2xl text-slate">Specialty Workshops</CardTitle>
+              <CardTitle className="text-2xl text-slate">Cocina Creativa</CardTitle>
               <CardDescription className="text-amber font-semibold text-lg">Teens & Adults</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-slate-medium mb-4 text-lg">
-                Advanced workshops for teens and adults. Perfect for birthday parties, 
-                private events, and special occasions.
+                Beginner, intermediate, and advanced workshops designed for teens and adults. 
+                Perfect for birthday parties, private events, and special occasions.
               </p>
               <div className="space-y-2 text-sm text-slate-medium">
                 <p>• Custom options available</p>

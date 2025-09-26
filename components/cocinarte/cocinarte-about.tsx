@@ -11,8 +11,8 @@ export default function CocinarteAbout() {
             <Image
               src="/cocinarte/floating_elements/COCINARTE_cuchara.svg"
               alt="Spoon"
-              width={80}
-              height={80}
+              width={120}
+              height={120}
               className="opacity-70 animate-float-slow"
             />
             <h2 className="text-4xl lg:text-5xl font-bold text-slate">
@@ -21,8 +21,8 @@ export default function CocinarteAbout() {
             <Image
               src="/cocinarte/floating_elements/COCINARTE_cuchillo.svg"
               alt="Knife"
-              width={70}
-              height={70}
+              width={110}
+              height={110}
               className="opacity-70 animate-float-medium"
             />
           </div>

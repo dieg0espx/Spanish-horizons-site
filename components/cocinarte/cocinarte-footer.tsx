@@ -54,14 +54,11 @@ export default function CocinarteFooter() {
           <div>
             <h3 className="font-bold text-lg mb-4 text-cocinarte-yellow">Follow Us</h3>
             <div className="space-y-4">
-              <Button className="bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-bold px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                <Link href="https://instagram.com/cocinarte" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  <Instagram className="w-4 h-4 mr-2" />
-                  Instagram
-                </Link>
-              </Button>
               <div className="flex space-x-2">
-                <Link href="https://facebook.com/cocinarte" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
+                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
+                  <Instagram className="w-4 h-4 text-cocinarte-black" />
+                </Link>
+                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
                   <Facebook className="w-4 h-4 text-cocinarte-black" />
                 </Link>
                 <Link href="https://twitter.com/cocinarte" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-cocinarte-yellow rounded-full flex items-center justify-center hover:bg-cocinarte-orange transition-colors cursor-pointer">
