@@ -4,8 +4,21 @@ import Image from "next/image"
 
 export default function CocinarteClassTypes() {
   return (
-    <section id="classes" className="py-20 bg-gradient-to-br from-amber-50 to-golden-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="classes" className="py-20 relative">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/cocinarte/cocinarte3.jpeg"
+          alt="Cooking class background"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/80"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-6 mb-4">
             <Image

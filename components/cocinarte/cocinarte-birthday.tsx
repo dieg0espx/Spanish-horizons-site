@@ -11,8 +11,21 @@ export default function CocinarteBirthday() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 
   return (
-    <section id="birthday-parties" className="py-20 bg-gradient-to-br from-cocinarte-yellow/10 via-cocinarte-orange/10 to-cocinarte-red/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="birthday-parties" className="py-20 relative">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/cocinarte/cocinarte11.jpeg"
+          alt="Birthday party background"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/80"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-6 mb-4">
             <Image
@@ -39,7 +52,7 @@ export default function CocinarteBirthday() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-gradient-to-br from-cocinarte-yellow/20 to-cocinarte-yellow/40 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+          <div className="bg-gradient-to-br from-cocinarte-yellow/50 to-cocinarte-yellow/50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
             <Cake className="w-12 h-12 text-cocinarte-yellow mx-auto mb-3" />
             <h3 className="font-semibold text-slate text-2xl mb-2">Mini Party</h3>
             <p className="text-lg text-slate-medium mb-3">Up to 8 kids</p>
@@ -53,7 +66,7 @@ export default function CocinarteBirthday() {
                 </ul>
               </div>
 
-          <div className="bg-gradient-to-br from-cocinarte-red/20 to-cocinarte-red/40 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+          <div className="bg-gradient-to-br from-cocinarte-red/50 to-cocinarte-red/50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
             <PartyPopper className="w-12 h-12 text-cocinarte-red mx-auto mb-3" />
             <h3 className="font-semibold text-slate text-2xl mb-2">Deluxe Party</h3>
             <p className="text-lg text-slate-medium mb-3">Up to 12 kids</p>
@@ -68,7 +81,7 @@ export default function CocinarteBirthday() {
                 </ul>
               </div>
 
-          <div className="bg-gradient-to-br from-cocinarte-blue/20 to-cocinarte-blue/40 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+          <div className="bg-gradient-to-br from-cocinarte-blue/50 to-cocinarte-blue/50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
             <Star className="w-12 h-12 text-cocinarte-navy mx-auto mb-3" />
             <h3 className="font-semibold text-slate text-2xl mb-2">Premium Party</h3>
             <p className="text-lg text-slate-medium mb-3">Up to 16 kids</p>
