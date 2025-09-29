@@ -17,9 +17,9 @@ export default function CocinarteHeader() {
   // Prevent hydration mismatch by not rendering interactive elements until mounted
   if (!isMounted) {
     return (
-      <header className="bg-cocinarte-navy shadow-xl w-full fixed top-0 left-0 right-0 z-50 border">
+      <header className="bg-cocinarte-navy shadow-xl w-full fixed top-0 left-0 right-0 z-50">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 lg:h-24">
+          <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
             {/* Logo */}
             <div className="flex items-center flex-shrink-0">
               <Link href="/cocinarte" className="flex items-center group">
@@ -28,7 +28,7 @@ export default function CocinarteHeader() {
                   alt="Cocinarte Logo" 
                   width={200} 
                   height={64} 
-                  className="object-contain h-14 sm:h-16 lg:h-20 max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]" 
+                  className="object-contain h-12 sm:h-14 lg:h-20 max-w-[100px] sm:max-w-[120px] lg:max-w-[200px]" 
                 />
               </Link>
             </div>
@@ -37,37 +37,37 @@ export default function CocinarteHeader() {
             <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
               <Link
                 href="#calendar"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 Calendar
               </Link>
               <Link
                 href="#about"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 About
               </Link>
               <Link
                 href="#classes"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 Classes
               </Link>
               <Link
                 href="#birthday-parties"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 Birthday Parties
               </Link>
               <Link
                 href="#private-events"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 Private Events
               </Link>
               <Link
                 href="#faq"
-                className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+                className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
               >
                 FAQ
               </Link>
@@ -76,16 +76,16 @@ export default function CocinarteHeader() {
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
               <div className="flex items-center space-x-1">
-                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
-                  <Instagram className="h-6 w-6 text-cocinarte-white" />
+                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center p-2 lg:p-3">
+                  <Instagram className="h-5 w-5 lg:h-6 lg:w-6 text-cocinarte-white" />
                 </Link>
-                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
-                  <Facebook className="h-6 w-6 text-cocinarte-white" />
+                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center p-2 lg:p-3">
+                  <Facebook className="h-5 w-5 lg:h-6 lg:w-6 text-cocinarte-white" />
                 </Link>
               </div>
               <Button
                 size="lg"
-                className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-3 text-base"
+                className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base"
               >
                 <Link href="#calendar">Book Now</Link>
               </Button>
@@ -95,64 +95,8 @@ export default function CocinarteHeader() {
             <button
               className="lg:hidden p-2 rounded-xl bg-cocinarte-orange text-cocinarte-black hover:bg-cocinarte-yellow transition-colors duration-200"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
-          </div>
-
-          {/* Mobile Menu - Hidden on SSR */}
-          <div className="lg:hidden hidden">
-            <nav className="px-4 py-4 space-y-2">
-              <Link
-                href="#calendar"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
-              >
-                Calendar
-              </Link>
-              <Link
-                href="#about"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
-              >
-                About
-              </Link>
-              <Link
-                href="#classes"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
-              >
-                Classes
-              </Link>
-              <Link
-                href="#birthday-parties"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
-              >
-                Birthday Parties
-              </Link>
-              <Link
-                href="#private-events"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
-              >
-                Private Events
-              </Link>
-              <Link
-                href="#faq"
-                className="flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
-              >
-                FAQ
-              </Link>
-              <div className="flex space-x-2">
-                <Button className="flex-1 bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
-                  <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                    <Instagram className="w-4 h-4 mr-2" />
-                    Instagram
-                  </Link>
-                </Button>
-                <Button className="flex-1 bg-cocinarte-yellow hover:bg-cocinarte-orange text-cocinarte-black font-medium py-3 text-sm rounded-xl shadow-lg transition-all duration-200">
-                  <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                    <Facebook className="w-4 h-4 mr-2" />
-                    Facebook
-                  </Link>
-                </Button>
-              </div>
-            </nav>
           </div>
         </div>
       </header>
@@ -162,7 +106,7 @@ export default function CocinarteHeader() {
   return (
     <header className="bg-cocinarte-navy shadow-xl w-full fixed top-0 left-0 right-0 z-50">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-24">
+        <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
           {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link href="/cocinarte" className="flex items-center group">
@@ -171,7 +115,7 @@ export default function CocinarteHeader() {
                 alt="Cocinarte Logo" 
                 width={200} 
                 height={64} 
-                className="object-contain h-14 sm:h-16 lg:h-20 max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]" 
+                className="object-contain h-12 sm:h-14 lg:h-20 max-w-[100px] sm:max-w-[120px] lg:max-w-[200px]" 
               />
             </Link>
           </div>
@@ -180,37 +124,37 @@ export default function CocinarteHeader() {
           <nav className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
             <Link
               href="#calendar"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               Calendar
             </Link>
             <Link
               href="#about"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               About
             </Link>
             <Link
               href="#classes"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               Classes
             </Link>
             <Link
               href="#birthday-parties"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               Birthday Parties
             </Link>
             <Link
               href="#private-events"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               Private Events
             </Link>
             <Link
               href="#faq"
-              className="px-6 py-3 rounded-xl text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
+              className="px-4 lg:px-6 py-2 lg:py-3 rounded-xl text-sm lg:text-base font-semibold transition-all duration-200 text-cocinarte-white hover:bg-cocinarte-orange hover:text-cocinarte-black"
             >
               FAQ
             </Link>
@@ -219,16 +163,16 @@ export default function CocinarteHeader() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
               <div className="flex items-center space-x-1">
-                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
-                  <Instagram className="h-6 w-6 text-cocinarte-white" />
+                <Link href="https://www.instagram.com/corcinartepdx/" target="_blank" rel="noopener noreferrer" className="flex items-center p-2 lg:p-3">
+                  <Instagram className="h-5 w-5 lg:h-6 lg:w-6 text-cocinarte-white" />
                 </Link>
-                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center p-3">
-                  <Facebook className="h-6 w-6 text-cocinarte-white" />
+                <Link href="https://www.facebook.com/profile.php?id=61580541556926" target="_blank" rel="noopener noreferrer" className="flex items-center p-2 lg:p-3">
+                  <Facebook className="h-5 w-5 lg:h-6 lg:w-6 text-cocinarte-white" />
                 </Link>
               </div>
             <Button
               size="lg"
-              className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-3 text-base"
+              className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base"
             >
               <Link href="#calendar">Book Now</Link>
             </Button>
@@ -239,7 +183,7 @@ export default function CocinarteHeader() {
             className="lg:hidden p-2 rounded-xl bg-cocinarte-orange text-cocinarte-black hover:bg-cocinarte-yellow transition-colors duration-200"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
           </button>
         </div>
 

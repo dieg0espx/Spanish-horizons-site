@@ -280,6 +280,23 @@
     font-family: inherit !important;
   }
 
+  /* Cocinarte page DatePicker font styling */
+  [data-page="cocinarte"] .react-datepicker-calendar {
+    font-family: 'Coming Soon', cursive !important;
+  }
+
+  [data-page="cocinarte"] .react-datepicker__current-month {
+    font-family: 'Coming Soon', cursive !important;
+  }
+
+  [data-page="cocinarte"] .react-datepicker__day-name {
+    font-family: 'Coming Soon', cursive !important;
+  }
+
+  [data-page="cocinarte"] .react-datepicker__day {
+    font-family: 'Coming Soon', cursive !important;
+  }
+
   .react-datepicker__header {
     background: #00ADEE !important;
     border-bottom: 2px solid #00ADEE !important;

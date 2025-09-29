@@ -51,13 +51,13 @@ export default function CocinarteBirthday() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-gradient-to-br from-cocinarte-yellow/50 to-cocinarte-yellow/50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
-            <Cake className="w-12 h-12 text-cocinarte-yellow mx-auto mb-3" />
-            <h3 className="font-semibold text-slate text-2xl mb-2">Mini Party</h3>
-            <p className="text-lg text-slate-medium mb-3">Up to 8 kids</p>
-            <p className="text-3xl font-bold text-cocinarte-yellow mb-4">$350</p>
-            <ul className="text-sm text-slate-medium space-y-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="bg-gradient-to-br from-cocinarte-yellow/50 to-cocinarte-yellow/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300">
+            <Cake className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-yellow mx-auto mb-2 sm:mb-3" />
+            <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Mini Party</h3>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Up to 8 kids</p>
+            <p className="text-2xl sm:text-3xl font-bold text-cocinarte-yellow mb-3 sm:mb-4">$350</p>
+            <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
                   <li>• 2-hour cooking session</li>
                   <li>• All ingredients included</li>
                   <li>• Birthday cake making</li>
@@ -66,12 +66,12 @@ export default function CocinarteBirthday() {
                 </ul>
               </div>
 
-          <div className="bg-gradient-to-br from-cocinarte-red/50 to-cocinarte-red/50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
-            <PartyPopper className="w-12 h-12 text-cocinarte-red mx-auto mb-3" />
-            <h3 className="font-semibold text-slate text-2xl mb-2">Deluxe Party</h3>
-            <p className="text-lg text-slate-medium mb-3">Up to 12 kids</p>
-            <p className="text-3xl font-bold text-cocinarte-red mb-4">$500</p>
-            <ul className="text-sm text-slate-medium space-y-2">
+          <div className="bg-gradient-to-br from-cocinarte-red/50 to-cocinarte-red/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300">
+            <PartyPopper className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-red mx-auto mb-2 sm:mb-3" />
+            <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Deluxe Party</h3>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Up to 12 kids</p>
+            <p className="text-2xl sm:text-3xl font-bold text-cocinarte-red mb-3 sm:mb-4">$500</p>
+            <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
                   <li>• 2.5-hour cooking session</li>
                   <li>• All ingredients included</li>
                   <li>• Custom birthday cake</li>
@@ -81,12 +81,12 @@ export default function CocinarteBirthday() {
                 </ul>
               </div>
 
-          <div className="bg-gradient-to-br from-cocinarte-blue/50 to-cocinarte-blue/50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
-            <Star className="w-12 h-12 text-cocinarte-navy mx-auto mb-3" />
-            <h3 className="font-semibold text-slate text-2xl mb-2">Premium Party</h3>
-            <p className="text-lg text-slate-medium mb-3">Up to 16 kids</p>
-            <p className="text-3xl font-bold text-cocinarte-navy mb-4">$750</p>
-            <ul className="text-sm text-slate-medium space-y-2">
+          <div className="bg-gradient-to-br from-cocinarte-blue/50 to-cocinarte-blue/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300 sm:col-span-2 lg:col-span-1">
+            <Star className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-navy mx-auto mb-2 sm:mb-3" />
+            <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Premium Party</h3>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Up to 16 kids</p>
+            <p className="text-2xl sm:text-3xl font-bold text-cocinarte-navy mb-3 sm:mb-4">$750</p>
+            <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
                   <li>• 3-hour cooking session</li>
                   <li>• All ingredients included</li>
                   <li>• Custom themed cake</li>
@@ -107,13 +107,13 @@ export default function CocinarteBirthday() {
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                   Preferred Date *
                 </label>
-                <div className="relative">
+                <div className="relative" data-page="cocinarte">
                   <DatePicker
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
                     dateFormat="MM/dd/yyyy"
                     placeholderText="Select a date"
-                    className="w-full px-4 py-3 pr-12 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10"
+                    className="w-full px-4 py-3 pr-12 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10 font-coming-soon"
                     required
                     minDate={new Date()}
                     showPopperArrow={false}

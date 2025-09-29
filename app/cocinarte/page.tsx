@@ -16,76 +16,76 @@ export default function CocinartePage() {
   return (
     <>
       <div className="min-h-screen bg-white font-coming-soon relative overflow-hidden" style={{ fontFamily: 'Coming Soon, cursive' }} data-page="cocinarte">
-        {/* Floating elements around the entire page */}
+        {/* Floating elements around the entire page - hidden on mobile for better performance */}
         <Image
           src="/cocinarte/floating_elements/COCINARTE_cupcakes.png"
           alt="Cupcakes"
           width={60}
           height={60}
-          className="absolute top-20 left-8 opacity-30 animate-float-slow pointer-events-none"
+          className="hidden sm:block absolute top-20 left-8 opacity-30 animate-float-slow pointer-events-none w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_frutas.png"
           alt="Fruits"
           width={50}
           height={50}
-          className="absolute top-32 right-12 opacity-25 animate-float-medium pointer-events-none"
+          className="hidden sm:block absolute top-32 right-12 opacity-25 animate-float-medium pointer-events-none w-10 h-10 sm:w-12 sm:h-12 lg:w-[50px] lg:h-[50px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_cuchara.png"
           alt="Spoon"
           width={45}
           height={45}
-          className="absolute top-64 left-16 opacity-20 animate-float-slow pointer-events-none"
+          className="hidden sm:block absolute top-64 left-16 opacity-20 animate-float-slow pointer-events-none w-9 h-9 sm:w-11 sm:h-11 lg:w-[45px] lg:h-[45px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_tenedor.png"
           alt="Fork"
           width={40}
           height={40}
-          className="absolute top-80 right-20 opacity-25 animate-float-medium pointer-events-none"
+          className="hidden sm:block absolute top-80 right-20 opacity-25 animate-float-medium pointer-events-none w-8 h-8 sm:w-10 sm:h-10 lg:w-[40px] lg:h-[40px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_plato.png"
           alt="Plate"
           width={55}
           height={55}
-          className="absolute top-96 left-12 opacity-20 animate-float-slow pointer-events-none"
+          className="hidden sm:block absolute top-96 left-12 opacity-20 animate-float-slow pointer-events-none w-11 h-11 sm:w-13 sm:h-13 lg:w-[55px] lg:h-[55px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_olla .png"
           alt="Pot"
           width={65}
           height={65}
-          className="absolute top-[500px] right-8 opacity-30 animate-float-medium pointer-events-none"
+          className="hidden sm:block absolute top-[500px] right-8 opacity-30 animate-float-medium pointer-events-none w-13 h-13 sm:w-15 sm:h-15 lg:w-[65px] lg:h-[65px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_utensilios.png"
           alt="Utensils"
           width={50}
           height={50}
-          className="absolute top-[600px] left-20 opacity-25 animate-float-slow pointer-events-none"
+          className="hidden sm:block absolute top-[600px] left-20 opacity-25 animate-float-slow pointer-events-none w-10 h-10 sm:w-12 sm:h-12 lg:w-[50px] lg:h-[50px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_tetera.png"
           alt="Teapot"
           width={60}
           height={60}
-          className="absolute top-[700px] right-16 opacity-20 animate-float-medium pointer-events-none"
+          className="hidden sm:block absolute top-[700px] right-16 opacity-20 animate-float-medium pointer-events-none w-12 h-12 sm:w-14 sm:h-14 lg:w-[60px] lg:h-[60px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_comida.png"
           alt="Food"
           width={70}
           height={70}
-          className="absolute top-[800px] left-8 opacity-25 animate-float-slow pointer-events-none"
+          className="hidden sm:block absolute top-[800px] left-8 opacity-25 animate-float-slow pointer-events-none w-14 h-14 sm:w-16 sm:h-16 lg:w-[70px] lg:h-[70px]"
         />
         <Image
           src="/cocinarte/floating_elements/COCINARTE_tabla corte.png"
           alt="Cutting Board"
           width={55}
           height={55}
-          className="absolute top-[900px] right-12 opacity-20 animate-float-medium pointer-events-none"
+          className="hidden sm:block absolute top-[900px] right-12 opacity-20 animate-float-medium pointer-events-none w-11 h-11 sm:w-13 sm:h-13 lg:w-[55px] lg:h-[55px]"
         />
 
         <CocinarteHeader />

@@ -426,8 +426,10 @@ export default function CocinarteMonthlyCalendar() {
   }
 
   const handleClassClick = (classItem: CookingClass) => {
+    console.log('Class clicked:', classItem)
     setSelectedClass(classItem)
     setIsDialogOpen(true)
+    console.log('Dialog should be open:', true)
   }
 
   const nextMonth = () => {
@@ -1051,65 +1053,73 @@ export default function CocinarteMonthlyCalendar() {
 
 
       {/* Class Details Modal */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <div className="flex items-center space-x-3">
-              <Badge className={`${selectedClass ? getTypeColor(selectedClass.type, selectedClass.price) : ''} font-bold`}>
+      {isDialogOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+          <div className="w-[90vw] h-[70vh] max-w-2xl max-h-[95vh] sm:h-[75vh] bg-white rounded-lg overflow-y-auto font-coming-soon p-4 sm:p-6" style={{ fontFamily: 'Coming Soon, cursive' }}>
+            {console.log('Dialog rendering, isDialogOpen:', isDialogOpen, 'selectedClass:', selectedClass)}
+          <div className="pb-4 relative">
+            <button 
+              onClick={() => setIsDialogOpen(false)}
+              className="absolute right-0 top-0 text-gray-500 hover:text-gray-700 text-xl font-bold"
+            >
+              ✕
+            </button>
+            <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 pr-8">
+              <Badge className={`${selectedClass ? getTypeColor(selectedClass.type, selectedClass.price) : ''} font-bold w-fit`}>
                 {selectedClass ? getTypeLabel(selectedClass.type) : ''}
               </Badge>
-              <DialogTitle className="text-2xl text-slate">
+              <h2 className="text-lg sm:text-xl lg:text-2xl text-slate leading-tight font-bold">
                 {selectedClass?.title}
-              </DialogTitle>
+              </h2>
             </div>
-            <DialogDescription className="text-slate-medium text-lg">
+            <p className="text-slate-medium text-sm sm:text-base lg:text-lg pt-2">
               {selectedClass?.date.toLocaleDateString('en-US', { 
                 weekday: 'long', 
                 month: 'long', 
                 day: 'numeric',
                 year: 'numeric'
               })} • {selectedClass?.time}
-            </DialogDescription>
-          </DialogHeader>
+            </p>
+          </div>
           
           {selectedClass && (
-            <div className="space-y-6">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-6">
               {/* Price */}
-              <div className="flex items-center space-x-2">
-                <span className="text-3xl font-bold text-cocinarte-orange">
+              <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-cocinarte-orange">
                   ${selectedClass.price}
                 </span>
-                <span className="text-slate-medium">per {selectedClass.type === 'mini-chef' ? 'child' : 'pair'}</span>
+                <span className="text-slate-medium text-xs sm:text-sm lg:text-base">per {selectedClass.type === 'mini-chef' ? 'child' : 'pair'}</span>
               </div>
 
               {/* Menu */}
-              <div className="space-y-3">
-                <h3 className="text-xl font-bold text-slate flex items-center space-x-2">
-                  <ChefHat className="h-5 w-5 text-cocinarte-navy" />
+              <div className="space-y-2 sm:space-y-3">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-slate flex items-center space-x-2">
+                  <ChefHat className="h-4 w-4 sm:h-5 sm:w-5 text-cocinarte-navy flex-shrink-0" />
                   <span>Menu</span>
                 </h3>
                 <div className="space-y-2">
                   {selectedClass.menu.map((item, index) => (
-                    <div key={index} className="p-3 bg-slate-50 rounded-lg border-l-4 border-cocinarte-yellow">
-                      <p className="text-slate-medium">{item}</p>
+                    <div key={index} className="p-2 sm:p-3 bg-slate-50 rounded-lg border-l-4 border-cocinarte-yellow">
+                      <p className="text-slate-medium text-xs sm:text-sm lg:text-base leading-relaxed">{item}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Class Type Info */}
-              <div className="bg-cocinarte-navy/5 rounded-lg p-4">
+              <div className="bg-cocinarte-navy/5 rounded-lg p-3 sm:p-4">
                 <div className="flex items-center space-x-2 mb-2">
                   {selectedClass.type === 'mini-chef' ? (
-                    <ChefHat className="h-5 w-5 text-cocinarte-yellow" />
+                    <ChefHat className="h-4 w-4 sm:h-5 sm:w-5 text-cocinarte-yellow flex-shrink-0" />
                   ) : (
-                    <Users className="h-5 w-5 text-cocinarte-orange" />
+                    <Users className="h-4 w-4 sm:h-5 sm:w-5 text-cocinarte-orange flex-shrink-0" />
                   )}
-                  <span className="font-bold text-slate">
+                  <span className="font-bold text-slate text-xs sm:text-sm lg:text-base">
                     {getTypeLabel(selectedClass.type)} Class
                   </span>
                 </div>
-                <p className="text-slate-medium text-sm">
+                <p className="text-slate-medium text-xs sm:text-sm leading-relaxed">
                   {selectedClass.type === 'mini-chef' 
                     ? "Perfect for young chefs ages 5-12. Children work independently with guidance from our instructors."
                     : "A special bonding experience for parents and children. Work together to create delicious dishes."
@@ -1118,13 +1128,13 @@ export default function CocinarteMonthlyCalendar() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex space-x-3 pt-4">
-                <Button className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white font-bold rounded-xl px-8 py-3 text-lg flex-1">
+              <div className="flex space-x-3 pt-3 sm:pt-4">
+                <Button className="bg-cocinarte-red hover:bg-cocinarte-orange text-cocinarte-white font-bold rounded-xl px-4 sm:px-6 lg:px-8 py-2 sm:py-3 text-sm sm:text-base lg:text-lg flex-[0.7]">
                   Book This Class
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="border-cocinarte-navy text-cocinarte-navy hover:bg-cocinarte-navy hover:text-cocinarte-white font-bold rounded-xl px-6 py-3"
+                  className="border-cocinarte-navy text-cocinarte-navy hover:bg-cocinarte-navy hover:text-cocinarte-white font-bold rounded-xl px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base lg:text-lg flex-[0.3]"
                   onClick={() => setIsDialogOpen(false)}
                 >
                   Close
@@ -1132,8 +1142,9 @@ export default function CocinarteMonthlyCalendar() {
               </div>
             </div>
           )}
-        </DialogContent>
-      </Dialog>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
