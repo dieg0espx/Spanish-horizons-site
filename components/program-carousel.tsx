@@ -12,6 +12,7 @@ interface MediaItem {
   description: string
   imagePosition?: string // Custom positioning for images
   imageScale?: 'cover' | 'contain' // Custom scaling for images
+  previewImage?: string // Preview image for videos
 }
 
 interface ProgramCarouselProps {
@@ -23,18 +24,24 @@ interface ProgramCarouselProps {
 export default function ProgramCarousel({ media, color = "blue", className = "" }: ProgramCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [thumbnailTouchStart, setThumbnailTouchStart] = useState<number | null>(null)
+  const [thumbnailTouchEnd, setThumbnailTouchEnd] = useState<number | null>(null)
+  
+  // Limit to 5 items on mobile
+  const displayMedia = isMobile ? media.slice(0, 5) : media
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % media.length)
+    setCurrentIndex((prev) => (prev + 1) % displayMedia.length)
     setIsPlaying(false)
   }
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + media.length) % media.length)
+    setCurrentIndex((prev) => (prev - 1 + displayMedia.length) % displayMedia.length)
     setIsPlaying(false)
   }
 
@@ -68,10 +75,10 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
     const isLeftSwipe = distance > 30
     const isRightSwipe = distance < -30
 
-    if (isLeftSwipe && media.length > 1) {
+    if (isLeftSwipe && displayMedia.length > 1) {
       nextSlide()
     }
-    if (isRightSwipe && media.length > 1) {
+    if (isRightSwipe && displayMedia.length > 1) {
       prevSlide()
     }
   }
@@ -95,19 +102,55 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
     const isLeftSwipe = distance > 30
     const isRightSwipe = distance < -30
 
-    if (isLeftSwipe && media.length > 1) {
+    if (isLeftSwipe && displayMedia.length > 1) {
       nextSlide()
     }
-    if (isRightSwipe && media.length > 1) {
+    if (isRightSwipe && displayMedia.length > 1) {
       prevSlide()
     }
   }
 
-  const currentMedia = media[currentIndex]
+  // Thumbnail touch event handlers for mobile swipe functionality
+  const handleThumbnailTouchStart = (e: React.TouchEvent) => {
+    setThumbnailTouchEnd(null)
+    setThumbnailTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleThumbnailTouchMove = (e: React.TouchEvent) => {
+    setThumbnailTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleThumbnailTouchEnd = () => {
+    if (!thumbnailTouchStart || !thumbnailTouchEnd) return
+    
+    const distance = thumbnailTouchStart - thumbnailTouchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe && displayMedia.length > 1) {
+      nextSlide()
+    }
+    if (isRightSwipe && displayMedia.length > 1) {
+      prevSlide()
+    }
+  }
+
+  const currentMedia = displayMedia[currentIndex]
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Auto-play videos when they become the current slide
   useEffect(() => {
-    if (currentMedia.type === 'video' && videoRef.current) {
+    if (currentMedia && currentMedia.type === 'video' && videoRef.current) {
       videoRef.current.play().then(() => {
         setIsPlaying(true)
       }).catch(() => {
@@ -116,7 +159,7 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
     } else {
       setIsPlaying(false)
     }
-  }, [currentIndex, currentMedia.type])
+  }, [currentIndex, currentMedia])
 
   // Color mappings for different programs
   const colorClasses = {
@@ -181,7 +224,7 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
 
       {/* Media Display */}
       <div 
-        className="relative aspect-video bg-slate-100 cursor-grab active:cursor-grabbing select-none"
+        className="relative aspect-video bg-slate-100 select-none"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -224,10 +267,15 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
       </div>
 
       {/* Thumbnail Navigation */}
-      {media.length > 1 && (
+      {displayMedia.length > 1 && (
         <div className={`p-4 border-t ${colors.border}`}>
-          <div className="flex space-x-2 overflow-x-auto">
-            {media.map((item, index) => (
+          <div 
+            className="flex space-x-2 overflow-x-auto"
+            onTouchStart={handleThumbnailTouchStart}
+            onTouchMove={handleThumbnailTouchMove}
+            onTouchEnd={handleThumbnailTouchEnd}
+          >
+            {displayMedia.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => setCurrentIndex(index)}
@@ -243,12 +291,18 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
                     className="object-cover"
                   />
                 ) : (
-                  <video
-                    src={item.src}
-                    className="w-full h-full object-cover"
-                    muted
-                    preload="metadata"
-                  />
+                  item.previewImage ? (
+                    <Image
+                      src={item.previewImage}
+                      alt={item.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-200 flex items-center justify-center">
+                      <Play className="w-6 h-6 text-slate-500" />
+                    </div>
+                  )
                 )}
               </button>
             ))}

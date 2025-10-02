@@ -62,7 +62,8 @@ export default function LandingPage() {
         type: 'video' as const,
         src: '/videos/video 2.mp4',
         alt: 'Music and dance activities',
-        description: 'Students experience Latin American music and dance, building cultural connections through movement.'
+        description: 'Students experience Latin American music and dance, building cultural connections through movement.',
+        previewImage: '/landing/preview1.png'
       },
       {
         id: '5',
@@ -183,7 +184,8 @@ export default function LandingPage() {
         type: 'video' as const,
         src: '/videos/clip_jumping.mp4',
         alt: 'Outdoor camp activities',
-        description: 'Active outdoor learning experiences that combine Spanish language with physical activities and fun.'
+        description: 'Active outdoor learning experiences that combine Spanish language with physical activities and fun.',
+        previewImage: '/landing/preview2.png'
       },
       {
         id: '3',
@@ -267,7 +269,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-black/65 z-10"></div>
         
         {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 w-full overflow-hidden">
+        <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-8 w-full overflow-hidden">
           <div className="text-center mb-16">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-questa leading-tight text-white mb-6">
               Spanish Horizons
@@ -294,7 +296,7 @@ export default function LandingPage() {
 
       {/* Overview Section */}
       <section id="overview" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-8 w-full overflow-hidden">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-questa text-slate mb-4">
               Four Programs, One Mission
@@ -318,11 +320,6 @@ export default function LandingPage() {
                     height={112}
                     className="w-full h-full object-contain"
                   />
-                </div>
-                <div className="flex justify-center mb-2 sm:mb-3">
-                  <Badge variant="secondary" className="bg-slate-200 text-slate-800 text-xs w-fit">
-                    K-5 Elementary School
-                  </Badge>
                 </div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">Spanish Horizons Academy</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2 sm:mb-3 flex-grow">
@@ -349,11 +346,6 @@ export default function LandingPage() {
                     height={112}
                     className="w-full h-full object-contain"
                   />
-                </div>
-                <div className="flex justify-center mb-2 sm:mb-3">
-                  <Badge variant="secondary" className="bg-green-200 text-green-800 text-xs w-fit">
-                    Preschool & Daycare
-                  </Badge>
                 </div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">
                   Casita Azul
@@ -382,11 +374,6 @@ export default function LandingPage() {
                     height={112}
                     className="w-full h-full object-contain"
                   />
-                </div>
-                <div className="flex justify-center mb-2 sm:mb-3">
-                  <Badge variant="secondary" className="bg-orange-200 text-orange-800 text-xs w-fit">
-                    Cooking Classes
-                  </Badge>
                 </div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">Cocinarte</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2 sm:mb-3 flex-grow">
@@ -434,7 +421,7 @@ export default function LandingPage() {
 
       {/* Detailed Program Sections */}
       <section ref={cardsRef} className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 w-full overflow-hidden">
           
           {/* Spanish Horizons Academy */}
           <div id="spanish-horizons" className={`mb-12 sm:mb-16 lg:mb-24 transform transition-all duration-700 ease-out ${
@@ -443,23 +430,23 @@ export default function LandingPage() {
             <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 items-center w-full">
               <div className="space-y-3 sm:space-y-4 lg:space-y-6 w-full max-w-full overflow-hidden">
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="flex justify-center mb-3 sm:mb-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
                       <Image
                         src="/branding/logo.png"
                         alt="Spanish Horizons Academy"
-                        width={64}
-                        height={64}
+                        width={80}
+                        height={80}
                         className="w-full h-full object-contain"
                       />
                     </div>
                   </div>
-                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
+                  <div className="flex justify-center mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-slate-200 text-slate-800 text-xs sm:text-sm w-fit">
                       K-5 Elementary School
                     </Badge>
                   </div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight">
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight text-center">
                     Spanish Horizons Academy
                   </h2>
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed break-words">
@@ -528,23 +515,23 @@ export default function LandingPage() {
 
               <div className="space-y-3 sm:space-y-4 lg:space-y-6 order-1 lg:order-2 w-full">
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="flex justify-center mb-3 sm:mb-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
                       <Image
                         src="/casita-azul.png"
                         alt="Casita Azul"
-                        width={64}
-                        height={64}
+                        width={80}
+                        height={80}
                         className="w-full h-full object-contain"
                       />
                     </div>
                   </div>
-                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
+                  <div className="flex justify-center mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-green-200 text-green-800 text-xs sm:text-sm w-fit">
                       Preschool & Daycare
                     </Badge>
                   </div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight">
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight text-center">
                     Casita Azul
                   </h2>
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -599,23 +586,23 @@ export default function LandingPage() {
             <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 items-center">
               <div className="space-y-3 sm:space-y-4 lg:space-y-6 w-full">
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="flex justify-center mb-3 sm:mb-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
                       <Image
                         src="/cocinarte/cocinarteLogo.png"
                         alt="Cocinarte"
-                        width={64}
-                        height={64}
+                        width={80}
+                        height={80}
                         className="w-full h-full object-contain"
                       />
                     </div>
                   </div>
-                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
+                  <div className="flex justify-center mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-orange-200 text-orange-800 text-xs sm:text-sm w-fit">
                       Cooking Classes
                     </Badge>
                   </div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight">
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight text-center">
                     Cocinarte
                   </h2>
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -684,23 +671,23 @@ export default function LandingPage() {
 
               <div className="space-y-3 sm:space-y-4 lg:space-y-6 order-1 lg:order-2 w-full">
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="flex justify-center mb-3 sm:mb-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
                       <Image
                         src="/camp-alegria.png"
                         alt="Camp Alegría"
-                        width={64}
-                        height={64}
+                        width={80}
+                        height={80}
                         className="w-full h-full object-contain"
                       />
                     </div>
                   </div>
-                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
+                  <div className="flex justify-center mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-amber-200 text-amber-800 text-xs sm:text-sm w-fit">
                       Summer Camp
                     </Badge>
                   </div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight">
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight text-center">
                     Camp Alegría
                   </h2>
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -831,7 +818,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-questa text-slate mb-4">
-              Ready to Start Your Journey?
+              Ready to Start Your <span className="block sm:inline">Journey?</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
               Get in touch with us to learn more about our programs and find the perfect fit for your child.
