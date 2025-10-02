@@ -27,7 +27,7 @@ export default function CasitaAzulPage() {
       {/* Hero Section */}
       <section className="py-10">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge variant="secondary" className="bg-slate-100 text-slate-800 border-slate-200 px-4 py-2 text-sm">
@@ -80,7 +80,7 @@ export default function CasitaAzulPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-50 to-green-100">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -241,7 +241,7 @@ export default function CasitaAzulPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-50 to-green-100">
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -483,7 +483,7 @@ export default function CasitaAzulPage() {
       </section>
 
       {/* Contact Information Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+      <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold font-questa text-slate mb-4">
