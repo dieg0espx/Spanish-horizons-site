@@ -136,7 +136,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${lora.variable} ${cormorant.variable} ${libreBaskerville.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${lora.variable} ${cormorant.variable} ${libreBaskerville.variable} ${poppins.variable} scroll-smooth`}>
       <head>
         {/* Favicon Links */}
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
@@ -157,7 +157,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#1e293b" />
         
         {/* Additional Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="format-detection" content="date=no" />
         <meta name="format-detection" content="address=no" />

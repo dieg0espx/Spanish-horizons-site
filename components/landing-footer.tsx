@@ -41,11 +41,11 @@ export default function LandingFooter() {
     <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Programs */}
           <div className="lg:col-span-2">
             <h3 className="text-xl font-bold font-questa mb-6">Our Programs</h3>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {programs.map((program) => {
                 return (
                   <Link
@@ -100,20 +100,6 @@ export default function LandingFooter() {
               </div>
             </div>
             
-            <div className="flex flex-col space-y-3">
-              <Button className="bg-amber hover:bg-amber-600 text-white">
-                <Link href="/programs" className="flex items-center justify-center">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  Learn More
-                </Link>
-              </Button>
-              <Button variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white">
-                <Link href="/admissions" className="flex items-center justify-center">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Apply Now
-                </Link>
-              </Button>
-            </div>
           </div>
         </div>
       </div>

@@ -2,8 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react"
+import { Play, Pause } from "lucide-react"
 
 interface MediaItem {
   id: string
@@ -26,6 +25,8 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
   const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % media.length)
@@ -47,6 +48,58 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
         }
         setIsPlaying(!isPlaying)
       }
+    }
+  }
+
+  // Touch event handlers for swipe functionality
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 30
+    const isRightSwipe = distance < -30
+
+    if (isLeftSwipe && media.length > 1) {
+      nextSlide()
+    }
+    if (isRightSwipe && media.length > 1) {
+      prevSlide()
+    }
+  }
+
+  // Mouse event handlers for desktop drag functionality
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.clientX)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (touchStart !== null) {
+      setTouchEnd(e.clientX)
+    }
+  }
+
+  const handleMouseUp = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 30
+    const isRightSwipe = distance < -30
+
+    if (isLeftSwipe && media.length > 1) {
+      nextSlide()
+    }
+    if (isRightSwipe && media.length > 1) {
+      prevSlide()
     }
   }
 
@@ -127,7 +180,19 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
     <div className={`${colors.bg} rounded-2xl shadow-lg overflow-hidden ${className}`}>
 
       {/* Media Display */}
-      <div className="relative aspect-video bg-slate-100">
+      <div 
+        className="relative aspect-video bg-slate-100 cursor-grab active:cursor-grabbing select-none"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={() => {
+          setTouchStart(null)
+          setTouchEnd(null)
+        }}
+      >
         {currentMedia.type === 'image' ? (
           <Image
             src={currentMedia.src}
@@ -150,11 +215,12 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
             onClick={toggleVideo}
           />
         )}
+        
       </div>
 
       {/* Description */}
       <div className="p-6">
-        <p className={`${colors.description} leading-relaxed`}>{currentMedia.description}</p>
+        <p className={`${colors.description} leading-relaxed text-sm sm:text-base`}>{currentMedia.description}</p>
       </div>
 
       {/* Thumbnail Navigation */}

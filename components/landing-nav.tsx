@@ -54,7 +54,7 @@ export default function LandingNav() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-end lg:justify-between h-16 lg:h-20">
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
@@ -92,20 +92,20 @@ export default function LandingNav() {
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
             <Button variant="outline" size="sm" className="border-slate-300 text-slate-700 hover:bg-slate-50">
-              <Link href="/programs" className="flex items-center">
+              <Link href="#spanish-horizons" className="flex items-center scroll-smooth">
                 <BookOpen className="w-4 h-4 mr-2" />
                 Learn More
               </Link>
             </Button>
             <Button size="sm" className="bg-slate hover:bg-slate-800 text-white">
-              <Link href="/admissions" className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                Apply Now
+              <Link href="#contact" className="flex items-center scroll-smooth">
+                <Phone className="w-4 h-4 mr-2" />
+                Contact Us
               </Link>
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Moved to right */}
           <button
             onClick={toggleMenu}
             className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors duration-200"
@@ -122,71 +122,50 @@ export default function LandingNav() {
         {isMenuOpen && (
           <div className="lg:hidden border-t border-slate-200 bg-white">
             <div className="px-4 py-6 space-y-6">
-              {/* Programs Grid */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Programs List */}
+              <div className="space-y-3">
                 {programs.map((program) => {
                   return (
                     <Link
                       key={program.name}
                       href={program.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="group p-4 rounded-lg border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all duration-200"
+                      className="group flex items-center space-x-4 p-4 rounded-lg border border-slate-200 hover:border-slate-300 hover:shadow-sm transition-all duration-200"
                     >
-                      <div className="flex items-center space-x-3 mb-2">
-                        <div className="w-8 h-8 rounded-lg overflow-hidden">
-                          <Image
-                            src={program.logo}
-                            alt={program.name}
-                            width={32}
-                            height={32}
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                        <Badge variant="secondary" className="bg-slate-100 text-slate-800 text-xs">
-                          {program.badge}
-                        </Badge>
+                      <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
+                        <Image
+                          src={program.logo}
+                          alt={program.name}
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-contain"
+                        />
                       </div>
-                      <h3 className="font-medium text-slate-700 text-sm mb-1">
-                        {program.name}
-                      </h3>
-                      <p className="text-xs text-slate-500">
-                        {program.description}
-                      </p>
+                      <div className="flex-1">
+                        <h3 className="font-medium text-slate-700 text-sm mb-1">
+                          {program.name}
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          {program.description}
+                        </p>
+                      </div>
                     </Link>
                   )
                 })}
               </div>
 
-              {/* Contact Info */}
-              <div className="border-t border-slate-200 pt-6">
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3 text-sm text-slate-600">
-                    <MapPin className="w-4 h-4 text-slate-400" />
-                    <span>770 NE Rogahn Street, Hillsboro, OR</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-sm text-slate-600">
-                    <Phone className="w-4 h-4 text-slate-400" />
-                    <span>(503) 916-9758</span>
-                  </div>
-                  <div className="flex items-center space-x-3 text-sm text-slate-600">
-                    <Mail className="w-4 h-4 text-slate-400" />
-                    <span>info@spanishhorizons.org</span>
-                  </div>
-                </div>
-              </div>
-
               {/* Mobile CTA Buttons */}
               <div className="flex flex-col space-y-3 pt-6 border-t border-slate-200">
                 <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
-                  <Link href="/programs" className="flex items-center justify-center">
+                  <Link href="#spanish-horizons" className="flex items-center justify-center scroll-smooth">
                     <BookOpen className="w-4 h-4 mr-2" />
                     Learn More
                   </Link>
                 </Button>
                 <Button className="w-full bg-slate hover:bg-slate-800 text-white">
-                  <Link href="/admissions" className="flex items-center justify-center">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Apply Now
+                  <Link href="#contact" className="flex items-center justify-center scroll-smooth">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Contact Us
                   </Link>
                 </Button>
               </div>
