@@ -6,6 +6,7 @@ export interface Clase {
   time: string; // HH:MM:SS format
   minStudents: number;
   maxStudents: number;
+  enrolled: number; // number of students currently enrolled
   price: number;
   classDuration: number; // duration in minutes
   created_at: string;
@@ -35,6 +36,7 @@ export interface CreateClaseData {
   time: string;
   minStudents: number;
   maxStudents: number;
+  enrolled?: number; // optional, defaults to 0
   price: number;
   classDuration: number;
 }
