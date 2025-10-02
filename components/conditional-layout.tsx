@@ -20,8 +20,11 @@ export default function ConditionalLayout({ children, showHeader = true }: Condi
   // Check if we're on the landing page
   const isLandingPage = pathname?.startsWith('/landing')
   
-  if (isCocinartePage || isLandingPage || !showHeader) {
-    // For Cocinarte pages, landing page, or when showHeader is false, only render the children (no header/footer)
+  // Check if we're on the dashboard page
+  const isDashboardPage = pathname?.startsWith('/dashboard')
+  
+  if (isCocinartePage || isLandingPage || isDashboardPage || !showHeader) {
+    // For Cocinarte pages, landing page, dashboard, or when showHeader is false, only render the children (no header/footer)
     return <>{children}</>
   }
   
