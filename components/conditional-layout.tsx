@@ -8,16 +8,20 @@ import FloatingCTA from "@/components/floating-cta"
 
 interface ConditionalLayoutProps {
   children: React.ReactNode
+  showHeader?: boolean
 }
 
-export default function ConditionalLayout({ children }: ConditionalLayoutProps) {
+export default function ConditionalLayout({ children, showHeader = true }: ConditionalLayoutProps) {
   const pathname = usePathname()
   
   // Check if we're on a Cocinarte page
   const isCocinartePage = pathname?.startsWith('/cocinarte')
   
-  if (isCocinartePage) {
-    // For Cocinarte pages, only render the children (no header/footer)
+  // Check if we're on the landing page
+  const isLandingPage = pathname?.startsWith('/landing')
+  
+  if (isCocinartePage || isLandingPage || !showHeader) {
+    // For Cocinarte pages, landing page, or when showHeader is false, only render the children (no header/footer)
     return <>{children}</>
   }
   
