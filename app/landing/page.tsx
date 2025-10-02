@@ -319,6 +319,11 @@ export default function LandingPage() {
                     className="w-full h-full object-contain"
                   />
                 </div>
+                <div className="flex justify-center mb-2 sm:mb-3">
+                  <Badge variant="secondary" className="bg-slate-200 text-slate-800 text-xs w-fit">
+                    K-5 Elementary School
+                  </Badge>
+                </div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">Spanish Horizons Academy</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2 sm:mb-3 flex-grow">
                   K-5 Spanish immersion school with Expeditionary Learning approach
@@ -344,6 +349,11 @@ export default function LandingPage() {
                     height={112}
                     className="w-full h-full object-contain"
                   />
+                </div>
+                <div className="flex justify-center mb-2 sm:mb-3">
+                  <Badge variant="secondary" className="bg-green-200 text-green-800 text-xs w-fit">
+                    Preschool & Daycare
+                  </Badge>
                 </div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">
                   Casita Azul
@@ -372,6 +382,11 @@ export default function LandingPage() {
                     height={112}
                     className="w-full h-full object-contain"
                   />
+                </div>
+                <div className="flex justify-center mb-2 sm:mb-3">
+                  <Badge variant="secondary" className="bg-orange-200 text-orange-800 text-xs w-fit">
+                    Cooking Classes
+                  </Badge>
                 </div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">Cocinarte</h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2 sm:mb-3 flex-grow">
@@ -438,6 +453,8 @@ export default function LandingPage() {
                         className="w-full h-full object-contain"
                       />
                     </div>
+                  </div>
+                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-slate-200 text-slate-800 text-xs sm:text-sm w-fit">
                       K-5 Elementary School
                     </Badge>
@@ -521,6 +538,8 @@ export default function LandingPage() {
                         className="w-full h-full object-contain"
                       />
                     </div>
+                  </div>
+                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-green-200 text-green-800 text-xs sm:text-sm w-fit">
                       Preschool & Daycare
                     </Badge>
@@ -590,6 +609,8 @@ export default function LandingPage() {
                         className="w-full h-full object-contain"
                       />
                     </div>
+                  </div>
+                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-orange-200 text-orange-800 text-xs sm:text-sm w-fit">
                       Cooking Classes
                     </Badge>
@@ -673,6 +694,8 @@ export default function LandingPage() {
                         className="w-full h-full object-contain"
                       />
                     </div>
+                  </div>
+                  <div className="flex justify-center sm:justify-start mb-2 sm:mb-3">
                     <Badge variant="secondary" className="bg-amber-200 text-amber-800 text-xs sm:text-sm w-fit">
                       Summer Camp
                     </Badge>
