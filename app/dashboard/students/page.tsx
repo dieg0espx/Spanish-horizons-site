@@ -23,14 +23,14 @@ export default async function StudentsPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Students</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Cocinarte Students</h1>
             <p className="text-muted-foreground">
-              Manage student information and enrollment.
+              Manage Cocinarte cooking class students and enrollment.
             </p>
           </div>
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Add New Student
+            Add New Cooking Student
           </Button>
         </div>
 
@@ -38,13 +38,13 @@ export default async function StudentsPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Students</CardTitle>
+              <CardTitle className="text-sm font-medium">Cocinarte Students</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">26</div>
+              <div className="text-2xl font-bold">18</div>
               <p className="text-xs text-muted-foreground">
-                Active enrollment
+                Active cooking students
               </p>
             </CardContent>
           </Card>
@@ -55,35 +55,35 @@ export default async function StudentsPage() {
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">4</div>
+              <div className="text-2xl font-bold">3</div>
               <p className="text-xs text-muted-foreground">
-                Recent enrollments
+                New cooking students
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Classes</CardTitle>
+              <CardTitle className="text-sm font-medium">Active Cooking Classes</CardTitle>
               <BookOpen className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">3</div>
+              <div className="text-2xl font-bold">5</div>
               <p className="text-xs text-muted-foreground">
-                Currently running
+                Cooking sessions running
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Completion Rate</CardTitle>
+              <CardTitle className="text-sm font-medium">Recipe Mastery Rate</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">94%</div>
+              <div className="text-2xl font-bold">87%</div>
               <p className="text-xs text-muted-foreground">
-                Course completion
+                Recipe completion rate
               </p>
             </CardContent>
           </Card>
@@ -154,7 +154,7 @@ export default async function StudentsPage() {
                     </div>
                     <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                       <BookOpen className="h-3 w-3" />
-                      <span>Cocinarte Workshop</span>
+                      <span>Tapas Workshop</span>
                     </div>
                   </div>
                 </div>
@@ -190,7 +190,7 @@ export default async function StudentsPage() {
                     </div>
                     <div className="flex items-center space-x-1 text-sm text-muted-foreground">
                       <BookOpen className="h-3 w-3" />
-                      <span>Advanced Conversation</span>
+                      <span>Spanish Tortilla Workshop</span>
                     </div>
                   </div>
                 </div>

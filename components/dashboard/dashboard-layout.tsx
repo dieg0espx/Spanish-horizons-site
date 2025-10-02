@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import {
   LayoutDashboard,
@@ -66,12 +67,14 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <Sidebar>
           <SidebarHeader>
             <div className="flex items-center gap-2 px-2 py-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-blue-600 text-white font-bold">
-                SH
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold">Spanish Horizons</span>
-                <span className="text-xs text-muted-foreground">Dashboard</span>
+              <div className="flex h-[80px] w-[200px] items-center justify-center rounded overflow-hidden">
+                <Image 
+                  src="/cocinarte/cocinarteLogo.png" 
+                  alt="Cocinarte Logo" 
+                  width={32} 
+                  height={32}
+                  className="object-contain w-full h-full"
+                />
               </div>
             </div>
           </SidebarHeader>

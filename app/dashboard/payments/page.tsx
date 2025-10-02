@@ -23,14 +23,14 @@ export default async function PaymentsPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Payments</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Cocinarte Payments</h1>
             <p className="text-muted-foreground">
-              Track student payments and manage billing.
+              Track Cocinarte cooking class payments and manage billing.
             </p>
           </div>
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Record Payment
+            Record Cooking Class Payment
           </Button>
         </div>
 
@@ -42,22 +42,22 @@ export default async function PaymentsPage() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$4,250.00</div>
+              <div className="text-2xl font-bold">$2,850.00</div>
               <p className="text-xs text-muted-foreground">
-                This month
+                Cocinarte revenue this month
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Pending Payments</CardTitle>
+              <CardTitle className="text-sm font-medium">Pending Cooking Class Payments</CardTitle>
               <CreditCard className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$850.00</div>
+              <div className="text-2xl font-bold">$425.00</div>
               <p className="text-xs text-muted-foreground">
-                5 outstanding
+                3 outstanding cooking class payments
               </p>
             </CardContent>
           </Card>
@@ -68,22 +68,22 @@ export default async function PaymentsPage() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$3,400.00</div>
+              <div className="text-2xl font-bold">$2,425.00</div>
               <p className="text-xs text-muted-foreground">
-                22 payments
+                15 cooking class payments
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Average Payment</CardTitle>
+              <CardTitle className="text-sm font-medium">Average Cooking Class Fee</CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$154.55</div>
+              <div className="text-2xl font-bold">$95.00</div>
               <p className="text-xs text-muted-foreground">
-                Per student
+                Per cooking class
               </p>
             </CardContent>
           </Card>
@@ -106,13 +106,13 @@ export default async function PaymentsPage() {
                   </div>
                   <div>
                     <p className="font-medium">Maria Rodriguez</p>
-                    <p className="text-sm text-muted-foreground">Spanish for Beginners</p>
+                    <p className="text-sm text-muted-foreground">Paella Workshop</p>
                     <p className="text-sm text-muted-foreground">Dec 15, 2024</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="text-right">
-                    <p className="font-medium text-green-600">$150.00</p>
+                    <p className="font-medium text-green-600">$95.00</p>
                     <Badge variant="secondary">Paid</Badge>
                   </div>
                   <div className="flex space-x-1">
@@ -133,13 +133,13 @@ export default async function PaymentsPage() {
                   </div>
                   <div>
                     <p className="font-medium">John Smith</p>
-                    <p className="text-sm text-muted-foreground">Cocinarte Workshop</p>
+                    <p className="text-sm text-muted-foreground">Tapas Workshop</p>
                     <p className="text-sm text-muted-foreground">Dec 14, 2024</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="text-right">
-                    <p className="font-medium text-green-600">$75.00</p>
+                    <p className="font-medium text-green-600">$85.00</p>
                     <Badge variant="secondary">Paid</Badge>
                   </div>
                   <div className="flex space-x-1">
@@ -160,13 +160,13 @@ export default async function PaymentsPage() {
                   </div>
                   <div>
                     <p className="font-medium">Sarah Johnson</p>
-                    <p className="text-sm text-muted-foreground">Advanced Conversation</p>
+                    <p className="text-sm text-muted-foreground">Spanish Tortilla Workshop</p>
                     <p className="text-sm text-muted-foreground">Dec 13, 2024</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="text-right">
-                    <p className="font-medium text-orange-600">$200.00</p>
+                    <p className="font-medium text-orange-600">$90.00</p>
                     <Badge variant="outline">Pending</Badge>
                   </div>
                   <div className="flex space-x-1">

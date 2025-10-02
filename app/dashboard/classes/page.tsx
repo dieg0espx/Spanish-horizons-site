@@ -23,14 +23,14 @@ export default async function ClassesPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Classes</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Cocinarte Classes</h1>
             <p className="text-muted-foreground">
-              Manage your Spanish classes and programs.
+              Manage your Cocinarte cooking classes and workshops.
             </p>
           </div>
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Add New Class
+            Add New Cooking Class
           </Button>
         </div>
 
@@ -41,48 +41,7 @@ export default async function ClassesPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <BookOpen className="h-5 w-5 text-blue-600" />
-                  <CardTitle>Spanish for Beginners</CardTitle>
-                </div>
-                <Badge variant="secondary">Active</Badge>
-              </div>
-              <CardDescription>
-                Mon, Wed, Fri - 10:00 AM to 11:30 AM
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                  <Users className="h-4 w-4" />
-                  <span>12 students enrolled</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  <span>Next class: Tomorrow</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4" />
-                  <span>Duration: 90 minutes</span>
-                </div>
-                <div className="flex space-x-2 pt-2">
-                  <Button size="sm" variant="outline">
-                    <Edit className="h-3 w-3 mr-1" />
-                    Edit
-                  </Button>
-                  <Button size="sm" variant="outline">
-                    <Trash2 className="h-3 w-3 mr-1" />
-                    Delete
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="h-5 w-5 text-green-600" />
-                  <CardTitle>Cocinarte Workshop</CardTitle>
+                  <CardTitle>Paella Workshop</CardTitle>
                 </div>
                 <Badge variant="secondary">Active</Badge>
               </div>
@@ -122,13 +81,13 @@ export default async function ClassesPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <BookOpen className="h-5 w-5 text-purple-600" />
-                  <CardTitle>Advanced Conversation</CardTitle>
+                  <BookOpen className="h-5 w-5 text-green-600" />
+                  <CardTitle>Tapas Workshop</CardTitle>
                 </div>
-                <Badge variant="outline">Inactive</Badge>
+                <Badge variant="secondary">Active</Badge>
               </div>
               <CardDescription>
-                Tue, Thu - 6:00 PM to 7:30 PM
+                Friday - 6:00 PM to 8:00 PM
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -139,11 +98,52 @@ export default async function ClassesPage() {
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />
-                  <span>Last class: 2 weeks ago</span>
+                  <span>Next class: This Friday</span>
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
-                  <span>Duration: 90 minutes</span>
+                  <span>Duration: 120 minutes</span>
+                </div>
+                <div className="flex space-x-2 pt-2">
+                  <Button size="sm" variant="outline">
+                    <Edit className="h-3 w-3 mr-1" />
+                    Edit
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <Trash2 className="h-3 w-3 mr-1" />
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <BookOpen className="h-5 w-5 text-purple-600" />
+                  <CardTitle>Spanish Tortilla Workshop</CardTitle>
+                </div>
+                <Badge variant="outline">Inactive</Badge>
+              </div>
+              <CardDescription>
+                Sunday - 10:00 AM to 12:00 PM
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <Users className="h-4 w-4" />
+                  <span>4 students enrolled</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  <span>Last class: 1 week ago</span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <Clock className="h-4 w-4" />
+                  <span>Duration: 120 minutes</span>
                 </div>
                 <div className="flex space-x-2 pt-2">
                   <Button size="sm" variant="outline">

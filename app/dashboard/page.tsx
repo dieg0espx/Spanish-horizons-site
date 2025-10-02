@@ -24,9 +24,9 @@ export default async function DashboardPage() {
         {/* Welcome Section */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Dashboard Overview</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Cocinarte Dashboard</h1>
             <p className="text-muted-foreground">
-              Welcome back! Here's a summary of your Spanish learning programs.
+              Welcome back! Here's a summary of your Cocinarte cooking programs.
             </p>
           </div>
         </div>
@@ -35,26 +35,26 @@ export default async function DashboardPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Students</CardTitle>
+              <CardTitle className="text-sm font-medium">Cocinarte Students</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">26</div>
+              <div className="text-2xl font-bold">18</div>
               <p className="text-xs text-muted-foreground">
-                Active enrollment
+                Active cooking students
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Classes</CardTitle>
+              <CardTitle className="text-sm font-medium">Cooking Classes</CardTitle>
               <BookOpen className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">3</div>
+              <div className="text-2xl font-bold">5</div>
               <p className="text-xs text-muted-foreground">
-                Currently running
+                Active cooking sessions
               </p>
             </CardContent>
           </Card>
@@ -65,22 +65,22 @@ export default async function DashboardPage() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$4,250</div>
+              <div className="text-2xl font-bold">$2,850</div>
               <p className="text-xs text-muted-foreground">
-                This month
+                Cocinarte income
               </p>
             </CardContent>
           </Card>
           
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Completion Rate</CardTitle>
+              <CardTitle className="text-sm font-medium">Recipe Mastery</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">94%</div>
+              <div className="text-2xl font-bold">87%</div>
               <p className="text-xs text-muted-foreground">
-                Course completion
+                Recipe completion rate
               </p>
             </CardContent>
           </Card>
@@ -98,13 +98,13 @@ export default async function DashboardPage() {
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
               </div>
               <CardDescription>
-                Manage your Spanish classes and programs
+                Manage your Cocinarte cooking classes and workshops
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">3 active classes</p>
-                <p className="text-sm text-muted-foreground">26 students enrolled</p>
+                <p className="text-sm text-muted-foreground">5 active cooking classes</p>
+                <p className="text-sm text-muted-foreground">18 students enrolled</p>
               </div>
               <Button asChild className="w-full mt-4">
                 <Link href="/dashboard/classes">Manage Classes</Link>
@@ -122,13 +122,13 @@ export default async function DashboardPage() {
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
               </div>
               <CardDescription>
-                Track student payments and billing
+                Track Cocinarte payments and cooking class fees
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">$4,250 this month</p>
-                <p className="text-sm text-muted-foreground">$850 pending</p>
+                <p className="text-sm text-muted-foreground">$2,850 this month</p>
+                <p className="text-sm text-muted-foreground">$425 pending</p>
               </div>
               <Button asChild className="w-full mt-4">
                 <Link href="/dashboard/payments">View Payments</Link>
@@ -146,13 +146,13 @@ export default async function DashboardPage() {
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
               </div>
               <CardDescription>
-                Manage student information and enrollment
+                Manage Cocinarte student information and enrollment
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">26 total students</p>
-                <p className="text-sm text-muted-foreground">4 new this month</p>
+                <p className="text-sm text-muted-foreground">18 cooking students</p>
+                <p className="text-sm text-muted-foreground">3 new this month</p>
               </div>
               <Button asChild className="w-full mt-4">
                 <Link href="/dashboard/students">Manage Students</Link>
@@ -177,10 +177,10 @@ export default async function DashboardPage() {
                 </div>
                 <div className="flex-1 space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    New student enrolled
+                    New Cocinarte student enrolled
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Maria Rodriguez joined Spanish for Beginners
+                    Maria Rodriguez joined Paella Workshop
                   </p>
                 </div>
                 <div className="text-xs text-muted-foreground">
@@ -195,10 +195,10 @@ export default async function DashboardPage() {
                 </div>
                 <div className="flex-1 space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Payment received
+                    Cocinarte payment received
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    John Smith paid $75 for Cocinarte Workshop
+                    John Smith paid $85 for Tapas Workshop
                   </p>
                 </div>
                 <div className="text-xs text-muted-foreground">
@@ -213,10 +213,10 @@ export default async function DashboardPage() {
                 </div>
                 <div className="flex-1 space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Class completed
+                    Cooking class completed
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Advanced Conversation - Session 5 finished
+                    Spanish Tortilla Workshop - Session 3 finished
                   </p>
                 </div>
                 <div className="text-xs text-muted-foreground">
