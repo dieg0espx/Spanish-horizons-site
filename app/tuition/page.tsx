@@ -209,7 +209,7 @@ export default function TuitionPage() {
                   ))}
                 </div>
 
-                                 <div className="mt-4 p-3 bg-slate rounded-lg">
+                <div className="mt-4 p-3 bg-slate rounded-lg">
                   <p className="text-sm text-white font-questa">
                     <strong>Includes:</strong> Snacks, cultural activities, homework help (Grades 2+), outdoor play, and
                     mindfulness activities
