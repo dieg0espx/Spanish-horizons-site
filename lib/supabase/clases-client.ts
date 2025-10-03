@@ -221,4 +221,32 @@ export class ClasesClientService {
 
     return data || [];
   }
+
+  async updateClassEnrollment(claseId: string, increment: number): Promise<Clase> {
+    // First get the current class to check enrollment limits
+    const currentClass = await this.getClaseById(claseId);
+    if (!currentClass) {
+      throw new Error('Class not found');
+    }
+
+    // Check if adding this enrollment would exceed max students
+    const newEnrolled = currentClass.enrolled + increment;
+    if (newEnrolled > currentClass.maxStudents) {
+      throw new Error('Class is full. Cannot enroll more students.');
+    }
+
+    // Update the enrolled count
+    const { data, error } = await this.supabase
+      .from('clases')
+      .update({ enrolled: newEnrolled })
+      .eq('id', claseId)
+      .select()
+      .single();
+
+    if (error) {
+      throw new Error(`Error updating class enrollment: ${error.message}`);
+    }
+
+    return data;
+  }
 }

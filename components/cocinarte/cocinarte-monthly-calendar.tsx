@@ -17,6 +17,7 @@ import {
   Star,
   Printer
 } from "lucide-react"
+import CocinarteBookingPopup from "./cocinarte-booking-popup"
 
 interface CookingClass {
   id: string
@@ -34,6 +35,7 @@ export default function CocinarteMonthlyCalendar() {
   const [selectedClass, setSelectedClass] = useState<CookingClass | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [viewMode, setViewMode] = useState<'calendar' | 'cards'>('calendar')
+  const [isBookingOpen, setIsBookingOpen] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
@@ -1026,7 +1028,10 @@ export default function CocinarteMonthlyCalendar() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold text-amber">${classItem.price}</span>
-                  <Button className="bg-amber hover:bg-golden text-cocinarte-white font-bold rounded-xl">
+                  <Button 
+                    onClick={() => setIsBookingOpen(true)}
+                    className="bg-amber hover:bg-golden text-cocinarte-white font-bold rounded-xl"
+                  >
                     Book Now
                   </Button>
                 </div>
@@ -1145,6 +1150,12 @@ export default function CocinarteMonthlyCalendar() {
           </div>
         </div>
       )}
+      
+      {/* Booking Popup */}
+      <CocinarteBookingPopup 
+        isOpen={isBookingOpen} 
+        onClose={() => setIsBookingOpen(false)} 
+      />
     </div>
   )
 }

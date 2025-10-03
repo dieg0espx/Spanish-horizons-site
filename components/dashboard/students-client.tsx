@@ -145,10 +145,6 @@ export function StudentsClient({ initialStudents }: StudentsClientProps): JSX.El
             />
           </div>
         </div>
-        <Button onClick={openCreate}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add New Student
-        </Button>
       </div>
 
       <div className="grid gap-4 w-full grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
