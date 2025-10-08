@@ -101,60 +101,60 @@ export default function AboutPage() {
       />
 
       {/* Our Story Section - Clean Modern Design */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-12 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="mb-12 md:mb-20">
-            <h2 className="text-5xl md:text-6xl font-ivry font-bold text-slate mb-4">Our Story</h2>
-            <p className="text-xl text-slate-medium max-w-3xlfont-questa">
+          <div className="mb-8 md:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-ivry font-bold text-slate mb-4 px-4">Our Story</h2>
+            <p className="text-base sm:text-lg md:text-xl text-slate-medium max-w-3xl font-questa px-4">
               A journey of passion, innovation, and commitment to bilingual excellence
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-20 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
             {/* Content Side */}
-            <div className="space-y-12">
+            <div className="space-y-8 md:space-y-12">
               {/* Vision Statement */}
-              <div className="border-l-4 border-golden pl-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-golden rounded-lg flex items-center justify-center mr-4">
-                    <Star className="h-5 w-5 text-white" />
+              <div className="border-l-4 border-golden pl-4 sm:pl-6 md:pl-8">
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-golden rounded-lg flex items-center justify-center mr-3 md:mr-4">
+                    <Star className="h-4 w-4 md:h-5 md:w-5 text-white" />
                   </div>
-                  <h3 className="text-2xl font-ivry font-bold text-slate">Our Vision</h3>
+                  <h3 className="text-xl md:text-2xl font-ivry font-bold text-slate">Our Vision</h3>
                 </div>
-                <p className="text-lg text-slate-medium leading-relaxed font-questa">
+                <p className="text-base md:text-lg text-slate-medium leading-relaxed font-questa">
                   Spanish Horizons Academy was born from a vision: to create a school where learning is joyful,
                   meaningful, and deeply connected to the world around us.
                 </p>
               </div>
 
               {/* Legacy Section */}
-              <div className="border-l-4 border-amber pl-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-amber rounded-lg flex items-center justify-center mr-4">
-                    <Heart className="h-5 w-5 text-white" />
+              <div className="border-l-4 border-amber pl-4 sm:pl-6 md:pl-8">
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-amber rounded-lg flex items-center justify-center mr-3 md:mr-4">
+                    <Heart className="h-4 w-4 md:h-5 md:w-5 text-white" />
                   </div>
-                  <h3 className="text-2xl font-ivry font-bold text-slate">Our Legacy</h3>
+                  <h3 className="text-xl md:text-2xl font-ivry font-bold text-slate">Our Legacy</h3>
                 </div>
-                <p className="text-lg text-slate-medium leading-relaxed font-questa mb-4">
+                <p className="text-base md:text-lg text-slate-medium leading-relaxed font-questa mb-4">
                   Founded by Laura Paz-Whitmore, the heart behind Casita Azul and Amanecer Academy, Spanish Horizons
                   continues a legacy of culturally rich, bilingual programs.
                 </p>
-                <p className="text-lg text-slate-medium leading-relaxed font-questa">
+                <p className="text-base md:text-lg text-slate-medium leading-relaxed font-questa">
                   What began with early childhood education has expanded into a full K–5 school where students explore 
                   the world through movement, cooking, art, and storytelling.
                 </p>
               </div>
 
               {/* Approach Section */}
-              <div className="bg-slate text-white p-8 rounded-2xl">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-4">
-                    <Globe className="h-5 w-5 text-slate" />
+              <div className="bg-slate text-white p-4 sm:p-6 md:p-8 rounded-2xl">
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-white rounded-lg flex items-center justify-center mr-3 md:mr-4">
+                    <Globe className="h-4 w-4 md:h-5 md:w-5 text-slate" />
                   </div>
-                  <h3 className="text-2xl font-ivry font-bold text-white">Our Approach</h3>
+                  <h3 className="text-xl md:text-2xl font-ivry font-bold text-white">Our Approach</h3>
                 </div>
-                <p className="text-lg text-white/90 leading-relaxed font-questa">
+                <p className="text-base md:text-lg text-white/90 leading-relaxed font-questa">
                   Our approach combines the proven methodology of Expeditionary Learning with authentic Spanish
                   immersion, creating an environment where children don't just learn about the world—they experience it.
                 </p>
@@ -180,9 +180,9 @@ export default function AboutPage() {
             </div>
 
             {/* Images Side */}
-            <div className="space-y-8">
-              <div className="grid grid-cols-2 gap-8">
-                <div className="aspect-[4/5] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
+            <div className="space-y-4 md:space-y-8">
+              <div className="grid grid-cols-2 gap-4 md:gap-8">
+                <div className="aspect-[4/5] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                   <img 
                     src={storyImage1} 
                     alt="Our Legacy" 
@@ -190,7 +190,7 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <div className="aspect-[4/5] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
+                <div className="aspect-[4/5] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                   <img 
                     src={storyImage2} 
                     alt="Our Legacy" 
@@ -199,7 +199,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
-              <div className="aspect-[16/9] bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
+              <div className="aspect-[16/9] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 group hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] hover:scale-105 transition-all duration-500 ease-out">
                 <img 
                   src={storyImage3} 
                   alt="Our Legacy" 
@@ -213,7 +213,7 @@ export default function AboutPage() {
       </section>
 
       {/* Founder Section with Enhanced Images */}
-      <section id="leadership" className="relative py-16 overflow-hidden">
+      <section id="leadership" className="relative py-12 md:py-16 overflow-hidden">
         {/* Background Image with Parallax */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -227,45 +227,45 @@ export default function AboutPage() {
         
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-ivry font-bold text-white mb-4">Meet Our Founder</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-ivry font-bold text-white mb-4 px-4">Meet Our Founder</h2>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 items-start">
+          <div className="grid lg:grid-cols-3 gap-6 md:gap-8 items-start">
             {/* Founder Photo */}
             <div className="text-center h-full">
-              <div className="w-80 h-[calc(100%-80px)] bg-white rounded-lg mx-auto mb-6 overflow-hidden shadow-2xl">
+              <div className="w-full max-w-xs mx-auto aspect-[3/4] bg-white rounded-lg mb-4 md:mb-6 overflow-hidden shadow-2xl">
                 <img 
                   src={founderImage} 
                   alt="Laura Paz-Whitmore - Founder & Educational Director" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-ivry font-bold text-white">Laura Paz-Whitmore</h3>
-              <p className="text-white/50 font-questa font-semibold text-lg">Founder & Educational Director</p>
+              <h3 className="text-xl md:text-2xl font-ivry font-bold text-white">Laura Paz-Whitmore</h3>
+              <p className="text-white/50 font-questa font-semibold text-base md:text-lg">Founder & Educational Director</p>
             </div>
 
             {/* Bio Content */}
             <div className="lg:col-span-2">
               <Card className="shadow-2xl border-0 bg-white h-full">
-                <CardContent className="p-10">
-                  <div className="space-y-6 text-slate-medium font-questa">
-                    <p className="text-lg leading-relaxed">
+                <CardContent className="p-4 sm:p-6 md:p-10">
+                  <div className="space-y-4 md:space-y-6 text-slate-medium font-questa">
+                    <p className="text-sm sm:text-base md:text-lg leading-relaxed">
                       With a background in psychology and behavioral health, Laura brings a strong passion for emotional
                       regulation, mental health, and prefrontal cortex development. She is the visionary behind Casita
                       Azul and Amanecer Academy, and now Spanish Horizons Academy.
                     </p>
-                    <p className="text-lg leading-relaxed">
+                    <p className="text-sm sm:text-base md:text-lg leading-relaxed">
                       Laura designs schools where children are seen, nurtured, and deeply inspired. Her approach
                       integrates cutting-edge research in child development with authentic cultural experiences and
                       bilingual education.
                     </p>
-                    <blockquote className=" pl-6 italic text-xl text-white bg-slate p-6 rounded-lg font-questa">
+                    <blockquote className="pl-4 md:pl-6 italic text-base sm:text-lg md:text-xl text-white bg-slate p-4 md:p-6 rounded-lg font-questa">
                       "Children learn best when they feel loved, seen, and inspired."
                     </blockquote>
 
                     {/* Additional Images */}
-                    <div className="grid grid-cols-2 gap-4 mt-8">
+                    <div className="grid grid-cols-2 gap-3 md:gap-4 mt-6 md:mt-8">
                       <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
                         <img 
                           src="/pictures/children/children1.jpeg" 
@@ -295,16 +295,16 @@ export default function AboutPage() {
        <section id="values" className="py-12 md:py-16 ">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-4xl font-ivry font-bold text-slate mb-4">Our Values in Action</h2>
-            <p className="text-xl text-slate-medium font-questa">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-ivry font-bold text-slate mb-4 px-4">Our Values in Action</h2>
+            <p className="text-base sm:text-lg md:text-xl text-slate-medium font-questa px-4">
               See how our core values shape every aspect of our educational approach
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-10">
-                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+              <CardContent className="p-4 sm:p-6 md:p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-4 md:mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage1} 
                     alt="Curiosity in Action" 
@@ -312,8 +312,8 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Curiosity</h3>
-                <p className="text-white/90 font-questa">
+                <h3 className="text-lg md:text-xl font-ivry font-bold mb-2 md:mb-3 text-white">Curiosity</h3>
+                <p className="text-white/90 font-questa text-sm md:text-base">
                   We foster natural wonder through hands-on exploration, encouraging students to ask questions and seek
                   answers through investigation.
                 </p>
@@ -321,8 +321,8 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-10">
-                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+              <CardContent className="p-4 sm:p-6 md:p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-4 md:mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage2} 
                     alt="Cultural Learning" 
@@ -330,8 +330,8 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Culture</h3>
-                <p className="text-white/90 font-questa">
+                <h3 className="text-lg md:text-xl font-ivry font-bold mb-2 md:mb-3 text-white">Culture</h3>
+                <p className="text-white/90 font-questa text-sm md:text-base">
                   Rich cultural experiences through cooking, music, art, and storytelling connect students to the
                   broader Spanish-speaking world.
                 </p>
@@ -339,8 +339,8 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-10">
-                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+              <CardContent className="p-4 sm:p-6 md:p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-4 md:mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage3} 
                     alt="Community Building" 
@@ -348,8 +348,8 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Community</h3>
-                <p className="text-white/90 font-questa">
+                <h3 className="text-lg md:text-xl font-ivry font-bold mb-2 md:mb-3 text-white">Community</h3>
+                <p className="text-white/90 font-questa text-sm md:text-base">
                   Strong partnerships between families, teachers, and students create a supportive learning environment
                   for everyone.
                 </p>
@@ -357,8 +357,8 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-10">
-                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+              <CardContent className="p-4 sm:p-6 md:p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-4 md:mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage4} 
                     alt="Language Immersion" 
@@ -366,8 +366,8 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Language</h3>
-                <p className="text-white/90 font-questa">
+                <h3 className="text-lg md:text-xl font-ivry font-bold mb-2 md:mb-3 text-white">Language</h3>
+                <p className="text-white/90 font-questa text-sm md:text-base">
                   Authentic Spanish immersion develops true bilingual competency while maintaining strong English
                   language arts skills.
                 </p>
@@ -375,8 +375,8 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-10">
-                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+              <CardContent className="p-4 sm:p-6 md:p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-4 md:mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage5} 
                     alt="Project Discovery" 
@@ -384,8 +384,8 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Discovery</h3>
-                <p className="text-white/90 font-questa">
+                <h3 className="text-lg md:text-xl font-ivry font-bold mb-2 md:mb-3 text-white">Discovery</h3>
+                <p className="text-white/90 font-questa text-sm md:text-base">
                   Project-based expeditions allow students to uncover connections between subjects and real-world
                   applications.
                 </p>
@@ -393,8 +393,8 @@ export default function AboutPage() {
             </Card>
 
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate">
-              <CardContent className="p-10">
-                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
+              <CardContent className="p-4 sm:p-6 md:p-10">
+                <div className="aspect-[4/3] bg-gray-100 rounded-2xl mb-4 md:mb-8 overflow-hidden group/image hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out">
                   <img 
                     src={valueImage6} 
                     alt="Emotional Learning" 
@@ -402,8 +402,8 @@ export default function AboutPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
                 </div>
-                <h3 className="text-xl font-ivry font-bold mb-3 text-white">Heart-Centered Learning</h3>
-                <p className="text-white/90 font-questa">
+                <h3 className="text-lg md:text-xl font-ivry font-bold mb-2 md:mb-3 text-white">Heart-Centered Learning</h3>
+                <p className="text-white/90 font-questa text-sm md:text-base">
                   Emotional regulation and social-emotional learning are woven throughout our curriculum and daily
                   practices.
                 </p>
@@ -416,8 +416,8 @@ export default function AboutPage() {
       {/* Contact Footer */}
       <section className="py-12 bg-slate text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-ivry font-bold mb-4">Ready to Learn More?</h3>
-          <p className="text-white mb-8 text-lg font-questa">
+          <h3 className="text-xl sm:text-2xl font-ivry font-bold mb-4 px-4">Ready to Learn More?</h3>
+          <p className="text-white mb-6 md:mb-8 text-base sm:text-lg font-questa px-4">
             Schedule a tour to experience our vibrant learning community firsthand.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

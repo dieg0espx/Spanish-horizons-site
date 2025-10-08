@@ -22,7 +22,8 @@ const config: Config = {
   			'poppins': ['var(--font-poppins)', 'system-ui', 'sans-serif'],
   			'questa': ['var(--font-playfair)', 'Georgia', 'serif'],
   			'ivry': ['IvryOra Display', 'serif'],
-  			'mono': ['JetBrains Mono', 'Fira Code', 'monospace']
+  			'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
+  			'coming-soon': ['Coming Soon', 'cursive']
   		},
 		colors: {
 			// Custom color palette

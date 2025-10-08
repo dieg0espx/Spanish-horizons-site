@@ -105,17 +105,17 @@ export default function HeroWithImages({
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         
-        <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6 border border-white/30">
-          <Globe className="h-4 w-4 mr-2" />
-          {badge}
+        <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-medium mb-4 md:mb-6 border border-white/30">
+          <Globe className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+          <span className="truncate max-w-[250px] sm:max-w-none">{badge}</span>
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-light text-white mb-6 leading-tight tracking-wide">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-white mb-4 md:mb-6 leading-tight tracking-wide px-4">
           {title}
           {subtitle && <span className="text-golden block font-normal">{subtitle}</span>}
         </h1>
         
-        <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 leading-relaxed max-w-3xl mx-auto px-4" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
           {description}
         </p>
         

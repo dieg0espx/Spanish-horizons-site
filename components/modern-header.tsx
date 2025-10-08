@@ -195,32 +195,32 @@ export default function ModernHeader() {
                 </Button>
 
                 {activeDropdown === "Discover More" && (
-                  <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50">
+                  <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50">
                     <Link
                       href="/casita-azul"
-                      className="flex items-center px-4 py-3 text-sm font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
+                      className="flex items-center px-4 py-4 text-base font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <Image 
                         src="/casita-azul.png" 
                         alt="Casita Azul Logo" 
-                        width={20} 
-                        height={20} 
-                        className="mr-3 object-contain" 
+                        width={44} 
+                        height={44} 
+                        className="mr-4 object-contain" 
                       />
                       Casita Azul
                     </Link>
                     <Link
                       href="/camp-alegria"
-                      className="flex items-center px-4 py-3 text-sm font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
+                      className="flex items-center px-4 py-4 text-base font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
                       onClick={() => setActiveDropdown(null)}
                     >
                       <Image 
                         src="/camp-alegria.png" 
                         alt="Camp Alegria Logo" 
-                        width={20} 
-                        height={20} 
-                        className="mr-3 object-contain" 
+                        width={44} 
+                        height={44} 
+                        className="mr-4 object-contain" 
                       />
                       Camp Alegria
                     </Link>
@@ -370,7 +370,7 @@ export default function ModernHeader() {
                         <div className="mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
                           <Link
                             href="/casita-azul"
-                            className="flex items-center px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                            className="flex items-center px-3 py-4 rounded-lg text-base font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                             onClick={() => {
                               setIsMenuAnimating(false)
                               setTimeout(() => {
@@ -382,15 +382,15 @@ export default function ModernHeader() {
                             <Image 
                               src="/casita-azul.png" 
                               alt="Casita Azul Logo" 
-                              width={18} 
-                              height={18} 
-                              className="mr-3 object-contain" 
+                              width={36} 
+                              height={36} 
+                              className="mr-4 object-contain" 
                             />
                             Casita Azul
                           </Link>
                           <Link
                             href="/camp-alegria"
-                            className="flex items-center px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                            className="flex items-center px-3 py-4 rounded-lg text-base font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                             onClick={() => {
                               setIsMenuAnimating(false)
                               setTimeout(() => {
@@ -402,9 +402,9 @@ export default function ModernHeader() {
                             <Image 
                               src="/camp-alegria.png" 
                               alt="Camp Alegria Logo" 
-                              width={18} 
-                              height={18} 
-                              className="mr-3 object-contain" 
+                              width={36} 
+                              height={36} 
+                              className="mr-4 object-contain" 
                             />
                             Camp Alegria
                           </Link>

@@ -28,12 +28,12 @@ export default function TuitionPage() {
   const aftercarePricing = [
     {
       plan: "5 Days/Week",
-      price: "$550/month",
+      price: "$650/month",
       description: "Monday through Friday coverage",
     },
     {
       plan: "3 Days/Week",
-      price: "$450/month",
+      price: "$550/month",
       description: "Flexible three-day schedule",
     },
     {

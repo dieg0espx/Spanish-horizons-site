@@ -151,11 +151,22 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
   // Auto-play videos when they become the current slide
   useEffect(() => {
     if (currentMedia && currentMedia.type === 'video' && videoRef.current) {
-      videoRef.current.play().then(() => {
-        setIsPlaying(true)
-      }).catch(() => {
-        setIsPlaying(false)
-      })
+      // Reset video to start
+      videoRef.current.currentTime = 0
+      
+      // Attempt to play
+      const playPromise = videoRef.current.play()
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true)
+          })
+          .catch((error) => {
+            console.log("Video autoplay prevented:", error)
+            setIsPlaying(false)
+          })
+      }
     } else {
       setIsPlaying(false)
     }
@@ -248,6 +259,7 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
           />
         ) : (
           <video
+            key={currentMedia.id}
             ref={videoRef}
             src={currentMedia.src}
             className="w-full h-full object-cover"
@@ -256,7 +268,21 @@ export default function ProgramCarousel({ media, color = "blue", className = "" 
             autoPlay
             playsInline
             onClick={toggleVideo}
-          />
+            preload="auto"
+            controls={false}
+            disablePictureInPicture
+            controlsList="nodownload nofullscreen noremoteplayback"
+            onLoadedData={() => {
+              if (videoRef.current) {
+                videoRef.current.play().catch(() => {
+                  console.log("Video autoplay was prevented")
+                })
+              }
+            }}
+          >
+            <source src={currentMedia.src} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         )}
         
       </div>

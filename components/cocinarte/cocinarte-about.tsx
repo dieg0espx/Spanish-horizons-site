@@ -34,49 +34,88 @@ export default function CocinarteAbout() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue">
-            <CardHeader className="text-center pb-3">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-cocinarte-blue rounded-full flex items-center justify-center mx-auto mb-3">
-                <ChefHat className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-cocinarte-navy" />
-              </div>
-              <CardTitle className="text-lg sm:text-xl lg:text-2xl text-slate font-bold">Hands-On Learning</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center pt-0">
-              <CardDescription className="text-slate-medium text-sm sm:text-base lg:text-lg leading-relaxed">
-                Interactive cooking experiences where kids learn by doing, building confidence 
-                and skills in the kitchen.
-              </CardDescription>
-            </CardContent>
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue relative overflow-hidden">
+            {/* Background Image */}
+            <Image
+              src="/cocinarte/handsOnLearning.jpg"
+              alt="Hands-On Learning"
+              fill
+              className="object-cover"
+            />
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/75"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <CardHeader className="text-center pb-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <ChefHat className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
+                </div>
+                <CardTitle className="text-lg sm:text-xl lg:text-2xl text-white font-bold">Hands-On Learning</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center pt-0">
+                <CardDescription className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
+                  Interactive cooking experiences where kids learn by doing, building confidence 
+                  and skills in the kitchen.
+                </CardDescription>
+              </CardContent>
+            </div>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue">
-            <CardHeader className="text-center pb-3">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-cocinarte-blue rounded-full flex items-center justify-center mx-auto mb-3">
-                <Utensils className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-cocinarte-navy" />
-              </div>
-              <CardTitle className="text-lg sm:text-xl lg:text-2xl text-slate font-bold">Latin Flavors</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center pt-0">
-              <CardDescription className="text-slate-medium text-sm sm:text-base lg:text-lg leading-relaxed">
-                Explore authentic Latin American cuisine and discover new flavors, ingredients, 
-                and cooking techniques.
-              </CardDescription>
-            </CardContent>
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue relative overflow-hidden">
+            {/* Background Image */}
+            <Image
+              src="/cocinarte/latinFlavours.jpg"
+              alt="Latin Flavors"
+              fill
+              className="object-cover"
+            />
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/75"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <CardHeader className="text-center pb-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Utensils className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
+                </div>
+                <CardTitle className="text-lg sm:text-xl lg:text-2xl text-white font-bold">Latin Flavors</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center pt-0">
+                <CardDescription className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
+                  Explore authentic Latin American cuisine and discover new flavors, ingredients, 
+                  and cooking techniques.
+                </CardDescription>
+              </CardContent>
+            </div>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue sm:col-span-2 lg:col-span-1">
-            <CardHeader className="text-center pb-3">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-cocinarte-blue rounded-full flex items-center justify-center mx-auto mb-3">
-                <Users className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-cocinarte-navy" />
-              </div>
-              <CardTitle className="text-lg sm:text-xl lg:text-2xl text-slate font-bold">Family Fun</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center pt-0">
-              <CardDescription className="text-slate-medium text-sm sm:text-base lg:text-lg leading-relaxed">
-                Perfect for kids and families to cook together, creating lasting memories 
-                and bonding experiences.
-              </CardDescription>
-            </CardContent>
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue sm:col-span-2 lg:col-span-1 relative overflow-hidden">
+            {/* Background Image */}
+            <Image
+              src="/cocinarte/family.jpg"
+              alt="Family Fun"
+              fill
+              className="object-cover"
+            />
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/75"></div>
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <CardHeader className="text-center pb-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Users className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
+                </div>
+                <CardTitle className="text-lg sm:text-xl lg:text-2xl text-white font-bold">Family Fun</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center pt-0">
+                <CardDescription className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
+                  Perfect for kids and families to cook together, creating lasting memories 
+                  and bonding experiences.
+                </CardDescription>
+              </CardContent>
+            </div>
           </Card>
         </div>
       </div>

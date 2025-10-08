@@ -55,7 +55,7 @@ export default function CocinarteBirthday() {
           <div className="bg-gradient-to-br from-cocinarte-yellow/50 to-cocinarte-yellow/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300">
             <Cake className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-yellow mx-auto mb-2 sm:mb-3" />
             <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Mini Fiesta</h3>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Up to 8 kids</p>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Minimum of 8 kids</p>
             <p className="text-2xl sm:text-3xl font-bold text-cocinarte-yellow mb-3 sm:mb-4">$350</p>
             <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
                   <li>• 2-hour cooking session</li>
@@ -69,7 +69,7 @@ export default function CocinarteBirthday() {
           <div className="bg-gradient-to-br from-cocinarte-red/50 to-cocinarte-red/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300">
             <PartyPopper className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-red mx-auto mb-2 sm:mb-3" />
             <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Deluxe Fiesta</h3>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Up to 12 kids</p>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Minimum of 12 kids</p>
             <p className="text-2xl sm:text-3xl font-bold text-cocinarte-red mb-3 sm:mb-4">$500</p>
             <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
                   <li>• 2.5-hour cooking session</li>
@@ -84,7 +84,7 @@ export default function CocinarteBirthday() {
           <div className="bg-gradient-to-br from-cocinarte-blue/50 to-cocinarte-blue/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300 sm:col-span-2 lg:col-span-1">
             <Star className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-navy mx-auto mb-2 sm:mb-3" />
             <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Premium Fiesta</h3>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Up to 16 kids</p>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Minimum of 16 kids</p>
             <p className="text-2xl sm:text-3xl font-bold text-cocinarte-navy mb-3 sm:mb-4">$750</p>
             <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
                   <li>• 3-hour cooking session</li>
