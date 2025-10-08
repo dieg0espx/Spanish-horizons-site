@@ -45,7 +45,7 @@ const faqs = [
     id: 7,
     question: "How does the aftercare program work?",
     answer:
-      "Aftercare runs from 3:15-5:30 PM with bilingual programming that continues the immersive experience. We offer 5-day ($550/month) and 3-day ($450/month) options, plus drop-in availability. The program includes snacks, homework help for grades 2+, and cultural activities.",
+      "Aftercare runs from 3:15-5:30 PM with bilingual programming that continues the immersive experience. We offer 5-day ($650/month) and 3-day ($550/month) options, plus drop-in availability. The program includes snacks, homework help for grades 2+, and cultural activities.",
   },
   {
     id: 8,

@@ -45,3 +45,11 @@
   font-style: italic;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Coming Soon';
+  src: url('/fonts/Coming_Soon/ComingSoon-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

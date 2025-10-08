@@ -28,23 +28,23 @@ export default function CampAlegriaPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="py-10">
+      <section className="py-6 md:py-10">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <Badge variant="secondary" className="bg-slate-100 text-slate-800 border-slate-200 px-4 py-2 text-sm">
-                  <Sun className="w-4 h-4 mr-2" />
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+            <div className="space-y-6 md:space-y-8">
+              <div className="space-y-3 md:space-y-4">
+                <Badge variant="secondary" className="bg-slate-100 text-slate-800 border-slate-200 px-3 sm:px-4 py-2 text-xs sm:text-sm">
+                  <Sun className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                   Summer 2025 Registration Open
                 </Badge>
-                <h1 className="text-4xl lg:text-6xl font-bold font-questa leading-tight text-slate">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-questa leading-tight text-slate">
                   Camp Alegría
                 </h1>
-                <p className="text-xl lg:text-2xl text-slate-600 font-questa">
+                <p className="text-lg sm:text-xl lg:text-2xl text-slate-600 font-questa">
                   Immersive Summer Camp for Ages 5-12
                 </p>
               </div>
-              <p className="text-lg text-slate-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
                 A one-of-a-kind immersive summer camp designed for children ages 5-12 to experience 
                 Latin American culture through storytelling, hands-on activities, and unforgettable experiences.
               </p>
@@ -71,10 +71,10 @@ export default function CampAlegriaPage() {
       </section>
 
       {/* Contact Info Section */}
-      <section id="contact" className="py-16 bg-white">
+      <section id="contact" className="py-12 md:py-16 bg-white">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold font-questa text-slate mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-questa text-slate mb-4 px-4">
               Register your child for a summer of fun!
             </h2>
           </div>
@@ -127,41 +127,41 @@ export default function CampAlegriaPage() {
       </section>
 
       {/* What Makes Camp Alegría Special */}
-      <section className="py-20 bg-gradient-to-br from-green-50 to-amber-50">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-green-50 to-amber-50">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold font-questa text-slate mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-questa text-slate mb-4 px-4">
               What Makes Camp Alegría Special?
             </h2>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-4xl mx-auto px-4">
               Camp Alegría offers a unique blend of Spanish immersion, cultural activities, and summer fun. Our experienced staff creates an environment where children can learn, grow, and make lasting memories while developing their Spanish language skills. Each session offers unique themes and activities designed to engage children in Spanish language learning through play, exploration, and cultural experiences.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold font-questa text-slate mb-4 flex items-center">
-                  <Globe className="w-8 h-8 mr-3 text-green-600" />
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="space-y-6 md:space-y-8">
+              <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-questa text-slate mb-3 md:mb-4 flex items-center">
+                  <Globe className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 mr-2 sm:mr-3 text-green-600 flex-shrink-0" />
                   Full Spanish Immersion
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-sm sm:text-base">
                   Complete Spanish language immersion with native speakers and cultural activities
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold font-questa text-slate mb-4 flex items-center">
-                  <Users className="w-8 h-8 mr-3 text-amber" />
+              <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-questa text-slate mb-3 md:mb-4 flex items-center">
+                  <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 mr-2 sm:mr-3 text-amber flex-shrink-0" />
                   Bilingual Support
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-sm sm:text-base">
                   Supportive bilingual environment for children at different Spanish proficiency levels
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
-                <p className="text-lg text-gray-600 font-semibold">
+              <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+                <p className="text-base sm:text-lg text-gray-600 font-semibold">
                   Each session will conclude with a special community event, such as a World Cup match, 
                   Carnaval parade, or group feast!
                 </p>
@@ -170,7 +170,7 @@ export default function CampAlegriaPage() {
 
             <div className="relative">
               <Image
-                src="/pictures/6-DSC02581.jpg"
+                src="/pictures/discoverMore.jpeg"
                 alt="Children enjoying Camp Alegria"
                 width={600}
                 height={400}
@@ -182,18 +182,18 @@ export default function CampAlegriaPage() {
       </section>
 
       {/* Sessions Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold font-questa text-slate mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-questa text-slate mb-4 px-4">
               Take a look to our sessions in 2026
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto px-4">
               Explore our exciting sessions for 2026 and give your child an unforgettable summer experience!
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
             {/* Session 1 */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-50 to-green-100">
               <CardHeader>

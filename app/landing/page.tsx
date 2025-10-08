@@ -60,7 +60,7 @@ export default function LandingPage() {
       {
         id: '4',
         type: 'video' as const,
-        src: '/videos/video 2.mp4',
+        src: 'https://res.cloudinary.com/dhuhpf3wq/video/upload/v1759936340/video2_xwke0b.mp4',
         alt: 'Music and dance activities',
         description: 'Students experience Latin American music and dance, building cultural connections through movement.',
         previewImage: '/landing/preview1.png'
@@ -182,7 +182,7 @@ export default function LandingPage() {
       {
         id: '2',
         type: 'video' as const,
-        src: '/videos/clip_jumping.mp4',
+        src: 'https://res.cloudinary.com/dhuhpf3wq/video/upload/v1759936324/clip_jumping_vgs3sf.mp4',
         alt: 'Outdoor camp activities',
         description: 'Active outdoor learning experiences that combine Spanish language with physical activities and fun.',
         previewImage: '/landing/preview2.png'
@@ -269,17 +269,17 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-black/65 z-10"></div>
         
         {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-8 w-full overflow-hidden">
-          <div className="text-center mb-16">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-questa leading-tight text-white mb-6">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
+          <div className="text-center mb-12 md:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-questa leading-tight text-white mb-4 md:mb-6 px-4">
               Spanish Horizons
               <span className="block text-amber">Family of Programs</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed px-4">
               From early childhood through elementary school, cooking adventures to summer camps 
               we provide comprehensive Spanish immersion education for every stage of your child's journey.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6 md:mt-8 px-4">
               <Button size="lg" className="bg-slate hover:bg-slate-800 text-white font-questa px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 w-[70%] sm:w-fit sm:mx-0">
                 <Link href="/admissions" className="flex items-center justify-center">
                   Get Started Today
@@ -296,12 +296,12 @@ export default function LandingPage() {
 
       {/* Overview Section */}
       <section id="overview" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-8 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-questa text-slate mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-questa text-slate mb-4 px-4">
               Four Programs, One Mission
             </h2>
-            <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto px-4">
               Our comprehensive Spanish immersion ecosystem serves children and families at every stage, 
               creating a seamless educational journey from early childhood through elementary school.
             </p>
@@ -421,7 +421,7 @@ export default function LandingPage() {
 
       {/* Detailed Program Sections */}
       <section ref={cardsRef} className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
           
           {/* Spanish Horizons Academy */}
           <div id="spanish-horizons" className={`mb-12 sm:mb-16 lg:mb-24 transform transition-all duration-700 ease-out ${
@@ -739,7 +739,7 @@ export default function LandingPage() {
 
       {/* Why Choose Our Programs */}
       <section 
-        className="py-20 relative overflow-hidden"
+        className="py-12 md:py-20 relative overflow-hidden"
         style={{
           backgroundImage: `url('/pictures/classroom2.jpeg')`,
           backgroundSize: 'cover',
@@ -751,11 +751,11 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-black/70 z-10"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold font-questa text-yellow-400 mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-questa text-yellow-400 mb-4 px-4">
               Why Choose Our Spanish Immersion Programs?
             </h2>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto px-4">
               Our comprehensive approach ensures your child receives the best bilingual education 
               from early childhood through elementary school.
             </p>
@@ -814,18 +814,18 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Information */}
-      <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+      <section id="contact" className="py-12 md:py-20 bg-gradient-to-br from-slate-50 to-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold font-questa text-slate mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-questa text-slate mb-4 px-4">
               Ready to Start Your <span className="block sm:inline">Journey?</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto px-4">
               Get in touch with us to learn more about our programs and find the perfect fit for your child.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12 md:mb-16">
             <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 cursor-pointer">
               <Link href="https://maps.app.goo.gl/fqpVt8rUhnFzenYg9" target="_blank" rel="noopener noreferrer">
                 <CardContent className="p-4 sm:p-6 lg:p-8 text-center">

@@ -138,15 +138,15 @@ export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-16 md:py-24">
+      <section className="bg-slate py-12 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
-              <Target className="h-4 w-4 mr-2" />
+            <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-slate rounded-full text-white text-xs sm:text-sm font-questa font-medium mb-4 md:mb-6">
+              <Target className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
               K-5 Academic Excellence
             </div>
-            <h1 className="text-5xl md:text-6xl font-ivry font-bold text-white mb-6">K-5 Spanish Immersion Program</h1>
-            <p className="text-xl text-white max-w-3xl mx-auto mb-8 font-questa">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-ivry font-bold text-white mb-4 md:mb-6 px-4">K-5 Spanish Immersion Program</h1>
+            <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto mb-6 md:mb-8 font-questa px-4">
               Built on two powerful pillars: Expeditionary Learning and Spanish Immersion (80/20 model). Where academic
               excellence meets cultural richness and hands-on discovery.
             </p>
@@ -190,16 +190,16 @@ export default function ProgramsPage() {
             <h2 className="text-3xl font-ivry font-bold text-white mb-4">Built on Two Pillars</h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate p-8">
-              <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
-                  <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-12">
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate p-4 sm:p-6 md:p-8">
+              <CardHeader className="text-center pb-4 md:pb-6">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                  <Globe className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-2xl font-ivry font-bold text-white">Spanish Immersion (80/20 Model)</CardTitle>
+                <CardTitle className="text-xl md:text-2xl font-ivry font-bold text-white">Spanish Immersion (80/20 Model)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4 text-white/90 font-questa">
+                <div className="space-y-3 md:space-y-4 text-white/90 font-questa text-sm md:text-base">
                   <p>
                     <strong>80% Spanish:</strong> Core subjects including math, science, social studies, and arts are
                     taught in Spanish, providing authentic language acquisition through meaningful content.
@@ -216,15 +216,15 @@ export default function ProgramsPage() {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate p-8">
-              <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
-                  <Target className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-slate p-4 sm:p-6 md:p-8">
+              <CardHeader className="text-center pb-4 md:pb-6">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                  <Target className="h-8 w-8 md:h-10 md:w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-2xl font-ivry font-bold text-white">Expeditionary Learning (EL)</CardTitle>
+                <CardTitle className="text-xl md:text-2xl font-ivry font-bold text-white">Expeditionary Learning (EL)</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4 text-white/90 font-questa">
+                <div className="space-y-3 md:space-y-4 text-white/90 font-questa text-sm md:text-base">
                   <p>
                     <strong>Project-Based Units:</strong> Students explore real-world topics through multi-week
                     expeditions that integrate multiple subjects and culminate in authentic products.
@@ -248,50 +248,50 @@ export default function ProgramsPage() {
        <section className="py-12 md:py-16 bg-slate">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Core Academic Areas</h2>
-            <p className="text-lg text-white/50 font-questa">
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">Core Academic Areas</h2>
+            <p className="text-base sm:text-lg text-white/50 font-questa px-4">
               Comprehensive curriculum delivered through immersive, hands-on experiences
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 text-center">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
-                   <BookOpen className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6 text-center">
+               <CardContent className="pt-3 sm:pt-4">
+                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-slate-medium transition-colors duration-300">
+                   <BookOpen className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
-                 <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Daily Academics</h3>
-                 <p className="text-slate-medium text-sm font-questa">Math, Literacy, Phonics & Writing</p>
+                 <h3 className="text-sm sm:text-base md:text-lg font-ivry font-semibold mb-1 sm:mb-2 text-slate">Daily Academics</h3>
+                 <p className="text-slate-medium text-xs md:text-sm font-questa">Math, Literacy, Phonics & Writing</p>
                </CardContent>
              </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 text-center">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-golden transition-colors duration-300">
-                   <Target className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6 text-center">
+               <CardContent className="pt-3 sm:pt-4">
+                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-golden transition-colors duration-300">
+                   <Target className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
-                 <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Project-Based Units</h3>
-                 <p className="text-slate-medium text-sm font-questa">Expeditions & Investigations</p>
+                 <h3 className="text-sm sm:text-base md:text-lg font-ivry font-semibold mb-1 sm:mb-2 text-slate">Project-Based Units</h3>
+                 <p className="text-slate-medium text-xs md:text-sm font-questa">Expeditions & Investigations</p>
                </CardContent>
              </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 text-center">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber transition-colors duration-300">
-                   <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6 text-center">
+               <CardContent className="pt-3 sm:pt-4">
+                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-amber transition-colors duration-300">
+                   <Heart className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
-                 <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Social-Emotional</h3>
-                 <p className="text-slate-medium text-sm font-questa">Emotional Regulation & Executive Function</p>
+                 <h3 className="text-sm sm:text-base md:text-lg font-ivry font-semibold mb-1 sm:mb-2 text-slate">Social-Emotional</h3>
+                 <p className="text-slate-medium text-xs md:text-sm font-questa">Emotional Regulation & Executive Function</p>
                </CardContent>
              </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 text-center">
-               <CardContent className="pt-4">
-                                   <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
-                    <Palette className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6 text-center">
+               <CardContent className="pt-3 sm:pt-4">
+                                   <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-slate-medium transition-colors duration-300">
+                    <Palette className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                   </div>
-                 <h3 className="text-lg font-ivry font-semibold mb-2 text-slate">Specials</h3>
-                 <p className="text-slate-medium text-sm font-questa">Art, Music, Cooking, Gardening, Movement</p>
+                 <h3 className="text-sm sm:text-base md:text-lg font-ivry font-semibold mb-1 sm:mb-2 text-slate">Specials</h3>
+                 <p className="text-slate-medium text-xs md:text-sm font-questa">Art, Music, Cooking, Gardening, Movement</p>
                </CardContent>
              </Card>
           </div>
@@ -314,20 +314,20 @@ export default function ProgramsPage() {
          {/* Content */}
          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">
               Sample Curriculum: Adventures Across Latin America
             </h2>
-            <p className="text-lg text-white/90 font-questa">See how our expeditionary approach brings learning to life</p>
+            <p className="text-base sm:text-lg text-white/90 font-questa px-4">See how our expeditionary approach brings learning to life</p>
           </div>
 
-                     <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6 max-w-4xl mx-auto">
-             <CardHeader className="pb-4">
-               <CardTitle className="text-center text-2xl font-ivry text-slate">Multi-Week Expedition Example</CardTitle>
+                     <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6 max-w-4xl mx-auto">
+             <CardHeader className="pb-3 md:pb-4">
+               <CardTitle className="text-center text-lg sm:text-xl md:text-2xl font-ivry text-slate">Multi-Week Expedition Example</CardTitle>
              </CardHeader>
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-2 gap-8">
+            <CardContent className="p-4 sm:p-6 md:p-8">
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <div>
-                  <h3 className="text-xl font-ivry font-semibold mb-4 text-slate">Countries Explored</h3>
+                  <h3 className="text-base sm:text-lg md:text-xl font-ivry font-semibold mb-3 md:mb-4 text-slate">Countries Explored</h3>
                   <div className="space-y-2">
                     <Badge variant="outline" className="mr-2 font-questa">
                       Mexico
@@ -348,39 +348,39 @@ export default function ProgramsPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-ivry font-semibold mb-4 text-slate">Learning Activities</h3>
-                  <div className="space-y-3">
+                  <h3 className="text-base sm:text-lg md:text-xl font-ivry font-semibold mb-3 md:mb-4 text-slate">Learning Activities</h3>
+                  <div className="space-y-2 sm:space-y-3">
                     <div className="flex items-center">
-                      <ChefHat className="h-5 w-5 text-amber mr-2" />
-                      <span className="text-slate-medium font-questa">Cooking traditional foods</span>
+                      <ChefHat className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 flex-shrink-0" />
+                      <span className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">Cooking traditional foods</span>
                     </div>
                     <div className="flex items-center">
-                      <BookOpen className="h-5 w-5 text-slate mr-2" />
-                      <span className="text-slate-medium font-questa">Storytelling and bilingual literature</span>
+                      <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 text-slate mr-2 flex-shrink-0" />
+                      <span className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">Storytelling and bilingual literature</span>
                     </div>
                     <div className="flex items-center">
-                      <Music className="h-5 w-5 text-golden mr-2" />
-                      <span className="text-slate-medium font-questa">Music and cultural dances (Cumbia)</span>
+                      <Music className="h-4 w-4 sm:h-5 sm:w-5 text-golden mr-2 flex-shrink-0" />
+                      <span className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">Music and cultural dances (Cumbia)</span>
                     </div>
                     <div className="flex items-center">
-                      <Sprout className="h-5 w-5 text-golden mr-2" />
-                      <span className="text-slate-medium font-questa">Science (rainforest ecosystems)</span>
+                      <Sprout className="h-4 w-4 sm:h-5 sm:w-5 text-golden mr-2 flex-shrink-0" />
+                      <span className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">Science (rainforest ecosystems)</span>
                     </div>
                     <div className="flex items-center">
-                      <Target className="h-5 w-5 text-amber mr-2" />
-                      <span className="text-slate-medium font-questa">Math with cultural contexts</span>
+                      <Target className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 flex-shrink-0" />
+                      <span className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">Math with cultural contexts</span>
                     </div>
                     <div className="flex items-center">
-                      <Palette className="h-5 w-5 text-golden mr-2" />
-                      <span className="text-slate-medium font-questa">Art (Andean-inspired projects)</span>
+                      <Palette className="h-4 w-4 sm:h-5 sm:w-5 text-golden mr-2 flex-shrink-0" />
+                      <span className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">Art (Andean-inspired projects)</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-slate rounded-lg">
-                <h4 className="text-lg font-ivry font-semibold text-white mb-2">Culmination Event</h4>
-                <p className="text-white/50 font-questa">
+              <div className="mt-4 sm:mt-6 md:mt-8 p-4 sm:p-5 md:p-6 bg-slate rounded-lg">
+                <h4 className="text-base sm:text-lg font-ivry font-semibold text-white mb-2">Culmination Event</h4>
+                <p className="text-white/50 font-questa text-xs sm:text-sm md:text-base">
                   <strong>Student-led Latin America Fair:</strong> Students showcase their learning through
                   presentations, cultural performances, food tastings, and interactive displays for families and the
                   community.
@@ -395,8 +395,8 @@ export default function ProgramsPage() {
        <section className="py-12 md:py-16 bg-slate">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Kindergarten Daily Schedule</h2>
-            <p className="text-lg text-white/50 font-questa">A balanced day of learning, play, and discovery</p>
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">Kindergarten Daily Schedule</h2>
+            <p className="text-base sm:text-lg text-white/50 font-questa px-4">A balanced day of learning, play, and discovery</p>
           </div>
 
           <div className="max-w-5xl mx-auto">
@@ -406,33 +406,26 @@ export default function ProgramsPage() {
                 return (
                   <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-white overflow-hidden">
                     <CardContent className="p-0">
-                      <div className="flex items-center p-6 hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center p-3 sm:p-4 md:p-6 hover:bg-gray-50 transition-colors">
                         {/* Icon with colored background */}
-                        <div className={`flex-shrink-0 w-16 h-16 rounded-2xl ${item.color} flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300`}>
-                          <IconComponent className={`h-8 w-8 ${item.iconColor}`} />
+                        <div className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-2xl ${item.color} flex items-center justify-center mr-3 sm:mr-4 md:mr-6 group-hover:scale-110 transition-transform duration-300`}>
+                          <IconComponent className={`h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 ${item.iconColor}`} />
                         </div>
                         
                         {/* Content */}
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                              <div className="flex items-center gap-2">
-                                <Clock className="h-4 w-4 text-gray-400" />
-                                <span className="font-questa font-semibold text-gray-700 text-sm">{item.time}</span>
-                              </div>
-                              <h3 className="font-questa font-semibold text-gray-900 text-lg leading-tight">
-                                {item.activity}
-                              </h3>
+                          <div className="flex flex-col gap-1 sm:gap-2">
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 flex-shrink-0" />
+                              <span className="font-questa font-semibold text-gray-700 text-xs sm:text-sm">{item.time}</span>
                             </div>
+                            <h3 className="font-questa font-semibold text-gray-900 text-sm sm:text-base md:text-lg leading-tight">
+                              {item.activity}
+                            </h3>
+                            <p className="text-gray-600 font-questa text-xs sm:text-sm leading-relaxed">
+                              {item.description}
+                            </p>
                           </div>
-                          <p className="text-gray-600 font-questa text-sm mt-2 leading-relaxed">
-                            {item.description}
-                          </p>
-                        </div>
-                        
-                        {/* Decorative element */}
-                        <div className="flex-shrink-0 ml-4">
-                          <div className="w-2 h-2 rounded-full bg-gray-200 group-hover:bg-gray-400 transition-colors"></div>
                         </div>
                       </div>
                     </CardContent>
@@ -471,41 +464,41 @@ export default function ProgramsPage() {
          {/* Content */}
          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Program Highlights</h2>
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">Program Highlights</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6">
-               <CardContent className="pt-4 text-center">
-                                   <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
-                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6">
+               <CardContent className="pt-3 sm:pt-4 text-center">
+                                   <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-slate-medium transition-colors duration-300">
+                   <Users className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                  </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Small Class Sizes</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-base sm:text-lg md:text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Small Class Sizes</h3>
+                <p className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">
                   12–16 students per grade with one classroom per grade level for personalized attention
                 </p>
               </CardContent>
             </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6">
-               <CardContent className="pt-4 text-center">
-                 <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber transition-colors duration-300">
-                  <Heart className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6">
+               <CardContent className="pt-3 sm:pt-4 text-center">
+                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-amber transition-colors duration-300">
+                  <Heart className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Emotional Development</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-base sm:text-lg md:text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Emotional Development</h3>
+                <p className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">
                   Strong focus on emotional regulation, mental health, and prefrontal cortex development
                 </p>
               </CardContent>
             </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-6">
-               <CardContent className="pt-4 text-center">
-                 <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-golden transition-colors duration-300">
-                  <Globe className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
+                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white p-3 sm:p-4 md:p-6">
+               <CardContent className="pt-3 sm:pt-4 text-center">
+                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-3 md:mb-4 group-hover:bg-golden transition-colors duration-300">
+                  <Globe className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-xl font-ivry font-semibold mb-3 text-slate">Cultural Immersion</h3>
-                <p className="text-slate-medium font-questa">
+                <h3 className="text-base sm:text-lg md:text-xl font-ivry font-semibold mb-2 md:mb-3 text-slate">Cultural Immersion</h3>
+                <p className="text-slate-medium font-questa text-xs sm:text-sm md:text-base">
                   Authentic cultural experiences woven throughout the curriculum and daily life
                 </p>
               </CardContent>
@@ -515,10 +508,10 @@ export default function ProgramsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-slate text-white">
+      <section className="py-12 md:py-16 bg-slate text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-ivry font-bold mb-4">Ready to Explore Our Program?</h2>
-          <p className="text-xl text-white mb-8 max-w-2xl mx-auto font-questa">
+          <h2 className="text-2xl sm:text-3xl font-ivry font-bold mb-4 px-4">Ready to Explore Our Program?</h2>
+          <p className="text-base sm:text-lg md:text-xl text-white mb-6 md:mb-8 max-w-2xl mx-auto font-questa px-4">
             Experience our vibrant learning community firsthand. Schedule a tour to see our students engaged in
             authentic Spanish immersion and hands-on expeditionary learning.
           </p>

@@ -42,7 +42,7 @@ export default function ImageGallery({
       description: "Latin American cultural activities", 
       category: "culture",
       imageSrc: "/pictures/11-DSC02612.jpg",
-      videoSrc: "/videos/video 2.mp4",
+      videoSrc: "https://res.cloudinary.com/dhuhpf3wq/video/upload/v1759936340/video2_xwke0b.mp4",
       videoPosition: "center 60%",
       detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
       learningOutcomes: [
@@ -70,7 +70,7 @@ export default function ImageGallery({
       description: "Creative expression in Spanish", 
       category: "arts",
       imageSrc: "/pictures/1.jpeg",
-      videoSrc: "/videos/video1.mp4",
+      videoSrc: "https://res.cloudinary.com/dhuhpf3wq/video/upload/v1759936329/video1_mvzsi6.mp4",
       detailedDescription: "Art becomes a medium for Spanish language learning as students create projects inspired by Latin American artists and cultural themes.",
       learningOutcomes: [
         "Creative expression",
@@ -97,7 +97,7 @@ export default function ImageGallery({
       description: "Garden and nature exploration", 
       category: "outdoor",
       imageSrc: "/pictures/11-DSC02612.jpg",
-      videoSrc: "/videos/clip_jumping.mp4",
+      videoSrc: "https://res.cloudinary.com/dhuhpf3wq/video/upload/v1759936324/clip_jumping_vgs3sf.mp4",
       videoPosition: "center 60%",
       detailedDescription: "Our garden classroom provides hands-on learning about nature, sustainability, and Spanish vocabulary related to plants, animals, and environmental concepts.",
       learningOutcomes: [
@@ -112,7 +112,7 @@ export default function ImageGallery({
     //   description: "Latin American cultural activities", 
     //   category: "culture",
     //   imageSrc: "/pictures/11-DSC02612.jpg",
-    //   videoSrc: "/videos/video 2.mp4",
+    //   videoSrc: "https://res.cloudinary.com/dhuhpf3wq/video/upload/v1759936340/video2_xwke0b.mp4",
     //   videoPosition: "center 60%",
     //   detailedDescription: "Students experience the rhythm and joy of Latin American music and dance, learning traditional songs and movements while building cultural connections.",
     //   learningOutcomes: [
@@ -165,13 +165,13 @@ export default function ImageGallery({
   }
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden bg-slate">
+    <section className="relative py-12 md:py-24 overflow-hidden bg-slate">
       
       {/* Content */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 md:mb-20">
-          <h2 className="text-5xl font-ivry font-bold text-white mb-6">{title}</h2>
-          <p className="text-2xl text-white/90 font-questa max-w-4xl mx-auto">{subtitle}</p>
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-ivry font-bold text-white mb-4 md:mb-6 px-4">Experience Our Learning Environment</h2>
+          <p className="text-lg sm:text-xl md:text-2xl text-white/90 font-questa max-w-4xl mx-auto px-4">{subtitle}</p>
         </div>
 
         {/* Horizontal Scrolling Container */}
@@ -180,32 +180,32 @@ export default function ImageGallery({
           <Button
             onClick={scrollLeft}
             disabled={!canScrollLeft}
-            className={`absolute left-4 top-1/2 transform -translate-y-1/2 z-10 shadow-lg hover:shadow-xl transition-all duration-200 rounded-full w-12 h-12 p-0 ${
+            className={`flex absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-10 shadow-lg hover:shadow-xl transition-all duration-200 rounded-full w-10 h-10 md:w-12 md:h-12 p-0 ${
               canScrollLeft 
                 ? 'bg-white/90 hover:bg-white text-slate' 
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
             aria-label="Scroll left"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
           </Button>
           
           <Button
             onClick={scrollRight}
             disabled={!canScrollRight}
-            className={`absolute right-4 top-1/2 transform -translate-y-1/2 z-10 shadow-lg hover:shadow-xl transition-all duration-200 rounded-full w-12 h-12 p-0 ${
+            className={`flex absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-10 shadow-lg hover:shadow-xl transition-all duration-200 rounded-full w-10 h-10 md:w-12 md:h-12 p-0 ${
               canScrollRight 
                 ? 'bg-white/90 hover:bg-white text-slate' 
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
             aria-label="Scroll right"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
           </Button>
 
           <div 
             ref={scrollContainerRef}
-            className="flex overflow-x-auto scrollbar-hide space-x-6 pb-6 px-16" 
+            className="flex overflow-x-auto scrollbar-hide space-x-4 md:space-x-6 pb-6 px-4 md:px-16" 
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {images.map((image, index) => (

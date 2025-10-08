@@ -18,6 +18,7 @@ import {
   Printer
 } from "lucide-react"
 import CocinarteBookingPopup from "./cocinarte-booking-popup"
+import Image from "next/image"
 
 interface CookingClass {
   id: string
@@ -27,10 +28,11 @@ interface CookingClass {
   type: "mini-chef" | "mom-me"
   price: number
   menu: string[]
+  image?: string
 }
 
 export default function CocinarteMonthlyCalendar() {
-  const [currentMonth, setCurrentMonth] = useState(new Date(2025, 8)) // September 2025
+  const [currentMonth, setCurrentMonth] = useState(new Date(2025, 9)) // October 2025
   const [isMounted, setIsMounted] = useState(false)
   const [selectedClass, setSelectedClass] = useState<CookingClass | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -120,7 +122,8 @@ export default function CocinarteMonthlyCalendar() {
       menu: [
         "Empanaditas de calabaza al horno → Baked Pumpkin Mini Empanadas",
         "Panecitos de manzana con dulce de leche → Apple Buns with Dulce de Leche"
-      ]
+      ],
+      image: "/pictures/calendar/pumpkinEmpanadas.jpg"
     },
     {
       id: "6",
@@ -133,7 +136,8 @@ export default function CocinarteMonthlyCalendar() {
         "Esquites Mexicanos (ranch-fusión) → Mexican Street Corn Cups (Ranch Fusion)",
         "Cocadas horneadas → Baked Coconut Cookies",
         "Atol de vainilla con canela → Vanilla Cinnamon Atol"
-      ]
+      ],
+      image: "/pictures/calendar/esquite.jpg"
     },
     {
       id: "7",
@@ -145,7 +149,8 @@ export default function CocinarteMonthlyCalendar() {
       menu: [
         "Tacos crujientes de camote y frijoles negros → Crispy Sweet Potato and Black Bean Tacos",
         "Torrejas de leche → Milk French Toast"
-      ]
+      ],
+      image: "/pictures/calendar/tacos.jpg"
     },
     {
       id: "8",
@@ -157,7 +162,8 @@ export default function CocinarteMonthlyCalendar() {
       menu: [
         "Monster guac + mini quesadillas → Monster Guacamole + Mini Quesadillas",
         "Calabacitas de Gelatina de Mango y Leche → Mango and Milk Gelatin"
-      ]
+      ],
+      image: "/pictures/calendar/quesadillas.jpg"
     },
     // November 2025
     {
@@ -171,7 +177,8 @@ export default function CocinarteMonthlyCalendar() {
         "Sopa de calabaza → Pumpkin Soup",
         "Pan de elote dulce → Sweet Cornbread",
         "Plátanos caramelizados en sartén → Pan-Fried Caramelized Plantains"
-      ]
+      ],
+      image: "/pictures/calendar/november/plantains.jpg"
     },
     {
       id: "10",
@@ -184,7 +191,8 @@ export default function CocinarteMonthlyCalendar() {
         "Empanaditas de pollo → Mini Chicken Empanadas",
         "Ensalada tibia de otoño → Warm Autumn Salad",
         "Chocolate de la Abuela → Grandma's Hot Chocolate"
-      ]
+      ],
+      image: "/pictures/calendar/november/chickenEmpanadas.jpg"
     },
     {
       id: "11",
@@ -196,7 +204,8 @@ export default function CocinarteMonthlyCalendar() {
       menu: [
         "Cazuelitas de maíz con pavo y verduras → Mini Corn Casseroles with Turkey and Vegetables",
         "Muffins de Plátano y Canela con Toque de Dulce de Leche → Banana Cinnamon Muffins with a Touch of Dulce de Leche"
-      ]
+      ],
+      image: "/pictures/calendar/november/turkeyCorn.jpg"
     },
     {
       id: "12",
@@ -209,7 +218,8 @@ export default function CocinarteMonthlyCalendar() {
         "Birria de pavo → Turkey Birria",
         "Sopes de frijoles con queso fresco → Bean Sopes with Fresh Cheese",
         "Ensalada de frutas latina → Latin-Style Fruit Salad"
-      ]
+      ],
+      image: "/pictures/calendar/november/quesabirria.jpg"
     },
     {
       id: "13",
@@ -221,7 +231,8 @@ export default function CocinarteMonthlyCalendar() {
       menu: [
         "Quiche de calabaza y queso latino → Pumpkin and Latin-Style Cheese Quiche",
         "Pie de pera → Pear Pie"
-      ]
+      ],
+      image: "/pictures/calendar/november/quiche.jpeg"
     },
     // December 2025
     {
@@ -235,7 +246,8 @@ export default function CocinarteMonthlyCalendar() {
         "Tabla de Quesos y Frutas Navideña → Christmas Cheese and Fruit Board",
         "Tabla de Verduras y Dip de Yogurt → Vegetable Board with Yogurt Dip",
         "Tabla Dulce de Frutas y Galletas → Sweet Fruit and Cookie Board"
-      ]
+      ],
+      image: "/pictures/calendar/december/christmasTree.jpg"
     },
     {
       id: "15",
@@ -248,7 +260,8 @@ export default function CocinarteMonthlyCalendar() {
         "Burritos de huevo y pavo estilo navideño → Christmas-Style Egg and Turkey Burritos",
         "Panqueques de calabaza con canela → Pumpkin Cinnamon Pancakes",
         "Parfaits navideños de yogurt, granola y fruta → Christmas Yogurt, Granola, and Fruit Parfaits"
-      ]
+      ],
+      image: "/pictures/calendar/december/burritos.jpg"
     },
     {
       id: "16",
@@ -260,7 +273,8 @@ export default function CocinarteMonthlyCalendar() {
       menu: [
         "Mini Rollitos de Pollo con Espinaca y Queso → Mini Spinach & Cheese Chicken Rolls",
         "Cheesecake Fácil al Estilo Latino → Easy Latin-Style Cheesecake"
-      ]
+      ],
+      image: "/pictures/calendar/december/chickenRolls.jpg"
     },
     {
       id: "17",
@@ -271,7 +285,8 @@ export default function CocinarteMonthlyCalendar() {
       price: 80,
       menu: [
         "Receta Básica de Galletas de Mantequilla para decorar → Basic Butter Cookie Recipe for Decorating"
-      ]
+      ],
+      image: "/pictures/calendar/december/cookies.jpg"
     },
     // January 2026
     {
@@ -828,49 +843,68 @@ export default function CocinarteMonthlyCalendar() {
       const isToday = date.toDateString() === new Date().toDateString()
       const hasClass = isClassDate(date)
 
+      const classWithImage = dayClasses.find(c => c.image)
+      
       days.push(
         <div 
           key={day} 
-          className={`h-24 sm:h-32 border border-gray-200 p-1 sm:p-2 ${
+          className={`h-24 sm:h-32 border border-gray-200 p-1 sm:p-2 relative overflow-hidden ${
             isToday ? 'bg-cocinarte-blue/10' : 
             hasClass ? 'bg-cocinarte-yellow/5' : 'bg-white'
           }`}
         >
-          {/* Day Number */}
-          <div className="flex items-center justify-between mb-1">
-            <span className={`text-sm font-semibold ${
-              isToday ? 'text-cocinarte-blue' : 
-              hasClass ? 'text-cocinarte-navy' : 'text-slate'
-            }`}>
-              {day}
-            </span>
-            {isToday && (
-              <div className="w-2 h-2 bg-cocinarte-blue rounded-full"></div>
-            )}
-            {hasClass && !isToday && (
-              <div className="w-2 h-2 bg-cocinarte-yellow rounded-full"></div>
-            )}
-          </div>
+          {/* Background Image with Black Overlay */}
+          {classWithImage?.image && (
+            <>
+              <Image
+                src={classWithImage.image}
+                alt={classWithImage.title}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/60"></div>
+            </>
+          )}
+          
+          {/* Content */}
+          <div className="relative z-10">
+            {/* Day Number */}
+            <div className="flex items-center justify-between mb-1">
+              <span className={`text-sm font-semibold ${
+                classWithImage?.image ? 'text-white' :
+                isToday ? 'text-cocinarte-blue' : 
+                hasClass ? 'text-cocinarte-navy' : 'text-slate'
+              }`}>
+                {day}
+              </span>
+              {isToday && (
+                <div className="w-2 h-2 bg-cocinarte-blue rounded-full"></div>
+              )}
+              {hasClass && !isToday && (
+                <div className="w-2 h-2 bg-cocinarte-yellow rounded-full"></div>
+              )}
+            </div>
 
-          {/* Classes */}
-          <div className="space-y-0.5 sm:space-y-1 overflow-hidden">
-            {dayClasses.slice(0, 2).map((classItem) => (
-              <button
-                key={classItem.id}
-                onClick={() => handleClassClick(classItem)}
-                className={`text-xs p-0.5 sm:p-1 rounded font-medium w-full text-left hover:opacity-80 transition-opacity cursor-pointer ${getTypeColor(classItem.type, classItem.price)}`}
-              >
-                <span className="truncate">
-                  <span className="sm:hidden">{classItem.title}</span>
-                  <span className="hidden sm:inline">{classItem.title}</span>
-                </span>
-              </button>
-            ))}
-            {dayClasses.length > 2 && (
-              <div className="text-xs text-slate-medium">
-                +{dayClasses.length - 2} more
-              </div>
-            )}
+            {/* Classes */}
+            <div className="space-y-0.5 sm:space-y-1 overflow-hidden">
+              {dayClasses.slice(0, 2).map((classItem) => (
+                <button
+                  key={classItem.id}
+                  onClick={() => handleClassClick(classItem)}
+                  className={`text-xs p-0.5 sm:p-1 rounded font-medium w-full text-left hover:opacity-80 transition-opacity cursor-pointer ${getTypeColor(classItem.type, classItem.price)}`}
+                >
+                  <span className="truncate">
+                    <span className="sm:hidden">{classItem.title}</span>
+                    <span className="hidden sm:inline">{classItem.title}</span>
+                  </span>
+                </button>
+              ))}
+              {dayClasses.length > 2 && (
+                <div className={`text-xs ${classWithImage?.image ? 'text-white' : 'text-slate-medium'}`}>
+                  +{dayClasses.length - 2} more
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )

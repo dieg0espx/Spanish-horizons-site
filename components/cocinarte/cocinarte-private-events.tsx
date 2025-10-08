@@ -139,7 +139,7 @@ export default function CocinartePrivateEvents() {
                   alt="Holiday Party"
                   width={400}
                   height={225}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-[center_35%]"
                 />
               </div>
             </div>

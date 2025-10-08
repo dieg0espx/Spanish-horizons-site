@@ -45,15 +45,15 @@ export default function AdmissionsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-slate py-16 md:py-24">
+      <section className="bg-slate py-12 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-slate rounded-full text-white text-sm font-questa font-medium mb-6">
-              <Users className="h-4 w-4 mr-2" />
+            <div className="inline-flex items-center px-3 sm:px-4 py-2 bg-slate rounded-full text-white text-xs sm:text-sm font-questa font-medium mb-4 md:mb-6">
+              <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
               Join Our Community
             </div>
-            <h1 className="text-5xl md:text-6xl font-ivry font-bold text-white mb-6">Join Our Learning Community</h1>
-            <p className="text-xl text-white max-w-3xl mx-auto mb-8 font-questa">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-ivry font-bold text-white mb-4 md:mb-6 px-4">Join Our Learning Community</h1>
+            <p className="text-base sm:text-lg md:text-xl text-white max-w-3xl mx-auto mb-6 md:mb-8 font-questa px-4">
               Begin your family's journey with Spanish Horizons Academy. Our admissions process is designed to help you
               understand our program and ensure the best fit for your child's educational journey.
             </p>
@@ -86,54 +86,54 @@ export default function AdmissionsPage() {
          {/* Content */}
          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">2025-2026 Application Timeline</h2>
-            <p className="text-lg text-white/90 font-questa">Important dates for the upcoming school year</p>
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">2025-2026 Application Timeline</h2>
+            <p className="text-base sm:text-lg text-white/90 font-questa px-4">Important dates for the upcoming school year</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-golden transition-colors duration-300">
-                   <Calendar className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                 </div>
-                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Applications Open</h3>
-                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">November 3, 2025</p>
-                  <p className="text-slate-medium font-questa text-center md:text-left">Begin your application process</p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                        <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-4 md:p-6">
+              <CardContent className="pt-3 md:pt-4">
+                <div className="w-12 h-12 md:w-20 md:h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4 group-hover:bg-golden transition-colors duration-300">
+                  <Calendar className="h-6 w-6 md:h-10 md:w-10 text-white group-hover:text-white transition-colors duration-300" />
+                </div>
+                                  <h3 className="text-base md:text-xl lg:text-2xl font-ivry font-bold mb-1 md:mb-3 text-slate text-center h-[40px] md:h-[60px] flex items-center justify-center">Applications Open</h3>
+                 <p className="text-lg md:text-2xl lg:text-3xl font-ivry font-bold text-golden mb-1 md:mb-3 text-center">Nov 3, 2025</p>
+                 <p className="text-slate-medium font-questa text-xs md:text-sm text-center">Begin application</p>
+             </CardContent>
+           </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-medium transition-colors duration-300">
-                   <FileText className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                 </div>
-                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Priority Deadline</h3>
-                  <p className="text-3xl font-ivry font-bold text-slate mb-3 text-center md:text-left">January 30, 2026</p>
-                  <p className="text-slate-medium font-questa text-center md:text-left">Submit for priority consideration</p>
-              </CardContent>
-            </Card>
+                        <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-4 md:p-6">
+              <CardContent className="pt-3 md:pt-4">
+                <div className="w-12 h-12 md:w-20 md:h-20 bg-slate rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4 group-hover:bg-slate-medium transition-colors duration-300">
+                  <FileText className="h-6 w-6 md:h-10 md:w-10 text-white group-hover:text-white transition-colors duration-300" />
+                </div>
+                                  <h3 className="text-base md:text-xl lg:text-2xl font-ivry font-bold mb-1 md:mb-3 text-slate text-center h-[40px] md:h-[60px] flex items-center justify-center">Priority Deadline</h3>
+                 <p className="text-lg md:text-2xl lg:text-3xl font-ivry font-bold text-slate mb-1 md:mb-3 text-center">Jan 30, 2026</p>
+                 <p className="text-slate-medium font-questa text-xs md:text-sm text-center">Priority consideration</p>
+             </CardContent>
+           </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber transition-colors duration-300">
-                   <MessageCircle className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                 </div>
-                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">Interview Period</h3>
-                  <p className="text-3xl font-ivry font-bold text-amber mb-3 text-center md:text-left">February–March</p>
-                  <p className="text-slate-medium font-questa text-center md:text-left">Family interviews scheduled</p>
-              </CardContent>
-            </Card>
+                        <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-4 md:p-6">
+              <CardContent className="pt-3 md:pt-4">
+                <div className="w-12 h-12 md:w-20 md:h-20 bg-amber-light rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4 group-hover:bg-amber transition-colors duration-300">
+                  <MessageCircle className="h-6 w-6 md:h-10 md:w-10 text-white group-hover:text-white transition-colors duration-300" />
+                </div>
+                                  <h3 className="text-base md:text-xl lg:text-2xl font-ivry font-bold mb-1 md:mb-3 text-slate text-center h-[40px] md:h-[60px] flex items-center justify-center">Interview Period</h3>
+                 <p className="text-lg md:text-2xl lg:text-3xl font-ivry font-bold text-amber mb-1 md:mb-3 text-center">Feb–March</p>
+                 <p className="text-slate-medium font-questa text-xs md:text-sm text-center">Family interviews</p>
+             </CardContent>
+           </Card>
 
-                         <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-6">
-               <CardContent className="pt-4">
-                 <div className="w-20 h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-golden transition-colors duration-300">
-                   <Users className="h-10 w-10 text-white group-hover:text-white transition-colors duration-300" />
-                 </div>
-                                   <h3 className="text-2xl font-ivry font-bold mb-3 h-[80px] flex items-center justify-center text-slate text-center md:text-left">First Day of School</h3>
-                  <p className="text-3xl font-ivry font-bold text-golden mb-3 text-center md:text-left">September 1, 2026</p>
-                  <p className="text-slate-medium font-questa text-center md:text-left">Welcome to our community!</p>
-              </CardContent>
-            </Card>
+                        <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-white text-center p-4 md:p-6">
+              <CardContent className="pt-3 md:pt-4">
+                <div className="w-12 h-12 md:w-20 md:h-20 bg-golden-light rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4 group-hover:bg-golden transition-colors duration-300">
+                  <Users className="h-6 w-6 md:h-10 md:w-10 text-white group-hover:text-white transition-colors duration-300" />
+                </div>
+                                  <h3 className="text-base md:text-xl lg:text-2xl font-ivry font-bold mb-1 md:mb-3 text-slate text-center h-[40px] md:h-[60px] flex items-center justify-center">First Day of School</h3>
+                 <p className="text-lg md:text-2xl lg:text-3xl font-ivry font-bold text-golden mb-1 md:mb-3 text-center">Sep 1, 2026</p>
+                 <p className="text-slate-medium font-questa text-xs md:text-sm text-center">Welcome!</p>
+             </CardContent>
+           </Card>
           </div>
         </div>
       </section>
@@ -142,28 +142,28 @@ export default function AdmissionsPage() {
        <section className="py-12 md:py-16 bg-slate">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Application Process</h2>
-            <p className="text-lg text-white/50 font-questa">Five simple steps to join our learning community</p>
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">Application Process</h2>
+            <p className="text-base sm:text-lg text-white/50 font-questa px-4">Five simple steps to join our learning community</p>
           </div>
 
-                     <div className="space-y-6 md:space-y-8">
+                     <div className="space-y-4 md:space-y-8">
              {applicationSteps.map((step, index) => (
                <Card key={index} className="max-w-4xl mx-auto">
-                 <CardContent className="p-6 md:p-8">
+                 <CardContent className="p-4 md:p-8">
                   <div className="flex flex-col md:flex-row items-center md:items-start">
-                                         <div className="flex-shrink-0 mb-3 md:mb-0 md:mr-6">
-                       <div className="w-16 h-16 bg-slate rounded-full flex items-center justify-center">
-                        <step.icon className="h-8 w-8 text-white" />
+                                         <div className="flex-shrink-0 mb-2 md:mb-0 md:mr-6">
+                       <div className="w-12 h-12 md:w-16 md:h-16 bg-slate rounded-full flex items-center justify-center">
+                        <step.icon className="h-6 w-6 md:h-8 md:w-8 text-white" />
                       </div>
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <div className="flex flex-col sm:flex-row items-center sm:justify-center md:justify-start mb-2 gap-2 sm:gap-0">
-                        <Badge className="bg-slate text-white sm:mr-3 font-questa">Step {step.step}</Badge>
-                        <h3 className="text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
+                      <div className="flex flex-col sm:flex-row items-center sm:justify-center md:justify-start mb-1 md:mb-2 gap-1 sm:gap-0">
+                        <Badge className="bg-slate text-white sm:mr-3 font-questa text-xs md:text-sm">Step {step.step}</Badge>
+                        <h3 className="text-base md:text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
                       </div>
-                      <p className="text-slate-medium mb-4 font-questa text-center sm:text-left">{step.description}</p>
+                      <p className="text-slate-medium mb-2 md:mb-4 font-questa text-center sm:text-left text-xs md:text-base">{step.description}</p>
                       <div className="flex justify-center md:justify-start">
-                        <Button variant="outline" size="sm" className="font-questa">
+                        <Button variant="outline" size="sm" className="font-questa text-xs md:text-sm">
                           {step.action}
                         </Button>
                       </div>
@@ -192,46 +192,46 @@ export default function AdmissionsPage() {
          {/* Content */}
          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl font-ivry font-bold text-white mb-4">Important Information</h2>
+            <h2 className="text-2xl sm:text-3xl font-ivry font-bold text-white mb-4 px-4">Important Information</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 text-center bg-slate">
-              <CardContent className="pt-6">
-                <Heart className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">No Spanish Required</h3>
-                <p className="text-white/90 text-sm font-questa">
-                  No Spanish language experience required for families. Our immersion model supports all learners.
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <Card className="p-4 md:p-6 text-center bg-slate">
+              <CardContent className="pt-3 md:pt-6">
+                <Heart className="h-10 w-10 md:h-12 md:w-12 text-white mx-auto mb-2 md:mb-4" />
+                <h3 className="text-base md:text-lg font-ivry font-semibold mb-2 md:mb-3 text-white h-[40px] md:h-auto flex items-center justify-center">No Spanish Required</h3>
+                <p className="text-white/90 text-xs md:text-sm font-questa">
+                  No Spanish experience required. Our immersion model supports all learners.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate">
-              <CardContent className="pt-6">
-                <Users className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Small Class Sizes</h3>
-                <p className="text-white/90 text-sm font-questa">
-                  12–16 students per grade with one classroom per grade level for personalized attention.
+            <Card className="p-4 md:p-6 text-center bg-slate">
+              <CardContent className="pt-3 md:pt-6">
+                <Users className="h-10 w-10 md:h-12 md:w-12 text-white mx-auto mb-2 md:mb-4" />
+                <h3 className="text-base md:text-lg font-ivry font-semibold mb-2 md:mb-3 text-white h-[40px] md:h-auto flex items-center justify-center">Small Class Sizes</h3>
+                <p className="text-white/90 text-xs md:text-sm font-questa">
+                  12–16 students per grade for personalized attention.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate">
-              <CardContent className="pt-6">
-                <DollarSign className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Financial Assistance</h3>
-                <p className="text-white/90 text-sm font-questa">
-                  Need-based and equity-based scholarships available to support diverse families.
+            <Card className="p-4 md:p-6 text-center bg-slate">
+              <CardContent className="pt-3 md:pt-6">
+                <DollarSign className="h-10 w-10 md:h-12 md:w-12 text-white mx-auto mb-2 md:mb-4" />
+                <h3 className="text-base md:text-lg font-ivry font-semibold mb-2 md:mb-3 text-white h-[40px] md:h-auto flex items-center justify-center">Financial Assistance</h3>
+                <p className="text-white/90 text-xs md:text-sm font-questa">
+                  Need-based and equity scholarships available.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="p-6 text-center bg-slate">
-              <CardContent className="pt-6">
-                <CheckCircle className="h-12 w-12 text-white mx-auto mb-4" />
-                <h3 className="text-lg font-ivry font-semibold mb-3 text-white">Rolling Admissions</h3>
-                <p className="text-white/90 text-sm font-questa">
-                  Applications accepted throughout the year based on space availability.
+            <Card className="p-4 md:p-6 text-center bg-slate">
+              <CardContent className="pt-3 md:pt-6">
+                <CheckCircle className="h-10 w-10 md:h-12 md:w-12 text-white mx-auto mb-2 md:mb-4" />
+                <h3 className="text-base md:text-lg font-ivry font-semibold mb-2 md:mb-3 text-white h-[40px] md:h-auto flex items-center justify-center">Rolling Admissions</h3>
+                <p className="text-white/90 text-xs md:text-sm font-questa">
+                  Applications accepted year-round based on availability.
                 </p>
               </CardContent>
             </Card>
