@@ -11,7 +11,7 @@ export default function CocinarteClassTypes() {
           src="/cocinarte/cocinarte3.jpeg"
           alt="Cooking class background"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
         />
         {/* Overlay for better text readability */}

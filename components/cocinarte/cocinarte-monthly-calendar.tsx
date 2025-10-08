@@ -862,7 +862,7 @@ export default function CocinarteMonthlyCalendar() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-black/60"></div>
+              <div className="absolute inset-0 bg-black/0"></div>
             </>
           )}
           
@@ -1093,9 +1093,8 @@ export default function CocinarteMonthlyCalendar() {
 
       {/* Class Details Modal */}
       {isDialogOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="w-[90vw] h-[70vh] max-w-2xl max-h-[95vh] sm:h-[75vh] bg-white rounded-lg overflow-y-auto font-coming-soon p-4 sm:p-6" style={{ fontFamily: 'Coming Soon, cursive' }}>
-            {console.log('Dialog rendering, isDialogOpen:', isDialogOpen, 'selectedClass:', selectedClass)}
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center -top-10">
+          <div className="w-[90vw] max-w-2xl max-h-[80vh] bg-white rounded-lg overflow-y-auto font-coming-soon p-4 sm:p-6" style={{ fontFamily: 'Coming Soon, cursive' }}>
           <div className="pb-4 relative">
             <button 
               onClick={() => setIsDialogOpen(false)}

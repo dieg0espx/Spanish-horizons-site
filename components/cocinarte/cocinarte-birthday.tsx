@@ -22,7 +22,7 @@ export default function CocinarteBirthday() {
           priority
         />
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/80"></div>
+        <div className="absolute inset-0 bg-white/50"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -52,12 +52,12 @@ export default function CocinarteBirthday() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <div className="bg-gradient-to-br from-cocinarte-yellow/50 to-cocinarte-yellow/50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300">
-            <Cake className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-cocinarte-yellow mx-auto mb-2 sm:mb-3" />
-            <h3 className="font-semibold text-slate text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Mini Fiesta</h3>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-medium mb-2 sm:mb-3">Minimum of 8 kids</p>
-            <p className="text-2xl sm:text-3xl font-bold text-cocinarte-yellow mb-3 sm:mb-4">$350</p>
-            <ul className="text-xs sm:text-sm text-slate-medium space-y-1 sm:space-y-2">
+          <div className="bg-gradient-to-br from-cocinarte-yellow/50 to-cocinarte-yellow rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition-all duration-300">
+            <Cake className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white mx-auto mb-2 sm:mb-3" />
+            <h3 className="font-semibold text-white text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2">Mini Fiesta</h3>
+            <p className="text-sm sm:text-base lg:text-lg text-white mb-2 sm:mb-3">Minimum of 8 kids</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">$350</p>
+            <ul className="text-xs sm:text-sm text-white space-y-1 sm:space-y-2">
                   <li>• 2-hour cooking session</li>
                   <li>• All ingredients included</li>
                   <li>• Birthday cake making</li>
