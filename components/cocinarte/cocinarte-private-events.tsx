@@ -43,7 +43,7 @@ export default function CocinartePrivateEvents() {
             <form className="space-y-6 flex-1">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Event Type</label>
-                <select className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10">
+                <select className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50">
                   <option>Select event type</option>
                   <option>Team Building</option>
                   <option>Corporate Event</option>
@@ -55,7 +55,7 @@ export default function CocinartePrivateEvents() {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Number of Guests</label>
-                <input type="number" className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10" placeholder="How many people?" />
+                <input type="number" className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50" placeholder="How many people?" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Preferred Date</label>
@@ -65,7 +65,7 @@ export default function CocinartePrivateEvents() {
                     onChange={(date) => setSelectedDate(date)}
                     dateFormat="MM/dd/yyyy"
                     placeholderText="Select a date"
-                    className="w-full px-4 py-3 pr-12 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10"
+                    className="w-full px-4 py-3 pr-12 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50"
                     minDate={new Date()}
                     showPopperArrow={false}
                     popperClassName="react-datepicker-popper"
@@ -81,7 +81,7 @@ export default function CocinartePrivateEvents() {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Preferred Time</label>
-                <select className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10">
+                <select className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50">
                   <option>Select time</option>
                   <option>Morning (9 AM - 12 PM)</option>
                   <option>Afternoon (1 PM - 4 PM)</option>
@@ -91,15 +91,15 @@ export default function CocinartePrivateEvents() {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Contact Name</label>
-                <input type="text" className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10" placeholder="Your full name" />
+                <input type="text" className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50" placeholder="Your full name" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
-                <input type="tel" className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10" placeholder="(503) 123-4567" />
+                <input type="tel" className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50" placeholder="(503) 123-4567" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Event Details</label>
-                <textarea rows={4} className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-cocinarte-blue/5 hover:bg-cocinarte-blue/10 resize-none" placeholder="Tell us about your event, any specific cuisine preferences, dietary restrictions, or special requirements..."></textarea>
+                <textarea rows={4} className="w-full px-4 py-3 border-2 border-cocinarte-blue/30 rounded-xl focus:ring-2 focus:ring-cocinarte-orange focus:border-cocinarte-orange transition-all duration-200 text-sm bg-white hover:bg-gray-50 resize-none" placeholder="Tell us about your event, any specific cuisine preferences, dietary restrictions, or special requirements..."></textarea>
               </div>
               <div className="text-center">
                 <Button className="bg-cocinarte-orange hover:bg-amber text-cocinarte-white font-bold px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200">

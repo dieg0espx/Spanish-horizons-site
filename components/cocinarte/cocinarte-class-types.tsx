@@ -15,7 +15,7 @@ export default function CocinarteClassTypes() {
           priority
         />
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/80"></div>
+        <div className="absolute inset-0 bg-white/40"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
