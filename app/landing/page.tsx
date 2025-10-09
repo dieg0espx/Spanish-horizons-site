@@ -255,40 +255,49 @@ export default function LandingPage() {
       <LandingNav />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-32 lg:pt-40 pb-4 sm:pb-8">
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed z-0"
-          style={{
-            backgroundImage: `url('/pictures/classroom.jpeg')`,
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        />
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/65 z-10"></div>
-        
-        {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
-          <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-questa leading-tight text-white mb-4 md:mb-6 px-4">
-              Spanish Horizons
-              <span className="block text-amber">Family of Programs</span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed px-4">
-              From early childhood through elementary school, cooking adventures to summer camps 
-              we provide comprehensive Spanish immersion education for every stage of your child's journey.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6 md:mt-8 px-4">
-              <Button size="lg" className="bg-slate hover:bg-slate-800 text-white font-questa px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 w-[70%] sm:w-fit sm:mx-0">
-                <Link href="/admissions" className="flex items-center justify-center">
-                  Get Started Today
-                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-slate hover:bg-slate hover:text-white font-questa px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-xl transition-all duration-200 w-[70%] sm:w-fit sm:mx-0">
-                <Link href="/contact" className="flex items-center justify-center">Contact Us</Link>
-              </Button>
+      <section className="relative w-full mt-[60px] sm:mt-[70px] md:mt-[90px]">
+        {/* Background image - full width, dynamic height */}
+        <div className="relative w-full">
+          {/* Mobile Image */}
+          <Image
+            src="/collage 1.1 format.png"
+            alt="Spanish Horizons background"
+            width={1080}
+            height={1920}
+            className="w-full h-auto block md:hidden"
+            priority
+          />
+          {/* Desktop Image */}
+          <Image
+            src="/collage horizontal format.png"
+            alt="Spanish Horizons background"
+            width={1920}
+            height={1080}
+            className="w-full h-auto hidden md:block"
+            priority
+          />
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30"></div>
+          
+          {/* Content */}
+          <div className="absolute inset-0 flex items-center justify-center py-8 sm:py-12">
+            <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4 mb-6 sm:mb-8">
+                From early childhood through elementary school, cooking adventures to summer camps 
+                we provide comprehensive Spanish immersion education for every stage of your child's journey.
+              </p>
+              <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center px-4">
+                <Button size="lg" className="bg-slate hover:bg-slate-800 text-white font-questa px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 w-full max-w-xs sm:w-fit sm:mx-0">
+                  <Link href="/admissions" className="flex items-center justify-center">
+                    Get Started Today
+                    <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="border-white/30 text-gray hover:bg-white hover:text-slate font-questa px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg rounded-xl transition-all duration-200 w-full max-w-xs sm:w-fit sm:mx-0">
+                  <Link href="/contact" className="flex items-center justify-center">Contact Us</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

@@ -88,7 +88,7 @@ export default function CocinarteSafety() {
                     className="object-cover"
                   />
                   {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-black/65"></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
                   
                   {/* Content */}
                   <div className="relative z-10">
@@ -106,7 +106,7 @@ export default function CocinarteSafety() {
                     className="object-cover"
                   />
                   {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-black/65"></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
                   
                   {/* Content */}
                   <div className="relative z-10">
@@ -126,7 +126,7 @@ export default function CocinarteSafety() {
                     className="object-cover"
                   />
                   {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-black/65"></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
                   
                   {/* Content */}
                   <div className="relative z-10">
@@ -138,13 +138,13 @@ export default function CocinarteSafety() {
                 <div className="bg-gradient-to-br from-cocinarte-yellow/20 to-cocinarte-yellow/40 rounded-xl p-4 sm:p-6 text-center relative overflow-hidden">
                   {/* Background Image */}
                   <Image
-                    src="/cocinarte/card4.jpg"
+                    src="/cocinarte/card5.jpg"
                     alt="Family Fun"
                     fill
                     className="object-cover"
                   />
                   {/* Dark Overlay */}
-                  <div className="absolute inset-0 bg-black/65"></div>
+                  <div className="absolute inset-0 bg-black/50"></div>
                   
                   {/* Content */}
                   <div className="relative z-10">

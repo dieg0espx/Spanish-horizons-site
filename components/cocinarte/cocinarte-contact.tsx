@@ -15,7 +15,7 @@ export default function CocinarteContact() {
           priority
         />
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/80"></div>
+        <div className="absolute inset-0 bg-white/50"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -52,7 +52,7 @@ export default function CocinarteContact() {
             </CardHeader>
             <CardContent className="text-center">
               <CardDescription className="text-slate-medium text-base sm:text-lg">
-                <p className="font-semibold text-slate">info@cocinarte.com</p>
+                <p className="font-semibold text-slate">info@cocinartepdx.com</p>
               </CardDescription>
             </CardContent>
           </Card>

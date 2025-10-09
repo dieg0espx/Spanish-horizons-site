@@ -1,6 +1,5 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChefHat, Utensils, Users } from "lucide-react"
 import Image from "next/image"
+import FlipCard from "@/components/flip-card"
 
 export default function CocinarteAbout() {
   return (
@@ -33,90 +32,45 @@ export default function CocinarteAbout() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue relative overflow-hidden">
-            {/* Background Image */}
-            <Image
-              src="/cocinarte/handsOnLearning.jpg"
-              alt="Hands-On Learning"
-              fill
-              className="object-cover"
-            />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/75"></div>
-            
-            {/* Content */}
-            <div className="relative z-10">
-              <CardHeader className="text-center pb-3">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <ChefHat className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
-                </div>
-                <CardTitle className="text-lg sm:text-xl lg:text-2xl text-white font-bold">Hands-On Learning</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center pt-0">
-                <CardDescription className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
-                  Interactive cooking experiences where kids learn by doing, building confidence 
-                  and skills in the kitchen.
-                </CardDescription>
-              </CardContent>
-            </div>
-          </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 sm:gap-32 lg:gap-40 justify-items-center">
+          <FlipCard
+            title="Hands-On Learning"
+            description="Interactive cooking experiences where kids learn by doing"
+            category="Learning"
+            imageSrc="/cocinarte/handsOnLearning.jpg"
+            detailedDescription="Interactive cooking experiences where kids learn by doing, building confidence and skills in the kitchen. Our hands-on approach ensures every child actively participates in creating delicious dishes."
+            learningOutcomes={[
+              "Build practical cooking skills and kitchen confidence",
+              "Learn proper knife safety and cooking techniques",
+              "Develop creativity and problem-solving in the kitchen"
+            ]}
+          />
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue relative overflow-hidden">
-            {/* Background Image */}
-            <Image
-              src="/cocinarte/latinFlavours.jpg"
-              alt="Latin Flavors"
-              fill
-              className="object-cover"
-            />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/75"></div>
-            
-            {/* Content */}
-            <div className="relative z-10">
-              <CardHeader className="text-center pb-3">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Utensils className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
-                </div>
-                <CardTitle className="text-lg sm:text-xl lg:text-2xl text-white font-bold">Latin Flavors</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center pt-0">
-                <CardDescription className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
-                  Explore authentic Latin American cuisine and discover new flavors, ingredients, 
-                  and cooking techniques.
-                </CardDescription>
-              </CardContent>
-            </div>
-          </Card>
+          <FlipCard
+            title="Latin Flavors"
+            description="Explore authentic Latin American cuisine"
+            category="Culture"
+            imageSrc="/cocinarte/latinFlavours.jpg"
+            detailedDescription="Explore authentic Latin American cuisine and discover new flavors, ingredients, and cooking techniques. Each class introduces children to the rich culinary traditions of Latin America."
+            learningOutcomes={[
+              "Discover traditional Latin American ingredients and spices",
+              "Learn authentic cooking methods from various regions",
+              "Appreciate cultural diversity through food"
+            ]}
+          />
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-cocinarte-blue sm:col-span-2 lg:col-span-1 relative overflow-hidden">
-            {/* Background Image */}
-            <Image
-              src="/cocinarte/family.jpg"
-              alt="Family Fun"
-              fill
-              className="object-cover"
-            />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/75"></div>
-            
-            {/* Content */}
-            <div className="relative z-10">
-              <CardHeader className="text-center pb-3">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Users className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
-                </div>
-                <CardTitle className="text-lg sm:text-xl lg:text-2xl text-white font-bold">Family Fun</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center pt-0">
-                <CardDescription className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed">
-                  Perfect for kids and families to cook together, creating lasting memories 
-                  and bonding experiences.
-                </CardDescription>
-              </CardContent>
-            </div>
-          </Card>
+          <FlipCard
+            title="Family Fun"
+            description="Perfect for kids and families to cook together"
+            category="Community"
+            imageSrc="/cocinarte/family.jpg"
+            detailedDescription="Perfect for kids and families to cook together, creating lasting memories and bonding experiences. Our classes foster a warm, inclusive environment where everyone can learn and grow together."
+            learningOutcomes={[
+              "Strengthen family bonds through shared cooking experiences",
+              "Create lasting memories in a fun, supportive environment",
+              "Build teamwork and communication skills"
+            ]}
+          />
         </div>
       </div>
     </section>
