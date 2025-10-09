@@ -258,12 +258,22 @@ export default function LandingPage() {
       <section className="relative w-full mt-[60px] sm:mt-[70px] md:mt-[90px]">
         {/* Background image - full width, dynamic height */}
         <div className="relative w-full">
+          {/* Mobile Image */}
           <Image
-            src="/hero-landing.png"
+            src="/collage 1.1 format.png"
+            alt="Spanish Horizons background"
+            width={1080}
+            height={1920}
+            className="w-full h-auto block md:hidden"
+            priority
+          />
+          {/* Desktop Image */}
+          <Image
+            src="/collage horizontal format.png"
             alt="Spanish Horizons background"
             width={1920}
             height={1080}
-            className="w-full h-auto"
+            className="w-full h-auto hidden md:block"
             priority
           />
           
