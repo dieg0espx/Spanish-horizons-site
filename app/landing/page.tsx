@@ -277,25 +277,40 @@ export default function LandingPage() {
             priority
           />
           
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/30"></div>
+          {/* Gradient Overlay - improved for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
           
           {/* Content */}
-          <div className="absolute inset-0 flex items-center justify-center py-8 sm:py-12">
-            <div className="text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed px-2 sm:px-4 mb-6 sm:mb-8">
+          <div className="absolute inset-0 flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-20">
+            <div className="text-center max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 w-full">
+              {/* Main heading */}
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-questa mb-4 sm:mb-6 md:mb-8 leading-tight tracking-tight animate-slide-up px-2 sm:px-4">
+                <span className="text-[#00ADEE]">Casita Azul</span> <span className="text-white">Education</span>
+              </h1>
+              
+              {/* Description */}
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-4xl mx-auto leading-relaxed px-3 sm:px-4 md:px-6 mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-light tracking-wide shadow-text animate-slide-up-delay">
                 From early childhood through elementary school, cooking adventures to summer camps 
                 we provide comprehensive Spanish immersion education for every stage of your child's journey.
               </p>
-              <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center px-4">
-                <Button size="lg" className="bg-slate hover:bg-slate-800 text-white font-questa px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 w-full max-w-xs sm:w-fit sm:mx-0">
-                  <Link href="/admissions" className="flex items-center justify-center">
+              
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 justify-center items-center px-3 sm:px-4 animate-slide-up-delay-2">
+                <Button 
+                  size="lg" 
+                  className="bg-[#00ADEE] hover:bg-[#0090C8] text-white font-questa px-6 py-4 xs:px-8 xs:py-5 sm:px-10 sm:py-6 md:px-12 md:py-7 text-sm xs:text-base sm:text-lg md:text-xl rounded-xl shadow-2xl hover:shadow-[#00ADEE]/50 hover:scale-105 transition-all duration-300 w-1/2 sm:w-auto group"
+                >
+                  <Link href="#spanish-horizons" className="flex items-center justify-center whitespace-nowrap">
                     Get Started Today
-                    <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+                    <ArrowRight className="ml-2 w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-gray hover:bg-white hover:text-slate font-questa px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 text-sm sm:text-base md:text-lg rounded-xl transition-all duration-200 w-full max-w-xs sm:w-fit sm:mx-0">
-                  <Link href="/contact" className="flex items-center justify-center">Contact Us</Link>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-2 border-white/60 backdrop-blur-sm text-black hover:bg-white hover:text-slate font-questa px-6 py-4 xs:px-8 xs:py-5 sm:px-10 sm:py-6 md:px-12 md:py-7 text-sm xs:text-base sm:text-lg md:text-xl rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl w-1/2 sm:w-auto"
+                >
+                  <Link href="#contact" className="flex items-center justify-center whitespace-nowrap">Contact Us</Link>
                 </Button>
               </div>
             </div>

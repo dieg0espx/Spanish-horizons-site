@@ -92,10 +92,10 @@ export const metadata: Metadata = {
     siteName: 'Spanish Horizons Academy',
     images: [
       {
-        url: '/branding/logo.png',
+        url: '/pictures/openGraphSpanish.png',
         width: 1200,
         height: 630,
-        alt: 'Spanish Horizons Academy Logo',
+        alt: 'Spanish Horizons Academy',
       },
     ],
     locale: 'en_US',
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Spanish Horizons Academy - K-5 Spanish Immersion School",
     description: "A Spanish Immersion Expeditionary School in Hillsboro, Oregon. Where culture meets curiosity through hands-on, project-based learning.",
-    images: ['/branding/logo.png'],
+    images: ['/pictures/openGraphSpanish.png'],
   },
   robots: {
     index: true,
