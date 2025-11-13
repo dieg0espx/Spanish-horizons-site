@@ -201,12 +201,12 @@ export default function ModernHeader() {
                       className="flex items-center px-4 py-4 text-base font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
                       onClick={() => setActiveDropdown(null)}
                     >
-                      <Image 
-                        src="/casita-azul.png" 
-                        alt="Casita Azul Logo" 
-                        width={44} 
-                        height={44} 
-                        className="mr-4 object-contain" 
+                      <Image
+                        src="/casita-azul.png"
+                        alt="Casita Azul Logo"
+                        width={44}
+                        height={44}
+                        className="mr-4 object-contain"
                       />
                       Casita Azul
                     </Link>
@@ -215,14 +215,23 @@ export default function ModernHeader() {
                       className="flex items-center px-4 py-4 text-base font-questa text-slate hover:bg-slate hover:text-white transition-colors duration-200"
                       onClick={() => setActiveDropdown(null)}
                     >
-                      <Image 
-                        src="/camp-alegria.png" 
-                        alt="Camp Alegria Logo" 
-                        width={44} 
-                        height={44} 
-                        className="mr-4 object-contain" 
+                      <Image
+                        src="/camp-alegria.png"
+                        alt="Camp Alegria Logo"
+                        width={44}
+                        height={44}
+                        className="mr-4 object-contain"
                       />
                       Camp Alegria
+                    </Link>
+                    <Link
+                      href="https://www.casitaazuleducation.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center px-4 py-4 text-base font-questa font-bold bg-slate/10 text-slate hover:bg-slate hover:text-white transition-colors duration-200 mx-2 my-1 rounded-lg"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      Our Programs
                     </Link>
                   </div>
                 )}
@@ -379,12 +388,12 @@ export default function ModernHeader() {
                               }, 300)
                             }}
                           >
-                            <Image 
-                              src="/casita-azul.png" 
-                              alt="Casita Azul Logo" 
-                              width={36} 
-                              height={36} 
-                              className="mr-4 object-contain" 
+                            <Image
+                              src="/casita-azul.png"
+                              alt="Casita Azul Logo"
+                              width={36}
+                              height={36}
+                              className="mr-4 object-contain"
                             />
                             Casita Azul
                           </Link>
@@ -399,14 +408,29 @@ export default function ModernHeader() {
                               }, 300)
                             }}
                           >
-                            <Image 
-                              src="/camp-alegria.png" 
-                              alt="Camp Alegria Logo" 
-                              width={36} 
-                              height={36} 
-                              className="mr-4 object-contain" 
+                            <Image
+                              src="/camp-alegria.png"
+                              alt="Camp Alegria Logo"
+                              width={36}
+                              height={36}
+                              className="mr-4 object-contain"
                             />
                             Camp Alegria
+                          </Link>
+                          <Link
+                            href="https://www.casitaazuleducation.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center px-3 py-4 rounded-lg text-base font-bold bg-slate/10 text-slate hover:bg-slate hover:text-white transition-all duration-200"
+                            onClick={() => {
+                              setIsMenuAnimating(false)
+                              setTimeout(() => {
+                                setIsMenuOpen(false)
+                                setActiveDropdown(null)
+                              }, 300)
+                            }}
+                          >
+                            Our Programs
                           </Link>
                         </div>
                       )}
