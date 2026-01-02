@@ -104,7 +104,7 @@ export default function ModernHeader() {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white shadow-xl sticky top-0 z-50">
+      <header className="bg-white shadow-xl">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 lg:h-24">
             {/* Logo Section */}
@@ -245,8 +245,11 @@ export default function ModernHeader() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden mobile-menu-button p-2 rounded-xl bg-slate text-white hover:bg-slate-medium hover:text-white transition-colors duration-200"
-              onClick={() => {
+              type="button"
+              className="lg:hidden mobile-menu-button p-3 rounded-xl bg-slate text-white active:bg-slate-medium transition-colors duration-200 relative z-[60] touch-manipulation select-none"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
                 if (!isMenuOpen) {
                   setIsMenuAnimating(true)
                   setIsMenuOpen(true)
@@ -258,7 +261,7 @@ export default function ModernHeader() {
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6 pointer-events-none" /> : <Menu className="h-6 w-6 pointer-events-none" />}
             </button>
           </div>
         </div>
