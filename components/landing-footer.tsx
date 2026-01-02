@@ -23,12 +23,6 @@ export default function LandingFooter() {
       description: "Preschool & Daycare"
     },
     {
-      name: "Cocinarte",
-      href: "#cocinarte",
-      logo: "/cocinarte/cocinarteLogo.png",
-      description: "Cooking Classes"
-    },
-    {
       name: "Camp Alegría",
       href: "#camp-alegria",
       logo: "/camp-alegria.png",
