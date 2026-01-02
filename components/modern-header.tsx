@@ -49,17 +49,16 @@ export default function ModernHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  // Close mobile menu when clicking outside
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement
-      if (isMenuOpen && !target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
-        setIsMenuAnimating(false)
-        setTimeout(() => setIsMenuOpen(false), 300)
-      }
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
     }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [isMenuOpen])
 
   const isActivePage = (href: string, submenu?: any[]) => {
@@ -105,18 +104,18 @@ export default function ModernHeader() {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white shadow-xl sticky top-0 z-50">
+      <header className="bg-white shadow-xl">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 lg:h-24">
             {/* Logo Section */}
             <div className="flex items-center flex-shrink-0">
               <Link href="/" className="flex items-center group">
-                <Image 
-                  src="/branding/logo.png" 
-                  alt="Spanish Horizons Logo" 
-                  width={200} 
-                  height={64} 
-                  className="object-contain h-14 sm:h-16 lg:h-20 max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]" 
+                <Image
+                  src="/branding/logo.png"
+                  alt="Spanish Horizons Logo"
+                  width={200}
+                  height={64}
+                  className="object-contain h-14 sm:h-16 lg:h-20 max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]"
                 />
               </Link>
             </div>
@@ -246,8 +245,11 @@ export default function ModernHeader() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden mobile-menu-button p-2 rounded-xl bg-slate text-white hover:bg-slate-medium hover:text-white transition-colors duration-200"
-              onClick={() => {
+              type="button"
+              className="lg:hidden mobile-menu-button p-3 rounded-xl bg-slate text-white active:bg-slate-medium transition-colors duration-200 relative z-[60] touch-manipulation select-none"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
                 if (!isMenuOpen) {
                   setIsMenuAnimating(true)
                   setIsMenuOpen(true)
@@ -256,185 +258,201 @@ export default function ModernHeader() {
                   setTimeout(() => setIsMenuOpen(false), 300)
                 }
               }}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6 pointer-events-none" /> : <Menu className="h-6 w-6 pointer-events-none" />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden mobile-menu fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
-            <div className={`absolute top-0 right-0 h-screen w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${
+      {/* Mobile Menu - Outside header to avoid stacking context issues */}
+      {isMenuOpen && (
+        <div
+          className="lg:hidden mobile-menu fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsMenuAnimating(false)
+              setTimeout(() => setIsMenuOpen(false), 300)
+            }
+          }}
+        >
+          <div
+            className={`absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col overflow-hidden ${
               isMenuAnimating ? 'translate-x-0' : 'translate-x-full'
-            }`}>
-              {/* Mobile Menu Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-gradient-to-r from-amber/5 to-golden/5 flex-shrink-0">
-                <div className="flex items-center flex-1">
-                  <Image 
-                    src="/branding/logo.png" 
-                    alt="Spanish Horizons Logo" 
-                    width={120} 
-                    height={40} 
-                    className="object-contain h-12 mx-auto" 
-                  />
-                </div>
-                <button
-                  onClick={() => {
-                    setIsMenuAnimating(false)
-                    setTimeout(() => setIsMenuOpen(false), 300)
-                  }}
-                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-md hover:shadow-lg"
-                >
-                  <X className="h-5 w-5 text-gray-600" />
-                </button>
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-gradient-to-r from-amber/5 to-golden/5 flex-shrink-0">
+              <div className="flex items-center flex-1">
+                <Image
+                  src="/branding/logo.png"
+                  alt="Spanish Horizons Logo"
+                  width={120}
+                  height={40}
+                  className="object-contain h-12 mx-auto"
+                />
               </div>
+              <button
+                onClick={() => {
+                  setIsMenuAnimating(false)
+                  setTimeout(() => setIsMenuOpen(false), 300)
+                }}
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-md hover:shadow-lg"
+                aria-label="Close menu"
+              >
+                <X className="h-5 w-5 text-gray-600" />
+              </button>
+            </div>
 
-              {/* Mobile Menu Content */}
-              <div className="flex flex-col flex-1 min-h-0">
-                <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
-                  {navigation.map((item) => (
-                    <div key={item.name}>
-                      {item.submenu ? (
-                        <div>
-                          <button
-                            className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                              isActivePage(item.href, item.submenu)
-                                ? "bg-amber text-white shadow-lg"
-                                : "text-gray-700 hover:bg-amber/10 hover:text-amber"
-                            }`}
-                            onClick={(e) => handleDropdownToggle(item.name, e)}
-                          >
-                            <span className="flex items-center">
-                              {item.name}
-                            </span>
-                            <ChevronDown
-                              className={`h-4 w-4 transition-all duration-300 ${
-                                activeDropdown === item.name ? "rotate-180" : ""
-                              }`}
-                            />
-                          </button>
-                          {activeDropdown === item.name && (
-                            <div className="ml-3 mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
-                              {item.submenu.map((subItem) => (
-                                <Link
-                                  key={subItem.name}
-                                  href={subItem.href}
-                                  className={`block px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                                    pathname === subItem.href || pathname.startsWith(subItem.href.split("#")[0])
-                                      ? "bg-amber text-white shadow-md"
-                                      : "text-gray-600 hover:bg-amber hover:text-white"
-                                  }`}
-                                  onClick={() => {
-                                    setIsMenuAnimating(false)
-                                    setTimeout(() => {
-                                      setIsMenuOpen(false)
-                                      setActiveDropdown(null)
-                                    }, 300)
-                                  }}
-                                >
-                                  {subItem.name}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                            pathname === item.href
+            {/* Mobile Menu Content */}
+            <div className="flex flex-col flex-1 overflow-hidden">
+              <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto overscroll-contain">
+                {navigation.map((item) => (
+                  <div key={item.name}>
+                    {item.submenu ? (
+                      <div>
+                        <button
+                          className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                            isActivePage(item.href, item.submenu)
                               ? "bg-amber text-white shadow-lg"
                               : "text-gray-700 hover:bg-amber/10 hover:text-amber"
                           }`}
+                          onClick={(e) => handleDropdownToggle(item.name, e)}
+                        >
+                          <span className="flex items-center">
+                            {item.name}
+                          </span>
+                          <ChevronDown
+                            className={`h-4 w-4 transition-all duration-300 ${
+                              activeDropdown === item.name ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        {activeDropdown === item.name && (
+                          <div className="ml-3 mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
+                            {item.submenu.map((subItem) => (
+                              <Link
+                                key={subItem.name}
+                                href={subItem.href}
+                                className={`block px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                  pathname === subItem.href || pathname.startsWith(subItem.href.split("#")[0])
+                                    ? "bg-amber text-white shadow-md"
+                                    : "text-gray-600 hover:bg-amber hover:text-white"
+                                }`}
+                                onClick={() => {
+                                  setIsMenuAnimating(false)
+                                  setTimeout(() => {
+                                    setIsMenuOpen(false)
+                                    setActiveDropdown(null)
+                                  }, 300)
+                                }}
+                              >
+                                {subItem.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={`flex items-center px-3 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                          pathname === item.href
+                            ? "bg-amber text-white shadow-lg"
+                            : "text-gray-700 hover:bg-amber/10 hover:text-amber"
+                        }`}
+                        onClick={() => {
+                          setIsMenuAnimating(false)
+                          setTimeout(() => setIsMenuOpen(false), 300)
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </div>
+                ))}
+              </nav>
+
+              {/* Action Buttons */}
+              <div className="px-4 py-4 border-t border-gray-100 flex-shrink-0">
+                <div className="space-y-3">
+                  <div className="relative">
+                    <Button
+                      size="lg"
+                      className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-medium py-3 text-sm shadow-lg transition-all duration-200 flex items-center justify-between"
+                      onClick={(e) => handleDropdownToggle("Discover More Mobile", e)}
+                    >
+                      <span>Discover More</span>
+                      <ChevronDown
+                        className={`h-4 w-4 transition-all duration-300 ${
+                          activeDropdown === "Discover More Mobile" ? "rotate-180" : ""
+                        }`}
+                      />
+                    </Button>
+                    {activeDropdown === "Discover More Mobile" && (
+                      <div className="mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
+                        <Link
+                          href="/casita-azul"
+                          className="flex items-center px-3 py-4 rounded-lg text-base font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
                           onClick={() => {
                             setIsMenuAnimating(false)
-                            setTimeout(() => setIsMenuOpen(false), 300)
+                            setTimeout(() => {
+                              setIsMenuOpen(false)
+                              setActiveDropdown(null)
+                            }, 300)
                           }}
                         >
-                          {item.name}
+                          <Image
+                            src="/casita-azul.png"
+                            alt="Casita Azul Logo"
+                            width={36}
+                            height={36}
+                            className="mr-4 object-contain"
+                          />
+                          Casita Azul
                         </Link>
-                      )}
-                    </div>
-                  ))}
-                </nav>
-
-                {/* Action Buttons */}
-                <div className="px-4 py-4 border-t border-gray-100 flex-shrink-0">
-                  <div className="space-y-3">
-                    <div className="relative">
-                      <Button
-                        size="lg"
-                        className="w-full bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-medium py-3 text-sm shadow-lg transition-all duration-200 flex items-center justify-between"
-                        onClick={(e) => handleDropdownToggle("Discover More Mobile", e)}
-                      >
-                        <span>Discover More</span>
-                        <ChevronDown
-                          className={`h-4 w-4 transition-all duration-300 ${
-                            activeDropdown === "Discover More Mobile" ? "rotate-180" : ""
-                          }`}
-                        />
-                      </Button>
-                      {activeDropdown === "Discover More Mobile" && (
-                        <div className="mt-2 space-y-1 bg-gray-50 rounded-lg p-2">
-                          <Link
-                            href="/casita-azul"
-                            className="flex items-center px-3 py-4 rounded-lg text-base font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
-                            onClick={() => {
-                              setIsMenuAnimating(false)
-                              setTimeout(() => {
-                                setIsMenuOpen(false)
-                                setActiveDropdown(null)
-                              }, 300)
-                            }}
-                          >
-                            <Image
-                              src="/casita-azul.png"
-                              alt="Casita Azul Logo"
-                              width={36}
-                              height={36}
-                              className="mr-4 object-contain"
-                            />
-                            Casita Azul
-                          </Link>
-                          <Link
-                            href="/camp-alegria"
-                            className="flex items-center px-3 py-4 rounded-lg text-base font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
-                            onClick={() => {
-                              setIsMenuAnimating(false)
-                              setTimeout(() => {
-                                setIsMenuOpen(false)
-                                setActiveDropdown(null)
-                              }, 300)
-                            }}
-                          >
-                            <Image
-                              src="/camp-alegria.png"
-                              alt="Camp Alegria Logo"
-                              width={36}
-                              height={36}
-                              className="mr-4 object-contain"
-                            />
-                            Camp Alegria
-                          </Link>
-                          <Link
-                            href="https://www.casitaazuleducation.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center px-3 py-4 rounded-lg text-base font-bold bg-slate/10 text-slate hover:bg-slate hover:text-white transition-all duration-200"
-                            onClick={() => {
-                              setIsMenuAnimating(false)
-                              setTimeout(() => {
-                                setIsMenuOpen(false)
-                                setActiveDropdown(null)
-                              }, 300)
-                            }}
-                          >
-                            Our Programs
-                          </Link>
-                        </div>
-                      )}
-                    </div>
+                        <Link
+                          href="/camp-alegria"
+                          className="flex items-center px-3 py-4 rounded-lg text-base font-medium text-gray-700 hover:bg-amber hover:text-white transition-all duration-200"
+                          onClick={() => {
+                            setIsMenuAnimating(false)
+                            setTimeout(() => {
+                              setIsMenuOpen(false)
+                              setActiveDropdown(null)
+                            }, 300)
+                          }}
+                        >
+                          <Image
+                            src="/camp-alegria.png"
+                            alt="Camp Alegria Logo"
+                            width={36}
+                            height={36}
+                            className="mr-4 object-contain"
+                          />
+                          Camp Alegria
+                        </Link>
+                        <Link
+                          href="https://www.casitaazuleducation.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center px-3 py-4 rounded-lg text-base font-bold bg-slate/10 text-slate hover:bg-slate hover:text-white transition-all duration-200"
+                          onClick={() => {
+                            setIsMenuAnimating(false)
+                            setTimeout(() => {
+                              setIsMenuOpen(false)
+                              setActiveDropdown(null)
+                            }, 300)
+                          }}
+                        >
+                          Our Programs
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                  <Link href="/contact" className="block">
                     <Button
                       size="lg"
                       className="w-full bg-slate hover:bg-slate-medium text-white rounded-xl font-medium py-3 text-sm shadow-lg transition-all duration-200"
@@ -443,15 +461,15 @@ export default function ModernHeader() {
                         setTimeout(() => setIsMenuOpen(false), 300)
                       }}
                     >
-                      <Link href="/contact">Apply Now</Link>
+                      Apply Now
                     </Button>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
     </div>
   )
 }
