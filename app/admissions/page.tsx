@@ -61,7 +61,7 @@ export default function AdmissionsPage() {
               size="lg"
               className="bg-amber hover:bg-golden hover:text-slate text-white px-8 py-4 rounded-xl font-questa font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
             >
-              <a href="/contact" className="flex items-center">
+              <a href="/admissions/application" className="flex items-center">
                 Start Your Application
                 <ChevronRight className="ml-2 h-5 w-5" />
               </a>

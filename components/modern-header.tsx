@@ -31,6 +31,7 @@ export default function ModernHeader() {
       href: "/admissions",
       submenu: [
         { name: "Admissions Process", href: "/admissions" },
+        { name: "Apply Now", href: "/admissions/application" },
         { name: "Tuition & Fees", href: "/tuition" },
       ],
     },
