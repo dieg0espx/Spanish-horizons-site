@@ -1,25 +1,11 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Phone, Mail, Clock, Instagram, MessageCircle, CheckCircle, AlertCircle } from "lucide-react"
 import { useState, useEffect } from "react"
-import { useToast } from "@/hooks/use-toast"
 
 export default function ContactPage() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    childAge: '',
-    interest: '',
-    message: ''
-  })
 
   // Array of all available images
   const allImages = [
@@ -74,65 +60,6 @@ export default function ContactPage() {
 
   // Shuffle the images array
   const shuffledImages = shuffleArray(allImages);
-
-  // Handle form input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          subject: formData.interest ? `Interest: ${formData.interest}` : 'General Inquiry'
-        }),
-      })
-
-      if (response.ok) {
-        await response.json()
-        
-        toast({
-          title: "✅ Message sent successfully!",
-          description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-        })
-        
-        // Reset form
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          childAge: '',
-          interest: '',
-          message: ''
-        })
-      } else {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to send message')
-      }
-    } catch (error) {
-      toast({
-        title: "❌ Error sending message",
-        description: error instanceof Error ? error.message : "Please try again later or contact us directly.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
 
   // State for current image
   const [campusImage, setCampusImage] = useState(shuffledImages[0]);
@@ -287,142 +214,53 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Start Application CTA */}
             <div>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl md:text-2xl font-ivry text-slate">Send Us a Message</CardTitle>
-                </CardHeader>
-                <CardContent className="p-4 md:p-6">
-                  <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="firstName" className="block text-sm font-questa font-medium text-slate mb-2">
-                          First Name *
-                        </label>
-                        <Input 
-                          id="firstName" 
-                          name="firstName" 
-                          type="text" 
-                          required 
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          className="text-sm md:text-base" 
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="lastName" className="block text-sm font-questa font-medium text-slate mb-2">
-                          Last Name *
-                        </label>
-                        <Input 
-                          id="lastName" 
-                          name="lastName" 
-                          type="text" 
-                          required 
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          className="text-sm md:text-base" 
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-questa font-medium text-slate mb-2">
-                        Email Address *
-                      </label>
-                      <Input 
-                        id="email" 
-                        name="email" 
-                        type="email" 
-                        required 
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="text-sm md:text-base" 
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-questa font-medium text-slate mb-2">
-                        Phone Number
-                      </label>
-                      <Input 
-                        id="phone" 
-                        name="phone" 
-                        type="tel" 
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="text-sm md:text-base" 
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="childAge" className="block text-sm font-questa font-medium text-slate mb-2">
-                        Child's Age/Grade Level
-                      </label>
-                      <Input 
-                        id="childAge" 
-                        name="childAge" 
-                        type="text" 
-                        placeholder="e.g., 5 years old, Kindergarten, 2nd grade" 
-                        value={formData.childAge}
-                        onChange={handleInputChange}
-                        className="text-sm md:text-base" 
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="interest" className="block text-sm font-questa font-medium text-slate mb-2">
-                        I'm interested in:
-                      </label>
-                      <select 
-                        name="interest" 
-                        value={formData.interest}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-slate focus:border-slate font-questa text-sm md:text-base"
-                      >
-                        <option value="">Please select...</option>
-                        <option value="tour">Scheduling a tour</option>
-                        <option value="admissions">Admissions information</option>
-                        <option value="tuition">Tuition and financial assistance</option>
-                        <option value="programs">Academic programs</option>
-                        <option value="aftercare">Aftercare program</option>
-                        <option value="other">Other questions</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-questa font-medium text-slate mb-2">
-                        Message
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        placeholder="Tell us about your questions or what you'd like to know about Spanish Horizons Academy..."
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        className="text-sm md:text-base"
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-sm md:text-base py-3 disabled:opacity-50"
+              <Card className="bg-slate border-0 shadow-xl">
+                <CardContent className="p-6 md:p-10 text-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-golden rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="h-8 w-8 md:h-10 md:w-10 text-slate" />
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-ivry font-bold text-white mb-4">
+                    Ready to Apply?
+                  </h2>
+                  <p className="text-white/90 font-questa mb-6 text-sm md:text-base max-w-md mx-auto">
+                    Start your application for Spanish Horizons Academy's Kindergarten program for Fall 2026. We're excited to learn more about your family.
+                  </p>
+                  <div className="space-y-4">
+                    <Button
+                      size="lg"
+                      className="w-full bg-amber hover:bg-golden hover:text-slate text-white font-questa text-base md:text-lg py-6"
+                      asChild
                     >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin h-4 w-4 md:h-5 md:w-5 mr-2 border-2 border-slate border-t-transparent rounded-full" />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <MessageCircle className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                          Send Message
-                        </>
-                      )}
+                      <a href="/admissions/application" className="flex items-center justify-center">
+                        <AlertCircle className="h-5 w-5 mr-2" />
+                        Start Your Application
+                      </a>
                     </Button>
-                  </form>
+                    <p className="text-white/60 text-xs font-questa">
+                      Currently accepting applications for Kindergarten only
+                    </p>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-white/20">
+                    <p className="text-white/70 font-questa text-sm mb-3">Have questions first?</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <a
+                        href="mailto:infospanishhorizons@casitaazulpdx.org"
+                        className="text-golden hover:text-golden-light font-questa text-sm transition-colors"
+                      >
+                        Email Us
+                      </a>
+                      <span className="hidden sm:inline text-white/40">|</span>
+                      <a
+                        href="tel:5039169758"
+                        className="text-golden hover:text-golden-light font-questa text-sm transition-colors"
+                      >
+                        Call (503) 916-9758
+                      </a>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>

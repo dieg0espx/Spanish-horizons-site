@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+import Script from "next/script"
 import "./globals.css"
 import "./fonts.css"
 import ModernHeader from "@/components/modern-header"
@@ -9,7 +10,6 @@ import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, P
 import FloatingCTA from "@/components/floating-cta"
 import ConditionalLayout from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/toaster"
-import { AuthProvider } from "@/contexts/auth-context"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -139,6 +139,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${lora.variable} ${cormorant.variable} ${libreBaskerville.variable} ${poppins.variable} scroll-smooth`}>
       <head>
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="6CS6c5IM2chKIRLvQyE/gw"
+          strategy="afterInteractive"
+        />
         {/* Favicon Links */}
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" />
@@ -202,12 +207,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        <AuthProvider>
-          <ConditionalLayout>
-            {children}
-          </ConditionalLayout>
-          <Toaster />
-        </AuthProvider>
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
+        <Toaster />
       </body>
     </html>
   )

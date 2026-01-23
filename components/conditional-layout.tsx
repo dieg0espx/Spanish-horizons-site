@@ -14,9 +14,6 @@ interface ConditionalLayoutProps {
 export default function ConditionalLayout({ children, showHeader = true }: ConditionalLayoutProps) {
   const pathname = usePathname()
   
-  // Check if we're on a Cocinarte page
-  const isCocinartePage = pathname?.startsWith('/cocinarte')
-  
   // Check if we're on the landing page
   const isLandingPage = pathname?.startsWith('/landing')
   
@@ -26,8 +23,8 @@ export default function ConditionalLayout({ children, showHeader = true }: Condi
   // Check if we're on the login page
   const isLoginPage = pathname?.startsWith('/login')
   
-  if (isCocinartePage || isLandingPage || isDashboardPage || isLoginPage || !showHeader) {
-    // For Cocinarte pages, landing page, dashboard, login, or when showHeader is false, only render the children (no header/footer)
+  if (isLandingPage || isDashboardPage || isLoginPage || !showHeader) {
+    // For landing page, dashboard, login, or when showHeader is false, only render the children (no header/footer)
     return <>{children}</>
   }
   

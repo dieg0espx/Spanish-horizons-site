@@ -108,43 +108,7 @@
     font-family: var(--font-playfair), 'Playfair Display', serif !important;
   }
   
-  /* Coming Soon font class for Cocinarte page */
-  .font-coming-soon {
-    font-family: 'Coming Soon', cursive !important;
-  }
-  
-  /* Local Coming Soon font face */
-  @font-face {
-    font-family: 'Coming Soon';
-    src: url('/fonts/Coming_Soon/ComingSoon-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  /* Exclude Cocinarte and Casita Azul pages from Poppins font */
-  [data-page="cocinarte"] body,
-  [data-page="cocinarte"] h1,
-  [data-page="cocinarte"] h2,
-  [data-page="cocinarte"] h3,
-  [data-page="cocinarte"] h4,
-  [data-page="cocinarte"] h5,
-  [data-page="cocinarte"] h6,
-  [data-page="cocinarte"] p,
-  [data-page="cocinarte"] span,
-  [data-page="cocinarte"] div,
-  [data-page="cocinarte"] a,
-  [data-page="cocinarte"] button,
-  [data-page="cocinarte"] input,
-  [data-page="cocinarte"] textarea,
-  [data-page="cocinarte"] select,
-  [data-page="cocinarte"] label,
-  [data-page="cocinarte"] li,
-  [data-page="cocinarte"] td,
-  [data-page="cocinarte"] th {
-    font-family: inherit !important;
-  }
-  
+  /* Exclude Casita Azul pages from Poppins font */
   [data-page="casita-azul"] body,
   [data-page="casita-azul"] h1,
   [data-page="casita-azul"] h2,
@@ -348,23 +312,6 @@
     font-family: inherit !important;
   }
 
-  /* Cocinarte page DatePicker font styling */
-  [data-page="cocinarte"] .react-datepicker-calendar {
-    font-family: 'Coming Soon', cursive !important;
-  }
-
-  [data-page="cocinarte"] .react-datepicker__current-month {
-    font-family: 'Coming Soon', cursive !important;
-  }
-
-  [data-page="cocinarte"] .react-datepicker__day-name {
-    font-family: 'Coming Soon', cursive !important;
-  }
-
-  [data-page="cocinarte"] .react-datepicker__day {
-    font-family: 'Coming Soon', cursive !important;
-  }
-
   .react-datepicker__header {
     background: #00ADEE !important;
     border-bottom: 2px solid #00ADEE !important;
@@ -466,7 +413,7 @@
     background: white !important;
   }
 
-  /* Floating animations for Cocinarte elements */
+  /* Floating animations */
   @keyframes float-slow {
     0%, 100% {
       transform: translateY(0px) rotate(0deg);

@@ -105,7 +105,7 @@ export default function FlipCard({
         {/* Back of Card - Information - Only visible on desktop */}
         {!isMobile && (
         <div 
-          className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-xl bg-cocinarte-navy rotate-y-180"
+          className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-xl bg-slate rotate-y-180"
           style={{ 
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)'
@@ -113,8 +113,8 @@ export default function FlipCard({
         >
           <div className="p-3 sm:p-4 md:p-6 h-full flex flex-col justify-between overflow-y-auto">
             <div>
-              <div className="inline-block bg-cocinarte-yellow/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 mb-2 sm:mb-4">
-                <span className="text-cocinarte-yellow text-xs sm:text-sm font-medium capitalize">{category}</span>
+              <div className="inline-block bg-amber/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 mb-2 sm:mb-4">
+                <span className="text-amber text-xs sm:text-sm font-medium capitalize">{category}</span>
               </div>
               <h3 className="text-white text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3">{title}</h3>
               <p className="text-white/90 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
@@ -124,11 +124,11 @@ export default function FlipCard({
             
             {learningOutcomes.length > 0 && (
               <div>
-                <h4 className="text-cocinarte-yellow text-xs sm:text-sm font-semibold mb-2">Learning Outcomes:</h4>
+                <h4 className="text-amber text-xs sm:text-sm font-semibold mb-2">Learning Outcomes:</h4>
                 <ul className="text-white/80 text-xs space-y-1">
                   {learningOutcomes.slice(0, 3).map((outcome, index) => (
                     <li key={index} className="flex items-start">
-                      <span className="text-cocinarte-yellow mr-2">•</span>
+                      <span className="text-amber mr-2">•</span>
                       <span>{outcome}</span>
                     </li>
                   ))}

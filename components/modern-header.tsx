@@ -31,6 +31,7 @@ export default function ModernHeader() {
       href: "/admissions",
       submenu: [
         { name: "Admissions Process", href: "/admissions" },
+        { name: "Apply Now", href: "/admissions/application" },
         { name: "Tuition & Fees", href: "/tuition" },
       ],
     },
@@ -108,7 +109,7 @@ export default function ModernHeader() {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 lg:h-24">
             {/* Logo Section */}
-            <div className="flex items-center flex-shrink-0">
+            <div className="flex items-center flex-shrink-0 -ml-2 sm:ml-0">
               <Link href="/" className="flex items-center group">
                 <Image
                   src="/branding/logo.png"

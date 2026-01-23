@@ -36,13 +36,6 @@ export default function LandingNav() {
       badge: "Ages 2-5"
     },
     {
-      name: "Cocinarte",
-      href: "#cocinarte",
-      logo: "/cocinarte/cocinarteLogo.png",
-      description: "Cooking Classes",
-      badge: "All Ages"
-    },
-    {
       name: "Camp Alegría",
       href: "#camp-alegria",
       logo: "/camp-alegria.png",

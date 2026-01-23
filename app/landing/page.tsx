@@ -8,7 +8,6 @@ import {
   Globe, 
   Users, 
   BookOpen,
-  ChefHat,
   Sun,
   ArrowRight,
   CheckCircle,
@@ -18,7 +17,6 @@ import {
   Calendar,
   GraduationCap,
   Home,
-  Utensils,
   TreePine
 } from "lucide-react"
 import Link from "next/link"
@@ -122,53 +120,6 @@ export default function LandingPage() {
         src: '/casitaAzul/casita6.jpeg',
         alt: 'Child development',
         description: 'Comprehensive child development program that integrates Spanish language learning with social and emotional growth.'
-      }
-    ],
-    cocinarte: [
-      {
-        id: '6',
-        type: 'image' as const,
-        src: '/cocinarte/cocinarte6.jpeg',
-        alt: 'Cooking techniques',
-        description: 'Learning fundamental cooking techniques and kitchen safety in a fun, interactive environment.'
-      },
-      {
-        id: '3',
-        type: 'image' as const,
-        src: '/cocinarte/cocinarte3.jpeg',
-        alt: 'Cooking ingredients and tools',
-        description: 'Interactive learning about ingredients, cooking techniques, and cultural traditions.',
-        imagePosition: 'center 100%'
-      },
-      {
-        id: '1',
-        type: 'image' as const,
-        src: '/cocinarte/cocinarte1.jpeg',
-        alt: 'Cooking class in progress',
-        description: 'Hands-on cooking experiences where kids learn Latin American cuisine and Spanish vocabulary.',
-        imagePosition: 'center 25%'
-      },
-      {
-        id: '4',
-        type: 'image' as const,
-        src: '/cocinarte/cocinarte4.jpeg',
-        alt: 'Finished cooking creations',
-        description: 'Celebrating the joy of cooking and sharing delicious Latin American dishes.'
-      },
-      {
-        id: '2',
-        type: 'image' as const,
-        src: '/cocinarte/cocinarte2.jpeg',
-        alt: 'Kids cooking together',
-        description: 'Family cooking sessions that create lasting memories while exploring Latin flavors.',
-        imagePosition: 'center 15%'
-      },
-      {
-        id: '5',
-        type: 'image' as const,
-        src: '/cocinarte/cocinarte5.jpeg',
-        alt: 'Culinary creativity',
-        description: 'Encouraging creativity and confidence in the kitchen while learning traditional Latin American recipes.'
       }
     ],
     campAlegria: [
@@ -290,7 +241,7 @@ export default function LandingPage() {
               
               {/* Description */}
               <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 max-w-4xl mx-auto leading-relaxed px-3 sm:px-4 md:px-6 mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-light tracking-wide shadow-text animate-slide-up-delay">
-                From early childhood through elementary school, cooking adventures to summer camps 
+                From early childhood through elementary school and summer camps,
                 we provide comprehensive Spanish immersion education for every stage of your child's journey.
               </p>
               
@@ -323,7 +274,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-questa text-slate mb-4 px-4">
-              Four Programs, One Mission
+              Three Programs, One Mission
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto px-4">
               Our comprehensive Spanish immersion ecosystem serves children and families at every stage, 
@@ -331,7 +282,7 @@ export default function LandingPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 lg:gap-8">
             {/* Spanish Horizons Academy */}
             <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-slate-50 to-slate-100 cursor-pointer">
               <Link href="/" className="block">
@@ -380,32 +331,6 @@ export default function LandingPage() {
                 <div className="flex justify-center">
                   <Badge variant="secondary" className="bg-green-200 text-green-800 text-xs w-fit">
                     Ages 2-5
-                  </Badge>
-                </div>
-                </CardContent>
-              </Link>
-            </Card>
-
-            {/* Cocinarte */}
-            <Card className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-orange-50 to-orange-100 cursor-pointer">
-              <Link href="/cocinarte" className="block">
-                <CardContent className="p-3 sm:p-4 lg:p-6 text-center flex flex-col h-full">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-2xl overflow-hidden mx-auto mb-3 sm:mb-4 group-hover:scale-105 transition-transform duration-300">
-                  <Image
-                    src="/cocinarte/cocinarteLogo.png"
-                    alt="Cocinarte"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-questa font-bold mb-2 sm:mb-3 text-slate leading-tight">Cocinarte</h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2 sm:mb-3 flex-grow">
-                  Cooking classes celebrating Latin flavors for kids & families
-                </p>
-                <div className="flex justify-center">
-                  <Badge variant="secondary" className="bg-orange-200 text-orange-800 text-xs w-fit">
-                    All Ages
                   </Badge>
                 </div>
                 </CardContent>
@@ -603,88 +528,10 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Cocinarte */}
-          <div id="cocinarte" className={`mb-12 sm:mb-16 lg:mb-24 transform transition-all duration-700 ease-out ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`} style={{ transitionDelay: '300ms' }}>
-            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 items-center">
-              <div className="space-y-3 sm:space-y-4 lg:space-y-6 w-full">
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex justify-center mb-3 sm:mb-4">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
-                      <Image
-                        src="/cocinarte/cocinarteLogo.png"
-                        alt="Cocinarte"
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex justify-center mb-2 sm:mb-3">
-                    <Badge variant="secondary" className="bg-orange-200 text-orange-800 text-xs sm:text-sm w-fit">
-                      Cooking Classes
-                    </Badge>
-                  </div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-questa text-slate leading-tight text-center">
-                    Cocinarte
-                  </h2>
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                    Cooking classes that celebrate Latin flavors, designed for kids and families. 
-                    Hands-on learning experiences that make cooking fun and educational.
-                  </p>
-                </div>
-
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-start space-x-2 sm:space-x-3">
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-orange-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-questa font-semibold text-sm sm:text-base lg:text-lg text-slate">Latin Flavors</h3>
-                      <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed">Explore authentic Latin American cuisine and cooking techniques</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-2 sm:space-x-3">
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-orange-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-questa font-semibold text-sm sm:text-base lg:text-lg text-slate">Family Fun</h3>
-                      <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed">Perfect for kids and families to cook together</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-2 sm:space-x-3">
-                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-orange-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-questa font-semibold text-sm sm:text-base lg:text-lg text-slate">Hands-On Learning</h3>
-                      <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed">Interactive cooking experiences building confidence and skills</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                  <Button size="sm" className="bg-orange-500 hover:bg-orange-600 text-white font-questa px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm w-full sm:w-auto">
-                    <Link href="/cocinarte" className="flex items-center justify-center">
-                      Learn More
-                      <ArrowRight className="ml-1 w-3 h-3 sm:w-4 sm:h-4" />
-                    </Link>
-                  </Button>
-                  <Button size="sm" variant="outline" className="border-orange-300 text-orange-700 hover:bg-orange-50 font-questa px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm w-full sm:w-auto">
-                    <Link href="/cocinarte#contact" className="flex items-center justify-center">Book Now</Link>
-                  </Button>
-                </div>
-              </div>
-
-              <div className="relative">
-                <ProgramCarousel
-                  media={programMedia.cocinarte}
-                  color="orange"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Camp Alegría */}
           <div id="camp-alegria" className={`transform transition-all duration-700 ease-out ${
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`} style={{ transitionDelay: '450ms' }}>
+          }`} style={{ transitionDelay: '300ms' }}>
             <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 items-center">
               <div className="relative order-2 lg:order-1">
                 <ProgramCarousel

@@ -44,16 +44,6 @@ const config: Config = {
 				lighter: '#3a3f7c', // Lighter slate blue
 				lightest: '#4a4f8c' // Lightest slate blue
 			},
-			// Cocinarte Color Palette
-			cocinarte: {
-				orange: '#F48E77', // Light orange
-				red: '#F0614F', // Red
-				white: '#FEFEFE', // Pure white
-				blue: '#CDECF9', // Light blue
-				yellow: '#FCB414', // Yellow
-				navy: '#00ADEE', // Navy blue
-				black: '#000000' // Black
-			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
