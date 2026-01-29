@@ -4,12 +4,14 @@ import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Star, MapPin, Phone, ChevronDown } from "lucide-react"
+import { Menu, X, Star, MapPin, Phone, ChevronDown, User, LogOut } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
+import { useAuth } from "@/contexts/auth-context"
 
 export default function ModernHeader() {
+  const { user, loading, signOut, openAuthModal } = useAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isMenuAnimating, setIsMenuAnimating] = useState(false)
@@ -98,6 +100,35 @@ export default function ModernHeader() {
                 <Star className="h-4 w-4 mr-1 text-golden" />
                 <span className="text-xs hidden sm:inline">K-5 Spanish Immersion Excellence</span>
                 <span className="text-xs sm:hidden">K-5 Excellence</span>
+              </div>
+              <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-white/20">
+                {!loading && (
+                  user ? (
+                    <div className="flex items-center space-x-3">
+                      <Link
+                        href="/dashboard"
+                        className="text-xs text-white/80 hover:text-golden transition-colors truncate max-w-[150px]"
+                      >
+                        {user.email}
+                      </Link>
+                      <button
+                        onClick={() => signOut()}
+                        className="text-xs text-white/80 hover:text-golden transition-colors flex items-center"
+                      >
+                        <LogOut className="h-3 w-3 mr-1" />
+                        Sign Out
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => openAuthModal('login')}
+                      className="text-xs text-white hover:text-golden transition-colors flex items-center"
+                    >
+                      <User className="h-3 w-3 mr-1" />
+                      Sign In
+                    </button>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -465,6 +496,66 @@ export default function ModernHeader() {
                       Apply Now
                     </Button>
                   </Link>
+
+                  {/* Auth Section */}
+                  {!loading && (
+                    <div className="pt-3 border-t border-gray-200">
+                      {user ? (
+                        <div className="space-y-2">
+                          <Link
+                            href="/dashboard"
+                            className="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-amber transition-colors rounded-lg hover:bg-amber/10"
+                            onClick={() => {
+                              setIsMenuAnimating(false)
+                              setTimeout(() => setIsMenuOpen(false), 300)
+                            }}
+                          >
+                            <User className="h-4 w-4 mr-2 text-amber" />
+                            <span className="truncate">{user.email}</span>
+                          </Link>
+                          <Button
+                            size="lg"
+                            variant="outline"
+                            className="w-full border-slate/20 text-slate hover:bg-slate hover:text-white rounded-xl font-medium py-3 text-sm transition-all duration-200"
+                            onClick={() => {
+                              signOut()
+                              setIsMenuAnimating(false)
+                              setTimeout(() => setIsMenuOpen(false), 300)
+                            }}
+                          >
+                            <LogOut className="h-4 w-4 mr-2" />
+                            Sign Out
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex space-x-2">
+                          <Button
+                            size="lg"
+                            variant="outline"
+                            className="flex-1 border-slate/20 text-slate hover:bg-slate hover:text-white rounded-xl font-medium py-3 text-sm transition-all duration-200"
+                            onClick={() => {
+                              openAuthModal('login')
+                              setIsMenuAnimating(false)
+                              setTimeout(() => setIsMenuOpen(false), 300)
+                            }}
+                          >
+                            Sign In
+                          </Button>
+                          <Button
+                            size="lg"
+                            className="flex-1 bg-golden hover:bg-amber text-slate rounded-xl font-medium py-3 text-sm shadow-lg transition-all duration-200"
+                            onClick={() => {
+                              openAuthModal('signup')
+                              setIsMenuAnimating(false)
+                              setTimeout(() => setIsMenuOpen(false), 300)
+                            }}
+                          >
+                            Sign Up
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

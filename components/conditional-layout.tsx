@@ -20,11 +20,11 @@ export default function ConditionalLayout({ children, showHeader = true }: Condi
   // Check if we're on the dashboard page
   const isDashboardPage = pathname?.startsWith('/dashboard')
   
-  // Check if we're on the login page
-  const isLoginPage = pathname?.startsWith('/login')
-  
-  if (isLandingPage || isDashboardPage || isLoginPage || !showHeader) {
-    // For landing page, dashboard, login, or when showHeader is false, only render the children (no header/footer)
+  // Check if we're on the admin page
+  const isAdminPage = pathname?.startsWith('/admin')
+
+  if (isLandingPage || isDashboardPage || isAdminPage || !showHeader) {
+    // For landing page, dashboard, admin, or when showHeader is false, only render the children (no header/footer)
     return <>{children}</>
   }
   
