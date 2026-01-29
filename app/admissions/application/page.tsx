@@ -6,13 +6,90 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { FileText, AlertCircle, CheckCircle, Users, Calendar, Info } from "lucide-react"
-import { useState } from "react"
+import { FileText, AlertCircle, CheckCircle, Users, Calendar, Info, User, LogIn } from "lucide-react"
+import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
+import { useAuth } from "@/contexts/auth-context"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+
+interface ExistingApplication {
+  parent_name: string
+  relationship_to_child: string
+  parent_email: string
+  parent_phone: string
+  home_address: string
+  preferred_communication: string
+  second_parent_name: string | null
+  second_parent_email: string | null
+  second_parent_phone: string | null
+  languages_at_home: string
+}
+
+// MOCK DATA - DELETE WHEN CONNECTING TO SUPABASE
+const MOCK_EXISTING_APPLICATIONS: ExistingApplication[] = [
+  {
+    parent_name: 'Maria Martinez',
+    relationship_to_child: 'Mother',
+    parent_email: 'maria.martinez@email.com',
+    parent_phone: '(503) 555-1234',
+    home_address: '123 Oak Street, Hillsboro, OR 97124',
+    preferred_communication: 'email',
+    second_parent_name: 'Carlos Martinez',
+    second_parent_email: 'carlos.martinez@email.com',
+    second_parent_phone: '(503) 555-5678',
+    languages_at_home: 'Spanish and English'
+  }
+]
+// END MOCK DATA
 
 export default function AdmissionsApplicationPage() {
   const { toast } = useToast()
+  const { user, loading: authLoading, openAuthModal } = useAuth()
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [existingApplications, setExistingApplications] = useState<ExistingApplication[]>([])
+  const [checkingApplication, setCheckingApplication] = useState(true)
+  const [parentInfoPreFilled, setParentInfoPreFilled] = useState(false)
+
+  // Fetch existing applications to pre-fill parent info
+  useEffect(() => {
+    // MOCK DATA - DELETE THIS BLOCK AND UNCOMMENT THE REAL FETCH BELOW
+    const loadMockData = () => {
+      setTimeout(() => {
+        setExistingApplications(MOCK_EXISTING_APPLICATIONS)
+        setCheckingApplication(false)
+      }, 300)
+    }
+    loadMockData()
+    return
+    // END MOCK DATA
+
+    /* UNCOMMENT WHEN CONNECTING TO SUPABASE
+    const fetchExistingApplications = async () => {
+      if (!user) {
+        setCheckingApplication(false)
+        return
+      }
+
+      try {
+        const response = await fetch('/api/admissions/application')
+        const data = await response.json()
+        if (data.applications && data.applications.length > 0) {
+          setExistingApplications(data.applications)
+        }
+      } catch (error) {
+        console.error('Error fetching applications:', error)
+      } finally {
+        setCheckingApplication(false)
+      }
+    }
+
+    if (!authLoading) {
+      fetchExistingApplications()
+    }
+    */
+  }, [user, authLoading])
   const [formData, setFormData] = useState({
     // Section 1: Student Information
     childFullName: '',
@@ -66,6 +143,27 @@ export default function AdmissionsApplicationPage() {
     ackReviewBased: false,
   })
 
+  // Pre-fill parent information from existing applications
+  useEffect(() => {
+    if (existingApplications.length > 0 && !parentInfoPreFilled) {
+      const existingApp = existingApplications[0]
+      setFormData(prev => ({
+        ...prev,
+        parentName: existingApp.parent_name || '',
+        relationshipToChild: existingApp.relationship_to_child || '',
+        parentEmail: existingApp.parent_email || '',
+        parentPhone: existingApp.parent_phone || '',
+        homeAddress: existingApp.home_address || '',
+        preferredCommunication: existingApp.preferred_communication || '',
+        secondParentName: existingApp.second_parent_name || '',
+        secondParentEmail: existingApp.second_parent_email || '',
+        secondParentPhone: existingApp.second_parent_phone || '',
+        languagesAtHome: existingApp.languages_at_home || '',
+      }))
+      setParentInfoPreFilled(true)
+    }
+  }, [existingApplications, parentInfoPreFilled])
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -95,6 +193,17 @@ export default function AdmissionsApplicationPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    // Check if user is logged in
+    if (!user) {
+      toast({
+        title: "Please sign in first",
+        description: "You must be signed in to submit an application.",
+        variant: "destructive",
+      })
+      openAuthModal('login')
+      return
+    }
+
     // Validate acknowledgments
     if (!formData.ackNotGuarantee || !formData.ackKindergartenOnly || !formData.ackFall2026 || !formData.ackConsiderationOnly || !formData.ackReviewBased) {
       toast({
@@ -119,48 +228,11 @@ export default function AdmissionsApplicationPage() {
       if (response.ok) {
         toast({
           title: "Application submitted successfully!",
-          description: "Thank you for your interest in Spanish Horizons Academy. We will review your application and contact you soon.",
+          description: "Thank you for your interest in Spanish Horizons Academy. Check your dashboard for status updates.",
         })
 
-        // Reset form
-        setFormData({
-          childFullName: '',
-          preferredName: '',
-          dateOfBirth: '',
-          primaryLanguages: '',
-          attendedPreschool: '',
-          currentSchool: '',
-          parentName: '',
-          relationshipToChild: '',
-          parentEmail: '',
-          parentPhone: '',
-          homeAddress: '',
-          preferredCommunication: '',
-          secondParentName: '',
-          secondParentEmail: '',
-          secondParentPhone: '',
-          previousEnrollment: [],
-          previousEnrollmentDetails: '',
-          languagesAtHome: '',
-          interestInAcademy: '',
-          hopingFor: '',
-          seekingFullTime: '',
-          excitedAbout: '',
-          valuesImportant: '',
-          interestedInContinuing: false,
-          receiveUpdates: false,
-          howDidYouFind: [],
-          howDidYouFindOther: '',
-          anythingElse: '',
-          ackNotGuarantee: false,
-          ackKindergartenOnly: false,
-          ackFall2026: false,
-          ackConsiderationOnly: false,
-          ackReviewBased: false,
-        })
-
-        // Scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        // Redirect to dashboard
+        router.push('/dashboard')
       } else {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Failed to submit application')
@@ -274,10 +346,107 @@ export default function AdmissionsApplicationPage() {
                 <li>Receive admissions updates and communications</li>
                 <li>Submit additional information if requested</li>
               </ul>
+
+              {/* Auth Status */}
+              <div className="mt-6 pt-6 border-t border-slate/10">
+                {checkingApplication ? (
+                  <div className="flex items-center justify-center py-4">
+                    <div className="animate-spin h-6 w-6 border-2 border-amber border-t-transparent rounded-full mr-3"></div>
+                    <span className="text-slate-medium font-questa">Checking account status...</span>
+                  </div>
+                ) : (
+                  /* MOCK: Always show as signed in for preview - DELETE AND RESTORE ORIGINAL WHEN CONNECTING TO SUPABASE */
+                  <div className="flex items-center justify-between bg-green-50 p-4 rounded-xl border border-green-200">
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <div>
+                        <p className="font-questa font-semibold text-green-700">Signed in as {user?.email || 'maria.martinez@email.com'}</p>
+                        <p className="text-sm text-green-600 font-questa">You're ready to submit your application</p>
+                        <p className="text-xs text-amber font-questa mt-1">(Preview Mode - Mock Data)</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* ORIGINAL AUTH STATUS - UNCOMMENT WHEN CONNECTING TO SUPABASE
+                {authLoading || checkingApplication ? (
+                  <div className="flex items-center justify-center py-4">
+                    <div className="animate-spin h-6 w-6 border-2 border-amber border-t-transparent rounded-full mr-3"></div>
+                    <span className="text-slate-medium font-questa">Checking account status...</span>
+                  </div>
+                ) : user ? (
+                  <div className="flex items-center justify-between bg-green-50 p-4 rounded-xl border border-green-200">
+                    <div className="flex items-center">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                      <div>
+                        <p className="font-questa font-semibold text-green-700">Signed in as {user.email}</p>
+                        <p className="text-sm text-green-600 font-questa">You're ready to submit your application</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-amber/10 p-4 rounded-xl border border-amber/30">
+                    <div className="flex items-start">
+                      <User className="h-5 w-5 text-amber mr-3 mt-0.5" />
+                      <div className="flex-1">
+                        <p className="font-questa font-semibold text-slate mb-2">Sign in to submit your application</p>
+                        <p className="text-sm text-slate-medium font-questa mb-4">
+                          Create an account or sign in to save your application and track its status.
+                        </p>
+                        <div className="flex gap-3">
+                          <Button
+                            onClick={() => openAuthModal('login')}
+                            className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa"
+                          >
+                            <LogIn className="h-4 w-4 mr-2" />
+                            Sign In
+                          </Button>
+                          <Button
+                            onClick={() => openAuthModal('signup')}
+                            variant="outline"
+                            className="border-slate/30 text-slate hover:bg-slate hover:text-white rounded-xl font-questa"
+                          >
+                            Create Account
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                */}
+              </div>
             </CardContent>
           </Card>
         </div>
       </section>
+
+      {/* Adding Another Child Notice */}
+      {existingApplications.length > 0 && (
+        <section className="py-6 bg-green-50">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Card className="border-green-500 border-2">
+              <CardContent className="p-6">
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-4 mt-0.5" />
+                  <div className="flex-1">
+                    <h3 className="font-ivry font-bold text-slate text-lg mb-2">Adding Another Child</h3>
+                    <p className="text-slate-medium font-questa mb-3">
+                      You already have {existingApplications.length} application{existingApplications.length > 1 ? 's' : ''} on file. Your parent/guardian information has been pre-filled for convenience.
+                    </p>
+                    <p className="text-slate-medium font-questa text-sm mb-4">
+                      Simply fill in the new child's information below and submit.
+                    </p>
+                    <Link href="/dashboard">
+                      <Button variant="outline" className="border-green-500 text-green-700 hover:bg-green-100 rounded-xl font-questa">
+                        View Existing Applications
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
 
       {/* Application Form */}
       <section className="py-8 md:py-12 bg-white">
@@ -996,6 +1165,7 @@ export default function AdmissionsApplicationPage() {
             </Card>
 
             {/* Submit Button */}
+            {/* MOCK: Always show submit button for preview - DELETE AND RESTORE ORIGINAL WHEN CONNECTING TO SUPABASE */}
             <div className="pt-4">
               <Button
                 type="submit"
@@ -1007,6 +1177,11 @@ export default function AdmissionsApplicationPage() {
                     <div className="animate-spin h-5 w-5 mr-2 border-2 border-slate border-t-transparent rounded-full" />
                     Submitting Application...
                   </>
+                ) : existingApplications.length > 0 ? (
+                  <>
+                    <Users className="h-5 w-5 mr-2" />
+                    Submit Application for Another Child
+                  </>
                 ) : (
                   <>
                     <FileText className="h-5 w-5 mr-2" />
@@ -1015,6 +1190,48 @@ export default function AdmissionsApplicationPage() {
                 )}
               </Button>
             </div>
+            {/* ORIGINAL SUBMIT BUTTON - UNCOMMENT WHEN CONNECTING TO SUPABASE
+            <div className="pt-4">
+              {!user ? (
+                <div className="text-center">
+                  <p className="text-slate-medium font-questa mb-4">
+                    Please sign in to submit your application.
+                  </p>
+                  <Button
+                    type="button"
+                    onClick={() => openAuthModal('login')}
+                    className="w-full bg-slate hover:bg-slate-medium text-white font-questa text-base md:text-lg py-6"
+                  >
+                    <LogIn className="h-5 w-5 mr-2" />
+                    Sign In to Submit Application
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-base md:text-lg py-6 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin h-5 w-5 mr-2 border-2 border-slate border-t-transparent rounded-full" />
+                      Submitting Application...
+                    </>
+                  ) : existingApplications.length > 0 ? (
+                    <>
+                      <Users className="h-5 w-5 mr-2" />
+                      Submit Application for Another Child
+                    </>
+                  ) : (
+                    <>
+                      <FileText className="h-5 w-5 mr-2" />
+                      Submit Application
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
+            */}
           </form>
         </div>
       </section>

@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(request: NextRequest) {
   try {
+    const supabase = await createClient()
+
+    // Get authenticated user
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: 'You must be logged in to submit an application' },
+        { status: 401 }
+      )
+    }
+
     const body = await request.json()
     const {
       // Section 1: Student Information
@@ -102,7 +115,91 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Format arrays for display
+    // Check if user already has an application for this child (same name and DOB)
+    const { data: existingApp } = await supabase
+      .from('applications')
+      .select('id')
+      .eq('user_id', user.id)
+      .eq('child_full_name', childFullName)
+      .eq('date_of_birth', dateOfBirth)
+      .single()
+
+    if (existingApp) {
+      return NextResponse.json(
+        { error: 'You have already submitted an application for this child. Please check your dashboard for status updates.' },
+        { status: 400 }
+      )
+    }
+
+    // Save application to database
+    const applicationData = {
+      user_id: user.id,
+      user_email: user.email,
+      status: 'submitted',
+
+      // Section 1: Student Information
+      child_full_name: childFullName,
+      preferred_name: preferredName || null,
+      date_of_birth: dateOfBirth,
+      primary_languages: primaryLanguages,
+      attended_preschool: attendedPreschool,
+      current_school: currentSchool || null,
+
+      // Section 2: Parent/Guardian Information
+      parent_name: parentName,
+      relationship_to_child: relationshipToChild,
+      parent_email: parentEmail,
+      parent_phone: parentPhone,
+      home_address: homeAddress,
+      preferred_communication: preferredCommunication,
+      second_parent_name: secondParentName || null,
+      second_parent_email: secondParentEmail || null,
+      second_parent_phone: secondParentPhone || null,
+
+      // Section 3: Previous Enrollment Information
+      previous_enrollment: previousEnrollment || [],
+      previous_enrollment_details: previousEnrollmentDetails || null,
+
+      // Section 4: Family & Educational Background
+      languages_at_home: languagesAtHome,
+      interest_in_academy: interestInAcademy,
+      hoping_for: hopingFor,
+
+      // Section 5: Interest & Intent
+      seeking_full_time: seekingFullTime,
+      excited_about: excitedAbout,
+      values_important: valuesImportant,
+
+      // Section 6: Looking Ahead
+      interested_in_continuing: interestedInContinuing || false,
+      receive_updates: receiveUpdates || false,
+
+      // Section 7: How Did You Find Us?
+      how_did_you_find: howDidYouFind || [],
+      how_did_you_find_other: howDidYouFindOther || null,
+
+      // Section 8: Anything Else
+      anything_else: anythingElse || null,
+
+      // Metadata
+      submitted_at: new Date().toISOString(),
+    }
+
+    const { data: savedApplication, error: dbError } = await supabase
+      .from('applications')
+      .insert(applicationData)
+      .select()
+      .single()
+
+    if (dbError) {
+      console.error('Database error:', dbError)
+      return NextResponse.json(
+        { error: 'Failed to save application to database' },
+        { status: 500 }
+      )
+    }
+
+    // Format arrays for display in emails
     const previousEnrollmentText = Array.isArray(previousEnrollment) && previousEnrollment.length > 0
       ? previousEnrollment.map((item: string) => {
           switch (item) {
@@ -139,7 +236,7 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Email content
+    // Email content for admin
     const mailOptions = {
       from: process.env.SMTP_FROM,
       to: process.env.CONTACT_EMAIL,
@@ -150,6 +247,7 @@ export async function POST(request: NextRequest) {
           <div style="background-color: #000638; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
             <h1 style="color: white; margin: 0; font-size: 28px;">New Admissions Application</h1>
             <p style="color: #FFD700; margin: 10px 0 0 0; font-size: 16px;">Spanish Horizons Academy - Kindergarten Fall 2026</p>
+            <p style="color: #FF8C00; margin: 10px 0 0 0; font-size: 14px;">Application ID: ${savedApplication.id}</p>
           </div>
 
           <!-- Section 1: Student Information -->
@@ -215,6 +313,10 @@ export async function POST(request: NextRequest) {
                 <td style="padding: 8px 0; color: #6b7280;"><strong>Preferred Communication:</strong></td>
                 <td style="padding: 8px 0; color: #374151;">${preferredCommunication.charAt(0).toUpperCase() + preferredCommunication.slice(1)}</td>
               </tr>
+              <tr>
+                <td style="padding: 8px 0; color: #6b7280;"><strong>Portal Account:</strong></td>
+                <td style="padding: 8px 0; color: #374151;">${user.email}</td>
+              </tr>
             </table>
 
             ${secondParentName || secondParentEmail || secondParentPhone ? `
@@ -244,88 +346,23 @@ export async function POST(request: NextRequest) {
             ` : ''}
           </div>
 
-          <!-- Section 3: Previous Enrollment Information -->
+          <!-- Remaining sections abbreviated for email -->
           <div style="background-color: #f9fafb; padding: 25px; border-left: 4px solid #000638; margin-top: 15px;">
-            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Section 3: Previous Enrollment Information</h2>
-            <p style="color: #6b7280; margin-bottom: 10px;"><strong>Previous Enrollment:</strong></p>
-            <p style="color: #374151; margin-top: 0;">${previousEnrollmentText}</p>
-            ${previousEnrollmentDetails ? `
-            <p style="color: #6b7280; margin-bottom: 10px;"><strong>Additional Details:</strong></p>
-            <p style="color: #374151; margin-top: 0; white-space: pre-wrap;">${previousEnrollmentDetails}</p>
-            ` : ''}
+            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Application Summary</h2>
+            <p style="color: #374151;"><strong>Languages at Home:</strong> ${languagesAtHome}</p>
+            <p style="color: #374151;"><strong>Seeking Full-Time:</strong> ${seekingFullTime === 'yes' ? 'Yes' : seekingFullTime === 'no' ? 'No' : 'Unsure'}</p>
+            <p style="color: #374151;"><strong>Previous Enrollment:</strong> ${previousEnrollmentText}</p>
+            <p style="color: #374151;"><strong>How They Found Us:</strong> ${howDidYouFindText}</p>
           </div>
 
-          <!-- Section 4: Family & Educational Background -->
-          <div style="background-color: #ffffff; padding: 25px; border-left: 4px solid #FFD700; margin-top: 15px; border: 1px solid #e5e7eb;">
-            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Section 4: Family & Educational Background</h2>
-            <p style="color: #6b7280; margin-bottom: 5px;"><strong>Languages Spoken at Home:</strong></p>
-            <p style="color: #374151; margin-top: 0; margin-bottom: 20px;">${languagesAtHome}</p>
-
-            <p style="color: #6b7280; margin-bottom: 5px;"><strong>What interests you most about Spanish Horizons Academy?</strong></p>
-            <p style="color: #374151; margin-top: 0; margin-bottom: 20px; white-space: pre-wrap; background-color: #f9fafb; padding: 15px; border-radius: 4px;">${interestInAcademy}</p>
-
-            <p style="color: #6b7280; margin-bottom: 5px;"><strong>What are you hoping for in your child's elementary school experience?</strong></p>
-            <p style="color: #374151; margin-top: 0; white-space: pre-wrap; background-color: #f9fafb; padding: 15px; border-radius: 4px;">${hopingFor}</p>
-          </div>
-
-          <!-- Section 5: Interest & Intent -->
-          <div style="background-color: #f9fafb; padding: 25px; border-left: 4px solid #FF8C00; margin-top: 15px;">
-            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Section 5: Interest & Intent (Non-Binding)</h2>
-            <p style="color: #6b7280; margin-bottom: 5px;"><strong>Seeking full-time Kindergarten enrollment?</strong></p>
-            <p style="color: #374151; margin-top: 0; margin-bottom: 20px;">${seekingFullTime === 'yes' ? 'Yes' : seekingFullTime === 'no' ? 'No' : 'Unsure'}</p>
-
-            <p style="color: #6b7280; margin-bottom: 5px;"><strong>What excites you most about a Spanish-forward, experiential learning model?</strong></p>
-            <p style="color: #374151; margin-top: 0; margin-bottom: 20px; white-space: pre-wrap; background-color: #ffffff; padding: 15px; border-radius: 4px;">${excitedAbout}</p>
-
-            <p style="color: #6b7280; margin-bottom: 5px;"><strong>What values matter most to you in a school community?</strong></p>
-            <p style="color: #374151; margin-top: 0; white-space: pre-wrap; background-color: #ffffff; padding: 15px; border-radius: 4px;">${valuesImportant}</p>
-          </div>
-
-          <!-- Section 6: Looking Ahead -->
-          <div style="background-color: #ffffff; padding: 25px; border-left: 4px solid #000638; margin-top: 15px; border: 1px solid #e5e7eb;">
-            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Section 6: Looking Ahead</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 8px 0; color: #6b7280;"><strong>Interested in continuing as additional grades open:</strong></td>
-                <td style="padding: 8px 0; color: #374151;">${interestedInContinuing ? 'Yes' : 'No'}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px 0; color: #6b7280;"><strong>Would like updates about future programs/events:</strong></td>
-                <td style="padding: 8px 0; color: #374151;">${receiveUpdates ? 'Yes' : 'No'}</td>
-              </tr>
-            </table>
-          </div>
-
-          <!-- Section 7: How Did You Find Us? -->
-          <div style="background-color: #f9fafb; padding: 25px; border-left: 4px solid #FFD700; margin-top: 15px;">
-            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Section 7: How Did You Find Us?</h2>
-            <p style="color: #374151; margin: 0;">${howDidYouFindText}</p>
-          </div>
-
-          <!-- Section 8: Anything Else -->
-          ${anythingElse ? `
-          <div style="background-color: #ffffff; padding: 25px; border-left: 4px solid #FF8C00; margin-top: 15px; border: 1px solid #e5e7eb;">
-            <h2 style="color: #000638; margin-top: 0; font-size: 20px;">Section 8: Additional Information</h2>
-            <p style="color: #374151; margin: 0; white-space: pre-wrap;">${anythingElse}</p>
-          </div>
-          ` : ''}
-
-          <!-- Section 9: Acknowledgments -->
           <div style="background-color: #000638; padding: 25px; margin-top: 15px; border-radius: 0 0 8px 8px;">
-            <h2 style="color: white; margin-top: 0; font-size: 20px;">Section 9: Acknowledgments</h2>
-            <p style="color: #10b981; margin: 5px 0;">✓ Understands application does not guarantee enrollment</p>
-            <p style="color: #10b981; margin: 5px 0;">✓ Understands only Kindergarten applications are being accepted</p>
-            <p style="color: #10b981; margin: 5px 0;">✓ Understands enrollment is for Fall 2026 (Hillsboro SD calendar)</p>
-            <p style="color: #10b981; margin: 5px 0;">✓ Understands this is for consideration only, not registration/payment</p>
-            <p style="color: #10b981; margin: 5px 0;">✓ Understands applications are reviewed based on alignment and space</p>
+            <p style="color: #10b981; margin: 5px 0;">✓ All acknowledgments confirmed</p>
+            <p style="color: white; margin-top: 15px; font-size: 14px;">View full application details in the admin dashboard.</p>
           </div>
 
           <div style="margin-top: 25px; padding: 20px; background-color: #f9fafb; border-radius: 8px; text-align: center;">
             <p style="color: #6b7280; font-size: 14px; margin: 0;">
               This application was submitted on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-            </p>
-            <p style="color: #6b7280; font-size: 14px; margin: 10px 0 0 0;">
-              Reply directly to: <a href="mailto:${parentEmail}" style="color: #2563eb;">${parentEmail}</a>
             </p>
           </div>
         </div>
@@ -333,82 +370,24 @@ export async function POST(request: NextRequest) {
       text: `
 NEW ADMISSIONS APPLICATION
 Spanish Horizons Academy - Kindergarten Fall 2026
+Application ID: ${savedApplication.id}
 ==========================================
 
-SECTION 1: STUDENT INFORMATION
-------------------------------
-Child's Full Legal Name: ${childFullName}
-${preferredName ? `Preferred Name: ${preferredName}` : ''}
-Date of Birth: ${dateOfBirth}
-Primary Language(s): ${primaryLanguages}
-Previous Preschool/Kindergarten: ${attendedPreschool === 'yes' ? 'Yes' : 'No'}
-${currentSchool ? `Current School/Childcare: ${currentSchool}` : ''}
-
-SECTION 2: PARENT/GUARDIAN INFORMATION
---------------------------------------
-Parent/Guardian Name: ${parentName}
-Relationship to Child: ${relationshipToChild}
+Child's Name: ${childFullName}
+Parent Name: ${parentName}
 Email: ${parentEmail}
 Phone: ${parentPhone}
-Home Address: ${homeAddress}
-Preferred Communication: ${preferredCommunication}
-${secondParentName ? `
-Second Parent/Guardian:
-  Name: ${secondParentName}
-  Email: ${secondParentEmail || 'Not provided'}
-  Phone: ${secondParentPhone || 'Not provided'}` : ''}
-
-SECTION 3: PREVIOUS ENROLLMENT INFORMATION
-------------------------------------------
-Previous Enrollment: ${previousEnrollmentText}
-${previousEnrollmentDetails ? `Additional Details: ${previousEnrollmentDetails}` : ''}
-
-SECTION 4: FAMILY & EDUCATIONAL BACKGROUND
-------------------------------------------
-Languages Spoken at Home: ${languagesAtHome}
-
-What interests you most about Spanish Horizons Academy?
-${interestInAcademy}
-
-What are you hoping for in your child's elementary school experience?
-${hopingFor}
-
-SECTION 5: INTEREST & INTENT (NON-BINDING)
-------------------------------------------
-Seeking full-time Kindergarten enrollment? ${seekingFullTime === 'yes' ? 'Yes' : seekingFullTime === 'no' ? 'No' : 'Unsure'}
-
-What excites you most about a Spanish-forward, experiential learning model?
-${excitedAbout}
-
-What values matter most to you in a school community?
-${valuesImportant}
-
-SECTION 6: LOOKING AHEAD
-------------------------
-Interested in continuing as additional grades open: ${interestedInContinuing ? 'Yes' : 'No'}
-Would like updates about future programs/events: ${receiveUpdates ? 'Yes' : 'No'}
-
-SECTION 7: HOW DID YOU FIND US?
--------------------------------
-${howDidYouFindText}
-
-${anythingElse ? `SECTION 8: ADDITIONAL INFORMATION
-----------------------------------
-${anythingElse}` : ''}
-
-SECTION 9: ACKNOWLEDGMENTS
---------------------------
-✓ All acknowledgments confirmed
+Portal Account: ${user.email}
 
 ==========================================
 Submitted: ${new Date().toLocaleString()}
-Reply to: ${parentEmail}
+View full details in admin dashboard.
       `
     }
 
-    // Send email
-    const result = await transporter.sendMail(mailOptions)
-    console.log('Admissions application email sent successfully:', result.messageId)
+    // Send email to admin
+    await transporter.sendMail(mailOptions)
+    console.log('Admissions application email sent to admin')
 
     // Send confirmation email to parent
     const confirmationMailOptions = {
@@ -429,22 +408,31 @@ Reply to: ${parentEmail}
               Thank you for submitting an application for <strong>${childFullName}</strong> to Spanish Horizons Academy's Kindergarten program for Fall 2026.
             </p>
 
+            <div style="background-color: #FFF8E7; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #FF8C00;">
+              <p style="color: #000638; margin: 0; font-weight: 600;">
+                Your Application Status: <span style="color: #FF8C00;">Submitted</span>
+              </p>
+              <p style="color: #374151; margin: 10px 0 0 0; font-size: 14px;">
+                Application ID: ${savedApplication.id}
+              </p>
+            </div>
+
             <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-              We have received your application and will review it carefully. Here's what you can expect:
+              You can track your application status anytime by logging into your Family Portal at <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://spanishhorizonsacademy.com'}/dashboard" style="color: #FF8C00;">spanishhorizonsacademy.com/dashboard</a>.
+            </p>
+
+            <p style="color: #374151; font-size: 16px; line-height: 1.6;">
+              <strong>What happens next:</strong>
             </p>
 
             <ul style="color: #374151; font-size: 16px; line-height: 1.8;">
               <li>Applications are reviewed on a rolling basis</li>
-              <li>You may be contacted for a follow-up conversation, tour, or information session</li>
-              <li>If accepted, you will receive details about enrollment timelines, tuition, and next steps</li>
+              <li>You may be contacted to schedule an interview</li>
+              <li>If accepted, you will receive enrollment details and next steps</li>
             </ul>
 
             <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-              If you have any questions in the meantime, please don't hesitate to reach out to us at <a href="mailto:infospanishhorizons@casitaazulpdx.org" style="color: #2563eb;">infospanishhorizons@casitaazulpdx.org</a>.
-            </p>
-
-            <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-              We look forward to learning more about your family and beginning this journey together.
+              If you have any questions, please contact us at <a href="mailto:infospanishhorizons@casitaazulpdx.com" style="color: #FF8C00;">infospanishhorizons@casitaazulpdx.com</a>.
             </p>
 
             <p style="color: #374151; font-size: 16px; line-height: 1.6; margin-top: 30px;">
@@ -456,7 +444,7 @@ Reply to: ${parentEmail}
           <div style="background-color: #000638; padding: 20px; text-align: center; border-radius: 0 0 8px 8px;">
             <p style="color: #9ca3af; font-size: 12px; margin: 0;">
               770 NE Rogahn Street, Hillsboro, OR 97124<br>
-              <a href="mailto:infospanishhorizons@casitaazulpdx.org" style="color: #FFD700;">infospanishhorizons@casitaazulpdx.org</a>
+              <a href="mailto:infospanishhorizons@casitaazulpdx.com" style="color: #FFD700;">infospanishhorizons@casitaazulpdx.com</a>
             </p>
           </div>
         </div>
@@ -470,31 +458,31 @@ Dear ${parentName},
 
 Thank you for submitting an application for ${childFullName} to Spanish Horizons Academy's Kindergarten program for Fall 2026.
 
-We have received your application and will review it carefully. Here's what you can expect:
+Your Application Status: Submitted
+Application ID: ${savedApplication.id}
 
+You can track your application status at: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://spanishhorizonsacademy.com'}/dashboard
+
+What happens next:
 - Applications are reviewed on a rolling basis
-- You may be contacted for a follow-up conversation, tour, or information session
-- If accepted, you will receive details about enrollment timelines, tuition, and next steps
+- You may be contacted to schedule an interview
+- If accepted, you will receive enrollment details and next steps
 
-If you have any questions in the meantime, please don't hesitate to reach out to us at infospanishhorizons@casitaazulpdx.org.
-
-We look forward to learning more about your family and beginning this journey together.
+Questions? Contact us at infospanishhorizons@casitaazulpdx.com
 
 Warm regards,
 Spanish Horizons Academy Admissions Team
-
-==============================
-770 NE Rogahn Street, Hillsboro, OR 97124
-infospanishhorizons@casitaazulpdx.org
       `
     }
 
-    // Send confirmation email
     await transporter.sendMail(confirmationMailOptions)
     console.log('Confirmation email sent to applicant:', parentEmail)
 
     return NextResponse.json(
-      { message: 'Application submitted successfully' },
+      {
+        message: 'Application submitted successfully',
+        applicationId: savedApplication.id
+      },
       { status: 200 }
     )
 
@@ -502,6 +490,45 @@ infospanishhorizons@casitaazulpdx.org
     console.error('Error processing admissions application:', error)
     return NextResponse.json(
       { error: 'Failed to submit application' },
+      { status: 500 }
+    )
+  }
+}
+
+// GET endpoint to fetch user's applications (supports multiple children)
+export async function GET(request: NextRequest) {
+  try {
+    const supabase = await createClient()
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
+    const { data: applications, error } = await supabase
+      .from('applications')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('submitted_at', { ascending: false })
+
+    if (error) {
+      console.error('Database error:', error)
+      return NextResponse.json(
+        { error: 'Failed to fetch applications' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ applications: applications || [] })
+
+  } catch (error) {
+    console.error('Error fetching applications:', error)
+    return NextResponse.json(
+      { error: 'Failed to fetch applications' },
       { status: 500 }
     )
   }

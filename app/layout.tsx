@@ -10,6 +10,7 @@ import { Inter, Playfair_Display, Lora, Cormorant_Garamond, Libre_Baskerville, P
 import FloatingCTA from "@/components/floating-cta"
 import ConditionalLayout from "@/components/conditional-layout"
 import { Toaster } from "@/components/ui/toaster"
+import { AuthProvider } from "@/contexts/auth-context"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -207,10 +208,12 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        <ConditionalLayout>
-          {children}
-        </ConditionalLayout>
-        <Toaster />
+        <AuthProvider>
+          <ConditionalLayout>
+            {children}
+          </ConditionalLayout>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )
