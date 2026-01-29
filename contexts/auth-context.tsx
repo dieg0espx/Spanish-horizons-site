@@ -65,6 +65,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     // END MOCK MODE
 
+    // Skip Supabase if not configured
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
+
     // Get initial session
     const getInitialSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()
@@ -85,7 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => {
       subscription.unsubscribe()
     }
-  }, [supabase.auth])
+  }, [supabase])
 
   const signIn = async (email: string, password: string) => {
     // MOCK MODE - Check mock users
@@ -116,6 +122,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     // END MOCK MODE
 
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -153,6 +162,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     // END MOCK MODE
 
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -171,6 +183,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     // END MOCK MODE
 
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
     const { error } = await supabase.auth.signOut()
     return { error }
   }
