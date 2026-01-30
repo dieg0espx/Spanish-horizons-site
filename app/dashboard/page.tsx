@@ -31,13 +31,15 @@ import {
   RefreshCw,
   CalendarPlus,
   X,
-  XCircle
+  XCircle,
+  CalendarX,
+  CalendarClock
 } from 'lucide-react'
 import InterviewBookingCalendar from '@/components/interview-booking-calendar'
 
 interface Application {
   id: string
-  status: 'submitted' | 'interview_scheduled' | 'admitted' | 'waitlist' | 'rejected' | 'declined' | 'withdrawn'
+  status: 'submitted' | 'under_review' | 'interview_pending' | 'interview_scheduled' | 'admitted' | 'waitlist' | 'rejected' | 'declined' | 'withdrawn'
   child_full_name: string
   preferred_name: string | null
   date_of_birth: string
@@ -53,12 +55,26 @@ interface Application {
   second_parent_name: string | null
   second_parent_email: string | null
   second_parent_phone: string | null
+  // Section 3: Previous Enrollment
+  previous_enrollment: string[]
+  previous_enrollment_details: string | null
+  // Section 4: Family & Educational Background
   languages_at_home: string
   interest_in_academy: string
   hoping_for: string
+  // Section 5: Interest & Intent
   seeking_full_time: string
   excited_about: string
   values_important: string
+  // Section 6: Looking Ahead
+  interested_in_continuing: boolean
+  receive_updates: boolean
+  // Section 7: How Did You Find Us
+  how_did_you_find: string[]
+  how_did_you_find_other: string | null
+  // Section 8: Anything Else
+  anything_else: string | null
+  // Metadata
   submitted_at: string
   updated_at: string
   interview_date?: string
@@ -73,7 +89,23 @@ const statusConfig = {
     textColor: 'text-amber',
     bgLight: 'bg-amber/10',
     icon: FileText,
-    description: 'Your application has been received and is being reviewed.'
+    description: 'Your application has been received and is pending review.'
+  },
+  under_review: {
+    label: 'Under Review',
+    color: 'bg-purple-500',
+    textColor: 'text-purple-500',
+    bgLight: 'bg-purple-50',
+    icon: Clock,
+    description: 'Your application is currently being reviewed by our admissions team.'
+  },
+  interview_pending: {
+    label: 'Interview Available',
+    color: 'bg-green-500',
+    textColor: 'text-green-500',
+    bgLight: 'bg-green-50',
+    icon: CalendarPlus,
+    description: 'Great news! Your application has been approved. Please schedule your interview.'
   },
   interview_scheduled: {
     label: 'Interview Scheduled',
@@ -125,7 +157,7 @@ const statusConfig = {
   }
 }
 
-function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel }: { application: Application; onViewDetails: (app: Application) => void; onBookInterview: (app: Application) => void; onCancel: (app: Application) => void }) {
+function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel, onCancelInterview, onRescheduleInterview }: { application: Application; onViewDetails: (app: Application) => void; onBookInterview: (app: Application) => void; onCancel: (app: Application) => void; onCancelInterview: (app: Application) => void; onRescheduleInterview: (app: Application) => void }) {
   const status = statusConfig[application.status]
   const StatusIcon = status.icon
 
@@ -158,7 +190,7 @@ function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel
           <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="flex flex-col items-center">
               <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs ${
-                ['submitted', 'interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
+                ['submitted', 'under_review', 'interview_pending', 'interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
                   ? 'bg-green-500 text-white'
                   : 'bg-gray-200 text-gray-400'
               }`}>
@@ -167,7 +199,22 @@ function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel
               <p className="text-[10px] sm:text-xs font-questa mt-1">Submitted</p>
             </div>
             <div className={`flex-1 h-0.5 mx-1 ${
-              ['interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
+              ['under_review', 'interview_pending', 'interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
+                ? 'bg-green-500'
+                : 'bg-gray-200'
+            }`}></div>
+            <div className="flex flex-col items-center">
+              <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs ${
+                ['under_review', 'interview_pending', 'interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
+                  ? application.status === 'under_review' ? 'bg-purple-500 text-white' : 'bg-green-500 text-white'
+                  : 'bg-gray-200 text-gray-400'
+              }`}>
+                <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
+              </div>
+              <p className="text-[10px] sm:text-xs font-questa mt-1">Review</p>
+            </div>
+            <div className={`flex-1 h-0.5 mx-1 ${
+              ['interview_pending', 'interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
                 ? 'bg-green-500'
                 : 'bg-gray-200'
             }`}></div>
@@ -175,7 +222,7 @@ function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel
               <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs ${
                 ['interview_scheduled', 'admitted', 'waitlist', 'rejected', 'declined'].includes(application.status)
                   ? 'bg-green-500 text-white'
-                  : 'bg-gray-200 text-gray-400'
+                  : application.status === 'interview_pending' ? 'bg-green-500 text-white animate-pulse' : 'bg-gray-200 text-gray-400'
               }`}>
                 <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
               </div>
@@ -218,6 +265,26 @@ function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel
             {application.interview_notes && (
               <p className="text-xs text-slate-medium font-questa mt-1 sm:mt-2 line-clamp-2">{application.interview_notes}</p>
             )}
+            <div className="flex gap-2 mt-2 sm:mt-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onRescheduleInterview(application)}
+                className="flex-1 text-blue-600 border-blue-300 hover:bg-blue-100 rounded-lg text-xs"
+              >
+                <CalendarClock className="h-3 w-3 mr-1" />
+                Reschedule
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onCancelInterview(application)}
+                className="flex-1 text-red-500 border-red-300 hover:bg-red-50 rounded-lg text-xs"
+              >
+                <CalendarX className="h-3 w-3 mr-1" />
+                Cancel
+              </Button>
+            </div>
           </div>
         )}
 
@@ -245,8 +312,8 @@ function ApplicationCard({ application, onViewDetails, onBookInterview, onCancel
           </div>
         </div>
 
-        {/* Book Interview Button - Show for submitted applications */}
-        {application.status === 'submitted' && (
+        {/* Book Interview Button - Only show when admin has approved for interview */}
+        {application.status === 'interview_pending' && (
           <Button
             onClick={() => onBookInterview(application)}
             size="sm"
@@ -292,54 +359,54 @@ function ApplicationDetailsModal({ application, isOpen, onClose }: { application
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
-        <DialogHeader>
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl sm:rounded-2xl p-4 sm:p-6">
+        <DialogHeader className="pb-2">
           <DialogTitle className="font-ivry text-lg sm:text-2xl text-slate flex items-center">
-            <User className="h-5 w-5 sm:h-6 sm:w-6 text-amber mr-2 sm:mr-3" />
-            {application.child_full_name}
+            <User className="h-5 w-5 sm:h-6 sm:w-6 text-amber mr-2 sm:mr-3 shrink-0" />
+            <span className="truncate">{application.child_full_name}</span>
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Status Badge */}
-          <div className={`${status.bgLight} p-4 rounded-xl border-l-4 ${status.color.replace('bg-', 'border-')}`}>
+          <div className={`${status.bgLight} p-3 sm:p-4 rounded-xl border-l-4 ${status.color.replace('bg-', 'border-')}`}>
             <div className="flex items-center">
-              <status.icon className={`h-5 w-5 ${status.textColor} mr-2`} />
-              <span className={`font-questa font-semibold ${status.textColor}`}>{status.label}</span>
+              <status.icon className={`h-4 w-4 sm:h-5 sm:w-5 ${status.textColor} mr-2 shrink-0`} />
+              <span className={`font-questa font-semibold text-sm sm:text-base ${status.textColor}`}>{status.label}</span>
             </div>
-            <p className="text-slate-medium font-questa text-sm mt-1">{status.description}</p>
+            <p className="text-slate-medium font-questa text-xs sm:text-sm mt-1">{status.description}</p>
           </div>
 
           {/* Interview Info */}
           {application.status === 'interview_scheduled' && application.interview_date && (
-            <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-              <h3 className="font-ivry font-bold text-slate mb-2 flex items-center">
-                <Calendar className="h-5 w-5 text-blue-500 mr-2" />
+            <div className="bg-blue-50 p-3 sm:p-4 rounded-xl border border-blue-200">
+              <h3 className="font-ivry font-bold text-slate mb-2 flex items-center text-sm sm:text-base">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500 mr-2 shrink-0" />
                 Interview Details
               </h3>
-              <p className="text-slate font-questa">
+              <p className="text-slate font-questa text-sm sm:text-base">
                 {new Date(application.interview_date).toLocaleDateString('en-US', {
-                  weekday: 'long',
+                  weekday: 'short',
                   year: 'numeric',
-                  month: 'long',
+                  month: 'short',
                   day: 'numeric',
                   hour: '2-digit',
                   minute: '2-digit'
                 })}
               </p>
               {application.interview_notes && (
-                <p className="text-slate-medium font-questa mt-2 text-sm">{application.interview_notes}</p>
+                <p className="text-slate-medium font-questa mt-2 text-xs sm:text-sm">{application.interview_notes}</p>
               )}
             </div>
           )}
 
           {/* Child Information */}
           <div>
-            <h3 className="font-ivry font-bold text-slate mb-3 flex items-center">
-              <User className="h-5 w-5 text-amber mr-2" />
+            <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+              <User className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
               Child Information
             </h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
               <div>
                 <p className="text-slate-medium font-questa">Full Name</p>
                 <p className="font-questa text-slate">{application.child_full_name}</p>
@@ -379,11 +446,11 @@ function ApplicationDetailsModal({ application, isOpen, onClose }: { application
 
           {/* Parent Information */}
           <div>
-            <h3 className="font-ivry font-bold text-slate mb-3 flex items-center">
-              <Users className="h-5 w-5 text-amber mr-2" />
+            <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+              <Users className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
               Parent/Guardian Information
             </h3>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
               <div>
                 <p className="text-slate-medium font-questa">Name</p>
                 <p className="font-questa text-slate">{application.parent_name}</p>
@@ -411,9 +478,9 @@ function ApplicationDetailsModal({ application, isOpen, onClose }: { application
             </div>
 
             {(application.second_parent_name || application.second_parent_email || application.second_parent_phone) && (
-              <div className="mt-4 pt-4 border-t border-slate/10">
-                <p className="text-slate-medium font-questa font-semibold mb-2">Second Parent/Guardian</p>
-                <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate/10">
+                <p className="text-slate-medium font-questa font-semibold mb-2 text-xs sm:text-sm">Second Parent/Guardian</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                   {application.second_parent_name && (
                     <div>
                       <p className="text-slate-medium font-questa">Name</p>
@@ -437,215 +504,174 @@ function ApplicationDetailsModal({ application, isOpen, onClose }: { application
             )}
           </div>
 
-          {/* Application Responses */}
+          {/* Previous Enrollment */}
+          {(application.previous_enrollment?.length > 0 || application.previous_enrollment_details) && (
+            <div>
+              <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
+                Previous Enrollment
+              </h3>
+              <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                {application.previous_enrollment?.length > 0 && (
+                  <div>
+                    <p className="text-slate-medium font-questa font-semibold">Previous Programs</p>
+                    <ul className="font-questa text-slate list-disc list-inside">
+                      {application.previous_enrollment.map((program, index) => (
+                        <li key={index}>
+                          {program === 'casita-azul' && 'Casita Azul Spanish Immersion Program'}
+                          {program === 'amanecer' && 'Amanecer Academy'}
+                          {program === 'none' && 'No previous enrollment in our network'}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {application.previous_enrollment_details && (
+                  <div>
+                    <p className="text-slate-medium font-questa font-semibold">Additional Details</p>
+                    <p className="font-questa text-slate">{application.previous_enrollment_details}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Family & Educational Background */}
           <div>
-            <h3 className="font-ivry font-bold text-slate mb-3 flex items-center">
-              <MessageSquare className="h-5 w-5 text-amber mr-2" />
-              Application Responses
+            <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+              <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
+              Family & Educational Background
             </h3>
-            <div className="space-y-4 text-sm">
+            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
               <div>
                 <p className="text-slate-medium font-questa font-semibold">Languages Spoken at Home</p>
                 <p className="font-questa text-slate">{application.languages_at_home}</p>
               </div>
               <div>
                 <p className="text-slate-medium font-questa font-semibold">Interest in Spanish Horizons Academy</p>
-                <p className="font-questa text-slate">{application.interest_in_academy}</p>
+                <p className="font-questa text-slate whitespace-pre-wrap">{application.interest_in_academy}</p>
               </div>
               <div>
                 <p className="text-slate-medium font-questa font-semibold">Hopes for Elementary School Experience</p>
-                <p className="font-questa text-slate">{application.hoping_for}</p>
+                <p className="font-questa text-slate whitespace-pre-wrap">{application.hoping_for}</p>
               </div>
+            </div>
+          </div>
+
+          {/* Interest & Intent */}
+          <div>
+            <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+              <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
+              Interest & Intent
+            </h3>
+            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
               <div>
                 <p className="text-slate-medium font-questa font-semibold">Seeking Full-Time Enrollment</p>
                 <p className="font-questa text-slate capitalize">{application.seeking_full_time}</p>
               </div>
               <div>
                 <p className="text-slate-medium font-questa font-semibold">Excitement About Spanish-Forward Learning</p>
-                <p className="font-questa text-slate">{application.excited_about}</p>
+                <p className="font-questa text-slate whitespace-pre-wrap">{application.excited_about}</p>
               </div>
               <div>
                 <p className="text-slate-medium font-questa font-semibold">Important Values in School Community</p>
-                <p className="font-questa text-slate">{application.values_important}</p>
+                <p className="font-questa text-slate whitespace-pre-wrap">{application.values_important}</p>
               </div>
             </div>
           </div>
 
+          {/* Looking Ahead */}
+          <div>
+            <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
+              Looking Ahead
+            </h3>
+            <div className="space-y-2 text-xs sm:text-sm">
+              <div className="flex items-center">
+                <div className={`w-5 h-5 rounded mr-2 flex items-center justify-center ${application.interested_in_continuing ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'}`}>
+                  {application.interested_in_continuing ? <CheckCircle className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                </div>
+                <p className="font-questa text-slate">Interested in continuing as additional grade levels open</p>
+              </div>
+              <div className="flex items-center">
+                <div className={`w-5 h-5 rounded mr-2 flex items-center justify-center ${application.receive_updates ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400'}`}>
+                  {application.receive_updates ? <CheckCircle className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                </div>
+                <p className="font-questa text-slate">Would like to receive updates about future programs & events</p>
+              </div>
+            </div>
+          </div>
+
+          {/* How Did You Find Us */}
+          {application.how_did_you_find?.length > 0 && (
+            <div>
+              <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                <Users className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
+                How They Found Us
+              </h3>
+              <div className="text-xs sm:text-sm">
+                <ul className="font-questa text-slate list-disc list-inside space-y-1">
+                  {application.how_did_you_find.map((source, index) => (
+                    <li key={index}>
+                      {source === 'casita-amanecer' && 'Casita Azul or Amanecer Academy'}
+                      {source === 'word-of-mouth' && 'Word of mouth'}
+                      {source === 'social-media' && 'Social media'}
+                      {source === 'online-search' && 'Online search'}
+                      {source === 'community-event' && 'Community event'}
+                      {source === 'other' && `Other: ${application.how_did_you_find_other || 'Not specified'}`}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {/* Anything Else */}
+          {application.anything_else && (
+            <div>
+              <h3 className="font-ivry font-bold text-slate mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-amber mr-2 shrink-0" />
+                Additional Information
+              </h3>
+              <div className="text-xs sm:text-sm">
+                <p className="font-questa text-slate whitespace-pre-wrap">{application.anything_else}</p>
+              </div>
+            </div>
+          )}
+
           {/* Application Metadata */}
-          <div className="bg-slate/5 p-4 rounded-xl">
-            <div className="flex items-center justify-between text-sm">
+          <div className="bg-slate/5 p-3 sm:p-4 rounded-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 text-xs sm:text-sm">
               <div>
                 <p className="text-slate-medium font-questa">Submitted</p>
                 <p className="font-questa text-slate">
                   {new Date(application.submitted_at).toLocaleDateString('en-US', {
                     year: 'numeric',
-                    month: 'long',
+                    month: 'short',
                     day: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit'
                   })}
                 </p>
               </div>
-              <div className="text-right">
+              <div className="sm:text-right">
                 <p className="text-slate-medium font-questa">Last Updated</p>
                 <p className="font-questa text-slate">
                   {new Date(application.updated_at).toLocaleDateString('en-US', {
                     year: 'numeric',
-                    month: 'long',
+                    month: 'short',
                     day: 'numeric'
                   })}
                 </p>
               </div>
             </div>
-            <p className="text-xs text-slate-medium font-questa mt-2">Application ID: {application.id}</p>
+            <p className="text-[10px] sm:text-xs text-slate-medium font-questa mt-2 truncate">ID: {application.id}</p>
           </div>
         </div>
       </DialogContent>
     </Dialog>
   )
 }
-
-// MOCK DATA - DELETE THIS WHEN CONNECTING TO SUPABASE
-const MOCK_APPLICATIONS: Application[] = [
-  {
-    id: 'mock-1',
-    status: 'interview_scheduled',
-    child_full_name: 'Sofia Martinez',
-    preferred_name: 'Sofi',
-    date_of_birth: '2020-03-15',
-    primary_languages: 'English, Spanish',
-    attended_preschool: 'yes',
-    current_school: 'Little Stars Preschool',
-    parent_name: 'Maria Martinez',
-    relationship_to_child: 'Mother',
-    parent_email: 'maria.martinez@email.com',
-    parent_phone: '(503) 555-1234',
-    home_address: '123 Oak Street, Hillsboro, OR 97124',
-    preferred_communication: 'email',
-    second_parent_name: 'Carlos Martinez',
-    second_parent_email: 'carlos.martinez@email.com',
-    second_parent_phone: '(503) 555-5678',
-    languages_at_home: 'Spanish and English',
-    interest_in_academy: 'We love the Spanish immersion approach and want Sofia to be bilingual. The experiential learning model aligns perfectly with how she learns best.',
-    hoping_for: 'A nurturing environment where Sofia can develop her language skills while making friends and building confidence.',
-    seeking_full_time: 'yes',
-    excited_about: 'The opportunity for Sofia to become fluent in Spanish while learning through hands-on activities and cultural experiences.',
-    values_important: 'Community, respect for diversity, love of learning, and strong family-school partnership.',
-    submitted_at: '2024-01-15T10:30:00Z',
-    updated_at: '2024-01-20T14:00:00Z',
-    interview_date: '2024-02-10T09:00:00Z',
-    interview_notes: 'Please arrive 10 minutes early. The interview will be held at the main campus. Bring a photo of Sofia for her file.'
-  },
-  {
-    id: 'mock-2',
-    status: 'admitted',
-    child_full_name: 'Lucas Martinez',
-    preferred_name: null,
-    date_of_birth: '2021-07-22',
-    primary_languages: 'English, Spanish',
-    attended_preschool: 'yes',
-    current_school: 'Casita Azul',
-    parent_name: 'Maria Martinez',
-    relationship_to_child: 'Mother',
-    parent_email: 'maria.martinez@email.com',
-    parent_phone: '(503) 555-1234',
-    home_address: '123 Oak Street, Hillsboro, OR 97124',
-    preferred_communication: 'email',
-    second_parent_name: 'Carlos Martinez',
-    second_parent_email: 'carlos.martinez@email.com',
-    second_parent_phone: '(503) 555-5678',
-    languages_at_home: 'Spanish and English',
-    interest_in_academy: 'Lucas has thrived at Casita Azul and we want to continue his Spanish immersion journey at Spanish Horizons Academy.',
-    hoping_for: 'Continuity in his language development and a smooth transition to elementary school.',
-    seeking_full_time: 'yes',
-    excited_about: 'Building on the foundation Lucas has developed at Casita Azul and watching him grow as a bilingual learner.',
-    values_important: 'Consistency, bilingualism, creativity, and strong academics.',
-    submitted_at: '2024-01-10T08:15:00Z',
-    updated_at: '2024-01-25T11:30:00Z'
-  },
-  {
-    id: 'mock-3',
-    status: 'submitted',
-    child_full_name: 'Emma Johnson',
-    preferred_name: 'Emmy',
-    date_of_birth: '2020-11-08',
-    primary_languages: 'English',
-    attended_preschool: 'yes',
-    current_school: 'Sunshine Daycare',
-    parent_name: 'Sarah Johnson',
-    relationship_to_child: 'Mother',
-    parent_email: 'sarah.j@email.com',
-    parent_phone: '(503) 555-9999',
-    home_address: '456 Maple Ave, Beaverton, OR 97005',
-    preferred_communication: 'phone',
-    second_parent_name: null,
-    second_parent_email: null,
-    second_parent_phone: null,
-    languages_at_home: 'English',
-    interest_in_academy: 'We want Emma to learn Spanish from an early age and believe immersion is the best approach.',
-    hoping_for: 'A welcoming environment where Emma can develop Spanish skills while making lasting friendships.',
-    seeking_full_time: 'yes',
-    excited_about: 'The chance for Emma to become bilingual and experience a different culture.',
-    values_important: 'Inclusivity, academic excellence, and cultural awareness.',
-    submitted_at: '2024-01-28T16:45:00Z',
-    updated_at: '2024-01-28T16:45:00Z'
-  },
-  {
-    id: 'mock-4',
-    status: 'waitlist',
-    child_full_name: 'Oliver Chen',
-    preferred_name: 'Ollie',
-    date_of_birth: '2020-05-30',
-    primary_languages: 'English, Mandarin',
-    attended_preschool: 'yes',
-    current_school: 'Happy Kids Academy',
-    parent_name: 'Jennifer Chen',
-    relationship_to_child: 'Mother',
-    parent_email: 'jen.chen@email.com',
-    parent_phone: '(503) 555-7777',
-    home_address: '789 Pine Road, Portland, OR 97201',
-    preferred_communication: 'email',
-    second_parent_name: 'David Chen',
-    second_parent_email: 'david.chen@email.com',
-    second_parent_phone: '(503) 555-8888',
-    languages_at_home: 'English and Mandarin',
-    interest_in_academy: 'Oliver already speaks two languages and we believe adding Spanish will open more doors for him.',
-    hoping_for: 'A trilingual education that challenges and excites Oliver.',
-    seeking_full_time: 'yes',
-    excited_about: 'The innovative teaching methods and the chance for Oliver to become trilingual.',
-    values_important: 'Multilingualism, academic rigor, and global citizenship.',
-    submitted_at: '2024-01-05T12:00:00Z',
-    updated_at: '2024-01-22T09:15:00Z'
-  },
-  {
-    id: 'mock-5',
-    status: 'rejected',
-    child_full_name: 'Mia Thompson',
-    preferred_name: null,
-    date_of_birth: '2020-09-12',
-    primary_languages: 'English',
-    attended_preschool: 'no',
-    current_school: null,
-    parent_name: 'Rachel Thompson',
-    relationship_to_child: 'Mother',
-    parent_email: 'rachel.t@email.com',
-    parent_phone: '(503) 555-4444',
-    home_address: '321 Cedar Lane, Tigard, OR 97223',
-    preferred_communication: 'phone',
-    second_parent_name: null,
-    second_parent_email: null,
-    second_parent_phone: null,
-    languages_at_home: 'English',
-    interest_in_academy: 'We want Mia to have the opportunity to learn Spanish.',
-    hoping_for: 'A good educational foundation for Mia.',
-    seeking_full_time: 'unsure',
-    excited_about: 'The language learning opportunities.',
-    values_important: 'Quality education and caring teachers.',
-    submitted_at: '2024-01-02T09:00:00Z',
-    updated_at: '2024-01-18T15:30:00Z'
-  }
-]
-// END MOCK DATA
 
 export default function DashboardPage() {
   const { user, loading: authLoading, signOut, openAuthModal } = useAuth()
@@ -660,6 +686,11 @@ export default function DashboardPage() {
   const [cancellingApplication, setCancellingApplication] = useState<Application | null>(null)
   const [isCancelling, setIsCancelling] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [isCancelInterviewModalOpen, setIsCancelInterviewModalOpen] = useState(false)
+  const [cancellingInterviewApp, setCancellingInterviewApp] = useState<Application | null>(null)
+  const [isCancellingInterview, setIsCancellingInterview] = useState(false)
+  const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false)
+  const [reschedulingApp, setReschedulingApp] = useState<Application | null>(null)
   const router = useRouter()
 
   const handleViewDetails = (app: Application) => {
@@ -672,15 +703,26 @@ export default function DashboardPage() {
     setIsBookingModalOpen(true)
   }
 
-  const handleInterviewBooked = (interviewDate: string) => {
+  const handleInterviewBooked = async (interviewDate: string) => {
     // Update the application in the list
+    const bookedAppId = bookingApplication?.id
     setApplications(apps =>
       apps.map(app =>
-        app.id === bookingApplication?.id
+        app.id === bookedAppId
           ? { ...app, status: 'interview_scheduled' as const, interview_date: interviewDate }
           : app
       )
     )
+
+    // Clear booking state to prevent accidental reschedule
+    setBookingApplication(null)
+
+    // Close modal after a short delay to show success message
+    setTimeout(() => {
+      setIsBookingModalOpen(false)
+      // Refresh applications from server to ensure data is in sync
+      handleRefresh()
+    }, 2000)
   }
 
   const handleCancelApplication = (app: Application) => {
@@ -688,23 +730,100 @@ export default function DashboardPage() {
     setIsCancelModalOpen(true)
   }
 
+  const handleCancelInterview = (app: Application) => {
+    setCancellingInterviewApp(app)
+    setIsCancelInterviewModalOpen(true)
+  }
+
+  const handleRescheduleInterview = (app: Application) => {
+    // Prevent reschedule if booking modal is open or we just finished booking
+    if (isBookingModalOpen || bookingApplication) {
+      console.log('Reschedule blocked - booking in progress')
+      return
+    }
+
+    // Show confirmation modal
+    setReschedulingApp(app)
+    setIsRescheduleModalOpen(true)
+  }
+
+  const confirmRescheduleInterview = async () => {
+    if (!reschedulingApp) return
+
+    setIsRescheduleModalOpen(false)
+
+    // First cancel the current interview, then open booking modal
+    setIsCancellingInterview(true)
+    try {
+      const response = await fetch('/api/admissions/cancel-interview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ applicationId: reschedulingApp.id })
+      })
+
+      if (response.ok) {
+        // Update application in list
+        setApplications(apps =>
+          apps.map(a =>
+            a.id === reschedulingApp.id
+              ? { ...a, status: 'interview_pending' as const, interview_date: undefined }
+              : a
+          )
+        )
+        // Open booking modal for rescheduling
+        setBookingApplication({ ...reschedulingApp, status: 'interview_pending' as const, interview_date: undefined })
+        setIsBookingModalOpen(true)
+      } else {
+        const data = await response.json()
+        setError(data.error || 'Failed to reschedule interview')
+      }
+    } catch (error) {
+      console.error('Error rescheduling interview:', error)
+      setError('Failed to reschedule interview')
+    } finally {
+      setIsCancellingInterview(false)
+      setReschedulingApp(null)
+    }
+  }
+
+  const confirmCancelInterview = async () => {
+    if (!cancellingInterviewApp) return
+
+    setIsCancellingInterview(true)
+    try {
+      const response = await fetch('/api/admissions/cancel-interview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ applicationId: cancellingInterviewApp.id })
+      })
+
+      if (response.ok) {
+        setApplications(apps =>
+          apps.map(app =>
+            app.id === cancellingInterviewApp.id
+              ? { ...app, status: 'interview_pending' as const, interview_date: undefined }
+              : app
+          )
+        )
+        setIsCancelInterviewModalOpen(false)
+        setCancellingInterviewApp(null)
+      } else {
+        const data = await response.json()
+        setError(data.error || 'Failed to cancel interview')
+      }
+    } catch (error) {
+      console.error('Error cancelling interview:', error)
+      setError('Failed to cancel interview')
+    } finally {
+      setIsCancellingInterview(false)
+    }
+  }
+
   const confirmCancelApplication = async () => {
     if (!cancellingApplication) return
 
     setIsCancelling(true)
     try {
-      // MOCK MODE - Just update locally
-      setApplications(apps =>
-        apps.map(app =>
-          app.id === cancellingApplication.id
-            ? { ...app, status: 'withdrawn' as const }
-            : app
-        )
-      )
-      setIsCancelModalOpen(false)
-      setCancellingApplication(null)
-
-      /* UNCOMMENT WHEN CONNECTING TO SUPABASE
       const response = await fetch('/api/admissions/withdraw', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -721,24 +840,19 @@ export default function DashboardPage() {
         )
         setIsCancelModalOpen(false)
         setCancellingApplication(null)
+      } else {
+        const data = await response.json()
+        setError(data.error || 'Failed to withdraw application')
       }
-      */
     } catch (error) {
       console.error('Error cancelling application:', error)
+      setError('Failed to withdraw application')
     } finally {
       setIsCancelling(false)
     }
   }
 
   const handleRefresh = async () => {
-    setIsRefreshing(true)
-    // MOCK: Simulate refresh delay
-    setTimeout(() => {
-      setIsRefreshing(false)
-    }, 1000)
-    return
-    // UNCOMMENT BELOW WHEN CONNECTING TO SUPABASE
-    /*
     if (!user) return
     setIsRefreshing(true)
     try {
@@ -752,7 +866,6 @@ export default function DashboardPage() {
     } finally {
       setIsRefreshing(false)
     }
-    */
   }
 
   useEffect(() => {
@@ -762,18 +875,6 @@ export default function DashboardPage() {
   }, [authLoading, user, openAuthModal])
 
   useEffect(() => {
-    // MOCK DATA - DELETE THIS BLOCK AND UNCOMMENT THE REAL FETCH BELOW
-    const loadMockData = () => {
-      setTimeout(() => {
-        setApplications(MOCK_APPLICATIONS)
-        setLoading(false)
-      }, 500) // Simulate loading delay
-    }
-    loadMockData()
-    return
-    // END MOCK DATA
-
-    /* UNCOMMENT THIS WHEN CONNECTING TO SUPABASE
     const fetchApplications = async () => {
       if (!user) return
 
@@ -795,28 +896,16 @@ export default function DashboardPage() {
 
     if (user) {
       fetchApplications()
+    } else if (!authLoading) {
+      setLoading(false)
     }
-    */
-  }, [user])
+  }, [user, authLoading])
 
   const handleSignOut = async () => {
     await signOut()
     router.push('/')
   }
 
-  // MOCK MODE: Skip auth check for testing - DELETE THIS CONDITION WHEN CONNECTING TO SUPABASE
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin h-12 w-12 border-4 border-amber border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-slate-medium font-questa">Loading your dashboard...</p>
-        </div>
-      </div>
-    )
-  }
-
-  /* UNCOMMENT THIS WHEN CONNECTING TO SUPABASE
   if (authLoading || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -849,23 +938,16 @@ export default function DashboardPage() {
       </div>
     )
   }
-  */
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* MOCK DATA BANNER - DELETE WHEN CONNECTING TO SUPABASE */}
-      <div className="bg-amber text-white text-center py-2 text-sm font-questa">
-        Preview Mode - Using Mock Data
-      </div>
-
       {/* Header */}
       <div className="bg-slate py-4 sm:py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <h1 className="text-xl sm:text-2xl md:text-3xl font-ivry font-bold text-white">Family Portal</h1>
-              {/* MOCK: Using mock email - replace with user.email when connecting to Supabase */}
-              <p className="text-white/70 font-questa text-sm sm:text-base mt-0.5 truncate">{user?.email || 'maria.martinez@email.com'}</p>
+              <p className="text-white/70 font-questa text-sm sm:text-base mt-0.5 truncate">{user?.email}</p>
             </div>
             <Button
               variant="outline"
@@ -942,7 +1024,7 @@ export default function DashboardPage() {
           <div className="space-y-4 sm:space-y-6">
             <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
               {applications.map((app) => (
-                <ApplicationCard key={app.id} application={app} onViewDetails={handleViewDetails} onBookInterview={handleBookInterview} onCancel={handleCancelApplication} />
+                <ApplicationCard key={app.id} application={app} onViewDetails={handleViewDetails} onBookInterview={handleBookInterview} onCancel={handleCancelApplication} onCancelInterview={handleCancelInterview} onRescheduleInterview={handleRescheduleInterview} />
               ))}
             </div>
 
@@ -995,10 +1077,10 @@ export default function DashboardPage() {
 
       {/* Interview Booking Modal */}
       <Dialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-ivry text-2xl text-slate flex items-center">
-              <Calendar className="h-6 w-6 text-green-500 mr-3" />
+        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-2xl max-h-[90vh] overflow-y-auto p-3 sm:p-6 rounded-xl sm:rounded-2xl">
+          <DialogHeader className="pb-2">
+            <DialogTitle className="font-ivry text-lg sm:text-2xl text-slate flex items-center">
+              <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-green-500 mr-2 sm:mr-3 shrink-0" />
               Schedule Interview
             </DialogTitle>
           </DialogHeader>
@@ -1015,37 +1097,148 @@ export default function DashboardPage() {
 
       {/* Cancel/Withdraw Confirmation Modal */}
       <Dialog open={isCancelModalOpen} onOpenChange={setIsCancelModalOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="font-ivry text-xl text-slate flex items-center">
-              <AlertCircle className="h-6 w-6 text-red-500 mr-3" />
+        <DialogContent className="w-[calc(100vw-2rem)] max-w-md p-4 sm:p-6 rounded-xl">
+          <DialogHeader className="pb-2">
+            <DialogTitle className="font-ivry text-lg sm:text-xl text-slate flex items-center">
+              <AlertCircle className="h-5 w-5 sm:h-6 sm:w-6 text-red-500 mr-2 sm:mr-3 shrink-0" />
               Withdraw Application
             </DialogTitle>
           </DialogHeader>
           {cancellingApplication && (
-            <div className="py-4">
-              <p className="text-slate-medium font-questa mb-4">
+            <div className="py-2 sm:py-4">
+              <p className="text-slate-medium font-questa mb-3 sm:mb-4 text-sm sm:text-base">
                 Are you sure you want to withdraw the application for <strong>{cancellingApplication.child_full_name}</strong>?
               </p>
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
-                <p className="text-red-700 font-questa text-sm">
+              <div className="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4 mb-3 sm:mb-4">
+                <p className="text-red-700 font-questa text-xs sm:text-sm">
                   <strong>Warning:</strong> This action cannot be undone. If you wish to apply again in the future, you will need to submit a new application.
                 </p>
               </div>
-              <div className="flex gap-3 justify-end">
+              <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 sm:justify-end">
                 <Button
                   variant="outline"
                   onClick={() => setIsCancelModalOpen(false)}
-                  className="rounded-xl font-questa"
+                  className="rounded-xl font-questa w-full sm:w-auto"
                 >
                   Keep Application
                 </Button>
                 <Button
                   onClick={confirmCancelApplication}
                   disabled={isCancelling}
-                  className="bg-red-500 hover:bg-red-600 text-white rounded-xl font-questa"
+                  className="bg-red-500 hover:bg-red-600 text-white rounded-xl font-questa w-full sm:w-auto"
                 >
                   {isCancelling ? 'Withdrawing...' : 'Yes, Withdraw'}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Cancel Interview Confirmation Modal */}
+      <Dialog open={isCancelInterviewModalOpen} onOpenChange={setIsCancelInterviewModalOpen}>
+        <DialogContent className="w-[calc(100vw-2rem)] max-w-md p-4 sm:p-6 rounded-xl">
+          <DialogHeader className="pb-2">
+            <DialogTitle className="font-ivry text-lg sm:text-xl text-slate flex items-center">
+              <CalendarX className="h-5 w-5 sm:h-6 sm:w-6 text-red-500 mr-2 sm:mr-3 shrink-0" />
+              Cancel Interview
+            </DialogTitle>
+          </DialogHeader>
+          {cancellingInterviewApp && (
+            <div className="py-2 sm:py-4">
+              <p className="text-slate-medium font-questa mb-3 sm:mb-4 text-sm sm:text-base">
+                Are you sure you want to cancel the scheduled interview for <strong>{cancellingInterviewApp.child_full_name}</strong>?
+              </p>
+              {cancellingInterviewApp.interview_date && (
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-4 mb-3 sm:mb-4">
+                  <p className="text-blue-700 font-questa text-xs sm:text-sm">
+                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1 sm:mr-2" />
+                    {new Date(cancellingInterviewApp.interview_date).toLocaleDateString('en-US', {
+                      weekday: 'short',
+                      month: 'short',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+              )}
+              <p className="text-slate-medium font-questa text-xs sm:text-sm mb-3 sm:mb-4">
+                You will be able to book a new interview time after canceling.
+              </p>
+              <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 sm:justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsCancelInterviewModalOpen(false)}
+                  className="rounded-xl font-questa w-full sm:w-auto"
+                >
+                  Keep Interview
+                </Button>
+                <Button
+                  onClick={confirmCancelInterview}
+                  disabled={isCancellingInterview}
+                  className="bg-red-500 hover:bg-red-600 text-white rounded-xl font-questa w-full sm:w-auto"
+                >
+                  {isCancellingInterview ? 'Canceling...' : 'Yes, Cancel'}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Reschedule Interview Confirmation Modal */}
+      <Dialog open={isRescheduleModalOpen} onOpenChange={setIsRescheduleModalOpen}>
+        <DialogContent className="w-[calc(100vw-2rem)] max-w-md p-4 sm:p-6 rounded-xl">
+          <DialogHeader className="pb-2">
+            <DialogTitle className="font-ivry text-lg sm:text-xl text-slate flex items-center">
+              <CalendarClock className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500 mr-2 sm:mr-3 shrink-0" />
+              Reschedule Interview
+            </DialogTitle>
+          </DialogHeader>
+          {reschedulingApp && (
+            <div className="py-2 sm:py-4">
+              <p className="text-slate-medium font-questa mb-3 sm:mb-4 text-sm sm:text-base">
+                Are you sure you want to reschedule the interview for <strong>{reschedulingApp.child_full_name}</strong>?
+              </p>
+              {reschedulingApp.interview_date && (
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-4 mb-3 sm:mb-4">
+                  <p className="text-xs sm:text-sm text-slate-medium font-questa mb-1">Current appointment:</p>
+                  <p className="text-blue-700 font-questa font-semibold text-sm sm:text-base">
+                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1 sm:mr-2" />
+                    {new Date(reschedulingApp.interview_date).toLocaleDateString('en-US', {
+                      weekday: 'short',
+                      month: 'short',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+              )}
+              <div className="bg-amber/10 border border-amber/30 rounded-xl p-3 sm:p-4 mb-3 sm:mb-4">
+                <p className="text-amber-700 font-questa text-xs sm:text-sm">
+                  <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4 inline mr-1 sm:mr-2" />
+                  This will cancel your current appointment. You'll then be able to select a new time.
+                </p>
+              </div>
+              <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 sm:justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setIsRescheduleModalOpen(false)
+                    setReschedulingApp(null)
+                  }}
+                  className="rounded-xl font-questa w-full sm:w-auto"
+                >
+                  Keep Current Time
+                </Button>
+                <Button
+                  onClick={confirmRescheduleInterview}
+                  disabled={isCancellingInterview}
+                  className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-questa w-full sm:w-auto"
+                >
+                  {isCancellingInterview ? 'Processing...' : 'Yes, Reschedule'}
                 </Button>
               </div>
             </div>

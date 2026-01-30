@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { FileText, AlertCircle, CheckCircle, Users, Calendar, Info, User, LogIn } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
@@ -26,23 +27,6 @@ interface ExistingApplication {
   languages_at_home: string
 }
 
-// MOCK DATA - DELETE WHEN CONNECTING TO SUPABASE
-const MOCK_EXISTING_APPLICATIONS: ExistingApplication[] = [
-  {
-    parent_name: 'Maria Martinez',
-    relationship_to_child: 'Mother',
-    parent_email: 'maria.martinez@email.com',
-    parent_phone: '(503) 555-1234',
-    home_address: '123 Oak Street, Hillsboro, OR 97124',
-    preferred_communication: 'email',
-    second_parent_name: 'Carlos Martinez',
-    second_parent_email: 'carlos.martinez@email.com',
-    second_parent_phone: '(503) 555-5678',
-    languages_at_home: 'Spanish and English'
-  }
-]
-// END MOCK DATA
-
 export default function AdmissionsApplicationPage() {
   const { toast } = useToast()
   const { user, loading: authLoading, openAuthModal } = useAuth()
@@ -54,18 +38,6 @@ export default function AdmissionsApplicationPage() {
 
   // Fetch existing applications to pre-fill parent info
   useEffect(() => {
-    // MOCK DATA - DELETE THIS BLOCK AND UNCOMMENT THE REAL FETCH BELOW
-    const loadMockData = () => {
-      setTimeout(() => {
-        setExistingApplications(MOCK_EXISTING_APPLICATIONS)
-        setCheckingApplication(false)
-      }, 300)
-    }
-    loadMockData()
-    return
-    // END MOCK DATA
-
-    /* UNCOMMENT WHEN CONNECTING TO SUPABASE
     const fetchExistingApplications = async () => {
       if (!user) {
         setCheckingApplication(false)
@@ -88,7 +60,6 @@ export default function AdmissionsApplicationPage() {
     if (!authLoading) {
       fetchExistingApplications()
     }
-    */
   }, [user, authLoading])
   const [formData, setFormData] = useState({
     // Section 1: Student Information
@@ -349,25 +320,6 @@ export default function AdmissionsApplicationPage() {
 
               {/* Auth Status */}
               <div className="mt-6 pt-6 border-t border-slate/10">
-                {checkingApplication ? (
-                  <div className="flex items-center justify-center py-4">
-                    <div className="animate-spin h-6 w-6 border-2 border-amber border-t-transparent rounded-full mr-3"></div>
-                    <span className="text-slate-medium font-questa">Checking account status...</span>
-                  </div>
-                ) : (
-                  /* MOCK: Always show as signed in for preview - DELETE AND RESTORE ORIGINAL WHEN CONNECTING TO SUPABASE */
-                  <div className="flex items-center justify-between bg-green-50 p-4 rounded-xl border border-green-200">
-                    <div className="flex items-center">
-                      <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                      <div>
-                        <p className="font-questa font-semibold text-green-700">Signed in as {user?.email || 'maria.martinez@email.com'}</p>
-                        <p className="text-sm text-green-600 font-questa">You're ready to submit your application</p>
-                        <p className="text-xs text-amber font-questa mt-1">(Preview Mode - Mock Data)</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                {/* ORIGINAL AUTH STATUS - UNCOMMENT WHEN CONNECTING TO SUPABASE
                 {authLoading || checkingApplication ? (
                   <div className="flex items-center justify-center py-4">
                     <div className="animate-spin h-6 w-6 border-2 border-amber border-t-transparent rounded-full mr-3"></div>
@@ -412,7 +364,6 @@ export default function AdmissionsApplicationPage() {
                     </div>
                   </div>
                 )}
-                */}
               </div>
             </CardContent>
           </Card>
@@ -491,18 +442,93 @@ export default function AdmissionsApplicationPage() {
                 </div>
 
                 <div>
-                  <Label htmlFor="dateOfBirth" className="block text-sm font-questa font-medium text-slate mb-2">
+                  <Label className="block text-sm font-questa font-medium text-slate mb-2">
                     Date of Birth *
                   </Label>
-                  <input
-                    id="dateOfBirth"
-                    name="dateOfBirth"
-                    type="date"
-                    required
-                    value={formData.dateOfBirth}
-                    onChange={handleInputChange}
-                    className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm md:text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-slate focus:border-slate disabled:cursor-not-allowed disabled:opacity-50"
-                  />
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* Month */}
+                    <Select
+                      value={formData.dateOfBirth ? formData.dateOfBirth.split('-')[1] : ''}
+                      onValueChange={(month) => {
+                        const parts = formData.dateOfBirth ? formData.dateOfBirth.split('-') : ['', '', '']
+                        const year = parts[0] || ''
+                        const day = parts[2] || ''
+                        if (year && month && day) {
+                          setFormData(prev => ({ ...prev, dateOfBirth: `${year}-${month}-${day}` }))
+                        } else {
+                          setFormData(prev => ({ ...prev, dateOfBirth: `${year}-${month}-${day}` }))
+                        }
+                      }}
+                    >
+                      <SelectTrigger className="w-full h-12 rounded-xl border-2 border-slate/20 hover:border-amber focus:border-amber focus:ring-amber/20 transition-all duration-200 font-questa">
+                        <SelectValue placeholder="Month" />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-xl border-2 border-slate/20 shadow-xl max-h-60">
+                        <SelectItem value="01" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">January</SelectItem>
+                        <SelectItem value="02" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">February</SelectItem>
+                        <SelectItem value="03" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">March</SelectItem>
+                        <SelectItem value="04" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">April</SelectItem>
+                        <SelectItem value="05" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">May</SelectItem>
+                        <SelectItem value="06" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">June</SelectItem>
+                        <SelectItem value="07" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">July</SelectItem>
+                        <SelectItem value="08" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">August</SelectItem>
+                        <SelectItem value="09" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">September</SelectItem>
+                        <SelectItem value="10" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">October</SelectItem>
+                        <SelectItem value="11" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">November</SelectItem>
+                        <SelectItem value="12" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">December</SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    {/* Day */}
+                    <Select
+                      value={formData.dateOfBirth ? formData.dateOfBirth.split('-')[2] : ''}
+                      onValueChange={(day) => {
+                        const parts = formData.dateOfBirth ? formData.dateOfBirth.split('-') : ['', '', '']
+                        const year = parts[0] || ''
+                        const month = parts[1] || ''
+                        setFormData(prev => ({ ...prev, dateOfBirth: `${year}-${month}-${day}` }))
+                      }}
+                    >
+                      <SelectTrigger className="w-full h-12 rounded-xl border-2 border-slate/20 hover:border-amber focus:border-amber focus:ring-amber/20 transition-all duration-200 font-questa">
+                        <SelectValue placeholder="Day" />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-xl border-2 border-slate/20 shadow-xl max-h-60">
+                        {Array.from({ length: 31 }, (_, i) => {
+                          const day = String(i + 1).padStart(2, '0')
+                          return (
+                            <SelectItem key={day} value={day} className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                              {i + 1}
+                            </SelectItem>
+                          )
+                        })}
+                      </SelectContent>
+                    </Select>
+
+                    {/* Year */}
+                    <Select
+                      value={formData.dateOfBirth ? formData.dateOfBirth.split('-')[0] : ''}
+                      onValueChange={(year) => {
+                        const parts = formData.dateOfBirth ? formData.dateOfBirth.split('-') : ['', '', '']
+                        const month = parts[1] || ''
+                        const day = parts[2] || ''
+                        setFormData(prev => ({ ...prev, dateOfBirth: `${year}-${month}-${day}` }))
+                      }}
+                    >
+                      <SelectTrigger className="w-full h-12 rounded-xl border-2 border-slate/20 hover:border-amber focus:border-amber focus:ring-amber/20 transition-all duration-200 font-questa">
+                        <SelectValue placeholder="Year" />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-xl border-2 border-slate/20 shadow-xl max-h-60">
+                        {Array.from({ length: 26 }, (_, i) => {
+                          const year = String(2025 - i)
+                          return (
+                            <SelectItem key={year} value={year} className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                              {year}
+                            </SelectItem>
+                          )
+                        })}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
 
                 <div>
@@ -525,18 +551,22 @@ export default function AdmissionsApplicationPage() {
                   <Label htmlFor="attendedPreschool" className="block text-sm font-questa font-medium text-slate mb-2">
                     Has your child attended preschool or kindergarten before? *
                   </Label>
-                  <select
-                    id="attendedPreschool"
-                    name="attendedPreschool"
-                    required
+                  <Select
                     value={formData.attendedPreschool}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-slate focus:border-slate font-questa text-sm md:text-base"
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, attendedPreschool: value }))}
                   >
-                    <option value="">Please select...</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                  </select>
+                    <SelectTrigger className="w-full h-12 rounded-xl border-2 border-slate/20 hover:border-amber focus:border-amber focus:ring-amber/20 transition-all duration-200 font-questa">
+                      <SelectValue placeholder="Please select..." />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl border-2 border-slate/20 shadow-xl">
+                      <SelectItem value="yes" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        Yes
+                      </SelectItem>
+                      <SelectItem value="no" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        No
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
@@ -644,19 +674,25 @@ export default function AdmissionsApplicationPage() {
                   <Label htmlFor="preferredCommunication" className="block text-sm font-questa font-medium text-slate mb-2">
                     Preferred Method of Communication *
                   </Label>
-                  <select
-                    id="preferredCommunication"
-                    name="preferredCommunication"
-                    required
+                  <Select
                     value={formData.preferredCommunication}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-slate focus:border-slate font-questa text-sm md:text-base"
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, preferredCommunication: value }))}
                   >
-                    <option value="">Please select...</option>
-                    <option value="email">Email</option>
-                    <option value="phone">Phone Call</option>
-                    <option value="text">Text Message</option>
-                  </select>
+                    <SelectTrigger className="w-full h-12 rounded-xl border-2 border-slate/20 hover:border-amber focus:border-amber focus:ring-amber/20 transition-all duration-200 font-questa">
+                      <SelectValue placeholder="Please select..." />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl border-2 border-slate/20 shadow-xl">
+                      <SelectItem value="email" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        Email
+                      </SelectItem>
+                      <SelectItem value="phone" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        Phone Call
+                      </SelectItem>
+                      <SelectItem value="text" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        Text Message
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="border-t pt-4 mt-4">
@@ -851,19 +887,25 @@ export default function AdmissionsApplicationPage() {
                   <Label htmlFor="seekingFullTime" className="block text-sm font-questa font-medium text-slate mb-2">
                     Are you seeking full-time Kindergarten enrollment? *
                   </Label>
-                  <select
-                    id="seekingFullTime"
-                    name="seekingFullTime"
-                    required
+                  <Select
                     value={formData.seekingFullTime}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-slate focus:border-slate font-questa text-sm md:text-base"
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, seekingFullTime: value }))}
                   >
-                    <option value="">Please select...</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                    <option value="unsure">Unsure</option>
-                  </select>
+                    <SelectTrigger className="w-full h-12 rounded-xl border-2 border-slate/20 hover:border-amber focus:border-amber focus:ring-amber/20 transition-all duration-200 font-questa">
+                      <SelectValue placeholder="Please select..." />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl border-2 border-slate/20 shadow-xl">
+                      <SelectItem value="yes" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        Yes
+                      </SelectItem>
+                      <SelectItem value="no" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        No
+                      </SelectItem>
+                      <SelectItem value="unsure" className="font-questa rounded-lg hover:bg-amber/10 focus:bg-amber/20 cursor-pointer">
+                        Unsure
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
@@ -1165,32 +1207,6 @@ export default function AdmissionsApplicationPage() {
             </Card>
 
             {/* Submit Button */}
-            {/* MOCK: Always show submit button for preview - DELETE AND RESTORE ORIGINAL WHEN CONNECTING TO SUPABASE */}
-            <div className="pt-4">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-base md:text-lg py-6 disabled:opacity-50"
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="animate-spin h-5 w-5 mr-2 border-2 border-slate border-t-transparent rounded-full" />
-                    Submitting Application...
-                  </>
-                ) : existingApplications.length > 0 ? (
-                  <>
-                    <Users className="h-5 w-5 mr-2" />
-                    Submit Application for Another Child
-                  </>
-                ) : (
-                  <>
-                    <FileText className="h-5 w-5 mr-2" />
-                    Submit Application
-                  </>
-                )}
-              </Button>
-            </div>
-            {/* ORIGINAL SUBMIT BUTTON - UNCOMMENT WHEN CONNECTING TO SUPABASE
             <div className="pt-4">
               {!user ? (
                 <div className="text-center">
@@ -1231,7 +1247,6 @@ export default function AdmissionsApplicationPage() {
                 </Button>
               )}
             </div>
-            */}
           </form>
         </div>
       </section>

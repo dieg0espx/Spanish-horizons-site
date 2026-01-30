@@ -40,7 +40,7 @@ interface AdminAvailabilityCalendarProps {
 export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailabilityCalendarProps) {
   const [slots, setSlots] = useState<TimeSlot[]>([])
   const [loading, setLoading] = useState(true)
-  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 1, 1)) // February 2026 for mock data
+  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 1, 1)) // February 2026
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [newSlot, setNewSlot] = useState({ date: '', start_time: '09:00', end_time: '09:30' })
@@ -78,8 +78,8 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
       if (response.ok) {
         const data = await response.json()
         setSlots([...slots, data.slot])
-        setIsAddModalOpen(false)
-        setNewSlot({ date: '', start_time: '09:00', end_time: '09:30' })
+        // Keep modal open to add more slots for the same day
+        setNewSlot({ ...newSlot, start_time: '09:00', end_time: '09:30' })
       }
     } catch (error) {
       console.error('Error adding slot:', error)
@@ -128,6 +128,15 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
     return `${year}-${month}-${dayStr}`
   }
 
+  const formatDisplayDate = (dateStr: string) => {
+    return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    })
+  }
+
   const getSlotsForDate = (dateStr: string) => {
     return slots.filter(slot => slot.date === dateStr)
   }
@@ -160,8 +169,10 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))
   }
 
-  const openAddModal = (date?: string) => {
-    setNewSlot({ ...newSlot, date: date || '' })
+  const handleDayClick = (day: number) => {
+    const dateStr = formatDate(day)
+    setSelectedDate(dateStr)
+    setNewSlot({ date: dateStr, start_time: '09:00', end_time: '09:30' })
     setIsAddModalOpen(true)
   }
 
@@ -176,13 +187,7 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
           <Calendar className="h-5 w-5 mr-2 text-amber" />
           Interview Availability
         </h3>
-        <Button
-          onClick={() => openAddModal()}
-          className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa"
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          Add Time Slot
-        </Button>
+        <p className="text-sm text-slate-medium font-questa">Click on a day to add time slots</p>
       </div>
 
       {/* Month Navigation */}
@@ -214,17 +219,16 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
           {days.map((day, index) => {
             const dateStr = day ? formatDate(day) : ''
             const daySlots = day ? getSlotsForDate(dateStr) : []
-            const isSelected = selectedDate === dateStr
             const hasAnySlots = day && hasSlots(day)
             const hasAvailable = day && hasAvailableSlots(day)
 
             return (
               <div
                 key={index}
-                className={`min-h-[100px] border-b border-r p-2 ${
-                  day ? 'cursor-pointer hover:bg-slate/5' : 'bg-gray-50'
-                } ${isSelected ? 'bg-amber/10' : ''}`}
-                onClick={() => day && setSelectedDate(isSelected ? null : dateStr)}
+                className={`min-h-[100px] border-b border-r p-2 transition-all ${
+                  day ? 'cursor-pointer hover:bg-amber/10 hover:border-amber' : 'bg-gray-50'
+                }`}
+                onClick={() => day && handleDayClick(day)}
               >
                 {day && (
                   <>
@@ -265,75 +269,6 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
         </div>
       </div>
 
-      {/* Selected Date Slots */}
-      {selectedDate && (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-lg font-ivry flex items-center justify-between">
-              <span>
-                {new Date(selectedDate + 'T00:00:00').toLocaleDateString('en-US', {
-                  weekday: 'long',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </span>
-              <Button
-                size="sm"
-                onClick={() => openAddModal(selectedDate)}
-                className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa"
-              >
-                <Plus className="h-4 w-4 mr-1" />
-                Add Slot
-              </Button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {getSlotsForDate(selectedDate).length === 0 ? (
-              <p className="text-slate-medium font-questa text-center py-4">
-                No time slots for this date
-              </p>
-            ) : (
-              <div className="space-y-2">
-                {getSlotsForDate(selectedDate).map(slot => (
-                  <div
-                    key={slot.id}
-                    className={`p-3 rounded-xl ${
-                      slot.is_booked ? 'bg-blue-50 border border-blue-200' : 'bg-green-50 border border-green-200'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Clock className={`h-4 w-4 mr-2 ${slot.is_booked ? 'text-blue-500' : 'text-green-500'}`} />
-                        <span className="font-questa font-semibold">
-                          {slot.start_time} - {slot.end_time}
-                        </span>
-                      </div>
-                      {!slot.is_booked && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => deleteSlot(slot.id)}
-                          className="text-red-500 hover:text-red-700 hover:bg-red-100 rounded-xl"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
-                    {slot.is_booked && (
-                      <div className="mt-2 pl-6">
-                        <span className="text-xs bg-blue-200 text-blue-700 px-2 py-1 rounded-full">
-                          Booked: {slot.booked_child_name || 'Unknown'}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
-
       {/* Legend */}
       <div className="flex items-center gap-4 text-sm font-questa">
         <div className="flex items-center">
@@ -346,53 +281,94 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
         </div>
       </div>
 
-      {/* Add Slot Modal */}
+      {/* Add/View Slots Modal */}
       <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="font-ivry text-xl text-slate">
-              Add Interview Time Slot
+              {selectedDate && formatDisplayDate(selectedDate)}
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-4 py-4">
-            <div>
-              <Label htmlFor="slot-date" className="font-questa font-semibold text-slate">
-                Date
-              </Label>
-              <Input
-                id="slot-date"
-                type="date"
-                value={newSlot.date}
-                onChange={(e) => setNewSlot({ ...newSlot, date: e.target.value })}
-                className="mt-1"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="start-time" className="font-questa font-semibold text-slate">
-                  Start Time
-                </Label>
-                <Input
-                  id="start-time"
-                  type="time"
-                  value={newSlot.start_time}
-                  onChange={(e) => setNewSlot({ ...newSlot, start_time: e.target.value })}
-                  className="mt-1"
-                />
+          <div className="space-y-4 py-2">
+            {/* Existing slots for this day */}
+            {selectedDate && getSlotsForDate(selectedDate).length > 0 && (
+              <div className="space-y-2">
+                <p className="text-sm font-questa font-semibold text-slate-medium">Existing Time Slots</p>
+                <div className="space-y-2 max-h-40 overflow-y-auto">
+                  {getSlotsForDate(selectedDate).map(slot => (
+                    <div
+                      key={slot.id}
+                      className={`p-3 rounded-xl flex items-center justify-between ${
+                        slot.is_booked ? 'bg-blue-50 border border-blue-200' : 'bg-green-50 border border-green-200'
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        <Clock className={`h-4 w-4 mr-2 ${slot.is_booked ? 'text-blue-500' : 'text-green-500'}`} />
+                        <span className="font-questa font-medium">
+                          {slot.start_time} - {slot.end_time}
+                        </span>
+                        {slot.is_booked && (
+                          <span className="ml-2 text-xs bg-blue-200 text-blue-700 px-2 py-0.5 rounded-full">
+                            {slot.booked_child_name || 'Booked'}
+                          </span>
+                        )}
+                      </div>
+                      {!slot.is_booked && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => deleteSlot(slot.id)}
+                          className="text-red-500 hover:text-red-700 hover:bg-red-100 rounded-xl h-8 w-8 p-0"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div>
-                <Label htmlFor="end-time" className="font-questa font-semibold text-slate">
-                  End Time
-                </Label>
-                <Input
-                  id="end-time"
-                  type="time"
-                  value={newSlot.end_time}
-                  onChange={(e) => setNewSlot({ ...newSlot, end_time: e.target.value })}
-                  className="mt-1"
-                />
+            )}
+
+            {/* Add new slot */}
+            <div className="border-t pt-4">
+              <p className="text-sm font-questa font-semibold text-slate mb-3">Add New Time Slot</p>
+              <div className="flex items-end gap-3">
+                <div className="flex-1">
+                  <Label htmlFor="start-time" className="text-xs text-slate-medium font-questa">
+                    Start Time
+                  </Label>
+                  <Input
+                    id="start-time"
+                    type="time"
+                    value={newSlot.start_time}
+                    onChange={(e) => setNewSlot({ ...newSlot, start_time: e.target.value })}
+                    className="mt-1 rounded-xl border-2 border-slate/20 focus:border-amber focus:ring-amber/50"
+                  />
+                </div>
+                <div className="flex-1">
+                  <Label htmlFor="end-time" className="text-xs text-slate-medium font-questa">
+                    End Time
+                  </Label>
+                  <Input
+                    id="end-time"
+                    type="time"
+                    value={newSlot.end_time}
+                    onChange={(e) => setNewSlot({ ...newSlot, end_time: e.target.value })}
+                    className="mt-1 rounded-xl border-2 border-slate/20 focus:border-amber focus:ring-amber/50"
+                  />
+                </div>
+                <Button
+                  onClick={addSlot}
+                  disabled={isSubmitting}
+                  className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa px-4"
+                >
+                  {isSubmitting ? (
+                    <span className="animate-spin">...</span>
+                  ) : (
+                    <Plus className="h-4 w-4" />
+                  )}
+                </Button>
               </div>
             </div>
           </div>
@@ -401,16 +377,9 @@ export default function AdminAvailabilityCalendar({ onSlotSelect }: AdminAvailab
             <Button
               variant="outline"
               onClick={() => setIsAddModalOpen(false)}
-              className="rounded-xl font-questa"
+              className="rounded-xl font-questa w-full"
             >
-              Cancel
-            </Button>
-            <Button
-              onClick={addSlot}
-              disabled={isSubmitting || !newSlot.date}
-              className="bg-amber hover:bg-golden hover:text-slate text-white rounded-xl font-questa"
-            >
-              {isSubmitting ? 'Adding...' : 'Add Time Slot'}
+              Done
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -17,6 +18,12 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Mail, Lock, Eye, EyeOff, User, ArrowRight } from 'lucide-react'
+
+// Admin emails - redirect these users to admin dashboard after login
+const ADMIN_EMAILS = [
+  'infospanishhorizons@casitaazulpdx.com',
+  'aletxa@comcreate.org',
+]
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -54,6 +61,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
   const [signUpSuccess, setSignUpSuccess] = useState(false)
   const { signIn, signUp } = useAuth()
   const { toast } = useToast()
+  const router = useRouter()
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -77,12 +85,18 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
       return
     }
 
+    // Check if user is an admin
+    const isAdmin = ADMIN_EMAILS.includes(data.email.toLowerCase())
+
     toast({
       title: 'Welcome back!',
-      description: 'You have successfully logged in.',
+      description: isAdmin ? 'Redirecting to admin dashboard...' : 'You have successfully logged in.',
     })
     setIsLoading(false)
     onClose()
+
+    // Redirect admin users to admin dashboard, others to family portal
+    router.push(isAdmin ? '/admin' : '/dashboard')
   }
 
   const handleSignUp = async (data: SignUpFormData) => {
