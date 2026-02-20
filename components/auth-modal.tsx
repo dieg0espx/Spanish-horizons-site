@@ -257,6 +257,16 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
                 )}
               </Button>
 
+              <div className="text-center pt-2">
+                <button
+                  type="button"
+                  onClick={() => switchMode('forgot-password')}
+                  className="text-sm text-slate-medium hover:text-amber transition-colors"
+                >
+                  Forgot password?
+                </button>
+              </div>
+
               <div className="text-center pt-4 border-t border-slate/10">
                 <p className="text-slate-medium text-sm">
                   Don&apos;t have an account?{' '}
