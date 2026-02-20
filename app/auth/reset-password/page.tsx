@@ -33,7 +33,7 @@ export default function ResetPasswordPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [resetSuccess, setResetSuccess] = useState(false)
   const [isValidToken, setIsValidToken] = useState(false)
-  const { updatePassword } = useAuth()
+  const { updatePassword, user, loading } = useAuth()
   const { toast } = useToast()
   const router = useRouter()
 
@@ -42,11 +42,11 @@ export default function ResetPasswordPage() {
   })
 
   useEffect(() => {
-    // Check if there's a valid password reset token in the URL
-    const hashParams = new URLSearchParams(window.location.hash.substring(1))
-    const type = hashParams.get('type')
+    // Wait for auth to finish loading
+    if (loading) return
 
-    if (type === 'recovery') {
+    // Check if user is authenticated (came through callback successfully)
+    if (user) {
       setIsValidToken(true)
     } else {
       toast({
@@ -56,7 +56,7 @@ export default function ResetPasswordPage() {
       })
       setTimeout(() => router.push('/'), 3000)
     }
-  }, [router, toast])
+  }, [user, loading, router, toast])
 
   const handleResetPassword = async (data: ResetPasswordFormData) => {
     setIsLoading(true)
