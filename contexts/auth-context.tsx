@@ -11,7 +11,9 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>
   signUp: (email: string, password: string) => Promise<{ error: AuthError | null }>
   signOut: () => Promise<{ error: AuthError | null }>
-  openAuthModal: (mode?: 'login' | 'signup') => void
+  resetPassword: (email: string) => Promise<{ error: AuthError | null }>
+  updatePassword: (newPassword: string) => Promise<{ error: AuthError | null }>
+  openAuthModal: (mode?: 'login' | 'signup' | 'forgot-password') => void
   closeAuthModal: () => void
 }
 
@@ -21,7 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalMode, setModalMode] = useState<'login' | 'signup'>('login')
+  const [modalMode, setModalMode] = useState<'login' | 'signup' | 'forgot-password'>('login')
   const supabase = createClient()
 
   useEffect(() => {
@@ -83,7 +85,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error }
   }
 
-  const openAuthModal = useCallback((mode: 'login' | 'signup' = 'login') => {
+  const resetPassword = async (email: string) => {
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/reset-password`,
+    })
+    return { error }
+  }
+
+  const updatePassword = async (newPassword: string) => {
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    })
+    return { error }
+  }
+
+  const openAuthModal = useCallback((mode: 'login' | 'signup' | 'forgot-password' = 'login') => {
     setModalMode(mode)
     setIsModalOpen(true)
   }, [])
@@ -93,7 +115,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, openAuthModal, closeAuthModal }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, resetPassword, updatePassword, openAuthModal, closeAuthModal }}>
       {children}
       <AuthModal
         isOpen={isModalOpen}
