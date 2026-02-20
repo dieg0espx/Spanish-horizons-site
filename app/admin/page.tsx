@@ -28,8 +28,13 @@ import {
   Edit,
   X,
   AlertCircle,
-  CalendarDays
+  CalendarDays,
+  Download,
+  Loader2,
+  Save
 } from 'lucide-react'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 import { useToast } from '@/hooks/use-toast'
 import AdminAvailabilityCalendar from '@/components/admin-availability-calendar'
 
@@ -37,7 +42,7 @@ interface Application {
   id: string
   user_id: string
   user_email: string
-  status: 'submitted' | 'interview_scheduled' | 'admitted' | 'waitlist' | 'rejected' | 'declined' | 'withdrawn'
+  status: 'submitted' | 'under_review' | 'interview_pending' | 'interview_scheduled' | 'admitted' | 'waitlist' | 'rejected' | 'declined' | 'withdrawn'
   child_full_name: string
   preferred_name: string | null
   date_of_birth: string
@@ -63,6 +68,14 @@ interface Application {
   interview_date?: string
   interview_notes?: string
   admin_notes?: string
+  // Additional fields
+  previous_enrollment?: string
+  previous_enrollment_details?: string
+  interested_in_continuing?: string
+  receive_updates?: string
+  how_did_you_find?: string
+  how_did_you_find_other?: string
+  anything_else?: string
 }
 
 const statusConfig = {
@@ -71,6 +84,16 @@ const statusConfig = {
     color: 'bg-amber',
     textColor: 'text-amber',
   },
+  under_review: {
+    label: 'Under Review',
+    color: 'bg-purple-500',
+    textColor: 'text-purple-500',
+  },
+  interview_pending: {
+    label: 'Interview Pending',
+    color: 'bg-green-500',
+    textColor: 'text-green-500',
+  },
   interview_scheduled: {
     label: 'Interview Scheduled',
     color: 'bg-blue-500',
@@ -78,8 +101,8 @@ const statusConfig = {
   },
   admitted: {
     label: 'Admitted',
-    color: 'bg-green-500',
-    textColor: 'text-green-500',
+    color: 'bg-green-600',
+    textColor: 'text-green-600',
   },
   waitlist: {
     label: 'Waitlist',
@@ -120,8 +143,10 @@ export default function AdminDashboardPage() {
     admin_notes: ''
   })
   const [updating, setUpdating] = useState(false)
+  const [savingNotes, setSavingNotes] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [activeTab, setActiveTab] = useState<'applications' | 'calendar'>('applications')
+  const [generatingPdf, setGeneratingPdf] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -232,6 +257,239 @@ export default function AdminDashboardPage() {
 
   const handleCancelConfirmation = () => {
     setShowConfirmation(false)
+  }
+
+  const handleSaveNotes = async () => {
+    if (!selectedApplication) return
+
+    setSavingNotes(true)
+    try {
+      const response = await fetch('/api/admin/applications', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          applicationId: selectedApplication.id,
+          status: selectedApplication.status, // Keep the same status
+          interview_date: editData.interview_date,
+          interview_notes: editData.interview_notes,
+          admin_notes: editData.admin_notes
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setApplications(apps =>
+          apps.map(app =>
+            app.id === selectedApplication.id ? data.application : app
+          )
+        )
+        setSelectedApplication(data.application)
+        toast({
+          title: 'Notes saved',
+          description: 'The notes have been saved successfully.'
+        })
+      } else {
+        toast({
+          title: 'Error',
+          description: data.error || 'Failed to save notes',
+          variant: 'destructive'
+        })
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to save notes',
+        variant: 'destructive'
+      })
+    } finally {
+      setSavingNotes(false)
+    }
+  }
+
+  const handleDownloadPdf = async (app: Application) => {
+    setGeneratingPdf(true)
+
+    try {
+      const pdf = new jsPDF('p', 'mm', 'a4')
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+      const margin = 15
+      let yPos = 20
+
+      // Helper function to add text with word wrap
+      const addWrappedText = (text: string, x: number, y: number, maxWidth: number, lineHeight: number = 6) => {
+        const lines = pdf.splitTextToSize(text, maxWidth)
+        lines.forEach((line: string) => {
+          if (y > pageHeight - 20) {
+            pdf.addPage()
+            y = 20
+          }
+          pdf.text(line, x, y)
+          y += lineHeight
+        })
+        return y
+      }
+
+      // Header
+      pdf.setFillColor(49, 68, 80) // slate color
+      pdf.rect(0, 0, pageWidth, 35, 'F')
+      pdf.setTextColor(255, 255, 255)
+      pdf.setFontSize(20)
+      pdf.setFont('helvetica', 'bold')
+      pdf.text('Spanish Horizons Academy', margin, 15)
+      pdf.setFontSize(12)
+      pdf.setFont('helvetica', 'normal')
+      pdf.text('Admissions Application', margin, 25)
+
+      // Reset text color
+      pdf.setTextColor(0, 0, 0)
+      yPos = 45
+
+      // Status badge
+      const statusLabel = statusConfig[app.status].label
+      pdf.setFontSize(10)
+      pdf.setTextColor(100, 100, 100)
+      pdf.text(`Status: ${statusLabel}`, margin, yPos)
+      pdf.text(`Submitted: ${new Date(app.submitted_at).toLocaleDateString()}`, pageWidth - margin - 50, yPos)
+      yPos += 10
+
+      // Section helper
+      const addSection = (title: string, yPosition: number) => {
+        if (yPosition > pageHeight - 40) {
+          pdf.addPage()
+          yPosition = 20
+        }
+        pdf.setFillColor(245, 166, 35) // amber color
+        pdf.rect(margin, yPosition, pageWidth - margin * 2, 8, 'F')
+        pdf.setTextColor(255, 255, 255)
+        pdf.setFontSize(11)
+        pdf.setFont('helvetica', 'bold')
+        pdf.text(title, margin + 3, yPosition + 5.5)
+        pdf.setTextColor(0, 0, 0)
+        pdf.setFont('helvetica', 'normal')
+        return yPosition + 14
+      }
+
+      // Field helper
+      const addField = (label: string, value: string | null | undefined, yPosition: number) => {
+        if (!value) return yPosition
+        if (yPosition > pageHeight - 25) {
+          pdf.addPage()
+          yPosition = 20
+        }
+        pdf.setFontSize(9)
+        pdf.setTextColor(100, 100, 100)
+        pdf.text(label, margin, yPosition)
+        pdf.setFontSize(10)
+        pdf.setTextColor(0, 0, 0)
+        yPosition = addWrappedText(value, margin, yPosition + 5, pageWidth - margin * 2)
+        return yPosition + 3
+      }
+
+      // SECTION 1: Student Information
+      yPos = addSection('Student Information', yPos)
+      yPos = addField('Child\'s Full Name', app.child_full_name, yPos)
+      yPos = addField('Preferred Name', app.preferred_name, yPos)
+      yPos = addField('Date of Birth', new Date(app.date_of_birth).toLocaleDateString(), yPos)
+      yPos = addField('Primary Language(s)', app.primary_languages, yPos)
+      yPos = addField('Attended Preschool', app.attended_preschool, yPos)
+      yPos = addField('Current School', app.current_school, yPos)
+
+      // SECTION 2: Primary Parent/Guardian
+      yPos = addSection('Primary Parent/Guardian', yPos)
+      yPos = addField('Name', app.parent_name, yPos)
+      yPos = addField('Relationship to Child', app.relationship_to_child, yPos)
+      yPos = addField('Email', app.parent_email, yPos)
+      yPos = addField('Phone', app.parent_phone, yPos)
+      yPos = addField('Home Address', app.home_address, yPos)
+      yPos = addField('Preferred Communication', app.preferred_communication, yPos)
+
+      // SECTION 3: Secondary Parent/Guardian
+      if (app.second_parent_name) {
+        yPos = addSection('Secondary Parent/Guardian', yPos)
+        yPos = addField('Name', app.second_parent_name, yPos)
+        yPos = addField('Email', app.second_parent_email, yPos)
+        yPos = addField('Phone', app.second_parent_phone, yPos)
+      }
+
+      // SECTION 4: Family & Educational Background
+      yPos = addSection('Family & Educational Background', yPos)
+      yPos = addField('Languages Spoken at Home', app.languages_at_home, yPos)
+
+      // SECTION 5: Previous Enrollment
+      if (app.previous_enrollment) {
+        yPos = addSection('Previous Enrollment', yPos)
+        yPos = addField('Previously Enrolled at Casita Azul', app.previous_enrollment, yPos)
+        yPos = addField('Details', app.previous_enrollment_details, yPos)
+      }
+
+      // SECTION 6: Interest & Intent
+      yPos = addSection('Interest & Intent', yPos)
+      yPos = addField('Why are you interested in Spanish Horizons Academy?', app.interest_in_academy, yPos)
+      yPos = addField('What do you hope your child will gain?', app.hoping_for, yPos)
+      yPos = addField('Seeking full-time Spanish immersion?', app.seeking_full_time, yPos)
+
+      // SECTION 7: Looking Ahead
+      yPos = addSection('Looking Ahead', yPos)
+      yPos = addField('What excites you most about our program?', app.excited_about, yPos)
+      yPos = addField('What values are important to you in your child\'s education?', app.values_important, yPos)
+      yPos = addField('Interested in continuing with Spanish Horizons?', app.interested_in_continuing, yPos)
+      yPos = addField('Receive updates about expansion?', app.receive_updates, yPos)
+
+      // SECTION 8: How They Found Us
+      if (app.how_did_you_find) {
+        yPos = addSection('How They Found Us', yPos)
+        yPos = addField('How did you hear about us?', app.how_did_you_find, yPos)
+        yPos = addField('Other Details', app.how_did_you_find_other, yPos)
+      }
+
+      // SECTION 9: Additional Information
+      if (app.anything_else) {
+        yPos = addSection('Additional Information', yPos)
+        yPos = addField('Anything else you\'d like us to know?', app.anything_else, yPos)
+      }
+
+      // SECTION 10: Admin Notes
+      if (app.admin_notes || app.interview_notes || app.interview_date) {
+        yPos = addSection('Admin Notes', yPos)
+        yPos = addField('Interview Date', app.interview_date ? new Date(app.interview_date).toLocaleString() : null, yPos)
+        yPos = addField('Interview Notes', app.interview_notes, yPos)
+        yPos = addField('Admin Notes', app.admin_notes, yPos)
+      }
+
+      // Footer on all pages
+      const totalPages = pdf.getNumberOfPages()
+      for (let i = 1; i <= totalPages; i++) {
+        pdf.setPage(i)
+        pdf.setFontSize(8)
+        pdf.setTextColor(150, 150, 150)
+        pdf.text(
+          `Generated on ${new Date().toLocaleDateString()} | Page ${i} of ${totalPages}`,
+          pageWidth / 2,
+          pageHeight - 10,
+          { align: 'center' }
+        )
+      }
+
+      // Save the PDF
+      const fileName = `application_${app.child_full_name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`
+      pdf.save(fileName)
+
+      toast({
+        title: 'PDF Downloaded',
+        description: `Application saved as ${fileName}`
+      })
+    } catch (error) {
+      console.error('Error generating PDF:', error)
+      toast({
+        title: 'Error',
+        description: 'Failed to generate PDF',
+        variant: 'destructive'
+      })
+    } finally {
+      setGeneratingPdf(false)
+    }
   }
 
   const filteredApplications = applications.filter(app => {
@@ -400,34 +658,35 @@ export default function AdminDashboardPage() {
         {/* Search and Filter */}
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4 sm:mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 sm:h-5 w-4 sm:w-5 text-slate/40" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 sm:h-5 w-4 sm:w-5 text-amber" />
             <Input
-              placeholder="Search..."
+              placeholder="Search by name or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 sm:pl-10 rounded-xl text-sm sm:text-base h-10"
+              className="pl-9 sm:pl-10 rounded-xl text-sm sm:text-base h-10 border-2 border-slate/20 focus:border-amber focus:ring-2 focus:ring-amber/50 transition-all hover:border-amber/50"
             />
           </div>
           <div className="relative">
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate/40" />
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-amber" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full sm:w-auto pl-9 pr-8 py-2 border rounded-xl font-questa text-slate bg-white appearance-none cursor-pointer text-sm h-10"
+              className="w-full sm:w-auto pl-9 pr-10 py-2 border-2 border-slate/20 rounded-xl font-questa font-medium text-slate bg-white appearance-none cursor-pointer text-sm h-10 focus:outline-none focus:ring-2 focus:ring-amber/50 focus:border-amber transition-all hover:border-amber/50"
               style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23F5A623' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
                 backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 12px center'
+                backgroundPosition: 'right 10px center'
               }}
             >
               <option value="all">All Statuses</option>
-              <option value="submitted">🟡 Submitted</option>
-              <option value="interview_scheduled">🔵 Interview</option>
-              <option value="admitted">🟢 Admitted</option>
-              <option value="waitlist">🟠 Waitlist</option>
-              <option value="rejected">🔴 Rejected</option>
-              <option value="declined">⚫ Declined</option>
-              <option value="withdrawn">⬜ Withdrawn</option>
+              <option value="submitted">Submitted</option>
+              <option value="under_review">Under Review</option>
+              <option value="interview_pending">Interview Pending</option>
+              <option value="interview_scheduled">Interview Scheduled</option>
+              <option value="admitted">Admitted</option>
+              <option value="waitlist">Waitlist</option>
+              <option value="declined">Declined</option>
+              <option value="withdrawn">Withdrawn</option>
             </select>
           </div>
         </div>
@@ -560,73 +819,264 @@ export default function AdminDashboardPage() {
 
       {/* View Modal */}
       <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-ivry text-slate">Application Details</DialogTitle>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader className="flex flex-row items-center justify-between pr-8">
+            <DialogTitle className="font-ivry text-slate text-xl">Application Details</DialogTitle>
+            {selectedApplication && (
+              <Button
+                onClick={() => handleDownloadPdf(selectedApplication)}
+                disabled={generatingPdf}
+                className="bg-slate hover:bg-slate/80 text-white rounded-xl"
+                size="sm"
+              >
+                {generatingPdf ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4 mr-2" />
+                )}
+                Download PDF
+              </Button>
+            )}
           </DialogHeader>
           {selectedApplication && (
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
+              {/* Status Badge */}
+              <div className="flex items-center justify-between bg-slate/5 p-4 rounded-xl">
                 <div>
-                  <p className="text-sm text-slate-medium font-questa">Child's Name</p>
-                  <p className="font-questa font-semibold text-slate">{selectedApplication.child_full_name}</p>
+                  <p className="text-sm text-slate-medium font-questa">Application Status</p>
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white ${statusConfig[selectedApplication.status].color}`}>
+                    {statusConfig[selectedApplication.status].label}
+                  </span>
                 </div>
-                <div>
-                  <p className="text-sm text-slate-medium font-questa">Date of Birth</p>
-                  <p className="font-questa text-slate">{new Date(selectedApplication.date_of_birth).toLocaleDateString()}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-slate-medium font-questa">Parent Name</p>
-                  <p className="font-questa text-slate">{selectedApplication.parent_name}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-slate-medium font-questa">Email</p>
-                  <p className="font-questa text-slate">{selectedApplication.parent_email}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-slate-medium font-questa">Phone</p>
-                  <p className="font-questa text-slate">{selectedApplication.parent_phone}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-slate-medium font-questa">Portal Account</p>
-                  <p className="font-questa text-slate">{selectedApplication.user_email}</p>
+                <div className="text-right">
+                  <p className="text-sm text-slate-medium font-questa">Submitted</p>
+                  <p className="font-questa text-slate">{new Date(selectedApplication.submitted_at).toLocaleDateString()}</p>
                 </div>
               </div>
 
-              <div>
-                <p className="text-sm text-slate-medium font-questa">Home Address</p>
-                <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.home_address}</p>
+              {/* Section 1: Student Information */}
+              <div className="border-b pb-4">
+                <h3 className="font-ivry text-amber text-lg mb-4">Student Information</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Child's Full Name</p>
+                    <p className="font-questa font-semibold text-slate">{selectedApplication.child_full_name}</p>
+                  </div>
+                  {selectedApplication.preferred_name && (
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">Preferred Name</p>
+                      <p className="font-questa text-slate">{selectedApplication.preferred_name}</p>
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Date of Birth</p>
+                    <p className="font-questa text-slate">{new Date(selectedApplication.date_of_birth).toLocaleDateString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Primary Language(s)</p>
+                    <p className="font-questa text-slate">{selectedApplication.primary_languages}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Attended Preschool Before</p>
+                    <p className="font-questa text-slate">{selectedApplication.attended_preschool}</p>
+                  </div>
+                  {selectedApplication.current_school && (
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">Current School</p>
+                      <p className="font-questa text-slate">{selectedApplication.current_school}</p>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              <div>
-                <p className="text-sm text-slate-medium font-questa">Languages at Home</p>
-                <p className="font-questa text-slate">{selectedApplication.languages_at_home}</p>
+              {/* Section 2: Primary Parent/Guardian */}
+              <div className="border-b pb-4">
+                <h3 className="font-ivry text-amber text-lg mb-4">Primary Parent/Guardian</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Name</p>
+                    <p className="font-questa font-semibold text-slate">{selectedApplication.parent_name}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Relationship to Child</p>
+                    <p className="font-questa text-slate">{selectedApplication.relationship_to_child}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Email</p>
+                    <p className="font-questa text-slate">{selectedApplication.parent_email}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Phone</p>
+                    <p className="font-questa text-slate">{selectedApplication.parent_phone}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-sm text-slate-medium font-questa">Home Address</p>
+                    <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.home_address}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Preferred Communication</p>
+                    <p className="font-questa text-slate">{selectedApplication.preferred_communication}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Portal Account Email</p>
+                    <p className="font-questa text-slate text-sm">{selectedApplication.user_email}</p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <p className="text-sm text-slate-medium font-questa">Interest in Academy</p>
-                <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.interest_in_academy}</p>
+              {/* Section 3: Secondary Parent/Guardian (if exists) */}
+              {selectedApplication.second_parent_name && (
+                <div className="border-b pb-4">
+                  <h3 className="font-ivry text-amber text-lg mb-4">Secondary Parent/Guardian</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">Name</p>
+                      <p className="font-questa font-semibold text-slate">{selectedApplication.second_parent_name}</p>
+                    </div>
+                    {selectedApplication.second_parent_email && (
+                      <div>
+                        <p className="text-sm text-slate-medium font-questa">Email</p>
+                        <p className="font-questa text-slate">{selectedApplication.second_parent_email}</p>
+                      </div>
+                    )}
+                    {selectedApplication.second_parent_phone && (
+                      <div>
+                        <p className="text-sm text-slate-medium font-questa">Phone</p>
+                        <p className="font-questa text-slate">{selectedApplication.second_parent_phone}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Section 4: Previous Enrollment */}
+              {selectedApplication.previous_enrollment && (
+                <div className="border-b pb-4">
+                  <h3 className="font-ivry text-amber text-lg mb-4">Previous Enrollment</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">Previously Enrolled at Casita Azul?</p>
+                      <p className="font-questa text-slate">{selectedApplication.previous_enrollment}</p>
+                    </div>
+                    {selectedApplication.previous_enrollment_details && (
+                      <div className="col-span-2">
+                        <p className="text-sm text-slate-medium font-questa">Enrollment Details</p>
+                        <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.previous_enrollment_details}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Section 5: Family & Educational Background */}
+              <div className="border-b pb-4">
+                <h3 className="font-ivry text-amber text-lg mb-4">Family & Educational Background</h3>
+                <div>
+                  <p className="text-sm text-slate-medium font-questa">Languages Spoken at Home</p>
+                  <p className="font-questa text-slate">{selectedApplication.languages_at_home}</p>
+                </div>
               </div>
 
-              <div>
-                <p className="text-sm text-slate-medium font-questa">Hoping For</p>
-                <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.hoping_for}</p>
+              {/* Section 6: Interest & Intent */}
+              <div className="border-b pb-4">
+                <h3 className="font-ivry text-amber text-lg mb-4">Interest & Intent</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Why are you interested in Spanish Horizons Academy?</p>
+                    <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.interest_in_academy}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">What do you hope your child will gain from this experience?</p>
+                    <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.hoping_for}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Are you seeking full-time Spanish language immersion?</p>
+                    <p className="font-questa text-slate">{selectedApplication.seeking_full_time}</p>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <p className="text-sm text-slate-medium font-questa">What Excites Them</p>
-                <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.excited_about}</p>
+              {/* Section 7: Looking Ahead */}
+              <div className="border-b pb-4">
+                <h3 className="font-ivry text-amber text-lg mb-4">Looking Ahead</h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">What excites you most about our program?</p>
+                    <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.excited_about}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">What values are important in your child's education?</p>
+                    <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.values_important}</p>
+                  </div>
+                  {selectedApplication.interested_in_continuing && (
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">Interested in continuing with Spanish Horizons through elementary grades?</p>
+                      <p className="font-questa text-slate">{selectedApplication.interested_in_continuing}</p>
+                    </div>
+                  )}
+                  {selectedApplication.receive_updates && (
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">Receive updates about program expansion?</p>
+                      <p className="font-questa text-slate">{selectedApplication.receive_updates}</p>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              <div>
-                <p className="text-sm text-slate-medium font-questa">Important Values</p>
-                <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.values_important}</p>
-              </div>
+              {/* Section 8: How They Found Us */}
+              {selectedApplication.how_did_you_find && (
+                <div className="border-b pb-4">
+                  <h3 className="font-ivry text-amber text-lg mb-4">How They Found Us</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-slate-medium font-questa">How did you hear about Spanish Horizons Academy?</p>
+                      <p className="font-questa text-slate">{selectedApplication.how_did_you_find}</p>
+                    </div>
+                    {selectedApplication.how_did_you_find_other && (
+                      <div>
+                        <p className="text-sm text-slate-medium font-questa">Additional Details</p>
+                        <p className="font-questa text-slate">{selectedApplication.how_did_you_find_other}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
 
-              {selectedApplication.admin_notes && (
+              {/* Section 9: Additional Information */}
+              {selectedApplication.anything_else && (
+                <div className="border-b pb-4">
+                  <h3 className="font-ivry text-amber text-lg mb-4">Additional Information</h3>
+                  <div>
+                    <p className="text-sm text-slate-medium font-questa">Anything else you'd like us to know?</p>
+                    <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.anything_else}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Admin Notes Section */}
+              {(selectedApplication.admin_notes || selectedApplication.interview_notes || selectedApplication.interview_date) && (
                 <div className="bg-amber/10 p-4 rounded-xl">
-                  <p className="text-sm text-slate-medium font-questa">Admin Notes</p>
-                  <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.admin_notes}</p>
+                  <h3 className="font-ivry text-amber text-lg mb-4">Admin Notes</h3>
+                  <div className="space-y-4">
+                    {selectedApplication.interview_date && (
+                      <div>
+                        <p className="text-sm text-slate-medium font-questa">Interview Date</p>
+                        <p className="font-questa text-slate">{new Date(selectedApplication.interview_date).toLocaleString()}</p>
+                      </div>
+                    )}
+                    {selectedApplication.interview_notes && (
+                      <div>
+                        <p className="text-sm text-slate-medium font-questa">Interview Notes</p>
+                        <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.interview_notes}</p>
+                      </div>
+                    )}
+                    {selectedApplication.admin_notes && (
+                      <div>
+                        <p className="text-sm text-slate-medium font-questa">General Notes</p>
+                        <p className="font-questa text-slate whitespace-pre-wrap">{selectedApplication.admin_notes}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -653,97 +1103,56 @@ export default function AdminDashboardPage() {
 
               {/* Status Selector */}
               <div>
-                <p className="text-sm text-slate-medium font-questa mb-3">Select New Status</p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setEditData({ ...editData, status: 'submitted' })}
-                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      editData.status === 'submitted'
-                        ? 'bg-amber text-white ring-2 ring-amber ring-offset-2'
-                        : 'bg-amber/10 text-amber hover:bg-amber/20'
-                    }`}
+                <p className="text-sm text-slate-medium font-questa mb-2">Select New Status</p>
+                <div className="relative">
+                  <div className={`absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full pointer-events-none ${
+                    editData.status === 'submitted' ? 'bg-amber' :
+                    editData.status === 'under_review' ? 'bg-purple-500' :
+                    editData.status === 'interview_pending' ? 'bg-green-500' :
+                    editData.status === 'interview_scheduled' ? 'bg-blue-500' :
+                    editData.status === 'admitted' ? 'bg-green-600' :
+                    editData.status === 'waitlist' ? 'bg-yellow-500' :
+                    'bg-gray-500'
+                  }`}></div>
+                  <select
+                    value={editData.status}
+                    onChange={(e) => setEditData({ ...editData, status: e.target.value })}
+                    className="w-full pl-10 pr-10 py-3 border-2 border-slate/20 rounded-xl font-questa font-medium text-slate bg-white appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber/50 focus:border-amber transition-all hover:border-amber/50"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23F5A623' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 14px center'
+                    }}
                   >
-                    <span className="w-2.5 h-2.5 rounded-full bg-current"></span>
-                    Submitted
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setEditData({ ...editData, status: 'interview_scheduled' })}
-                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      editData.status === 'interview_scheduled'
-                        ? 'bg-blue-500 text-white ring-2 ring-blue-500 ring-offset-2'
-                        : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
-                    }`}
-                  >
-                    <span className="w-2.5 h-2.5 rounded-full bg-current"></span>
-                    Interview
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setEditData({ ...editData, status: 'admitted' })}
-                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      editData.status === 'admitted'
-                        ? 'bg-green-500 text-white ring-2 ring-green-500 ring-offset-2'
-                        : 'bg-green-100 text-green-600 hover:bg-green-200'
-                    }`}
-                  >
-                    <span className="w-2.5 h-2.5 rounded-full bg-current"></span>
-                    Admitted
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setEditData({ ...editData, status: 'waitlist' })}
-                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      editData.status === 'waitlist'
-                        ? 'bg-yellow-500 text-white ring-2 ring-yellow-500 ring-offset-2'
-                        : 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
-                    }`}
-                  >
-                    <span className="w-2.5 h-2.5 rounded-full bg-current"></span>
-                    Waitlist
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setEditData({ ...editData, status: 'rejected' })}
-                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      editData.status === 'rejected'
-                        ? 'bg-red-500 text-white ring-2 ring-red-500 ring-offset-2'
-                        : 'bg-red-100 text-red-600 hover:bg-red-200'
-                    }`}
-                  >
-                    <span className="w-2.5 h-2.5 rounded-full bg-current"></span>
-                    Rejected
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setEditData({ ...editData, status: 'declined' })}
-                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                      editData.status === 'declined'
-                        ? 'bg-gray-500 text-white ring-2 ring-gray-500 ring-offset-2'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                    }`}
-                  >
-                    <span className="w-2.5 h-2.5 rounded-full bg-current"></span>
-                    Declined
-                  </button>
+                    <option value="submitted">Submitted</option>
+                    <option value="under_review">Under Review</option>
+                    <option value="interview_pending">Open Interview</option>
+                    <option value="interview_scheduled">Interview Scheduled</option>
+                    <option value="admitted">Admitted</option>
+                    <option value="waitlist">Waitlist</option>
+                    <option value="declined">Declined</option>
+                  </select>
                 </div>
               </div>
 
-              {editData.status === 'interview_scheduled' && (
-                <div>
-                  <p className="text-sm text-slate-medium font-questa mb-2">Interview Date & Time</p>
-                  <Input
-                    type="datetime-local"
-                    value={editData.interview_date}
-                    onChange={(e) => setEditData({ ...editData, interview_date: e.target.value })}
-                    className="rounded-xl"
-                  />
+              {/* Show interview date if scheduled (read-only - set by client) */}
+              {selectedApplication.interview_date && (
+                <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl">
+                  <p className="text-sm text-blue-600 font-questa mb-1">Scheduled Interview</p>
+                  <p className="font-questa font-semibold text-slate">
+                    {new Date(selectedApplication.interview_date).toLocaleDateString('en-US', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                    {' at '}
+                    {new Date(selectedApplication.interview_date).toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                      hour12: true
+                    })}
+                  </p>
                 </div>
               )}
 
@@ -772,7 +1181,7 @@ export default function AdminDashboardPage() {
               </div>
 
               {!showConfirmation ? (
-                <div className="flex justify-end gap-3 pt-4">
+                <div className="flex justify-between pt-4 border-t">
                   <Button
                     variant="outline"
                     onClick={() => setIsEditModalOpen(false)}
@@ -780,13 +1189,28 @@ export default function AdminDashboardPage() {
                   >
                     Cancel
                   </Button>
-                  <Button
-                    onClick={handleRequestUpdate}
-                    disabled={editData.status === selectedApplication.status}
-                    className="bg-amber hover:bg-golden hover:text-slate rounded-xl px-6"
-                  >
-                    Update Status
-                  </Button>
+                  <div className="flex gap-3">
+                    <Button
+                      variant="outline"
+                      onClick={handleSaveNotes}
+                      disabled={savingNotes}
+                      className="rounded-xl px-4 border-slate/30 hover:bg-slate/10"
+                    >
+                      {savingNotes ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <Save className="h-4 w-4 mr-2" />
+                      )}
+                      {savingNotes ? 'Saving...' : 'Save Notes'}
+                    </Button>
+                    <Button
+                      onClick={handleRequestUpdate}
+                      disabled={editData.status === selectedApplication.status}
+                      className="bg-amber hover:bg-golden hover:text-slate rounded-xl px-6"
+                    >
+                      Update Status
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <div className="border-t pt-4 mt-4">

@@ -5,32 +5,15 @@ import { createClient } from '@/lib/supabase/client'
 import { AuthModal } from '@/components/auth-modal'
 import type { User, AuthError } from '@supabase/supabase-js'
 
-// MOCK AUTH - DELETE WHEN CONNECTING TO SUPABASE
-const MOCK_USERS = [
-  {
-    id: 'mock-admin-1',
-    email: 'aletxa@comcreate.org',
-    password: 'Test1234#',
-    role: 'admin'
-  },
-  {
-    id: 'mock-user-1',
-    email: 'aletxa.pascual@gmail.com',
-    password: 'Test1234#',
-    role: 'user'
-  }
-]
-
-const MOCK_MODE = true // Set to false when using Supabase
-// END MOCK AUTH
-
 interface AuthContextType {
   user: User | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>
   signUp: (email: string, password: string) => Promise<{ error: AuthError | null }>
   signOut: () => Promise<{ error: AuthError | null }>
-  openAuthModal: (mode?: 'login' | 'signup') => void
+  resetPassword: (email: string) => Promise<{ error: AuthError | null }>
+  updatePassword: (newPassword: string) => Promise<{ error: AuthError | null }>
+  openAuthModal: (mode?: 'login' | 'signup' | 'forgot-password') => void
   closeAuthModal: () => void
 }
 
@@ -40,30 +23,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalMode, setModalMode] = useState<'login' | 'signup'>('login')
+  const [modalMode, setModalMode] = useState<'login' | 'signup' | 'forgot-password'>('login')
   const supabase = createClient()
 
   useEffect(() => {
-    // MOCK MODE - Check localStorage for mock session
-    if (MOCK_MODE) {
-      const mockSession = localStorage.getItem('mock_user')
-      if (mockSession) {
-        try {
-          const userData = JSON.parse(mockSession)
-          setUser(userData)
-          // Restore cookie for API routes
-          if (userData.email) {
-            document.cookie = `mock_user_email=${userData.email}; path=/; max-age=86400`
-          }
-        } catch {
-          localStorage.removeItem('mock_user')
-          document.cookie = 'mock_user_email=; path=/; max-age=0'
-        }
-      }
+    // Skip Supabase if not configured
+    if (!supabase) {
       setLoading(false)
       return
     }
-    // END MOCK MODE
 
     // Get initial session
     const getInitialSession = async () => {
@@ -85,37 +53,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => {
       subscription.unsubscribe()
     }
-  }, [supabase.auth])
+  }, [supabase])
 
   const signIn = async (email: string, password: string) => {
-    // MOCK MODE - Check mock users
-    if (MOCK_MODE) {
-      const mockUser = MOCK_USERS.find(
-        u => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-      )
-      if (mockUser) {
-        const userObj = {
-          id: mockUser.id,
-          email: mockUser.email,
-          role: mockUser.role,
-          aud: 'authenticated',
-          created_at: new Date().toISOString(),
-        } as unknown as User
-        localStorage.setItem('mock_user', JSON.stringify(userObj))
-        // Set cookie for API routes to verify
-        document.cookie = `mock_user_email=${mockUser.email}; path=/; max-age=86400`
-        setUser(userObj)
-        return { error: null }
-      }
-      return {
-        error: {
-          message: 'Invalid login credentials',
-          status: 400,
-        } as AuthError
-      }
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
     }
-    // END MOCK MODE
-
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -124,35 +67,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signUp = async (email: string, password: string) => {
-    // MOCK MODE - Add to mock users (in real app, this would persist)
-    if (MOCK_MODE) {
-      const existingUser = MOCK_USERS.find(
-        u => u.email.toLowerCase() === email.toLowerCase()
-      )
-      if (existingUser) {
-        return {
-          error: {
-            message: 'User already registered',
-            status: 400,
-          } as AuthError
-        }
-      }
-      // In mock mode, just sign them in after "signup"
-      const userObj = {
-        id: `mock-${Date.now()}`,
-        email: email,
-        role: 'user',
-        aud: 'authenticated',
-        created_at: new Date().toISOString(),
-      } as unknown as User
-      localStorage.setItem('mock_user', JSON.stringify(userObj))
-      // Set cookie for API routes to verify
-      document.cookie = `mock_user_email=${email}; path=/; max-age=86400`
-      setUser(userObj)
-      return { error: null }
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
     }
-    // END MOCK MODE
-
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -161,21 +78,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signOut = async () => {
-    // MOCK MODE
-    if (MOCK_MODE) {
-      localStorage.removeItem('mock_user')
-      // Clear the mock user cookie
-      document.cookie = 'mock_user_email=; path=/; max-age=0'
-      setUser(null)
-      return { error: null }
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
     }
-    // END MOCK MODE
-
     const { error } = await supabase.auth.signOut()
     return { error }
   }
 
-  const openAuthModal = useCallback((mode: 'login' | 'signup' = 'login') => {
+  const resetPassword = async (email: string) => {
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/reset-password`,
+    })
+    return { error }
+  }
+
+  const updatePassword = async (newPassword: string) => {
+    if (!supabase) {
+      return { error: { message: 'Supabase not configured', status: 500 } as AuthError }
+    }
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    })
+    return { error }
+  }
+
+  const openAuthModal = useCallback((mode: 'login' | 'signup' | 'forgot-password' = 'login') => {
     setModalMode(mode)
     setIsModalOpen(true)
   }, [])
@@ -185,7 +115,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, openAuthModal, closeAuthModal }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, resetPassword, updatePassword, openAuthModal, closeAuthModal }}>
       {children}
       <AuthModal
         isOpen={isModalOpen}
