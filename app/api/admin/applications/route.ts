@@ -1,13 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, createAdminClient } from '@/lib/supabase/server'
+import { isAdmin } from '@/lib/admin'
 import nodemailer from 'nodemailer'
-
-// List of admin emails - add your admin emails here
-const ADMIN_EMAILS = [
-  'infospanishhorizons@casitaazulpdx.com',
-  'aletxa@comcreate.org',
-  // Add more admin emails as needed
-]
 
 // Status email templates
 const statusEmailTemplates = {
@@ -568,7 +562,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Check if user is admin
-    if (!ADMIN_EMAILS.includes(user.email || '')) {
+    if (!(await isAdmin(user.email || ''))) {
       return NextResponse.json(
         { error: 'Forbidden - Admin access required' },
         { status: 403 }
@@ -650,7 +644,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Check if user is admin
-    if (!ADMIN_EMAILS.includes(user.email || '')) {
+    if (!(await isAdmin(user.email || ''))) {
       return NextResponse.json(
         { error: 'Forbidden - Admin access required' },
         { status: 403 }

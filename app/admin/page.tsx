@@ -31,7 +31,8 @@ import {
   CalendarDays,
   Download,
   Loader2,
-  Save
+  Save,
+  Shield
 } from 'lucide-react'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
@@ -145,8 +146,13 @@ export default function AdminDashboardPage() {
   const [updating, setUpdating] = useState(false)
   const [savingNotes, setSavingNotes] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
-  const [activeTab, setActiveTab] = useState<'applications' | 'calendar'>('applications')
+  const [activeTab, setActiveTab] = useState<'applications' | 'calendar' | 'admins'>('applications')
   const [generatingPdf, setGeneratingPdf] = useState(false)
+  const [adminUsers, setAdminUsers] = useState<{ id: string; email: string; added_by: string | null; created_at: string }[]>([])
+  const [adminUsersLoading, setAdminUsersLoading] = useState(false)
+  const [newAdminEmail, setNewAdminEmail] = useState('')
+  const [addingAdmin, setAddingAdmin] = useState(false)
+  const [removingAdminId, setRemovingAdminId] = useState<string | null>(null)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -182,6 +188,72 @@ export default function AdminDashboardPage() {
       fetchApplications()
     }
   }, [user])
+
+  // Fetch admin users when the admins tab becomes active
+  useEffect(() => {
+    const fetchAdminUsers = async () => {
+      if (!user || activeTab !== 'admins') return
+      setAdminUsersLoading(true)
+      try {
+        const response = await fetch('/api/admin/users')
+        const data = await response.json()
+        if (response.ok) {
+          setAdminUsers(data.admins || [])
+        }
+      } catch {
+        // silently fail
+      } finally {
+        setAdminUsersLoading(false)
+      }
+    }
+
+    fetchAdminUsers()
+  }, [user, activeTab])
+
+  const handleAddAdmin = async () => {
+    if (!newAdminEmail.trim()) return
+
+    setAddingAdmin(true)
+    try {
+      const response = await fetch('/api/admin/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: newAdminEmail.trim() })
+      })
+      const data = await response.json()
+
+      if (response.ok) {
+        setAdminUsers(prev => [...prev, data.admin])
+        setNewAdminEmail('')
+        toast({ title: 'Admin added', description: `${data.admin.email} has been added as an admin.` })
+      } else {
+        toast({ title: 'Error', description: data.error || 'Failed to add admin', variant: 'destructive' })
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to add admin', variant: 'destructive' })
+    } finally {
+      setAddingAdmin(false)
+    }
+  }
+
+  const handleRemoveAdmin = async (id: string) => {
+    setRemovingAdminId(id)
+    try {
+      const response = await fetch(`/api/admin/users?id=${id}`, { method: 'DELETE' })
+      const data = await response.json()
+
+      if (response.ok) {
+        setAdminUsers(prev => prev.filter(a => a.id !== id))
+        toast({ title: 'Admin removed', description: 'The admin user has been removed.' })
+      } else {
+        toast({ title: 'Error', description: data.error || 'Failed to remove admin', variant: 'destructive' })
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to remove admin', variant: 'destructive' })
+    } finally {
+      setRemovingAdminId(null)
+    }
+  }
 
   const handleSignOut = async () => {
     await signOut()
@@ -611,9 +683,97 @@ export default function AdminDashboardPage() {
             <span className="hidden sm:inline">Interview Calendar</span>
             <span className="sm:hidden">Calendar</span>
           </Button>
+          <Button
+            variant={activeTab === 'admins' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('admins')}
+            size="sm"
+            className={`rounded-xl font-questa whitespace-nowrap ${activeTab === 'admins' ? 'bg-slate text-white' : ''}`}
+          >
+            <Shield className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Admin Users</span>
+            <span className="sm:hidden">Admins</span>
+          </Button>
         </div>
 
-        {activeTab === 'calendar' ? (
+        {activeTab === 'admins' ? (
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-questa text-slate flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                Admin Users
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Add new admin */}
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate/40" />
+                  <Input
+                    type="email"
+                    placeholder="Enter email address..."
+                    value={newAdminEmail}
+                    onChange={(e) => setNewAdminEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleAddAdmin()}
+                    className="pl-10 rounded-xl"
+                    disabled={addingAdmin}
+                  />
+                </div>
+                <Button
+                  onClick={handleAddAdmin}
+                  disabled={addingAdmin || !newAdminEmail.trim()}
+                  className="bg-slate hover:bg-slate-medium text-white rounded-xl"
+                >
+                  {addingAdmin ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Add Admin'}
+                </Button>
+              </div>
+
+              {/* Admin list */}
+              {adminUsersLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-slate/40" />
+                </div>
+              ) : adminUsers.length === 0 ? (
+                <p className="text-center text-slate-medium py-8">No admin users found.</p>
+              ) : (
+                <div className="space-y-2">
+                  {adminUsers.map((admin) => (
+                    <div
+                      key={admin.id}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-xl"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-slate/10 rounded-full flex items-center justify-center">
+                          <User className="h-4 w-4 text-slate" />
+                        </div>
+                        <div>
+                          <p className="font-medium text-slate text-sm">{admin.email}</p>
+                          <p className="text-xs text-slate-medium">
+                            Added {admin.added_by ? `by ${admin.added_by}` : 'by system'} on{' '}
+                            {new Date(admin.created_at).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleRemoveAdmin(admin.id)}
+                        disabled={admin.email === user?.email?.toLowerCase() || removingAdminId === admin.id}
+                        className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-xl disabled:opacity-40"
+                        title={admin.email === user?.email?.toLowerCase() ? 'Cannot remove yourself' : 'Remove admin'}
+                      >
+                        {removingAdminId === admin.id ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <X className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        ) : activeTab === 'calendar' ? (
           <Card>
             <CardContent className="p-6">
               <AdminAvailabilityCalendar />
