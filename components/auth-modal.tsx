@@ -19,12 +19,6 @@ import {
 } from '@/components/ui/dialog'
 import { Mail, Lock, Eye, EyeOff, User, ArrowRight } from 'lucide-react'
 
-// Admin emails - redirect these users to admin dashboard after login
-const ADMIN_EMAILS = [
-  'infospanishhorizons@casitaazulpdx.com',
-  'aletxa@comcreate.org',
-]
-
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(1, 'Password is required'),
@@ -95,18 +89,25 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
       return
     }
 
-    // Check if user is an admin
-    const isAdmin = ADMIN_EMAILS.includes(data.email.toLowerCase())
+    // Check if user is an admin via API
+    let adminStatus = false
+    try {
+      const res = await fetch('/api/admin/check')
+      const checkData = await res.json()
+      adminStatus = checkData.isAdmin === true
+    } catch {
+      // Default to non-admin on error
+    }
 
     toast({
       title: 'Welcome back!',
-      description: isAdmin ? 'Redirecting to admin dashboard...' : 'You have successfully logged in.',
+      description: adminStatus ? 'Redirecting to admin dashboard...' : 'You have successfully logged in.',
     })
     setIsLoading(false)
     onClose()
 
     // Redirect admin users to admin dashboard, others to family portal
-    router.push(isAdmin ? '/admin' : '/dashboard')
+    router.push(adminStatus ? '/admin' : '/dashboard')
   }
 
   const handleSignUp = async (data: SignUpFormData) => {

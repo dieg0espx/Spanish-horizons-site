@@ -275,6 +275,55 @@ CREATE POLICY "Service role can delete availability"
   USING (auth.role() = 'service_role');
 
 -- =====================================================
+-- Admin Users Table
+-- =====================================================
+-- Stores admin email addresses for access control
+-- Replaces hardcoded ADMIN_EMAILS arrays in code
+
+CREATE TABLE IF NOT EXISTS admin_users (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  added_by TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Create index for faster lookups by email
+CREATE INDEX IF NOT EXISTS idx_admin_users_email ON admin_users(email);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies before recreating (makes script idempotent)
+DROP POLICY IF EXISTS "Service role can read admin_users" ON admin_users;
+DROP POLICY IF EXISTS "Service role can insert admin_users" ON admin_users;
+DROP POLICY IF EXISTS "Service role can delete admin_users" ON admin_users;
+
+-- Policy: Only service role can read admin users
+CREATE POLICY "Service role can read admin_users"
+  ON admin_users
+  FOR SELECT
+  USING (auth.role() = 'service_role');
+
+-- Policy: Only service role can insert admin users
+CREATE POLICY "Service role can insert admin_users"
+  ON admin_users
+  FOR INSERT
+  WITH CHECK (auth.role() = 'service_role');
+
+-- Policy: Only service role can delete admin users
+CREATE POLICY "Service role can delete admin_users"
+  ON admin_users
+  FOR DELETE
+  USING (auth.role() = 'service_role');
+
+-- Seed initial admin emails (idempotent - uses ON CONFLICT)
+INSERT INTO admin_users (email, added_by) VALUES
+  ('infospanishhorizons@casitaazulpdx.com', 'system'),
+  ('aletxa@comcreate.org', 'system'),
+  ('sofiapaz@casitaazulpdx.org', 'system')
+ON CONFLICT (email) DO NOTHING;
+
+-- =====================================================
 -- Architecture Notes
 -- =====================================================
 -- This schema uses the following structure:
@@ -295,3 +344,7 @@ CREATE POLICY "Service role can delete availability"
 --
 -- 4. interview_availability - Interview time slots (managed by admin)
 --    - Links to applications when booked
+--
+-- 5. admin_users - Admin email whitelist
+--    - Controls who has admin access to the dashboard
+--    - Managed via the Admin Users tab in the admin dashboard

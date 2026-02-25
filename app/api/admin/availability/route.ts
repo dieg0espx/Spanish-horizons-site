@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, createAdminClient } from '@/lib/supabase/server'
-
-// List of admin emails
-const ADMIN_EMAILS = [
-  'infospanishhorizons@casitaazulpdx.com',
-  'aletxa@comcreate.org',
-]
+import { isAdmin } from '@/lib/admin'
 
 // GET - Fetch all availability slots
 export async function GET(request: NextRequest) {
@@ -82,7 +77,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!ADMIN_EMAILS.includes(user.email || '')) {
+    if (!(await isAdmin(user.email || ''))) {
       return NextResponse.json({ error: 'Forbidden - Admin access required' }, { status: 403 })
     }
 
@@ -139,7 +134,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    if (!ADMIN_EMAILS.includes(user.email || '')) {
+    if (!(await isAdmin(user.email || ''))) {
       return NextResponse.json({ error: 'Forbidden - Admin access required' }, { status: 403 })
     }
 
