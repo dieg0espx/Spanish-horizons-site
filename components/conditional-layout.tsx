@@ -23,7 +23,10 @@ export default function ConditionalLayout({ children, showHeader = true }: Condi
   // Check if we're on the admin page
   const isAdminPage = pathname?.startsWith('/admin')
 
-  if (isLandingPage || isDashboardPage || isAdminPage || !showHeader) {
+  // Check if we're on the invoice payment page
+  const isInvoicePage = pathname?.startsWith('/invoice')
+
+  if (isLandingPage || isDashboardPage || isAdminPage || isInvoicePage || !showHeader) {
     // For landing page, dashboard, admin, or when showHeader is false, only render the children (no header/footer)
     return <>{children}</>
   }
