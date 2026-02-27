@@ -32,12 +32,14 @@ import {
   Download,
   Loader2,
   Save,
-  Shield
+  Shield,
+  DollarSign
 } from 'lucide-react'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import { useToast } from '@/hooks/use-toast'
 import AdminAvailabilityCalendar from '@/components/admin-availability-calendar'
+import InvoicesClient from '@/components/invoices-client'
 
 interface Application {
   id: string
@@ -146,7 +148,7 @@ export default function AdminDashboardPage() {
   const [updating, setUpdating] = useState(false)
   const [savingNotes, setSavingNotes] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
-  const [activeTab, setActiveTab] = useState<'applications' | 'calendar' | 'admins'>('applications')
+  const [activeTab, setActiveTab] = useState<'applications' | 'calendar' | 'admins' | 'invoices'>('applications')
   const [generatingPdf, setGeneratingPdf] = useState(false)
   const [adminUsers, setAdminUsers] = useState<{ id: string; email: string; added_by: string | null; created_at: string }[]>([])
   const [adminUsersLoading, setAdminUsersLoading] = useState(false)
@@ -684,6 +686,16 @@ export default function AdminDashboardPage() {
             <span className="sm:hidden">Calendar</span>
           </Button>
           <Button
+            variant={activeTab === 'invoices' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('invoices')}
+            size="sm"
+            className={`rounded-xl font-questa whitespace-nowrap ${activeTab === 'invoices' ? 'bg-slate text-white' : ''}`}
+          >
+            <DollarSign className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Invoices</span>
+            <span className="sm:hidden">Invoices</span>
+          </Button>
+          <Button
             variant={activeTab === 'admins' ? 'default' : 'outline'}
             onClick={() => setActiveTab('admins')}
             size="sm"
@@ -695,7 +707,9 @@ export default function AdminDashboardPage() {
           </Button>
         </div>
 
-        {activeTab === 'admins' ? (
+        {activeTab === 'invoices' ? (
+          <InvoicesClient />
+        ) : activeTab === 'admins' ? (
           <Card>
             <CardHeader>
               <CardTitle className="font-questa text-slate flex items-center gap-2">

@@ -1,0 +1,1176 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Badge } from "@/components/ui/badge"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import {
+  FileText, Plus, Send, Eye, Trash2, DollarSign,
+  Calendar as CalendarIcon,
+  Mail, User, Building, Phone, MapPin, CheckCircle, Clock,
+  AlertCircle, XCircle, X, Download
+} from "lucide-react"
+import { Invoice, InvoiceLineItem } from "@/lib/types/invoice"
+import { useAuth } from "@/contexts/auth-context"
+import { useToast } from "@/hooks/use-toast"
+import { generateInvoicePdf, generateReceiptPdf } from "@/lib/invoice-pdf"
+import { Calendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { format } from "date-fns"
+import { cn } from "@/lib/utils"
+
+export default function InvoicesClient() {
+  const { user } = useAuth()
+  const { toast } = useToast()
+  const [invoices, setInvoices] = useState<Invoice[]>([])
+  const [loading, setLoading] = useState(true)
+  const [showCreateDialog, setShowCreateDialog] = useState(false)
+  const [showViewDialog, setShowViewDialog] = useState(false)
+  const [showSendDialog, setShowSendDialog] = useState(false)
+  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null)
+  const [sendingInvoice, setSendingInvoice] = useState<string | null>(null)
+  const [customEmail, setCustomEmail] = useState("")
+  const [useCustomEmail, setUseCustomEmail] = useState(false)
+
+  // Form state
+  const [recipientName, setRecipientName] = useState("")
+  const [recipientEmail, setRecipientEmail] = useState("")
+  const [recipientPhone, setRecipientPhone] = useState("")
+  const [recipientAddress, setRecipientAddress] = useState("")
+  const [recipientCompany, setRecipientCompany] = useState("")
+  const [dueDate, setDueDate] = useState("")
+  const [lineItems, setLineItems] = useState<InvoiceLineItem[]>([
+    { description: "", quantity: 1, unit_price: 0, amount: 0 }
+  ])
+  const [taxRate, setTaxRate] = useState(0)
+  const [notes, setNotes] = useState("")
+  const [terms, setTerms] = useState("Payment due within 30 days of invoice date.")
+
+  const [sendImmediately, setSendImmediately] = useState(true)
+
+  const [formError, setFormError] = useState("")
+  const [formSuccess, setFormSuccess] = useState("")
+  const [creating, setCreating] = useState(false)
+
+  useEffect(() => {
+    fetchInvoices()
+  }, [])
+
+  const fetchInvoices = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch("/api/invoice/manage")
+      if (!response.ok) throw new Error("Failed to fetch invoices")
+      const data = await response.json()
+      setInvoices(data.invoices || [])
+    } catch (error) {
+      console.error("Error fetching invoices:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const calculateLineItemAmount = (quantity: number, unitPrice: number) => {
+    return quantity * unitPrice
+  }
+
+  const calculateSubtotal = () => {
+    return lineItems.reduce((sum, item) => sum + item.amount, 0)
+  }
+
+  const calculateTax = () => {
+    return (calculateSubtotal() * taxRate) / 100
+  }
+
+  const calculateTotal = () => {
+    return calculateSubtotal() + calculateTax()
+  }
+
+  const handleLineItemChange = (index: number, field: keyof InvoiceLineItem, value: any) => {
+    const newLineItems = [...lineItems]
+    newLineItems[index] = { ...newLineItems[index], [field]: value }
+
+    if (field === 'quantity' || field === 'unit_price') {
+      newLineItems[index].amount = calculateLineItemAmount(
+        newLineItems[index].quantity,
+        newLineItems[index].unit_price
+      )
+    }
+
+    setLineItems(newLineItems)
+  }
+
+  const addLineItem = () => {
+    setLineItems([...lineItems, { description: "", quantity: 1, unit_price: 0, amount: 0 }])
+  }
+
+  const removeLineItem = (index: number) => {
+    if (lineItems.length > 1) {
+      setLineItems(lineItems.filter((_, i) => i !== index))
+    }
+  }
+
+  const resetForm = () => {
+    setRecipientName("")
+    setRecipientEmail("")
+    setRecipientPhone("")
+    setRecipientAddress("")
+    setRecipientCompany("")
+    setDueDate("")
+    setLineItems([{ description: "", quantity: 1, unit_price: 0, amount: 0 }])
+    setTaxRate(0)
+    setNotes("")
+    setTerms("Payment due within 30 days of invoice date.")
+    setSendImmediately(true)
+    setFormError("")
+    setFormSuccess("")
+  }
+
+  const handleCreateInvoice = async () => {
+    setFormError("")
+    setFormSuccess("")
+
+    if (!recipientName || !recipientEmail || !dueDate) {
+      setFormError("Please fill in all required fields")
+      return
+    }
+
+    if (lineItems.length === 0 || lineItems.some(item => !item.description || item.quantity <= 0)) {
+      setFormError("Please add at least one valid line item")
+      return
+    }
+
+    try {
+      setCreating(true)
+
+      const invoiceData = {
+        recipient_name: recipientName,
+        recipient_email: recipientEmail,
+        recipient_phone: recipientPhone || undefined,
+        recipient_address: recipientAddress || undefined,
+        recipient_company: recipientCompany || undefined,
+        due_date: dueDate,
+        line_items: lineItems,
+        tax_rate: taxRate,
+        notes: notes || undefined,
+        terms: terms || undefined,
+      }
+
+      const response = await fetch("/api/invoice/manage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(invoiceData),
+      })
+
+      if (!response.ok) {
+        const err = await response.json()
+        throw new Error(err.error || "Failed to create invoice")
+      }
+
+      const { invoice: newInvoice } = await response.json()
+
+      // Send email immediately if checked
+      if (sendImmediately) {
+        setFormSuccess("Invoice created! Sending email...")
+
+        try {
+          const sendResponse = await fetch("/api/invoice/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ invoice_id: newInvoice.id })
+          })
+
+          if (sendResponse.ok) {
+            newInvoice.email_sent = true
+            newInvoice.email_sent_at = new Date().toISOString()
+            setFormSuccess("Invoice created and sent!")
+            toast({
+              title: "Invoice Created & Sent",
+              description: `Invoice ${newInvoice.invoice_number} sent to ${newInvoice.recipient_email}`,
+            })
+          } else {
+            setFormSuccess("Invoice created, but email failed to send.")
+            toast({
+              title: "Invoice Created",
+              description: "Invoice saved but the email failed to send. You can resend it later.",
+              variant: "destructive",
+            })
+          }
+        } catch {
+          setFormSuccess("Invoice created, but email failed to send.")
+          toast({
+            title: "Invoice Created",
+            description: "Invoice saved but the email failed to send. You can resend it later.",
+            variant: "destructive",
+          })
+        }
+      } else {
+        setFormSuccess("Invoice created successfully!")
+        toast({
+          title: "Invoice Created",
+          description: `Invoice ${newInvoice.invoice_number} saved as draft`,
+        })
+      }
+
+      setInvoices([newInvoice, ...invoices])
+
+      setTimeout(() => {
+        setShowCreateDialog(false)
+        resetForm()
+      }, 1500)
+    } catch (error: any) {
+      console.error("Error creating invoice:", error)
+      setFormError(error.message || "Failed to create invoice")
+    } finally {
+      setCreating(false)
+    }
+  }
+
+  const handleOpenSendDialog = (invoice: Invoice) => {
+    setSelectedInvoice(invoice)
+    setCustomEmail("")
+    setUseCustomEmail(false)
+    setShowSendDialog(true)
+  }
+
+  const handleSendInvoice = async () => {
+    if (!selectedInvoice) return
+
+    try {
+      setSendingInvoice(selectedInvoice.id)
+
+      const emailToSend = useCustomEmail && customEmail ? customEmail : selectedInvoice.recipient_email
+
+      const response = await fetch("/api/invoice/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          invoice_id: selectedInvoice.id,
+          custom_email: useCustomEmail ? emailToSend : undefined
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to send invoice")
+      }
+
+      setInvoices(invoices.map(inv =>
+        inv.id === selectedInvoice.id
+          ? { ...inv, email_sent: true, email_sent_at: new Date().toISOString() }
+          : inv
+      ))
+
+      toast({
+        title: "Invoice Sent",
+        description: `Invoice sent successfully to ${emailToSend}`,
+      })
+      setShowSendDialog(false)
+    } catch (error) {
+      console.error("Error sending invoice:", error)
+      toast({
+        title: "Failed to Send",
+        description: "Failed to send invoice. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setSendingInvoice(null)
+    }
+  }
+
+  const handleViewInvoice = (invoice: Invoice) => {
+    setSelectedInvoice(invoice)
+    setShowViewDialog(true)
+  }
+
+  const handleDeleteInvoice = async (invoiceId: string) => {
+    if (!confirm("Are you sure you want to delete this invoice?")) return
+
+    try {
+      const response = await fetch(`/api/invoice/manage?id=${invoiceId}`, {
+        method: "DELETE",
+      })
+      if (!response.ok) throw new Error("Failed to delete invoice")
+      setInvoices(invoices.filter(inv => inv.id !== invoiceId))
+    } catch (error) {
+      console.error("Error deleting invoice:", error)
+      toast({
+        title: "Delete Failed",
+        description: "Failed to delete invoice. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handleDownloadInvoice = (invoice: Invoice) => {
+    const doc = generateInvoicePdf(invoice)
+    doc.save(`Invoice-${invoice.invoice_number}.pdf`)
+  }
+
+  const handleDownloadReceipt = (invoice: Invoice) => {
+    const doc = generateReceiptPdf(invoice, invoice.stripe_payment_intent_id || 'N/A')
+    doc.save(`Receipt-${invoice.invoice_number}.pdf`)
+  }
+
+  const getStatusBadge = (status: string) => {
+    const statusConfig = {
+      pending: { color: "bg-yellow-100 text-yellow-800", icon: Clock },
+      paid: { color: "bg-green-100 text-green-800", icon: CheckCircle },
+      overdue: { color: "bg-red-100 text-red-800", icon: AlertCircle },
+      cancelled: { color: "bg-gray-100 text-gray-800", icon: XCircle },
+      refunded: { color: "bg-blue-100 text-blue-800", icon: DollarSign }
+    }
+    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending
+    const Icon = config.icon
+
+    return (
+      <Badge className={`${config.color} flex items-center gap-1`}>
+        <Icon className="h-3 w-3" />
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </Badge>
+    )
+  }
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount)
+  }
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+
+  const formatDateShort = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
+
+  return (
+    <div className="space-y-4 sm:space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Invoices</h1>
+          <p className="text-sm sm:text-base text-gray-600 mt-1">Create and manage customer invoices</p>
+        </div>
+        <Button
+          onClick={() => setShowCreateDialog(true)}
+          className="bg-slate hover:bg-slate/90 w-full sm:w-auto"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Create Invoice
+        </Button>
+      </div>
+
+      {/* Invoices List */}
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-slate"></div>
+          <span className="ml-2 text-gray-600">Loading invoices...</span>
+        </div>
+      ) : invoices.length === 0 ? (
+        <Card>
+          <CardContent className="py-12 text-center">
+            <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No invoices yet</h3>
+            <p className="text-gray-600 mb-4">Create your first invoice to get started</p>
+            <Button onClick={() => setShowCreateDialog(true)} className="bg-slate hover:bg-slate/90">
+              <Plus className="h-4 w-4 mr-2" />
+              Create Invoice
+            </Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="grid gap-3 sm:gap-4">
+          {invoices.map((invoice) => (
+            <Card key={invoice.id} className="hover:shadow-md transition-shadow">
+              <CardContent className="p-4 sm:p-6">
+                {/* Mobile Layout */}
+                <div className="sm:hidden space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-base font-bold text-gray-900">{invoice.invoice_number}</h3>
+                    {getStatusBadge(invoice.payment_status)}
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-gray-900">{invoice.recipient_name}</p>
+                      {invoice.recipient_company && (
+                        <p className="text-xs text-gray-500">{invoice.recipient_company}</p>
+                      )}
+                    </div>
+                    <p className="text-lg font-bold text-gray-900">{formatCurrency(invoice.total_amount)}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span>Due: {formatDateShort(invoice.due_date)}</span>
+                    {invoice.email_sent && (
+                      <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 text-xs px-1.5 py-0">
+                        <Mail className="h-2.5 w-2.5 mr-0.5" />
+                        Sent
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2 pt-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => handleViewInvoice(invoice)}
+                    >
+                      <Eye className="h-4 w-4 mr-1.5" />
+                      View
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => handleOpenSendDialog(invoice)}
+                      disabled={sendingInvoice === invoice.id}
+                    >
+                      {sendingInvoice === invoice.id ? (
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate"></div>
+                      ) : (
+                        <>
+                          <Send className="h-4 w-4 mr-1.5" />
+                          Send
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => invoice.payment_status === 'paid' ? handleDownloadReceipt(invoice) : handleDownloadInvoice(invoice)}
+                    >
+                      <Download className="h-4 w-4" />
+                    </Button>
+                    {invoice.payment_status === 'pending' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDeleteInvoice(invoice.id)}
+                      >
+                        <Trash2 className="h-4 w-4 text-red-600" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Desktop Layout */}
+                <div className="hidden sm:flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2 flex-wrap">
+                      <h3 className="text-lg font-bold text-gray-900">{invoice.invoice_number}</h3>
+                      {getStatusBadge(invoice.payment_status)}
+                      {invoice.email_sent && (
+                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                          <Mail className="h-3 w-3 mr-1" />
+                          Sent
+                        </Badge>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                      <div>
+                        <p className="text-sm text-gray-600">Recipient</p>
+                        <p className="font-semibold text-gray-900">{invoice.recipient_name}</p>
+                        {invoice.recipient_company && (
+                          <p className="text-sm text-gray-600">{invoice.recipient_company}</p>
+                        )}
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Amount</p>
+                        <p className="font-semibold text-gray-900 text-lg">{formatCurrency(invoice.total_amount)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Invoice Date</p>
+                        <p className="font-medium text-gray-900">{formatDate(invoice.invoice_date)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">Due Date</p>
+                        <p className="font-medium text-gray-900">{formatDate(invoice.due_date)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 ml-4">
+                    <Button variant="outline" size="sm" onClick={() => handleViewInvoice(invoice)}>
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleOpenSendDialog(invoice)}
+                      disabled={sendingInvoice === invoice.id}
+                    >
+                      {sendingInvoice === invoice.id ? (
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate"></div>
+                      ) : (
+                        <Send className="h-4 w-4" />
+                      )}
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => handleDownloadInvoice(invoice)} title="Download Invoice PDF">
+                      <Download className="h-4 w-4" />
+                    </Button>
+                    {invoice.payment_status === 'paid' && (
+                      <Button variant="outline" size="sm" onClick={() => handleDownloadReceipt(invoice)} title="Download Receipt PDF" className="text-green-600 hover:text-green-700">
+                        <Download className="h-4 w-4" />
+                      </Button>
+                    )}
+                    {invoice.payment_status === 'pending' && (
+                      <Button variant="outline" size="sm" onClick={() => handleDeleteInvoice(invoice.id)}>
+                        <Trash2 className="h-4 w-4 text-red-600" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {/* Create Invoice Dialog */}
+      <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
+        <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+          <DialogHeader>
+            <DialogTitle className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+              <FileText className="h-5 w-5 sm:h-6 sm:w-6 text-slate" />
+              Create New Invoice
+            </DialogTitle>
+            <DialogDescription>
+              Fill in the details below to create a new invoice
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4 sm:space-y-6 py-2 sm:py-4">
+            {/* Recipient Information */}
+            <Card>
+              <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-4">
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                  <User className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Recipient Information
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-3 sm:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <Label htmlFor="recipient-name">Full Name *</Label>
+                    <Input
+                      id="recipient-name"
+                      value={recipientName}
+                      onChange={(e) => setRecipientName(e.target.value)}
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="recipient-email">Email *</Label>
+                    <Input
+                      id="recipient-email"
+                      type="email"
+                      value={recipientEmail}
+                      onChange={(e) => setRecipientEmail(e.target.value)}
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <Label htmlFor="recipient-phone">Phone</Label>
+                    <Input
+                      id="recipient-phone"
+                      value={recipientPhone}
+                      onChange={(e) => setRecipientPhone(e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="recipient-company">Company</Label>
+                    <Input
+                      id="recipient-company"
+                      value={recipientCompany}
+                      onChange={(e) => setRecipientCompany(e.target.value)}
+                      placeholder="Acme Inc."
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="recipient-address">Address</Label>
+                  <Textarea
+                    id="recipient-address"
+                    value={recipientAddress}
+                    onChange={(e) => setRecipientAddress(e.target.value)}
+                    placeholder="123 Main St, City, State, ZIP"
+                    rows={2}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Invoice Details */}
+            <Card>
+              <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-4">
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                  <CalendarIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Invoice Details
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-3 sm:space-y-4">
+                <div>
+                  <Label>Due Date *</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !dueDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {dueDate ? format(new Date(dueDate + 'T00:00:00'), "MMMM d, yyyy") : "Select a due date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={dueDate ? new Date(dueDate + 'T00:00:00') : undefined}
+                        onSelect={(date) => {
+                          if (date) {
+                            const yyyy = date.getFullYear()
+                            const mm = String(date.getMonth() + 1).padStart(2, '0')
+                            const dd = String(date.getDate()).padStart(2, '0')
+                            setDueDate(`${yyyy}-${mm}-${dd}`)
+                          } else {
+                            setDueDate("")
+                          }
+                        }}
+                        disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                        captionLayout="dropdown"
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Line Items */}
+            <Card>
+              <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-4">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                    <DollarSign className="h-4 w-4 sm:h-5 sm:w-5" />
+                    Line Items
+                  </CardTitle>
+                  <Button variant="outline" size="sm" onClick={addLineItem}>
+                    <Plus className="h-4 w-4 mr-1" />
+                    <span className="hidden sm:inline">Add Item</span>
+                    <span className="sm:hidden">Add</span>
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-4">
+                {lineItems.map((item, index) => (
+                  <div key={index} className="space-y-2 sm:space-y-0">
+                    {/* Mobile: stacked layout */}
+                    <div className="sm:hidden space-y-2 p-3 bg-gray-50 rounded-lg relative">
+                      {lineItems.length > 1 && (
+                        <button
+                          onClick={() => removeLineItem(index)}
+                          className="absolute top-2 right-2 p-1 text-gray-400 hover:text-red-500"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      )}
+                      <div>
+                        <Label className="text-xs">Description</Label>
+                        <Input
+                          value={item.description}
+                          onChange={(e) => handleLineItemChange(index, 'description', e.target.value)}
+                          placeholder="Service or product"
+                          className="h-9"
+                        />
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div>
+                          <Label className="text-xs">Qty</Label>
+                          <Input
+                            type="number"
+                            min="1"
+                            value={item.quantity}
+                            onChange={(e) => handleLineItemChange(index, 'quantity', parseFloat(e.target.value) || 1)}
+                            className="h-9"
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-xs">Price</Label>
+                          <Input
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            value={item.unit_price}
+                            onChange={(e) => handleLineItemChange(index, 'unit_price', parseFloat(e.target.value) || 0)}
+                            className="h-9"
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-xs">Amount</Label>
+                          <Input
+                            value={formatCurrency(item.amount)}
+                            disabled
+                            className="h-9 bg-white"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Desktop: row layout */}
+                    <div className="hidden sm:flex gap-2 items-end">
+                      <div className="flex-1">
+                        <Label>Description</Label>
+                        <Input
+                          value={item.description}
+                          onChange={(e) => handleLineItemChange(index, 'description', e.target.value)}
+                          placeholder="Service or product description"
+                        />
+                      </div>
+                      <div className="w-24">
+                        <Label>Qty</Label>
+                        <Input
+                          type="number"
+                          min="1"
+                          value={item.quantity}
+                          onChange={(e) => handleLineItemChange(index, 'quantity', parseFloat(e.target.value) || 1)}
+                        />
+                      </div>
+                      <div className="w-32">
+                        <Label>Unit Price</Label>
+                        <Input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={item.unit_price}
+                          onChange={(e) => handleLineItemChange(index, 'unit_price', parseFloat(e.target.value) || 0)}
+                        />
+                      </div>
+                      <div className="w-32">
+                        <Label>Amount</Label>
+                        <Input
+                          value={formatCurrency(item.amount)}
+                          disabled
+                        />
+                      </div>
+                      {lineItems.length > 1 && (
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => removeLineItem(index)}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                {/* Totals */}
+                <div className="border-t pt-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Subtotal:</span>
+                    <span className="font-semibold">{formatCurrency(calculateSubtotal())}</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center text-sm gap-2 sm:gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-600">Tax Rate:</span>
+                      <Input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.1"
+                        value={taxRate}
+                        onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
+                        className="w-20 h-8"
+                      />
+                      <span className="text-gray-600">%</span>
+                    </div>
+                    <span className="font-semibold text-right">{formatCurrency(calculateTax())}</span>
+                  </div>
+                  <div className="flex justify-between text-base sm:text-lg font-bold pt-2 border-t">
+                    <span>Total:</span>
+                    <span className="text-amber">{formatCurrency(calculateTotal())}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Notes and Terms */}
+            <Card>
+              <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-4">
+                <CardTitle className="text-base sm:text-lg">Additional Information</CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0 space-y-3 sm:space-y-4">
+                <div>
+                  <Label htmlFor="notes">Notes</Label>
+                  <Textarea
+                    id="notes"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    placeholder="Any additional notes for the recipient"
+                    rows={3}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="terms">Payment Terms</Label>
+                  <Textarea
+                    id="terms"
+                    value={terms}
+                    onChange={(e) => setTerms(e.target.value)}
+                    placeholder="Payment terms and conditions"
+                    rows={3}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Send Email Option */}
+            <div className="flex items-start gap-3 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <input
+                type="checkbox"
+                id="sendImmediately"
+                checked={sendImmediately}
+                onChange={(e) => setSendImmediately(e.target.checked)}
+                className="mt-0.5 rounded border-gray-300"
+              />
+              <div>
+                <Label htmlFor="sendImmediately" className="font-medium cursor-pointer text-sm sm:text-base">
+                  Send invoice email immediately
+                </Label>
+                <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
+                  {sendImmediately
+                    ? `The invoice will be emailed to ${recipientEmail || "the recipient"} with a payment link right after creation.`
+                    : "The invoice will be saved as a draft. You can send it later from the invoice list."}
+                </p>
+              </div>
+            </div>
+
+            {/* Error/Success Messages */}
+            {formError && (
+              <Alert variant="destructive">
+                <AlertDescription>{formError}</AlertDescription>
+              </Alert>
+            )}
+            {formSuccess && (
+              <Alert className="bg-green-50 border-green-200">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800">{formSuccess}</AlertDescription>
+              </Alert>
+            )}
+
+            {/* Actions */}
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowCreateDialog(false)
+                  resetForm()
+                }}
+                disabled={creating}
+                className="w-full sm:w-auto"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleCreateInvoice}
+                disabled={creating}
+                className="bg-slate hover:bg-slate/90 w-full sm:w-auto"
+              >
+                {creating ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    {sendImmediately ? "Creating & Sending..." : "Creating..."}
+                  </>
+                ) : (
+                  <>
+                    {sendImmediately ? (
+                      <Send className="h-4 w-4 mr-2" />
+                    ) : (
+                      <FileText className="h-4 w-4 mr-2" />
+                    )}
+                    {sendImmediately ? "Create & Send" : "Create Invoice"}
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Invoice Dialog */}
+      <Dialog open={showViewDialog} onOpenChange={setShowViewDialog}>
+        <DialogContent className="w-[95vw] max-w-3xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+          {selectedInvoice && (
+            <>
+              <DialogHeader>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <DialogTitle className="text-xl sm:text-2xl font-bold">
+                    {selectedInvoice.invoice_number}
+                  </DialogTitle>
+                  {getStatusBadge(selectedInvoice.payment_status)}
+                </div>
+              </DialogHeader>
+
+              <div className="space-y-4 sm:space-y-6 py-2 sm:py-4">
+                {/* Recipient Info */}
+                <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Bill To:</h3>
+                  <p className="font-medium text-sm sm:text-base">{selectedInvoice.recipient_name}</p>
+                  {selectedInvoice.recipient_company && (
+                    <p className="text-xs sm:text-sm text-gray-600">{selectedInvoice.recipient_company}</p>
+                  )}
+                  <p className="text-xs sm:text-sm text-gray-600">{selectedInvoice.recipient_email}</p>
+                  {selectedInvoice.recipient_phone && (
+                    <p className="text-xs sm:text-sm text-gray-600">{selectedInvoice.recipient_phone}</p>
+                  )}
+                  {selectedInvoice.recipient_address && (
+                    <p className="text-xs sm:text-sm text-gray-600 mt-1">{selectedInvoice.recipient_address}</p>
+                  )}
+                </div>
+
+                {/* Dates */}
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div>
+                    <p className="text-xs sm:text-sm text-gray-600">Invoice Date</p>
+                    <p className="font-semibold text-sm sm:text-base">{formatDateShort(selectedInvoice.invoice_date)}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm text-gray-600">Due Date</p>
+                    <p className="font-semibold text-sm sm:text-base">{formatDateShort(selectedInvoice.due_date)}</p>
+                  </div>
+                </div>
+
+                {/* Line Items - Mobile: card layout */}
+                <div className="sm:hidden">
+                  <h3 className="font-semibold text-gray-900 mb-2 text-sm">Items</h3>
+                  <div className="space-y-2">
+                    {selectedInvoice.line_items.map((item, index) => (
+                      <div key={index} className="bg-gray-50 p-3 rounded-lg">
+                        <p className="font-medium text-sm">{item.description}</p>
+                        <div className="flex justify-between mt-1 text-xs text-gray-600">
+                          <span>{item.quantity} x {formatCurrency(item.unit_price)}</span>
+                          <span className="font-semibold text-gray-900">{formatCurrency(item.amount)}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Line Items - Desktop: table layout */}
+                <div className="hidden sm:block">
+                  <h3 className="font-semibold text-gray-900 mb-3">Items</h3>
+                  <div className="border rounded-lg overflow-hidden">
+                    <table className="w-full">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="text-left p-3 text-sm font-semibold">Description</th>
+                          <th className="text-right p-3 text-sm font-semibold">Qty</th>
+                          <th className="text-right p-3 text-sm font-semibold">Price</th>
+                          <th className="text-right p-3 text-sm font-semibold">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selectedInvoice.line_items.map((item, index) => (
+                          <tr key={index} className="border-t">
+                            <td className="p-3">{item.description}</td>
+                            <td className="p-3 text-right">{item.quantity}</td>
+                            <td className="p-3 text-right">{formatCurrency(item.unit_price)}</td>
+                            <td className="p-3 text-right font-semibold">{formatCurrency(item.amount)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Totals */}
+                <div className="border-t pt-3 sm:pt-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Subtotal:</span>
+                    <span className="font-semibold">{formatCurrency(selectedInvoice.subtotal)}</span>
+                  </div>
+                  {selectedInvoice.tax_rate > 0 && (
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Tax ({selectedInvoice.tax_rate}%):</span>
+                      <span className="font-semibold">{formatCurrency(selectedInvoice.tax_amount)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-lg sm:text-xl font-bold pt-2 border-t">
+                    <span>Total:</span>
+                    <span className="text-amber">{formatCurrency(selectedInvoice.total_amount)}</span>
+                  </div>
+                </div>
+
+                {/* Notes */}
+                {selectedInvoice.notes && (
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">Notes</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">{selectedInvoice.notes}</p>
+                  </div>
+                )}
+
+                {/* Terms */}
+                {selectedInvoice.terms && (
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">Payment Terms</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">{selectedInvoice.terms}</p>
+                  </div>
+                )}
+
+                {/* Download Buttons */}
+                <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t">
+                  <Button
+                    variant="outline"
+                    onClick={() => handleDownloadInvoice(selectedInvoice)}
+                    className="flex-1"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download Invoice PDF
+                  </Button>
+                  {selectedInvoice.payment_status === 'paid' && (
+                    <Button
+                      variant="outline"
+                      onClick={() => handleDownloadReceipt(selectedInvoice)}
+                      className="flex-1 text-green-600 hover:text-green-700"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Download Receipt PDF
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Send Invoice Dialog */}
+      <Dialog open={showSendDialog} onOpenChange={setShowSendDialog}>
+        <DialogContent className="w-[95vw] max-w-md p-4 sm:p-6">
+          <DialogHeader>
+            <DialogTitle className="text-lg sm:text-xl">Send Invoice</DialogTitle>
+            <DialogDescription>
+              Send invoice {selectedInvoice?.invoice_number} via email
+            </DialogDescription>
+          </DialogHeader>
+
+          {selectedInvoice && (
+            <div className="space-y-4">
+              <div className="bg-gray-50 p-3 sm:p-4 rounded-lg space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Invoice:</span>
+                  <span className="font-semibold">{selectedInvoice.invoice_number}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Amount:</span>
+                  <span className="font-semibold">{formatCurrency(selectedInvoice.total_amount)}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Recipient:</span>
+                  <span className="font-semibold truncate ml-2">{selectedInvoice.recipient_name}</span>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="useCustomEmail"
+                    checked={useCustomEmail}
+                    onChange={(e) => setUseCustomEmail(e.target.checked)}
+                    className="rounded border-gray-300"
+                  />
+                  <Label htmlFor="useCustomEmail" className="text-sm font-normal cursor-pointer">
+                    Send to a different email address
+                  </Label>
+                </div>
+
+                {!useCustomEmail ? (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <div className="flex items-start gap-2">
+                      <Mail className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
+                      <div className="text-sm min-w-0">
+                        <p className="font-medium text-blue-900">Sending to:</p>
+                        <p className="text-blue-700 break-all">{selectedInvoice.recipient_email}</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Label htmlFor="customEmail">Custom Email Address</Label>
+                    <Input
+                      id="customEmail"
+                      type="email"
+                      placeholder="email@example.com"
+                      value={customEmail}
+                      onChange={(e) => setCustomEmail(e.target.value)}
+                      className="w-full"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {selectedInvoice.email_sent && (
+                <Alert className="bg-yellow-50 border-yellow-200">
+                  <AlertDescription className="text-yellow-800 text-xs sm:text-sm">
+                    <strong>Note:</strong> This invoice was already sent to {selectedInvoice.recipient_email} on {formatDateShort(selectedInvoice.email_sent_at || '')}.
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              <div className="flex flex-col-reverse sm:flex-row gap-2 sm:justify-end">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowSendDialog(false)}
+                  disabled={sendingInvoice === selectedInvoice.id}
+                  className="w-full sm:w-auto"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleSendInvoice}
+                  disabled={sendingInvoice === selectedInvoice.id || (useCustomEmail && !customEmail)}
+                  className="bg-slate hover:bg-slate/90 w-full sm:w-auto"
+                >
+                  {sendingInvoice === selectedInvoice.id ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Send Invoice
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
