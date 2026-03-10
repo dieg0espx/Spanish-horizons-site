@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, createAdminClient } from '@/lib/supabase/server'
-import nodemailer from 'nodemailer'
+import { sendEmail } from '@/lib/resend'
 
 // POST - Book an interview slot
 export async function POST(request: NextRequest) {
@@ -115,19 +115,8 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation emails
     try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        secure: process.env.SMTP_SECURE === 'true',
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS
-        }
-      })
-
       // Email to user (registered email)
-      await transporter.sendMail({
-        from: process.env.SMTP_FROM,
+      await sendEmail({
         to: application.user_email,
         subject: 'Interview Confirmed - Spanish Horizons Academy',
         html: `
@@ -177,9 +166,8 @@ export async function POST(request: NextRequest) {
       })
 
       // Email to admin
-      await transporter.sendMail({
-        from: process.env.SMTP_FROM,
-        to: process.env.CONTACT_EMAIL,
+      await sendEmail({
+        to: process.env.CONTACT_EMAIL || '',
         subject: `Interview Booked - ${application.child_full_name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
