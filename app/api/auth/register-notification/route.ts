@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { sendEmail } from '@/lib/resend'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,22 +23,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
-    })
-
     // Send notification email to admin only
     // (User receives confirmation email from Supabase)
     const adminMailOptions = {
-      from: process.env.SMTP_FROM,
-      to: process.env.CONTACT_EMAIL,
+      to: process.env.CONTACT_EMAIL || '',
       subject: 'New User Registration - Spanish Horizons Academy',
       html: `
         <div style="font-family: 'Poppins', Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -88,7 +76,7 @@ Spanish Horizons Academy | 770 NE Rogahn Street, Hillsboro, OR 97124
     }
 
     // Send admin notification only
-    await transporter.sendMail(adminMailOptions)
+    await sendEmail(adminMailOptions)
 
     console.log('Registration notification emails sent successfully')
 

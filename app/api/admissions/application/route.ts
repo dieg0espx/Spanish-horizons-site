@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { sendEmail } from '@/lib/resend'
 import { createClient } from '@/lib/supabase/server'
 
 export async function POST(request: NextRequest) {
@@ -225,21 +225,9 @@ export async function POST(request: NextRequest) {
         }).join(', ')
       : 'Not specified'
 
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
-    })
-
     // Email content for admin
     const mailOptions = {
-      from: process.env.SMTP_FROM,
-      to: process.env.CONTACT_EMAIL,
+      to: process.env.CONTACT_EMAIL || '',
       replyTo: parentEmail,
       subject: `New Admissions Application: ${childFullName} - Kindergarten Fall 2026`,
       html: `
@@ -386,12 +374,11 @@ View full details in admin dashboard.
     }
 
     // Send email to admin
-    await transporter.sendMail(mailOptions)
+    await sendEmail(mailOptions)
     console.log('Admissions application email sent to admin')
 
     // Send confirmation email to parent
     const confirmationMailOptions = {
-      from: process.env.SMTP_FROM,
       to: parentEmail,
       subject: `Application Received - Spanish Horizons Academy`,
       html: `
@@ -475,7 +462,7 @@ Spanish Horizons Academy Admissions Team
       `
     }
 
-    await transporter.sendMail(confirmationMailOptions)
+    await sendEmail(confirmationMailOptions)
     console.log('Confirmation email sent to applicant:', parentEmail)
 
     return NextResponse.json(

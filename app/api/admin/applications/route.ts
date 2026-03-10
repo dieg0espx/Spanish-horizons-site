@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, createAdminClient } from '@/lib/supabase/server'
 import { isAdmin } from '@/lib/admin'
-import nodemailer from 'nodemailer'
+import { sendEmail } from '@/lib/resend'
 
 // Status email templates
 const statusEmailTemplates = {
@@ -512,16 +512,6 @@ async function sendStatusUpdateEmail(
   const template = statusEmailTemplates[newStatus as keyof typeof statusEmailTemplates]
   if (!template) return
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
-    }
-  })
-
   const emailContent = template.getContent(
     application.child_full_name,
     application.parent_name,
@@ -529,8 +519,7 @@ async function sendStatusUpdateEmail(
     interviewNotes
   )
 
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM,
+  await sendEmail({
     to: application.user_email,
     subject: template.subject,
     html: emailContent.html,

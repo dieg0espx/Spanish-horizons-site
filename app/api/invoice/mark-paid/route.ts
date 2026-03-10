@@ -1,19 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
-import nodemailer from 'nodemailer'
+import { sendEmail } from '@/lib/resend'
 import { generateReceiptPdf } from '@/lib/invoice-pdf'
 import { Invoice } from '@/lib/types/invoice'
-
-// Create nodemailer transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_SECURE === 'true',
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-})
 
 export async function POST(request: NextRequest) {
   try {
@@ -82,8 +71,7 @@ export async function POST(request: NextRequest) {
         console.error('Failed to generate receipt PDF:', pdfError)
       }
 
-      await transporter.sendMail({
-        from: `"Spanish Horizons Academy" <${process.env.SMTP_FROM}>`,
+      await sendEmail({
         to: invoice.recipient_email,
         subject: `Payment Confirmation - Invoice ${invoice.invoice_number}`,
         attachments: pdfAttachment,
