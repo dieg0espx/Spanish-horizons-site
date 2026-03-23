@@ -37,6 +37,7 @@ export default function ModernHeader() {
         { name: "Tuition & Fees", href: "/tuition" },
       ],
     },
+    { name: "Blog", href: "/blog" },
     { name: "Calendar", href: "/calendar" },
     { name: "Contact", href: "/contact" },
   ]
