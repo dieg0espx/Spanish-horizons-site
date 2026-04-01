@@ -7,12 +7,18 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { FileText, AlertCircle, CheckCircle, Users, Calendar, Info, User, LogIn } from "lucide-react"
-import { useState, useEffect } from "react"
+import { FileText, AlertCircle, CheckCircle, Users, Calendar, Info, User, LogIn, Tag, CreditCard, Loader2 } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { useAuth } from "@/contexts/auth-context"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import ApplicationPaymentForm from "@/components/application-payment-form"
+import { APPLICATION_FEE } from "@/lib/constants"
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 interface ExistingApplication {
   parent_name: string
@@ -35,6 +41,18 @@ export default function AdmissionsApplicationPage() {
   const [existingApplications, setExistingApplications] = useState<ExistingApplication[]>([])
   const [checkingApplication, setCheckingApplication] = useState(true)
   const [parentInfoPreFilled, setParentInfoPreFilled] = useState(false)
+
+  // Payment state
+  const [showPaymentStep, setShowPaymentStep] = useState(false)
+  const [couponCode, setCouponCode] = useState('')
+  const [couponApplied, setCouponApplied] = useState<{ valid: boolean; discountAmount: number; finalAmount: number; discountType: string; discountValue: number } | null>(null)
+  const [validatingCoupon, setValidatingCoupon] = useState(false)
+  const [couponError, setCouponError] = useState('')
+  const [clientSecret, setClientSecret] = useState('')
+  const [paymentAmount, setPaymentAmount] = useState(APPLICATION_FEE)
+  const [creatingPayment, setCreatingPayment] = useState(false)
+  const [paymentWaived, setPaymentWaived] = useState(false)
+  const paymentSectionRef = useRef<HTMLDivElement>(null)
 
   // Fetch existing applications to pre-fill parent info
   useEffect(() => {
@@ -161,49 +179,106 @@ export default function AdmissionsApplicationPage() {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleValidateCoupon = async () => {
+    if (!couponCode.trim()) return
 
-    // Check if user is logged in
-    if (!user) {
+    setValidatingCoupon(true)
+    setCouponError('')
+    setCouponApplied(null)
+
+    try {
+      const response = await fetch('/api/admissions/validate-coupon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: couponCode }),
+      })
+
+      const data = await response.json()
+
+      if (data.valid) {
+        setCouponApplied(data)
+        setPaymentAmount(data.finalAmount)
+        setCouponError('')
+      } else {
+        setCouponError(data.error || 'Invalid coupon code')
+        setCouponApplied(null)
+        setPaymentAmount(APPLICATION_FEE)
+      }
+    } catch {
+      setCouponError('Failed to validate coupon')
+    } finally {
+      setValidatingCoupon(false)
+    }
+  }
+
+  const handleRemoveCoupon = () => {
+    setCouponCode('')
+    setCouponApplied(null)
+    setCouponError('')
+    setPaymentAmount(APPLICATION_FEE)
+    setClientSecret('')
+    setPaymentWaived(false)
+  }
+
+  const handleInitiatePayment = async () => {
+    setCreatingPayment(true)
+    try {
+      const response = await fetch('/api/admissions/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ couponCode: couponApplied ? couponCode : undefined }),
+      })
+
+      const data = await response.json()
+
+      if (data.waived) {
+        setPaymentWaived(true)
+        setPaymentAmount(0)
+      } else if (data.clientSecret) {
+        setClientSecret(data.clientSecret)
+        setPaymentAmount(data.finalAmount)
+      } else {
+        throw new Error('Failed to initialize payment')
+      }
+    } catch (error) {
       toast({
-        title: "Please sign in first",
-        description: "You must be signed in to submit an application.",
+        title: "Payment Error",
+        description: "Failed to initialize payment. Please try again.",
         variant: "destructive",
       })
-      openAuthModal('login')
-      return
+    } finally {
+      setCreatingPayment(false)
     }
+  }
 
-    // Validate acknowledgments
-    if (!formData.ackNotGuarantee || !formData.ackKindergartenOnly || !formData.ackFall2026 || !formData.ackConsiderationOnly || !formData.ackReviewBased) {
-      toast({
-        title: "Please complete all acknowledgments",
-        description: "You must acknowledge all items in Section 9 before submitting.",
-        variant: "destructive",
-      })
-      return
-    }
-
+  const submitApplication = async (paymentIntentId?: string) => {
     setIsSubmitting(true)
 
     try {
       const response = await fetch('/api/admissions/application', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          paymentIntentId: paymentIntentId || null,
+          couponCode: couponApplied ? couponCode.trim().toUpperCase() : null,
+          paymentWaived,
+        }),
       })
 
       if (response.ok) {
-        toast({
-          title: "Application submitted successfully!",
-          description: "Thank you for your interest in Spanish Horizons Academy. Check your dashboard for status updates.",
+        const data = await response.json()
+        const params = new URLSearchParams({
+          id: data.applicationId,
+          amount: String(data.payment?.amount ?? paymentAmount),
+          fee: String(data.payment?.applicationFee ?? APPLICATION_FEE),
+          discount: String(data.payment?.discountAmount ?? 0),
+          coupon: data.payment?.couponCode || '',
+          status: data.payment?.status || 'paid',
+          child: formData.childFullName,
+          parent: formData.parentName,
         })
-
-        // Redirect to dashboard
-        router.push('/dashboard')
+        router.push(`/admissions/application/success?${params.toString()}`)
       } else {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Failed to submit application')
@@ -217,6 +292,38 @@ export default function AdmissionsApplicationPage() {
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // If payment step is already showing, don't re-run validation
+    if (showPaymentStep) return
+
+    if (!user) {
+      toast({
+        title: "Please sign in first",
+        description: "You must be signed in to submit an application.",
+        variant: "destructive",
+      })
+      openAuthModal('login')
+      return
+    }
+
+    if (!formData.ackNotGuarantee || !formData.ackKindergartenOnly || !formData.ackFall2026 || !formData.ackConsiderationOnly || !formData.ackReviewBased) {
+      toast({
+        title: "Please complete all acknowledgments",
+        description: "You must acknowledge all items in Section 9 before submitting.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    // Show payment step instead of submitting directly
+    setShowPaymentStep(true)
+    setTimeout(() => {
+      paymentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
   }
 
   return (
@@ -938,11 +1045,6 @@ export default function AdmissionsApplicationPage() {
                   />
                 </div>
 
-                <div className="bg-amber/10 p-4 rounded-lg">
-                  <p className="text-sm font-questa text-slate-medium italic">
-                    <strong>Please note:</strong> This section is not a commitment and does not involve payment or registration.
-                  </p>
-                </div>
               </CardContent>
             </Card>
 
@@ -1206,47 +1308,180 @@ export default function AdmissionsApplicationPage() {
               </CardContent>
             </Card>
 
-            {/* Submit Button */}
-            <div className="pt-4">
-              {!user ? (
-                <div className="text-center">
-                  <p className="text-slate-medium font-questa mb-4">
-                    Please sign in to submit your application.
-                  </p>
+            {/* Section 10: Application Fee & Payment */}
+            {showPaymentStep && (
+              <div ref={paymentSectionRef}>
+                <Card className="border-amber border-2">
+                  <CardHeader className="bg-amber/10">
+                    <CardTitle className="text-xl md:text-2xl font-ivry text-slate flex items-center">
+                      <CreditCard className="h-6 w-6 text-amber mr-3" />
+                      Section 10: Application Fee
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-4 md:p-6 space-y-6">
+                    {/* Fee Summary */}
+                    <div className="bg-slate/5 rounded-lg p-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-questa text-slate">Application Fee</span>
+                        <span className="font-questa font-semibold text-slate">${APPLICATION_FEE.toFixed(2)}</span>
+                      </div>
+                      {couponApplied && (
+                        <div className="flex justify-between items-center mb-2 text-green-600">
+                          <span className="font-questa">
+                            Coupon Discount ({couponApplied.discountType === 'percentage' ? `${couponApplied.discountValue}%` : `$${couponApplied.discountValue}`})
+                          </span>
+                          <span className="font-questa font-semibold">-${couponApplied.discountAmount.toFixed(2)}</span>
+                        </div>
+                      )}
+                      <div className="border-t pt-2 mt-2 flex justify-between items-center">
+                        <span className="font-questa font-bold text-slate text-lg">Total</span>
+                        <span className="font-questa font-bold text-slate text-lg">${paymentAmount.toFixed(2)}</span>
+                      </div>
+                    </div>
+
+                    {/* Coupon Code */}
+                    <div>
+                      <Label className="block text-sm font-questa font-medium text-slate mb-2">
+                        <Tag className="h-4 w-4 inline mr-1" />
+                        Have a coupon code?
+                      </Label>
+                      {couponApplied ? (
+                        <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg p-3">
+                          <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                          <span className="font-questa text-green-800 flex-1">
+                            Coupon <strong>{couponCode.toUpperCase()}</strong> applied — {couponApplied.discountType === 'percentage' ? `${couponApplied.discountValue}% off` : `$${couponApplied.discountAmount.toFixed(2)} off`}
+                          </span>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={handleRemoveCoupon}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex gap-2">
+                          <Input
+                            type="text"
+                            placeholder="Enter coupon code"
+                            value={couponCode}
+                            onChange={(e) => { setCouponCode(e.target.value); setCouponError('') }}
+                            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleValidateCoupon())}
+                            className="text-sm md:text-base uppercase"
+                          />
+                          <Button
+                            type="button"
+                            onClick={handleValidateCoupon}
+                            disabled={validatingCoupon || !couponCode.trim()}
+                            variant="outline"
+                            className="rounded-xl font-questa whitespace-nowrap"
+                          >
+                            {validatingCoupon ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
+                          </Button>
+                        </div>
+                      )}
+                      {couponError && (
+                        <p className="text-sm text-red-500 font-questa mt-1">{couponError}</p>
+                      )}
+                    </div>
+
+                    {/* Payment or Waived */}
+                    {paymentWaived ? (
+                      <div className="space-y-4">
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                          <CheckCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                          <p className="font-questa font-semibold text-green-800">Application fee fully covered by coupon!</p>
+                        </div>
+                        <Button
+                          type="button"
+                          onClick={() => submitApplication()}
+                          disabled={isSubmitting}
+                          className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-base md:text-lg py-6"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                              Submitting Application...
+                            </>
+                          ) : (
+                            <>
+                              <FileText className="h-5 w-5 mr-2" />
+                              Submit Application (Fee Waived)
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    ) : clientSecret ? (
+                      <Elements stripe={stripePromise} options={{ clientSecret }}>
+                        <ApplicationPaymentForm
+                          amount={paymentAmount}
+                          onSuccess={(paymentIntentId) => submitApplication(paymentIntentId)}
+                        />
+                      </Elements>
+                    ) : (
+                      <Button
+                        type="button"
+                        onClick={handleInitiatePayment}
+                        disabled={creatingPayment}
+                        className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-base md:text-lg py-6"
+                      >
+                        {creatingPayment ? (
+                          <>
+                            <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                            Preparing Payment...
+                          </>
+                        ) : (
+                          <>
+                            <CreditCard className="h-5 w-5 mr-2" />
+                            Proceed to Payment — ${paymentAmount.toFixed(2)}
+                          </>
+                        )}
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Submit / Sign In Button */}
+            {!showPaymentStep && (
+              <div className="pt-4">
+                {!user ? (
+                  <div className="text-center">
+                    <p className="text-slate-medium font-questa mb-4">
+                      Please sign in to submit your application.
+                    </p>
+                    <Button
+                      type="button"
+                      onClick={() => openAuthModal('login')}
+                      className="w-full bg-slate hover:bg-slate-medium text-white font-questa text-base md:text-lg py-6"
+                    >
+                      <LogIn className="h-5 w-5 mr-2" />
+                      Sign In to Submit Application
+                    </Button>
+                  </div>
+                ) : (
                   <Button
-                    type="button"
-                    onClick={() => openAuthModal('login')}
-                    className="w-full bg-slate hover:bg-slate-medium text-white font-questa text-base md:text-lg py-6"
+                    type="submit"
+                    className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-base md:text-lg py-6"
                   >
-                    <LogIn className="h-5 w-5 mr-2" />
-                    Sign In to Submit Application
+                    {existingApplications.length > 0 ? (
+                      <>
+                        <Users className="h-5 w-5 mr-2" />
+                        Continue to Payment
+                      </>
+                    ) : (
+                      <>
+                        <FileText className="h-5 w-5 mr-2" />
+                        Continue to Payment
+                      </>
+                    )}
                   </Button>
-                </div>
-              ) : (
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-amber hover:bg-golden hover:text-slate font-questa text-base md:text-lg py-6 disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin h-5 w-5 mr-2 border-2 border-slate border-t-transparent rounded-full" />
-                      Submitting Application...
-                    </>
-                  ) : existingApplications.length > 0 ? (
-                    <>
-                      <Users className="h-5 w-5 mr-2" />
-                      Submit Application for Another Child
-                    </>
-                  ) : (
-                    <>
-                      <FileText className="h-5 w-5 mr-2" />
-                      Submit Application
-                    </>
-                  )}
-                </Button>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </form>
         </div>
       </section>

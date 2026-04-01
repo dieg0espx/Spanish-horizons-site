@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Users, FileText, MessageCircle, CheckCircle, DollarSign, Heart, ChevronRight } from "lucide-react"
+import Link from "next/link"
 
 export default function AdmissionsPage() {
   const applicationSteps = [
@@ -11,6 +12,7 @@ export default function AdmissionsPage() {
       description: "Visit our campus to experience our learning environment firsthand",
       icon: Calendar,
       action: "Schedule Now",
+      href: "/contact",
     },
     {
       step: 2,
@@ -18,27 +20,25 @@ export default function AdmissionsPage() {
       description: "Complete our comprehensive application form",
       icon: FileText,
       action: "Apply Online",
+      href: "/admissions/application",
     },
     {
       step: 3,
       title: "Complete Family Interview",
       description: "Meet with our admissions team to discuss your family's goals",
       icon: MessageCircle,
-      action: "Interview Scheduled",
     },
     {
       step: 4,
       title: "Receive Acceptance & Registration Packet",
       description: "Get your enrollment materials and next steps",
       icon: CheckCircle,
-      action: "Enrollment Materials",
     },
     {
       step: 5,
       title: "Attend Orientation Night + Brightwheel Setup",
       description: "Join our community and set up communication systems",
       icon: Users,
-      action: "Orientation",
     },
   ]
 
@@ -162,11 +162,16 @@ export default function AdmissionsPage() {
                         <h3 className="text-base md:text-xl font-ivry font-semibold text-slate text-center sm:text-left">{step.title}</h3>
                       </div>
                       <p className="text-slate-medium mb-2 md:mb-4 font-questa text-center sm:text-left text-xs md:text-base">{step.description}</p>
-                      <div className="flex justify-center md:justify-start">
-                        <Button variant="outline" size="sm" className="font-questa text-xs md:text-sm">
-                          {step.action}
-                        </Button>
-                      </div>
+                      {step.href && step.action && (
+                        <div className="flex justify-center md:justify-start">
+                          <Link href={step.href}>
+                            <Button size="sm" className="bg-amber hover:bg-golden hover:text-slate text-white font-questa text-xs md:text-sm">
+                              {step.action}
+                              <ChevronRight className="h-3 w-3 md:h-4 md:w-4 ml-1" />
+                            </Button>
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>

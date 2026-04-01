@@ -324,6 +324,79 @@ INSERT INTO admin_users (email, added_by) VALUES
 ON CONFLICT (email) DO NOTHING;
 
 -- =====================================================
+-- Coupons Table
+-- =====================================================
+-- Stores coupon codes for application fee discounts
+
+CREATE TABLE IF NOT EXISTS coupons (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  code TEXT NOT NULL UNIQUE,
+  discount_type TEXT NOT NULL DEFAULT 'fixed',
+  discount_value NUMERIC(10,2) NOT NULL,
+  max_uses INTEGER DEFAULT 1,
+  current_uses INTEGER DEFAULT 0,
+  is_active BOOLEAN DEFAULT TRUE,
+  expires_at TIMESTAMPTZ,
+  recipient_email TEXT,
+  recipient_name TEXT,
+  child_name TEXT,
+  email_sent BOOLEAN DEFAULT FALSE,
+  email_sent_at TIMESTAMPTZ,
+  created_by TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE coupons DROP CONSTRAINT IF EXISTS coupons_discount_type_check;
+ALTER TABLE coupons ADD CONSTRAINT coupons_discount_type_check
+  CHECK (discount_type IN ('fixed', 'percentage'));
+
+ALTER TABLE coupons ADD COLUMN IF NOT EXISTS recipient_email TEXT;
+ALTER TABLE coupons ADD COLUMN IF NOT EXISTS recipient_name TEXT;
+ALTER TABLE coupons ADD COLUMN IF NOT EXISTS child_name TEXT;
+ALTER TABLE coupons ADD COLUMN IF NOT EXISTS email_sent BOOLEAN DEFAULT FALSE;
+ALTER TABLE coupons ADD COLUMN IF NOT EXISTS email_sent_at TIMESTAMPTZ;
+
+CREATE INDEX IF NOT EXISTS idx_coupons_code ON coupons(code);
+
+ALTER TABLE coupons ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Service role can read coupons" ON coupons;
+DROP POLICY IF EXISTS "Service role can insert coupons" ON coupons;
+DROP POLICY IF EXISTS "Service role can update coupons" ON coupons;
+DROP POLICY IF EXISTS "Service role can delete coupons" ON coupons;
+
+CREATE POLICY "Service role can read coupons"
+  ON coupons FOR SELECT
+  USING (auth.role() = 'service_role');
+
+CREATE POLICY "Service role can insert coupons"
+  ON coupons FOR INSERT
+  WITH CHECK (auth.role() = 'service_role');
+
+CREATE POLICY "Service role can update coupons"
+  ON coupons FOR UPDATE
+  USING (auth.role() = 'service_role');
+
+CREATE POLICY "Service role can delete coupons"
+  ON coupons FOR DELETE
+  USING (auth.role() = 'service_role');
+
+-- =====================================================
+-- Payment columns on Applications table
+-- =====================================================
+
+ALTER TABLE applications ADD COLUMN IF NOT EXISTS payment_status TEXT DEFAULT 'pending';
+ALTER TABLE applications ADD COLUMN IF NOT EXISTS payment_amount NUMERIC(10,2);
+ALTER TABLE applications ADD COLUMN IF NOT EXISTS coupon_code TEXT;
+ALTER TABLE applications ADD COLUMN IF NOT EXISTS discount_amount NUMERIC(10,2) DEFAULT 0;
+ALTER TABLE applications ADD COLUMN IF NOT EXISTS stripe_payment_intent_id TEXT;
+ALTER TABLE applications ADD COLUMN IF NOT EXISTS paid_at TIMESTAMPTZ;
+
+ALTER TABLE applications DROP CONSTRAINT IF EXISTS applications_payment_status_check;
+ALTER TABLE applications ADD CONSTRAINT applications_payment_status_check
+  CHECK (payment_status IN ('pending', 'paid', 'waived'));
+
+-- =====================================================
 -- Architecture Notes
 -- =====================================================
 -- This schema uses the following structure:

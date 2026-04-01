@@ -6,6 +6,7 @@ import { useAuth } from '@/contexts/auth-context'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import {
   Dialog,
@@ -33,13 +34,20 @@ import {
   Loader2,
   Save,
   Shield,
-  DollarSign
+  DollarSign,
+  Tag,
+  ToggleLeft,
+  ToggleRight,
+  Trash2,
+  Plus,
+  Copy
 } from 'lucide-react'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import { useToast } from '@/hooks/use-toast'
 import AdminAvailabilityCalendar from '@/components/admin-availability-calendar'
 import InvoicesClient from '@/components/invoices-client'
+import AdminEmailComposer from '@/components/admin-email-composer'
 
 interface Application {
   id: string
@@ -148,13 +156,27 @@ export default function AdminDashboardPage() {
   const [updating, setUpdating] = useState(false)
   const [savingNotes, setSavingNotes] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
-  const [activeTab, setActiveTab] = useState<'applications' | 'calendar' | 'admins' | 'invoices'>('applications')
+  const [activeTab, setActiveTab] = useState<'applications' | 'calendar' | 'admins' | 'invoices' | 'coupons'>('applications')
   const [generatingPdf, setGeneratingPdf] = useState(false)
   const [adminUsers, setAdminUsers] = useState<{ id: string; email: string; added_by: string | null; created_at: string }[]>([])
   const [adminUsersLoading, setAdminUsersLoading] = useState(false)
   const [newAdminEmail, setNewAdminEmail] = useState('')
   const [addingAdmin, setAddingAdmin] = useState(false)
   const [removingAdminId, setRemovingAdminId] = useState<string | null>(null)
+
+  // Coupons state
+  const [coupons, setCoupons] = useState<any[]>([])
+  const [couponsLoading, setCouponsLoading] = useState(false)
+  const [newCoupon, setNewCoupon] = useState({ code: '', discountType: 'fixed', discountValue: '', maxUses: '1', expiresAt: '', recipientEmail: '', recipientName: '', childName: '' })
+  const [creatingCoupon, setCreatingCoupon] = useState(false)
+  const [deletingCouponId, setDeletingCouponId] = useState<string | null>(null)
+  const [togglingCouponId, setTogglingCouponId] = useState<string | null>(null)
+  const [sendingCouponId, setSendingCouponId] = useState<string | null>(null)
+
+  // Email composer state
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
+  const [emailRecipient, setEmailRecipient] = useState({ email: '', parentName: '', childName: '' })
+
   const router = useRouter()
   const { toast } = useToast()
 
@@ -257,6 +279,123 @@ export default function AdminDashboardPage() {
     }
   }
 
+  // Fetch coupons when the coupons tab becomes active
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      if (!user || activeTab !== 'coupons') return
+      setCouponsLoading(true)
+      try {
+        const response = await fetch('/api/admin/coupons')
+        const data = await response.json()
+        if (response.ok) {
+          setCoupons(data.coupons || [])
+        }
+      } catch {
+        // silently fail
+      } finally {
+        setCouponsLoading(false)
+      }
+    }
+
+    fetchCoupons()
+  }, [user, activeTab])
+
+  const handleCreateCoupon = async () => {
+    if (!newCoupon.code.trim() || !newCoupon.discountValue) return
+
+    setCreatingCoupon(true)
+    try {
+      const response = await fetch('/api/admin/coupons', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: newCoupon.code,
+          discountType: newCoupon.discountType,
+          discountValue: parseFloat(newCoupon.discountValue),
+          maxUses: newCoupon.maxUses ? parseInt(newCoupon.maxUses) : 1,
+          expiresAt: newCoupon.expiresAt || null,
+          recipientEmail: newCoupon.recipientEmail || null,
+          recipientName: newCoupon.recipientName || null,
+          childName: newCoupon.childName || null,
+        })
+      })
+      const data = await response.json()
+
+      if (response.ok) {
+        setCoupons(prev => [data.coupon, ...prev])
+        setNewCoupon({ code: '', discountType: 'fixed', discountValue: '', maxUses: '1', expiresAt: '', recipientEmail: '', recipientName: '', childName: '' })
+        toast({ title: 'Coupon created', description: `Coupon ${data.coupon.code} has been created.` })
+      } else {
+        toast({ title: 'Error', description: data.error || 'Failed to create coupon', variant: 'destructive' })
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to create coupon', variant: 'destructive' })
+    } finally {
+      setCreatingCoupon(false)
+    }
+  }
+
+  const handleSendCouponEmail = async (id: string) => {
+    setSendingCouponId(id)
+    try {
+      const response = await fetch('/api/admin/coupons', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'send_email', id })
+      })
+      const data = await response.json()
+
+      if (response.ok) {
+        setCoupons(prev => prev.map(c => c.id === id ? { ...c, email_sent: true, email_sent_at: new Date().toISOString() } : c))
+        toast({ title: 'Email sent!', description: data.message })
+      } else {
+        toast({ title: 'Error', description: data.error || 'Failed to send email', variant: 'destructive' })
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to send email', variant: 'destructive' })
+    } finally {
+      setSendingCouponId(null)
+    }
+  }
+
+  const handleToggleCoupon = async (id: string, currentActive: boolean) => {
+    setTogglingCouponId(id)
+    try {
+      const response = await fetch('/api/admin/coupons', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, is_active: !currentActive })
+      })
+
+      if (response.ok) {
+        setCoupons(prev => prev.map(c => c.id === id ? { ...c, is_active: !currentActive } : c))
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to update coupon', variant: 'destructive' })
+    } finally {
+      setTogglingCouponId(null)
+    }
+  }
+
+  const handleDeleteCoupon = async (id: string) => {
+    setDeletingCouponId(id)
+    try {
+      const response = await fetch(`/api/admin/coupons?id=${id}`, { method: 'DELETE' })
+
+      if (response.ok) {
+        setCoupons(prev => prev.filter(c => c.id !== id))
+        toast({ title: 'Coupon deleted', description: 'The coupon has been deleted.' })
+      } else {
+        const data = await response.json()
+        toast({ title: 'Error', description: data.error || 'Failed to delete coupon', variant: 'destructive' })
+      }
+    } catch {
+      toast({ title: 'Error', description: 'Failed to delete coupon', variant: 'destructive' })
+    } finally {
+      setDeletingCouponId(null)
+    }
+  }
+
   const handleSignOut = async () => {
     await signOut()
     router.push('/')
@@ -277,6 +416,15 @@ export default function AdminDashboardPage() {
     })
     setShowConfirmation(false)
     setIsEditModalOpen(true)
+  }
+
+  const openEmailModal = (app: Application) => {
+    setEmailRecipient({
+      email: app.parent_email,
+      parentName: app.parent_name,
+      childName: app.child_full_name,
+    })
+    setIsEmailModalOpen(true)
   }
 
   const handleRequestUpdate = () => {
@@ -696,6 +844,16 @@ export default function AdminDashboardPage() {
             <span className="sm:hidden">Invoices</span>
           </Button>
           <Button
+            variant={activeTab === 'coupons' ? 'default' : 'outline'}
+            onClick={() => setActiveTab('coupons')}
+            size="sm"
+            className={`rounded-xl font-questa whitespace-nowrap ${activeTab === 'coupons' ? 'bg-slate text-white' : ''}`}
+          >
+            <Tag className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Coupons</span>
+            <span className="sm:hidden">Coupons</span>
+          </Button>
+          <Button
             variant={activeTab === 'admins' ? 'default' : 'outline'}
             onClick={() => setActiveTab('admins')}
             size="sm"
@@ -709,6 +867,215 @@ export default function AdminDashboardPage() {
 
         {activeTab === 'invoices' ? (
           <InvoicesClient />
+        ) : activeTab === 'coupons' ? (
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-questa text-slate flex items-center gap-2">
+                <Tag className="h-5 w-5" />
+                Coupons
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Create new coupon */}
+              <div className="bg-gray-50 rounded-xl p-4 space-y-3">
+                <p className="font-questa font-semibold text-slate text-sm">Create New Coupon</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Parent/Guardian Name *</Label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Maria Garcia"
+                      value={newCoupon.recipientName}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, recipientName: e.target.value }))}
+                      className="rounded-xl"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Parent Email *</Label>
+                    <Input
+                      type="email"
+                      placeholder="e.g. maria@example.com"
+                      value={newCoupon.recipientEmail}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, recipientEmail: e.target.value }))}
+                      className="rounded-xl"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Child's Name *</Label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. Sofia Garcia"
+                      value={newCoupon.childName}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, childName: e.target.value }))}
+                      className="rounded-xl"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Coupon Code *</Label>
+                    <Input
+                      type="text"
+                      placeholder="e.g. SOFIA2026"
+                      value={newCoupon.code}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, code: e.target.value.toUpperCase() }))}
+                      className="rounded-xl uppercase"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Discount Type</Label>
+                    <select
+                      value={newCoupon.discountType}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, discountType: e.target.value }))}
+                      className="w-full h-10 rounded-xl border border-input bg-background px-3 text-sm"
+                    >
+                      <option value="fixed">Fixed ($)</option>
+                      <option value="percentage">Percentage (%)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">
+                      {newCoupon.discountType === 'fixed' ? 'Amount ($) *' : 'Percentage (%) *'}
+                    </Label>
+                    <Input
+                      type="number"
+                      placeholder={newCoupon.discountType === 'fixed' ? '120' : '100'}
+                      value={newCoupon.discountValue}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, discountValue: e.target.value }))}
+                      className="rounded-xl"
+                      min="0"
+                      max={newCoupon.discountType === 'percentage' ? '100' : undefined}
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Max Uses</Label>
+                    <Input
+                      type="number"
+                      placeholder="1"
+                      value={newCoupon.maxUses}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, maxUses: e.target.value }))}
+                      className="rounded-xl"
+                      min="1"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs font-questa text-slate-medium">Expires (optional)</Label>
+                    <Input
+                      type="date"
+                      value={newCoupon.expiresAt}
+                      onChange={(e) => setNewCoupon(prev => ({ ...prev, expiresAt: e.target.value }))}
+                      className="rounded-xl"
+                    />
+                  </div>
+                </div>
+                <Button
+                  onClick={handleCreateCoupon}
+                  disabled={creatingCoupon || !newCoupon.code.trim() || !newCoupon.discountValue || !newCoupon.recipientEmail.trim() || !newCoupon.childName.trim()}
+                  className="bg-slate hover:bg-slate-medium text-white rounded-xl"
+                >
+                  {creatingCoupon ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Plus className="h-4 w-4 mr-2" />}
+                  Create Coupon
+                </Button>
+              </div>
+
+              {/* Coupons list */}
+              {couponsLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-slate/40" />
+                </div>
+              ) : coupons.length === 0 ? (
+                <p className="text-center text-slate-medium py-8 font-questa">No coupons created yet.</p>
+              ) : (
+                <div className="space-y-2">
+                  {coupons.map((coupon) => (
+                    <div
+                      key={coupon.id}
+                      className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border ${coupon.is_active ? 'bg-white border-gray-200' : 'bg-gray-100 border-gray-200 opacity-60'}`}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <span className="font-mono font-bold text-slate text-sm bg-slate/10 px-2 py-0.5 rounded">{coupon.code}</span>
+                          <button
+                            onClick={() => { navigator.clipboard.writeText(coupon.code); toast({ title: 'Copied!', description: `${coupon.code} copied to clipboard` }) }}
+                            className="text-slate/40 hover:text-slate"
+                          >
+                            <Copy className="h-3.5 w-3.5" />
+                          </button>
+                          {!coupon.is_active && (
+                            <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded font-questa">Inactive</span>
+                          )}
+                          {coupon.email_sent && (
+                            <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded font-questa">Email Sent</span>
+                          )}
+                        </div>
+                        {(coupon.child_name || coupon.recipient_name) && (
+                          <p className="text-sm text-slate font-questa font-medium">
+                            {coupon.child_name && <span>Child: {coupon.child_name}</span>}
+                            {coupon.child_name && coupon.recipient_name && <span> · </span>}
+                            {coupon.recipient_name && <span>Parent: {coupon.recipient_name}</span>}
+                            {coupon.recipient_email && <span className="text-slate-medium"> ({coupon.recipient_email})</span>}
+                          </p>
+                        )}
+                        <p className="text-xs text-slate-medium font-questa">
+                          {coupon.discount_type === 'fixed' ? `$${coupon.discount_value} off` : `${coupon.discount_value}% off`}
+                          {' · '}
+                          {coupon.max_uses ? `${coupon.current_uses}/${coupon.max_uses} uses` : `${coupon.current_uses} uses (unlimited)`}
+                          {coupon.expires_at && ` · Expires ${new Date(coupon.expires_at).toLocaleDateString()}`}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 mt-2 sm:mt-0">
+                        {coupon.recipient_email && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleSendCouponEmail(coupon.id)}
+                            disabled={sendingCouponId === coupon.id}
+                            className={`rounded-xl ${coupon.email_sent ? 'text-green-600 hover:text-green-700 hover:bg-green-50' : 'text-blue-600 hover:text-blue-700 hover:bg-blue-50'}`}
+                            title={coupon.email_sent ? `Resend to ${coupon.recipient_email}` : `Send to ${coupon.recipient_email}`}
+                          >
+                            {sendingCouponId === coupon.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Mail className="h-4 w-4" />
+                            )}
+                          </Button>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleToggleCoupon(coupon.id, coupon.is_active)}
+                          disabled={togglingCouponId === coupon.id}
+                          className="rounded-xl"
+                          title={coupon.is_active ? 'Deactivate' : 'Activate'}
+                        >
+                          {togglingCouponId === coupon.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : coupon.is_active ? (
+                            <ToggleRight className="h-5 w-5 text-green-600" />
+                          ) : (
+                            <ToggleLeft className="h-5 w-5 text-gray-400" />
+                          )}
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteCoupon(coupon.id)}
+                          disabled={deletingCouponId === coupon.id}
+                          className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-xl"
+                        >
+                          {deletingCouponId === coupon.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Trash2 className="h-4 w-4" />
+                          )}
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         ) : activeTab === 'admins' ? (
           <Card>
             <CardHeader>
@@ -898,6 +1265,14 @@ export default function AdminDashboardPage() {
                       </Button>
                       <Button
                         size="sm"
+                        variant="outline"
+                        onClick={() => openEmailModal(app)}
+                        className="rounded-lg h-8 w-8 p-0 text-blue-600 border-blue-200 hover:bg-blue-50"
+                      >
+                        <Mail className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        size="sm"
                         onClick={() => openEditModal(app)}
                         className="rounded-lg bg-amber hover:bg-golden hover:text-slate h-8 w-8 p-0"
                       >
@@ -969,6 +1344,15 @@ export default function AdminDashboardPage() {
                               className="rounded-lg"
                             >
                               <Eye className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => openEmailModal(app)}
+                              className="rounded-lg text-blue-600 border-blue-200 hover:bg-blue-50"
+                              title="Send email"
+                            >
+                              <Mail className="h-4 w-4" />
                             </Button>
                             <Button
                               size="sm"
@@ -1257,6 +1641,15 @@ export default function AdminDashboardPage() {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Email Composer Modal */}
+      <AdminEmailComposer
+        open={isEmailModalOpen}
+        onOpenChange={setIsEmailModalOpen}
+        recipientEmail={emailRecipient.email}
+        parentName={emailRecipient.parentName}
+        childName={emailRecipient.childName}
+      />
 
       {/* Edit Modal */}
       <Dialog open={isEditModalOpen} onOpenChange={(open) => {

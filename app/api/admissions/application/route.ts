@@ -1,6 +1,161 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe'
+import jsPDF from 'jspdf'
 import { sendEmail } from '@/lib/resend'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createAdminClient } from '@/lib/supabase/server'
+import { APPLICATION_FEE } from '@/lib/constants'
+
+function getStripe() {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not configured')
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2024-11-20.acacia' as any
+  })
+}
+
+function generateReceiptPdf(data: {
+  applicationId: string
+  childName: string
+  parentName: string
+  parentEmail: string
+  date: string
+  applicationFee: number
+  discountAmount: number
+  couponCode: string | null
+  totalPaid: number
+  paymentMethod: string
+}): Buffer {
+  const doc = new jsPDF()
+  const pageWidth = doc.internal.pageSize.getWidth()
+  const margin = 15
+
+  // Header
+  doc.setFillColor(0, 6, 56)
+  doc.rect(0, 0, pageWidth, 40, 'F')
+  doc.setTextColor(255, 255, 255)
+  doc.setFontSize(20)
+  doc.setFont('helvetica', 'bold')
+  doc.text('Payment Receipt', margin, 22)
+  doc.setFontSize(11)
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(255, 215, 0)
+  doc.text('Spanish Horizons Academy', margin, 32)
+
+  // Receipt info
+  let y = 55
+  doc.setTextColor(100, 100, 100)
+  doc.setFontSize(9)
+  doc.text('Receipt Number', margin, y)
+  doc.text('Date', pageWidth - margin - 40, y)
+  y += 5
+  doc.setTextColor(0, 0, 0)
+  doc.setFontSize(10)
+  doc.setFont('helvetica', 'bold')
+  doc.text(`RCP-${data.applicationId.substring(0, 8).toUpperCase()}`, margin, y)
+  doc.text(data.date, pageWidth - margin - 40, y)
+  doc.setFont('helvetica', 'normal')
+
+  // Bill to
+  y += 15
+  doc.setFillColor(255, 140, 0)
+  doc.rect(margin, y, pageWidth - margin * 2, 8, 'F')
+  doc.setTextColor(255, 255, 255)
+  doc.setFontSize(11)
+  doc.setFont('helvetica', 'bold')
+  doc.text('Bill To', margin + 3, y + 5.5)
+  doc.setTextColor(0, 0, 0)
+  doc.setFont('helvetica', 'normal')
+  y += 14
+  doc.setFontSize(10)
+  doc.text(data.parentName, margin, y)
+  y += 5
+  doc.setTextColor(100, 100, 100)
+  doc.setFontSize(9)
+  doc.text(data.parentEmail, margin, y)
+
+  // Application for
+  y += 10
+  doc.setTextColor(100, 100, 100)
+  doc.text('Application for:', margin, y)
+  doc.setTextColor(0, 0, 0)
+  doc.setFontSize(10)
+  doc.text(data.childName, margin + 30, y)
+
+  // Line items table
+  y += 15
+  doc.setFillColor(245, 245, 245)
+  doc.rect(margin, y, pageWidth - margin * 2, 8, 'F')
+  doc.setFontSize(9)
+  doc.setFont('helvetica', 'bold')
+  doc.setTextColor(80, 80, 80)
+  doc.text('Description', margin + 3, y + 5.5)
+  doc.text('Amount', pageWidth - margin - 3, y + 5.5, { align: 'right' })
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(0, 0, 0)
+
+  y += 14
+  doc.setFontSize(10)
+  doc.text('Kindergarten Application Fee — Fall 2026', margin + 3, y)
+  doc.text(`$${data.applicationFee.toFixed(2)}`, pageWidth - margin - 3, y, { align: 'right' })
+
+  if (data.discountAmount > 0 && data.couponCode) {
+    y += 8
+    doc.setTextColor(0, 128, 0)
+    doc.text(`Coupon Discount (${data.couponCode})`, margin + 3, y)
+    doc.text(`-$${data.discountAmount.toFixed(2)}`, pageWidth - margin - 3, y, { align: 'right' })
+    doc.setTextColor(0, 0, 0)
+  }
+
+  // Total
+  y += 12
+  doc.setDrawColor(200, 200, 200)
+  doc.line(margin, y, pageWidth - margin, y)
+  y += 8
+  doc.setFontSize(12)
+  doc.setFont('helvetica', 'bold')
+  doc.text('Total Paid', margin + 3, y)
+  doc.text(`$${data.totalPaid.toFixed(2)}`, pageWidth - margin - 3, y, { align: 'right' })
+
+  // Payment method
+  y += 12
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(9)
+  doc.setTextColor(100, 100, 100)
+  doc.text(`Payment Method: ${data.paymentMethod}`, margin, y)
+
+  // Status badge
+  y += 12
+  doc.setFillColor(0, 128, 0)
+  doc.roundedRect(margin, y, 30, 8, 2, 2, 'F')
+  doc.setTextColor(255, 255, 255)
+  doc.setFontSize(9)
+  doc.setFont('helvetica', 'bold')
+  doc.text('PAID', margin + 15, y + 5.5, { align: 'center' })
+
+  // Footer
+  const footerY = doc.internal.pageSize.getHeight() - 20
+  doc.setDrawColor(200, 200, 200)
+  doc.setLineWidth(0.3)
+  doc.line(margin, footerY, pageWidth - margin, footerY)
+  doc.setFontSize(8)
+  doc.setTextColor(120, 120, 120)
+  doc.setFont('helvetica', 'normal')
+  doc.text(
+    'Spanish Horizons Academy  |  infospanishhorizons@casitaazulpdx.com  |  (503) 916-9758',
+    pageWidth / 2,
+    footerY + 5,
+    { align: 'center' }
+  )
+  doc.text(
+    '770 NE Rogahn Street, Hillsboro, OR 97124',
+    pageWidth / 2,
+    footerY + 9,
+    { align: 'center' }
+  )
+
+  return Buffer.from(doc.output('arraybuffer'))
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -68,6 +223,11 @@ export async function POST(request: NextRequest) {
       ackFall2026,
       ackConsiderationOnly,
       ackReviewBased,
+
+      // Payment
+      paymentIntentId,
+      couponCode,
+      paymentWaived,
     } = body
 
     // Validate required fields
@@ -131,6 +291,79 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Verify payment
+    let paymentStatus = 'pending'
+    let paymentAmount = APPLICATION_FEE
+    let discountAmount = 0
+    let validatedCouponCode: string | null = null
+    let stripePaymentIntentId: string | null = null
+
+    const adminClient = createAdminClient()
+
+    if (couponCode && adminClient) {
+      const normalizedCode = couponCode.trim().toUpperCase()
+      const { data: coupon } = await adminClient
+        .from('coupons')
+        .select('*')
+        .eq('code', normalizedCode)
+        .single()
+
+      if (coupon && coupon.is_active) {
+        const notExpired = !coupon.expires_at || new Date(coupon.expires_at) >= new Date()
+        const hasUses = coupon.max_uses === null || coupon.current_uses < coupon.max_uses
+
+        if (notExpired && hasUses) {
+          if (coupon.discount_type === 'percentage') {
+            discountAmount = Math.round((APPLICATION_FEE * coupon.discount_value / 100) * 100) / 100
+          } else {
+            discountAmount = Math.min(coupon.discount_value, APPLICATION_FEE)
+          }
+          paymentAmount = Math.max(0, APPLICATION_FEE - discountAmount)
+          validatedCouponCode = normalizedCode
+        }
+      }
+    }
+
+    if (paymentWaived && paymentAmount === 0) {
+      // Coupon covers 100% — no Stripe payment needed
+      paymentStatus = 'waived'
+      stripePaymentIntentId = null
+    } else if (paymentIntentId) {
+      // Verify Stripe payment
+      const stripe = getStripe()
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
+
+      if (paymentIntent.status !== 'succeeded') {
+        return NextResponse.json(
+          { error: 'Payment has not been completed. Please complete payment before submitting.' },
+          { status: 400 }
+        )
+      }
+
+      paymentStatus = 'paid'
+      stripePaymentIntentId = paymentIntentId
+    } else {
+      return NextResponse.json(
+        { error: 'Payment is required to submit an application.' },
+        { status: 400 }
+      )
+    }
+
+    // Increment coupon usage
+    if (validatedCouponCode && adminClient) {
+      const { data: coupon } = await adminClient
+        .from('coupons')
+        .select('current_uses')
+        .eq('code', validatedCouponCode)
+        .single()
+      if (coupon) {
+        await adminClient
+          .from('coupons')
+          .update({ current_uses: coupon.current_uses + 1 })
+          .eq('code', validatedCouponCode)
+      }
+    }
+
     // Save application to database
     const applicationData = {
       user_id: user.id,
@@ -180,6 +413,14 @@ export async function POST(request: NextRequest) {
 
       // Section 8: Anything Else
       anything_else: anythingElse || null,
+
+      // Payment
+      payment_status: paymentStatus,
+      payment_amount: paymentAmount,
+      coupon_code: validatedCouponCode,
+      discount_amount: discountAmount,
+      stripe_payment_intent_id: stripePaymentIntentId,
+      paid_at: paymentStatus !== 'pending' ? new Date().toISOString() : null,
 
       // Metadata
       submitted_at: new Date().toISOString(),
@@ -377,7 +618,50 @@ View full details in admin dashboard.
     await sendEmail(mailOptions)
     console.log('Admissions application email sent to admin')
 
-    // Send confirmation email to parent
+    // Generate receipt PDF
+    const receiptDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+    const receiptPdf = generateReceiptPdf({
+      applicationId: savedApplication.id,
+      childName: childFullName,
+      parentName,
+      parentEmail,
+      date: receiptDate,
+      applicationFee: APPLICATION_FEE,
+      discountAmount,
+      couponCode: validatedCouponCode,
+      totalPaid: paymentAmount,
+      paymentMethod: paymentStatus === 'waived' ? 'Coupon (Fee Waived)' : 'Credit Card (Stripe)',
+    })
+
+    // Payment summary for email
+    const paymentSummaryHtml = `
+      <div style="background-color: #ECFDF5; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10B981;">
+        <p style="color: #065F46; margin: 0 0 8px 0; font-weight: 600; font-size: 16px;">
+          Payment Confirmed
+        </p>
+        <table style="width: 100%; font-size: 14px; color: #374151;">
+          <tr>
+            <td style="padding: 4px 0;">Application Fee</td>
+            <td style="padding: 4px 0; text-align: right;">$${APPLICATION_FEE.toFixed(2)}</td>
+          </tr>
+          ${discountAmount > 0 ? `
+          <tr style="color: #059669;">
+            <td style="padding: 4px 0;">Coupon Discount (${validatedCouponCode})</td>
+            <td style="padding: 4px 0; text-align: right;">-$${discountAmount.toFixed(2)}</td>
+          </tr>
+          ` : ''}
+          <tr style="border-top: 1px solid #D1FAE5;">
+            <td style="padding: 8px 0 4px; font-weight: 600;">Total Paid</td>
+            <td style="padding: 8px 0 4px; text-align: right; font-weight: 600;">$${paymentAmount.toFixed(2)}</td>
+          </tr>
+        </table>
+        <p style="color: #6b7280; margin: 8px 0 0 0; font-size: 12px;">
+          A payment receipt is attached to this email.
+        </p>
+      </div>
+    `
+
+    // Send confirmation email to parent with receipt attached
     const confirmationMailOptions = {
       to: parentEmail,
       subject: `Application Received - Spanish Horizons Academy`,
@@ -403,6 +687,8 @@ View full details in admin dashboard.
                 Application ID: ${savedApplication.id}
               </p>
             </div>
+
+            ${paymentSummaryHtml}
 
             <p style="color: #374151; font-size: 16px; line-height: 1.6;">
               You can track your application status anytime by logging into your Family Portal at <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://spanishhorizonsacademy.com'}/dashboard" style="color: #FF8C00;">spanishhorizonsacademy.com/dashboard</a>.
@@ -448,6 +734,10 @@ Thank you for submitting an application for ${childFullName} to Spanish Horizons
 Your Application Status: Submitted
 Application ID: ${savedApplication.id}
 
+Payment Confirmed:
+- Application Fee: $${APPLICATION_FEE.toFixed(2)}${discountAmount > 0 ? `\n- Coupon Discount (${validatedCouponCode}): -$${discountAmount.toFixed(2)}` : ''}
+- Total Paid: $${paymentAmount.toFixed(2)}
+
 You can track your application status at: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://spanishhorizonsacademy.com'}/dashboard
 
 What happens next:
@@ -459,16 +749,29 @@ Questions? Contact us at infospanishhorizons@casitaazulpdx.com
 
 Warm regards,
 Spanish Horizons Academy Admissions Team
-      `
+      `,
+      attachments: [
+        {
+          filename: `Receipt-${savedApplication.id.substring(0, 8).toUpperCase()}.pdf`,
+          content: receiptPdf,
+        }
+      ],
     }
 
     await sendEmail(confirmationMailOptions)
-    console.log('Confirmation email sent to applicant:', parentEmail)
+    console.log('Confirmation email with receipt sent to applicant:', parentEmail)
 
     return NextResponse.json(
       {
         message: 'Application submitted successfully',
-        applicationId: savedApplication.id
+        applicationId: savedApplication.id,
+        payment: {
+          status: paymentStatus,
+          amount: paymentAmount,
+          applicationFee: APPLICATION_FEE,
+          discountAmount,
+          couponCode: validatedCouponCode,
+        },
       },
       { status: 200 }
     )
